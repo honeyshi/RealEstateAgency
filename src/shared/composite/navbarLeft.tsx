@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { NavbarItem } from 'shared/base';
+import { NavbarContainer, NavbarItem } from 'shared/base';
 
 const navbarItems = [
+  { text: 'Объявления', to: '/advert', key: 'navbar-advert' },
   { text: 'Квартиры на карте', to: '/flats-map', key: 'navbar-flats-map' },
   { text: 'Тарифы', to: '/rates', key: 'navbar-rates' },
   { text: 'О нас', to: '/about', key: 'navbar-about' },
@@ -27,11 +28,11 @@ export const NavbarLeft: React.FC = () => {
     return innerNavbar;
   }, [activeItem]);
   return (
-    <ul className="navbar-nav">
+    <NavbarContainer>
       <Link to="/" className="navbar-brand" onClick={() => setActiveItem('')}>
         Название
       </Link>
       {navbarItemComponents}
-    </ul>
+    </NavbarContainer>
   );
 };

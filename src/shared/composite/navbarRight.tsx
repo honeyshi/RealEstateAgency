@@ -1,14 +1,15 @@
 import React from 'react';
-import { NavbarItem } from 'shared/base';
+import { Block, Icon, NavbarContainer, NavbarItem } from 'shared/base';
 
 export const NavbarRight: React.FC = () => {
   return (
-    <ul className="navbar-nav ml-auto">
-      <NavbarItem text="Нижний Новгород" to="/" mr="2" />
-      <NavbarItem to="/" mr="2" mt="1">
-        <i className="gg-pin" />
+    <NavbarContainer ml="auto">
+      <NavbarItem text="Нижний Новгород" to="/" mr="2" linkClass="d-flex">
+        <Block mt="1" pl="2" pr="2">
+          <Icon name="pin" />
+        </Block>
       </NavbarItem>
-      <NavbarItem text="Войти" to="/signin" linkClass="rounded-link" ml="1" mr="2" mt="1" />
-    </ul>
+      <NavbarItem text="Войти" to="/signin" linkClass="rounded-link" mt="1" />
+    </NavbarContainer>
   );
 };
