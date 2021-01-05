@@ -1,3 +1,9 @@
+body {
+  font: 16px 'Gilroy', sans-serif;
+}
+
+@import '~bootstrap/scss/bootstrap';
+
 .rounded-link {
   border-radius: 2rem;
   border: 1px solid;
