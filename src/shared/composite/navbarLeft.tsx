@@ -6,7 +6,7 @@ const navbarItems = [
   { text: 'Объявления', to: '/advert', key: 'navbar-advert' },
   { text: 'Квартиры на карте', to: '/flats-map', key: 'navbar-flats-map' },
   { text: 'Тарифы', to: '/rates', key: 'navbar-rates' },
-  { text: 'О нас', to: '/about', key: 'navbar-about' },
+  { text: 'Поиск сожителей', to: '/search-roommates', key: 'navbar-search-roommates' },
 ];
 
 export const NavbarLeft: React.FC = () => {

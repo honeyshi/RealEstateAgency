@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from 'shared/base';
-import { NavbarLeft, NavbarRight } from 'shared/composite';
+import { NavbarLeft } from 'shared/composite/navbarLeft';
+import { NavbarRight } from 'shared/composite/navbarRight';
 
 export const Navbar: React.FC = () => {
   return (

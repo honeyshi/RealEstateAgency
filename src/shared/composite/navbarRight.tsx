@@ -9,7 +9,7 @@ export const NavbarRight: React.FC = () => {
           <Icon name="location-arrow" />
         </Block>
       </NavbarItem>
-      <NavbarItem text="Войти" to="/signin" linkClass="rounded-link" mt="1" />
+      <NavbarItem text="Войти" to="/login" linkClass="rounded-link" mt="1" />
     </NavbarContainer>
   );
 };

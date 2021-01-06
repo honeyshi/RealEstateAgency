@@ -1,9 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { SpaceProps, propsToSpace } from './utils/spaceUtil';
+import { propsToSpace, SpaceProps } from './utils/spaceUtil';
+import { propsToSize, SizeProps } from './utils/sizeUtil';
 
-interface Props extends SpaceProps {
+interface Props extends SpaceProps, SizeProps {
   tag?: React.ElementType;
   className?: string;
   vertical?: boolean;
@@ -31,6 +32,7 @@ export const Flexbox: React.FC<Props> = ({
       'flex-md-wrap': wrap,
     },
     propsToSpace(other),
+    propsToSize(other),
     className
   );
   return (

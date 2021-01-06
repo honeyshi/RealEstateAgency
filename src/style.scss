@@ -1,9 +1,18 @@
 $font-family-sans-serif: 'Aeroport';
+$border-radius: 0.625rem !important;
 
 @import '~bootstrap/scss/bootstrap';
+
+body {
+  font-weight: 300;
+}
 
 .rounded-link {
   border-radius: 2rem;
   border: 1px solid;
   padding: 0.2rem 1rem !important;
+}
+
+a:hover {
+  text-decoration: none;
 }

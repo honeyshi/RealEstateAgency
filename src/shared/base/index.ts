@@ -1,8 +1,10 @@
 export { Block } from './block';
+export { Button } from './button';
 export { Container } from './container';
 export { ExternalLink } from './externalLink';
 export { Flexbox } from './flexbox';
 export { Icon } from './icon';
+export { Input } from './input';
 export { NavbarContainer } from './navbarContainer';
 export { NavbarItem } from './navbarItem';
 export { TextField } from './textField';
