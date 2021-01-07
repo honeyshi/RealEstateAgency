@@ -1,8 +1,19 @@
+$invalid-color: #dc3545;
+
 .input-border-bottom {
-  border: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  border: 0 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5) !important;
 }
 
 input:focus {
   outline: none;
+}
+
+.form-control.is-invalid {
+  color: $invalid-color;
+  border-bottom-color: $invalid-color !important;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
 }
