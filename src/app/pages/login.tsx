@@ -3,12 +3,21 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 
 import { Button, Flexbox, Icon, Input, TextField } from 'shared/base';
-import { parseError } from 'core/parseError';
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
+import { parseError } from 'core/parseError';
 
 const schema = yup.object().shape({
-  email: yup.string().nullable().required().email().label('Email'),
-  password: yup.string().nullable().required().min(5).max(20).label('Password'),
+  email: yup
+    .string()
+    .nullable()
+    .required('Email обязательное поле')
+    .email('Email не соответствует формату электронной почты'),
+  password: yup
+    .string()
+    .nullable()
+    .required('Пароль обязательное поле')
+    .min(5, 'Пароль должен иметь длину не менее 5 символов')
+    .max(20, 'Пароль должен иметь длину не более 20 символов'),
 });
 
 interface Form {
@@ -60,7 +69,7 @@ export const Login: React.FC = () => {
           light
           placeholder="Пароль"
           type="password"
-          invalid={checkInvalidInput('Password')}
+          invalid={checkInvalidInput('Пароль')}
           value={form.password}
           onChange={(password) => setForm({ email: form.email, password: password })}
           pl="0"
