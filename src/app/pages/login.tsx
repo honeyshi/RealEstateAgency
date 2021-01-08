@@ -46,7 +46,7 @@ export const Login: React.FC = () => {
         Вход
       </TextField>
       <TextField mb="3">С возвращением! Войдите, чтобы получить доступ к множеству объявлений.</TextField>
-      <Link to="/forget-password" className="text-info mb-3">
+      <Link to="/reset-password" className="text-info mb-3">
         Забыли пароль?
       </Link>
       <Flexbox vertical w="25">
