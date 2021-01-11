@@ -4,6 +4,11 @@ $input-border-radius: 0rem !important;
 
 @import '~bootstrap/scss/bootstrap';
 
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   font-weight: 300;
 }

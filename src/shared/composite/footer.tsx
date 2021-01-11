@@ -54,6 +54,9 @@ export const Footer: React.FC = () => {
             </TextField>
             <TextField mb="0">+7 (831) 212-34-56</TextField>
             <TextField mb="0">example@email.com</TextField>
+            <Link to="/contact" className="text-black-50">
+              Напишите нам
+            </Link>
           </Flexbox>
         </Flexbox>
         <Flexbox justifyContent="between" pt="4" pb="4">

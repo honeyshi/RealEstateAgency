@@ -17,3 +17,7 @@ input:focus {
 .form-control:focus {
   box-shadow: none !important;
 }
+
+textarea {
+  resize: none !important;
+}
