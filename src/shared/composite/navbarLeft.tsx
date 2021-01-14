@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { NavbarContainer, NavbarItem } from 'shared/base';
 
 const navbarItems = [
@@ -27,12 +26,5 @@ export const NavbarLeft: React.FC = () => {
     });
     return innerNavbar;
   }, [activeItem]);
-  return (
-    <NavbarContainer>
-      <Link to="/" className="navbar-brand" onClick={() => setActiveItem('')}>
-        Название
-      </Link>
-      {navbarItemComponents}
-    </NavbarContainer>
-  );
+  return <NavbarContainer>{navbarItemComponents}</NavbarContainer>;
 };
