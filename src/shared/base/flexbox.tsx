@@ -7,6 +7,7 @@ import { propsToSize, SizeProps } from './utils/sizeUtil';
 interface Props extends SpaceProps, SizeProps {
   tag?: React.ElementType;
   className?: string;
+  md?: boolean;
   vertical?: boolean;
   wrap?: boolean;
   justifyContent?: 'start' | 'end' | 'center' | 'between' | 'around';
@@ -16,6 +17,7 @@ interface Props extends SpaceProps, SizeProps {
 export const Flexbox: React.FC<Props> = ({
   tag: Tag = 'div',
   className,
+  md = true,
   vertical,
   justifyContent,
   alignItems,
@@ -24,12 +26,12 @@ export const Flexbox: React.FC<Props> = ({
   ...other
 }) => {
   const classes = classNames(
-    'd-md-flex',
-    vertical ? 'flex-md-column' : 'flex-md-row',
+    `d${md ? '-md' : ''}-flex`,
+    vertical ? `flex${md ? '-md' : ''}-column` : `flex${md ? '-md' : ''}-row`,
     {
-      [`justify-content-md-${justifyContent}`]: justifyContent != null,
-      [`align-items-md-${alignItems}`]: alignItems != null,
-      'flex-md-wrap': wrap,
+      [`justify-content${md ? '-md' : ''}-${justifyContent}`]: justifyContent != null,
+      [`align-items${md ? '-md' : ''}-${alignItems}`]: alignItems != null,
+      [`flex${md ? '-md' : ''}-wrap`]: wrap,
     },
     propsToSpace(other),
     propsToSize(other),

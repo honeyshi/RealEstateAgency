@@ -1,4 +1,26 @@
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/mixins/_breakpoints';
+
 .footer {
+  margin-top: auto;
   bottom: 0;
   width: 100%;
+}
+
+@include media-breakpoint-up(md) {
+  .footer {
+    .social-media {
+      display: contents !important;
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .footer {
+    .social-media {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }

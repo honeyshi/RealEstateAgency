@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
               <br /> собственников
             </TextField>
           </Flexbox>
-          <Flexbox vertical>
+          <Flexbox vertical md={false}>
             <TextField tag="h6" uppercase>
               Информация
             </TextField>
@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
               FAQ
             </Link>
           </Flexbox>
-          <Flexbox vertical>
+          <Flexbox vertical md={false}>
             <TextField tag="h6" uppercase>
               Недвижимость
             </TextField>
@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
               Поиск сожителей
             </Link>
           </Flexbox>
-          <Flexbox vertical>
+          <Flexbox vertical md={false}>
             <TextField tag="h6" uppercase>
               Мы на связи
             </TextField>
@@ -63,15 +63,17 @@ export const Footer: React.FC = () => {
           <TextField light small>
             © 2020 All Rights Reserved
           </TextField>
-          <ExternalLink to="https://www.instagram.com/" text="black-50">
-            <Icon name="instagram" prefix="fab" />
-          </ExternalLink>
-          <ExternalLink to="https://vk.com/" text="black-50">
-            <Icon name="vk" prefix="fab" />
-          </ExternalLink>
-          <ExternalLink to="https://web.telegram.org/" text="black-50">
-            <Icon name="telegram" prefix="fab" />
-          </ExternalLink>
+          <div className="social-media">
+            <ExternalLink to="https://www.instagram.com/" text="black-50">
+              <Icon name="instagram" prefix="fab" />
+            </ExternalLink>
+            <ExternalLink to="https://vk.com/" text="black-50">
+              <Icon name="vk" prefix="fab" />
+            </ExternalLink>
+            <ExternalLink to="https://web.telegram.org/" text="black-50">
+              <Icon name="telegram" prefix="fab" />
+            </ExternalLink>
+          </div>
           <Link to="/user-agreement" className="font-weight-light small text-dark">
             Пользовательское соглашение
           </Link>
