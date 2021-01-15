@@ -1,0 +1,9 @@
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/mixins/_breakpoints';
+
+@include media-breakpoint-up(lg) {
+  .contact-form {
+    width: 50% !important;
+  }
+}

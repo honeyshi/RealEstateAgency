@@ -4,34 +4,47 @@ import classNames from 'classnames';
 import { propsToSpace, SpaceProps } from './utils/spaceUtil';
 import { propsToSize, SizeProps } from './utils/sizeUtil';
 
-interface Props extends SpaceProps, SizeProps {
+type Breakpoint = 'sm' | 'md' | 'lg' | 'xl';
+
+interface IFlexboxProps extends SpaceProps, SizeProps {
   tag?: React.ElementType;
   className?: string;
-  md?: boolean;
   vertical?: boolean;
   wrap?: boolean;
   justifyContent?: 'start' | 'end' | 'center' | 'between' | 'around';
   alignItems?: 'start' | 'end' | 'center' | 'baseline' | 'stretch';
+  flexSize?: Breakpoint;
+  directionSize?: Breakpoint;
+  wrapSize?: Breakpoint;
+  justifyContentSize?: Breakpoint;
+  alignItemsSize?: Breakpoint;
 }
 
-export const Flexbox: React.FC<Props> = ({
+export const Flexbox: React.FC<IFlexboxProps> = ({
   tag: Tag = 'div',
   className,
-  md = true,
   vertical,
   justifyContent,
   alignItems,
   wrap,
+  flexSize,
+  directionSize,
+  wrapSize,
+  justifyContentSize,
+  alignItemsSize,
   children,
   ...other
 }) => {
   const classes = classNames(
-    `d${md ? '-md' : ''}-flex`,
-    vertical ? `flex${md ? '-md' : ''}-column` : `flex${md ? '-md' : ''}-row`,
+    `d${flexSize != null ? `-${flexSize}` : ''}-flex`,
+    vertical
+      ? `flex${directionSize != null ? `-${directionSize}` : ''}-column`
+      : `flex${directionSize != null ? `-${directionSize}` : ''}-row`,
     {
-      [`justify-content${md ? '-md' : ''}-${justifyContent}`]: justifyContent != null,
-      [`align-items${md ? '-md' : ''}-${alignItems}`]: alignItems != null,
-      [`flex${md ? '-md' : ''}-wrap`]: wrap,
+      [`justify-content${justifyContentSize != null ? `-${justifyContentSize}` : ''}-${justifyContent}`]:
+        justifyContent != null,
+      [`align-items${alignItemsSize != null ? `-${alignItemsSize}` : ''}-${alignItems}`]: alignItems != null,
+      [`flex${wrapSize != null ? `-${wrapSize}` : ''}-wrap`]: wrap,
     },
     propsToSpace(other),
     propsToSize(other),

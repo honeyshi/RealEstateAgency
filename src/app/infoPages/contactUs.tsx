@@ -19,6 +19,8 @@ import { DefaultPage } from 'shared/layout/defaultPage';
 import { checkInvalidInput } from 'core/checkInvalidInput';
 import { parseError } from 'core/parseError';
 
+import '../pagesStyle.scss';
+
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -61,8 +63,10 @@ export const ContactUs: React.FC = () => {
                 <TextField tag="h2" mb="3">
                   Напишите нам
                 </TextField>
-                <TextField mb="3">Если у вас возникли вопросы, оставьте их в форме ниже.</TextField>
-                <Flexbox vertical w="50">
+                <TextField center mb="3">
+                  Если у вас возникли вопросы, оставьте их в форме ниже.
+                </TextField>
+                <Flexbox vertical className="contact-form">
                   <Input
                     borderBottom
                     light

@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="footer bg-light">
       <Container nonFluid pt="5">
-        <Flexbox justifyContent="between" pb="4" className="border-bottom">
+        <Flexbox justifyContent="between" directionSize="md" pb="4" className="border-bottom flex-column">
           <Flexbox vertical>
             <TextField tag="h3">Название</TextField>
             <TextField mb="0">
@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
               <br /> собственников
             </TextField>
           </Flexbox>
-          <Flexbox vertical md={false}>
+          <Flexbox vertical>
             <TextField tag="h6" uppercase>
               Информация
             </TextField>
@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
               FAQ
             </Link>
           </Flexbox>
-          <Flexbox vertical md={false}>
+          <Flexbox vertical>
             <TextField tag="h6" uppercase>
               Недвижимость
             </TextField>
@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
               Поиск сожителей
             </Link>
           </Flexbox>
-          <Flexbox vertical md={false}>
+          <Flexbox vertical>
             <TextField tag="h6" uppercase>
               Мы на связи
             </TextField>
@@ -59,8 +59,8 @@ export const Footer: React.FC = () => {
             </Link>
           </Flexbox>
         </Flexbox>
-        <Flexbox justifyContent="between" pt="4" pb="4">
-          <TextField light small>
+        <Flexbox justifyContent="between" directionSize="md" pt="4" pb="4" className="flex-column">
+          <TextField light small center>
             © 2020 All Rights Reserved
           </TextField>
           <div className="social-media">
@@ -74,7 +74,7 @@ export const Footer: React.FC = () => {
               <Icon name="telegram" prefix="fab" />
             </ExternalLink>
           </div>
-          <Link to="/user-agreement" className="font-weight-light small text-dark">
+          <Link to="/user-agreement" className="font-weight-light small text-dark text-center">
             Пользовательское соглашение
           </Link>
         </Flexbox>
