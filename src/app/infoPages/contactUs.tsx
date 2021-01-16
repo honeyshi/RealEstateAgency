@@ -19,8 +19,6 @@ import { DefaultPage } from 'shared/layout/defaultPage';
 import { checkInvalidInput } from 'core/checkInvalidInput';
 import { parseError } from 'core/parseError';
 
-import '../pagesStyle.scss';
-
 const schema = yup.object().shape({
   email: yup
     .string()

@@ -45,8 +45,10 @@ export const ResetPassword: React.FC = () => {
       <TextField tag="h2" mb="3">
         Смена пароля
       </TextField>
-      <TextField mb="3">Установите новый пароль для своего аккаунта.</TextField>
-      <Flexbox vertical w="25">
+      <TextField center mb="3" pl="2" pr="2">
+        Установите новый пароль для своего аккаунта.
+      </TextField>
+      <Flexbox vertical className="registration-form">
         <Input
           form
           borderBottom

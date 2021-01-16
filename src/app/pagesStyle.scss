@@ -6,4 +6,13 @@
   .contact-form {
     width: 50% !important;
   }
+  .registration-form {
+    width: 25% !important;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .registration-form {
+    width: 75% !important;
+  }
 }

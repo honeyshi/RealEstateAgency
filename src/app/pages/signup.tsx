@@ -51,8 +51,10 @@ export const Signup: React.FC = () => {
       <TextField tag="h2" mb="3">
         Регистрация
       </TextField>
-      <TextField mb="3">Вы ещё не с нами? Зарегистрируйтесь, чтобы получить доступ к множеству объявлений.</TextField>
-      <Flexbox vertical w="25">
+      <TextField center mb="3" pl="2" pr="2">
+        Вы ещё не с нами? Зарегистрируйтесь, чтобы получить доступ к множеству объявлений.
+      </TextField>
+      <Flexbox vertical className="registration-form">
         <Input
           borderBottom
           light
@@ -106,7 +108,7 @@ export const Signup: React.FC = () => {
           Продолжить
         </Button>
       </Flexbox>
-      <TextField mt="5">
+      <TextField center mt="5">
         Уже есть аккаунт?{' '}
         <Link to="/login" className="text-info">
           Войти.

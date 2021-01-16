@@ -7,6 +7,8 @@ import { ResetPassword } from './pages/resetPassword';
 import { ForgetPassword } from './pages/forgetPassword';
 import { ContactUs } from './infoPages/contactUs';
 
+import './pagesStyle.scss';
+
 export const App: React.FC = () => {
   return (
     <Switch>

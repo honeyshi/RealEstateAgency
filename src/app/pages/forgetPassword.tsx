@@ -31,8 +31,10 @@ export const ForgetPassword: React.FC = () => {
       <TextField tag="h2" mb="3">
         Смена пароля
       </TextField>
-      <TextField mb="3">Введите email для отправки нового пароля.</TextField>
-      <Flexbox vertical w="25">
+      <TextField center mb="3" pl="2" pr="2">
+        Введите email для отправки нового пароля.
+      </TextField>
+      <Flexbox vertical className="registration-form">
         <Input
           borderBottom
           light

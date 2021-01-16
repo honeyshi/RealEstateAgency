@@ -45,11 +45,13 @@ export const Login: React.FC = () => {
       <TextField tag="h2" mb="3">
         Вход
       </TextField>
-      <TextField mb="3">С возвращением! Войдите, чтобы получить доступ к множеству объявлений.</TextField>
+      <TextField center mb="3" pl="2" pr="2">
+        С возвращением! Войдите, чтобы получить доступ к множеству объявлений.
+      </TextField>
       <Link to="/forget-password" className="text-info mb-3">
         Забыли пароль?
       </Link>
-      <Flexbox vertical w="25">
+      <Flexbox vertical className="registration-form">
         <Input
           borderBottom
           light
@@ -83,7 +85,7 @@ export const Login: React.FC = () => {
           Продолжить
         </Button>
       </Flexbox>
-      <TextField mt="5">
+      <TextField center mt="5">
         Ещё нет аккаунта?{' '}
         <Link to="/signup" className="text-info">
           Зарегистрируйтесь.
