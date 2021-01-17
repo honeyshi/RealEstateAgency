@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { Button, Flexbox, Input, TextField } from 'shared/base';
 import { parseError } from 'core/parseError';
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
+import { checkInvalidInput } from 'core/checkInvalidInput';
 
 const schema = yup.object().shape({
   password: yup
@@ -35,10 +36,6 @@ export const ResetPassword: React.FC = () => {
       setErrorMessage(parseError(error));
     }
   };
-  const checkInvalidInput = (label: string): boolean => {
-    if (Array.isArray(errorMessage)) return errorMessage.some((message) => message.includes(label));
-    else return errorMessage.includes(label);
-  };
 
   return (
     <Flexbox justifyContent="center" alignItems="center" vertical vh>
@@ -55,9 +52,10 @@ export const ResetPassword: React.FC = () => {
           light
           placeholder="Пароль"
           type="password"
-          invalid={checkInvalidInput('Пароль')}
+          invalid={checkInvalidInput('Пароль', errorMessage)}
           value={form.password}
           onChange={(password) => setForm({ password: password, confirmPassword: form.confirmPassword })}
+          onEnterPress={resetPassword}
           pl="0"
           pt="2"
           pb="2"
@@ -69,9 +67,10 @@ export const ResetPassword: React.FC = () => {
           light
           placeholder="Повторите пароль"
           type="password"
-          invalid={checkInvalidInput('Повторите пароль')}
+          invalid={checkInvalidInput('Повторите пароль', errorMessage)}
           value={form.confirmPassword}
           onChange={(confirmPassword) => setForm({ password: form.password, confirmPassword: confirmPassword })}
+          onEnterPress={resetPassword}
           pl="0"
           pt="2"
           pb="2"

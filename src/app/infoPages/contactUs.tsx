@@ -73,6 +73,7 @@ export const ContactUs: React.FC = () => {
                     invalid={checkInvalidInput('Email', errorMessage)}
                     value={form.email}
                     onChange={(email) => setForm({ email: email, message: form.message })}
+                    onEnterPress={sendMessage}
                     pl="0"
                     pt="2"
                     pb="2"
@@ -87,6 +88,7 @@ export const ContactUs: React.FC = () => {
                     invalid={checkInvalidInput('Сообщение', errorMessage)}
                     value={form.message}
                     onChange={(message) => setForm({ email: form.email, message: message })}
+                    onEnterPress={sendMessage}
                     pl="0"
                     pt="2"
                     pb="2"

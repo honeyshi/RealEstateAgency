@@ -16,6 +16,7 @@ interface InputProps extends SpaceProps {
   type?: string;
   value: string;
   onChange: (value: string) => void;
+  onEnterPress: () => void;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -30,9 +31,13 @@ export const Input: React.FC<InputProps> = ({
   type,
   value,
   onChange,
+  onEnterPress,
   ...other
 }) => {
   const onchange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value), [onChange]);
+  const onkeypress = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && onEnterPress(), [
+    onEnterPress,
+  ]);
   const classes = classNames(
     className,
     {
@@ -51,6 +56,7 @@ export const Input: React.FC<InputProps> = ({
       type={type}
       value={value}
       onChange={onchange}
+      onKeyPress={onkeypress}
     />
   );
 };

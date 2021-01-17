@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { Button, Flexbox, Icon, Input, TextField } from 'shared/base';
 import { parseError } from 'core/parseError';
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
+import { checkInvalidInput } from 'core/checkInvalidInput';
 
 const schema = yup.object().shape({
   email: yup
@@ -42,10 +43,6 @@ export const Signup: React.FC = () => {
       setErrorMessage(parseError(error));
     }
   };
-  const checkInvalidInput = (label: string): boolean => {
-    if (Array.isArray(errorMessage)) return errorMessage.some((message) => message.includes(label));
-    else return errorMessage.includes(label);
-  };
   return (
     <Flexbox justifyContent="center" alignItems="center" vertical vh>
       <TextField tag="h2" mb="3">
@@ -60,11 +57,12 @@ export const Signup: React.FC = () => {
           light
           form
           placeholder="Email"
-          invalid={checkInvalidInput('Email')}
+          invalid={checkInvalidInput('Email', errorMessage)}
           value={form.email}
           onChange={(email) =>
             setForm({ email: email, password: form.password, confirmPassword: form.confirmPassword })
           }
+          onEnterPress={signup}
           pl="0"
           pt="2"
           pb="2"
@@ -76,11 +74,12 @@ export const Signup: React.FC = () => {
           light
           placeholder="Пароль"
           type="password"
-          invalid={checkInvalidInput('Пароль')}
+          invalid={checkInvalidInput('Пароль', errorMessage)}
           value={form.password}
           onChange={(password) =>
             setForm({ email: form.email, password: password, confirmPassword: form.confirmPassword })
           }
+          onEnterPress={signup}
           pl="0"
           pt="2"
           pb="2"
@@ -92,11 +91,12 @@ export const Signup: React.FC = () => {
           light
           placeholder="Повторите пароль"
           type="password"
-          invalid={checkInvalidInput('Повторите пароль')}
+          invalid={checkInvalidInput('Повторите пароль', errorMessage)}
           value={form.confirmPassword}
           onChange={(confirmPassword) =>
             setForm({ email: form.email, password: form.password, confirmPassword: confirmPassword })
           }
+          onEnterPress={signup}
           pl="0"
           pt="2"
           pb="2"

@@ -4,6 +4,7 @@ import * as yup from 'yup';
 
 import { Button, Flexbox, Icon, Input, TextField } from 'shared/base';
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
+import { checkInvalidInput } from 'core/checkInvalidInput';
 import { parseError } from 'core/parseError';
 
 const schema = yup.object().shape({
@@ -36,10 +37,6 @@ export const Login: React.FC = () => {
       setErrorMessage(parseError(error));
     }
   };
-  const checkInvalidInput = (label: string): boolean => {
-    if (Array.isArray(errorMessage)) return errorMessage.some((message) => message.includes(label));
-    else return errorMessage.includes(label);
-  };
   return (
     <Flexbox justifyContent="center" alignItems="center" vertical vh>
       <TextField tag="h2" mb="3">
@@ -57,9 +54,10 @@ export const Login: React.FC = () => {
           light
           form
           placeholder="Email"
-          invalid={checkInvalidInput('Email')}
+          invalid={checkInvalidInput('Email', errorMessage)}
           value={form.email}
           onChange={(email) => setForm({ email: email, password: form.password })}
+          onEnterPress={login}
           pl="0"
           pt="2"
           pb="2"
@@ -71,9 +69,10 @@ export const Login: React.FC = () => {
           light
           placeholder="Пароль"
           type="password"
-          invalid={checkInvalidInput('Пароль')}
+          invalid={checkInvalidInput('Пароль', errorMessage)}
           value={form.password}
           onChange={(password) => setForm({ email: form.email, password: password })}
+          onEnterPress={login}
           pl="0"
           pt="2"
           pb="2"

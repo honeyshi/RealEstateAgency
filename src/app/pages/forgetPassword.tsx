@@ -3,6 +3,7 @@ import * as yup from 'yup';
 
 import { Button, Flexbox, Input, TextField } from 'shared/base';
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
+import { checkInvalidInput } from 'core/checkInvalidInput';
 import { parseError } from 'core/parseError';
 
 const schema = yup
@@ -22,10 +23,6 @@ export const ForgetPassword: React.FC = () => {
       setErrorMessage(parseError(error));
     }
   };
-  const checkInvalidInput = () => {
-    if (Array.isArray(errorMessage)) return errorMessage.some((message) => message.includes('Email'));
-    else return errorMessage.includes('Email');
-  };
   return (
     <Flexbox justifyContent="center" alignItems="center" vertical vh>
       <TextField tag="h2" mb="3">
@@ -40,9 +37,10 @@ export const ForgetPassword: React.FC = () => {
           light
           form
           placeholder="Email"
-          invalid={checkInvalidInput()}
+          invalid={checkInvalidInput('Email', errorMessage)}
           value={email}
           onChange={(email) => setEmail(email)}
+          onEnterPress={sendPassword}
           pl="0"
           pt="2"
           pb="2"
