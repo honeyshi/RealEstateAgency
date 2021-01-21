@@ -10,5 +10,4 @@ export { NavbarContainer } from './navbarContainer';
 export { NavbarItem } from './navbarItem';
 export { Row } from './row';
 export { Section } from './section';
-export { SelectOption } from './selectOption';
 export { TextField } from './textField';
