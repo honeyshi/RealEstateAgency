@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Icon, SelectOption, TextField } from 'shared/base';
 
 import './select.scss';
@@ -8,20 +8,33 @@ interface ISelectProps {
   selectOptions: string[];
   selectText: string;
   className?: string;
+  onSelectValue: (value: string) => void;
 }
 
-export const Select: React.FC<ISelectProps> = ({ selectOptions, selectText, className }) => {
+export const Select: React.FC<ISelectProps> = ({ selectOptions, selectText, className, onSelectValue }) => {
+  const classes = classNames('select p-2', className);
   const [opened, setOpened] = useState(false);
   const [text, setText] = useState('');
+  const onselectvalue = useCallback(
+    (e: React.MouseEvent<HTMLSpanElement>) => {
+      setText(e.currentTarget.innerText);
+      onSelectValue(e.currentTarget.innerText);
+    },
+    [onSelectValue]
+  );
   const selectOptionComponents = useMemo(() => {
-    const selectOptionItems = selectOptions.map((optionText) => {
-      return <SelectOption onClick={() => setText(optionText)}>{optionText}</SelectOption>;
+    const selectOptionItems = selectOptions.map((optionText, index) => {
+      return (
+        <SelectOption onClick={onselectvalue} key={`${optionText}-${index}`}>
+          {optionText}
+        </SelectOption>
+      );
     });
     return selectOptionItems;
-  }, [selectOptions]);
+  }, [selectOptions, onselectvalue]);
 
   return (
-    <div className="select p-2">
+    <div className={classes}>
       <div className="pb-2" onClick={() => setOpened(!opened)}>
         <TextField tag="span" classes="placeholder" pr="4">
           {text === '' ? selectText : text}
