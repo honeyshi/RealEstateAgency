@@ -18,6 +18,7 @@ interface IFlexboxProps extends SpaceProps, SizeProps {
   wrapSize?: Breakpoint;
   justifyContentSize?: Breakpoint;
   alignItemsSize?: Breakpoint;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 export const Flexbox: React.FC<IFlexboxProps> = ({
@@ -32,6 +33,7 @@ export const Flexbox: React.FC<IFlexboxProps> = ({
   wrapSize,
   justifyContentSize,
   alignItemsSize,
+  onClick,
   children,
   ...other
 }) => {
@@ -51,7 +53,7 @@ export const Flexbox: React.FC<IFlexboxProps> = ({
     className
   );
   return (
-    <Tag className={classes} {...other}>
+    <Tag className={classes} onClick={onClick} {...other}>
       {children}
     </Tag>
   );

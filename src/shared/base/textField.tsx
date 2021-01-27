@@ -27,7 +27,7 @@ export const TextField: React.FC<ITextFieldProps> = ({
   const textClasses = classNames(
     classes,
     {
-      'font-bold': bold,
+      'font-weight-bold': bold,
       'font-weight-light': light,
       'text-center': center,
       small: small,

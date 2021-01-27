@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { DefaultPage } from 'shared/layout/defaultPage';
 import { Login } from './pages/login';
 import { Signup } from './pages/signup';
 import { ResetPassword } from './pages/resetPassword';
 import { ForgetPassword } from './pages/forgetPassword';
 import { ContactUs } from './infoPages/contactUs';
+import { StartPage } from './navbarPages/startPage';
 
 import './pagesStyle.scss';
 
@@ -17,7 +17,7 @@ export const App: React.FC = () => {
       <Route exact path="/forget-password" component={ForgetPassword} />
       <Route exact path="/reset-password" component={ResetPassword} />
       <Route exact path="/contact" component={ContactUs} />
-      <Route exact path="/" component={DefaultPage} />
+      <Route exact path="/" component={StartPage} />
     </Switch>
   );
 };
