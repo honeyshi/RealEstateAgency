@@ -8,6 +8,7 @@ import {
   faTimes,
   faAngleDown,
   faAngleUp,
+  faHome,
 } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faTelegram, faVk } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,6 +22,7 @@ library.add(
   faTimes,
   faAngleDown,
   faAngleUp,
+  faHome,
   faInstagram,
   faTelegram,
   faVk
@@ -35,9 +37,10 @@ export type ImportedIcon =
   | 'bars'
   | 'times'
   | 'angle-up'
-  | 'angle-down';
+  | 'angle-down'
+  | 'home';
 
-interface IconProps extends SpaceProps {
+interface IconProps extends SpaceProps, React.HTMLAttributes<any> {
   className?: string;
   prefix?: 'fas' | 'far' | 'fab';
   name: ImportedIcon;
@@ -45,5 +48,5 @@ interface IconProps extends SpaceProps {
 
 export const Icon: React.FC<IconProps> = ({ className, prefix = 'fas', name, ...other }) => {
   const classes = classNames(propsToSpace(other), className);
-  return <FontAwesomeIcon icon={[prefix, name]} className={classes} />;
+  return <FontAwesomeIcon icon={[prefix, name]} className={classes} {...other} />;
 };
