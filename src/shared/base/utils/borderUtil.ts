@@ -2,7 +2,7 @@ export interface BorderProps {
   border?: true | 'top' | 'right' | 'bottom' | 'left';
   border0?: true | 'top' | 'right' | 'bottom' | 'left';
   borderColor?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'white';
-  rounded?: true | 'top' | 'right' | 'bottom' | 'left' | 'circle' | 'pill' | '0' | '50';
+  rounded?: true | 'top' | 'right' | 'bottom' | 'left' | 'circle' | 'pill' | '0' | '50' | 'top-50';
 }
 
 export function propsToBorder(props: BorderProps) {

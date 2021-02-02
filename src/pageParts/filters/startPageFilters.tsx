@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Flexbox, TextField } from 'shared/base';
-import { Select } from '../select';
+import { Select } from 'shared/composite/select';
 
 export const StartPageFilters: React.FC = () => {
   return (

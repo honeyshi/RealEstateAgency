@@ -1,6 +1,6 @@
 import React from 'react';
 import { Block, Column, Container, Flexbox, Row, Section, TextField } from 'shared/base';
-import { StartPageFilters } from 'shared/composite/filters/startPageFilters';
+import { StartPageFilters } from 'pageParts/filters';
 
 export const FiltersSection: React.FC = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Icon, Row, Section, TextField } from 'shared/base';
-import { Advantage } from 'shared/composite/advantage';
+import { Advantage } from 'pageParts/advantage';
 
 type SizeType = string;
 

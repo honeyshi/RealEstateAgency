@@ -6,6 +6,7 @@ export const resolve = {
     root: _resolve(__dirname, "src"),
     app: "root/app",
     core: "root/core",
+    pageParts: "root/pageParts",
     shared: "root/shared",
   },
 };
