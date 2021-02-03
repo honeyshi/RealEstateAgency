@@ -1,6 +1,6 @@
 import React from 'react';
 import { DefaultPage } from 'shared/layout/defaultPage';
-import { AdvantagesSection, FiltersSection, SuggestionsSection } from './sections';
+import { AdvantagesSection, FeedbacksSection, FiltersSection, SuggestionsSection } from './sections';
 
 export const StartPage: React.FC = () => {
   return (
@@ -8,6 +8,7 @@ export const StartPage: React.FC = () => {
       <FiltersSection />
       <AdvantagesSection />
       <SuggestionsSection />
+      <FeedbacksSection />
     </DefaultPage>
   );
 };
