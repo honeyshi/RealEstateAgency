@@ -48,7 +48,7 @@ export const Signup: React.FC = () => {
       <TextField tag="h2" mb="3">
         Регистрация
       </TextField>
-      <TextField center mb="3" pl="2" pr="2">
+      <TextField center mb="3" px="2">
         Вы ещё не с нами? Зарегистрируйтесь, чтобы получить доступ к множеству объявлений.
       </TextField>
       <Flexbox vertical className="registration-form">
@@ -64,8 +64,7 @@ export const Signup: React.FC = () => {
           }
           onEnterPress={signup}
           pl="0"
-          pt="2"
-          pb="2"
+          py="2"
           mb="5"
         />
         <Input
@@ -81,8 +80,7 @@ export const Signup: React.FC = () => {
           }
           onEnterPress={signup}
           pl="0"
-          pt="2"
-          pb="2"
+          py="2"
           mb="5"
         />
         <Input
@@ -98,12 +96,11 @@ export const Signup: React.FC = () => {
           }
           onEnterPress={signup}
           pl="0"
-          pt="2"
-          pb="2"
+          py="2"
           mb="5"
         />
         <ErrorMessagesView messages={errorMessage} />
-        <Button light onClick={signup} pb="3" pt="3">
+        <Button light onClick={signup} py="3">
           <Icon name="arrow-alt-circle-right" mr="3" />
           Продолжить
         </Button>

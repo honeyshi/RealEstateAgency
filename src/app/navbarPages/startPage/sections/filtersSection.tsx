@@ -9,7 +9,7 @@ export const FiltersSection: React.FC = () => {
         <Row pb="5" alignItems="center">
           <Column>
             <Flexbox justifyContent="center" vertical>
-              <TextField tag="h2" mb="5" mt="5">
+              <TextField tag="h2" my="5">
                 Снимай жильё из первых рук
               </TextField>
               <TextField>

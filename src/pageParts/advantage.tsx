@@ -8,7 +8,7 @@ interface IAdvantageProps {
 
 export const Advantage: React.FC<IAdvantageProps> = ({ header, description, children }) => {
   return (
-    <Column size={3} rounded="50" pt="5" pb="5" pr="3" pl="3" ml="4" mr="4" mb="5" className="shadow">
+    <Column size={3} rounded="50" py="5" px="3" mx="4" mb="5" className="shadow">
       <Flexbox vertical alignItems="center">
         <Block
           rounded="circle"

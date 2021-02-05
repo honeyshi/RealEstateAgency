@@ -59,7 +59,7 @@ export const Footer: React.FC = () => {
             </Link>
           </Flexbox>
         </Flexbox>
-        <Flexbox justifyContent="between" directionSize="md" pt="4" pb="4" className="flex-column">
+        <Flexbox justifyContent="between" directionSize="md" py="4" className="flex-column">
           <TextField light small center>
             © 2020 All Rights Reserved
           </TextField>

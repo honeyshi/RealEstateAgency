@@ -5,7 +5,7 @@ export const NavbarRight: React.FC = () => {
   return (
     <NavbarContainer ml="auto">
       <NavbarItem text="Нижний Новгород" to="/" mr="2" linkClass="d-flex">
-        <Block pl="2" pr="2">
+        <Block px="2">
           <Icon name="location-arrow" />
         </Block>
       </NavbarItem>
