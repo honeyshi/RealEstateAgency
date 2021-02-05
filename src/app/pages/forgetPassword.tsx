@@ -28,7 +28,7 @@ export const ForgetPassword: React.FC = () => {
       <TextField tag="h2" mb="3">
         Смена пароля
       </TextField>
-      <TextField center mb="3" pl="2" pr="2">
+      <TextField center mb="3" px="2">
         Введите email для отправки нового пароля.
       </TextField>
       <Flexbox vertical className="registration-form">
@@ -42,12 +42,11 @@ export const ForgetPassword: React.FC = () => {
           onChange={(email) => setEmail(email)}
           onEnterPress={sendPassword}
           pl="0"
-          pt="2"
-          pb="2"
+          py="2"
           mb="5"
         />
         <ErrorMessagesView messages={errorMessage} />
-        <Button light onClick={sendPassword} pb="3" pt="3">
+        <Button light onClick={sendPassword} py="3">
           Отправить пароль
         </Button>
       </Flexbox>

@@ -42,7 +42,7 @@ export const ResetPassword: React.FC = () => {
       <TextField tag="h2" mb="3">
         Смена пароля
       </TextField>
-      <TextField center mb="3" pl="2" pr="2">
+      <TextField center mb="3" px="2">
         Установите новый пароль для своего аккаунта.
       </TextField>
       <Flexbox vertical className="registration-form">
@@ -57,8 +57,7 @@ export const ResetPassword: React.FC = () => {
           onChange={(password) => setForm({ password: password, confirmPassword: form.confirmPassword })}
           onEnterPress={resetPassword}
           pl="0"
-          pt="2"
-          pb="2"
+          py="2"
           mb="5"
         />
         <Input
@@ -72,12 +71,11 @@ export const ResetPassword: React.FC = () => {
           onChange={(confirmPassword) => setForm({ password: form.password, confirmPassword: confirmPassword })}
           onEnterPress={resetPassword}
           pl="0"
-          pt="2"
-          pb="2"
+          py="2"
           mb="5"
         />
         <ErrorMessagesView messages={errorMessage} />
-        <Button light onClick={resetPassword} pb="3" pt="3">
+        <Button light onClick={resetPassword} py="3">
           Изменить пароль
         </Button>
       </Flexbox>

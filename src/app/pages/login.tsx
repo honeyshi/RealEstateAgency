@@ -42,7 +42,7 @@ export const Login: React.FC = () => {
       <TextField tag="h2" mb="3">
         Вход
       </TextField>
-      <TextField center mb="3" pl="2" pr="2">
+      <TextField center mb="3" px="2">
         С возвращением! Войдите, чтобы получить доступ к множеству объявлений.
       </TextField>
       <Link to="/forget-password" className="text-info mb-3">
@@ -59,8 +59,7 @@ export const Login: React.FC = () => {
           onChange={(email) => setForm({ email: email, password: form.password })}
           onEnterPress={login}
           pl="0"
-          pt="2"
-          pb="2"
+          py="2"
           mb="5"
         />
         <Input
@@ -74,12 +73,11 @@ export const Login: React.FC = () => {
           onChange={(password) => setForm({ email: form.email, password: password })}
           onEnterPress={login}
           pl="0"
-          pt="2"
-          pb="2"
+          py="2"
           mb="5"
         />
         <ErrorMessagesView messages={errorMessage} />
-        <Button light onClick={login} pb="3" pt="3">
+        <Button light onClick={login} py="3">
           <Icon name="arrow-alt-circle-right" mr="3" />
           Продолжить
         </Button>

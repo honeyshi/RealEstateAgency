@@ -50,7 +50,7 @@ export const ContactUs: React.FC = () => {
   };
   return (
     <DefaultPage>
-      <Section>
+      <Section bottom>
         <Container>
           <Row>
             <Column>
@@ -75,8 +75,7 @@ export const ContactUs: React.FC = () => {
                     onChange={(email) => setForm({ email: email, message: form.message })}
                     onEnterPress={sendMessage}
                     pl="0"
-                    pt="2"
-                    pb="2"
+                    py="2"
                     mb="5"
                   />
                   <Input
@@ -90,15 +89,14 @@ export const ContactUs: React.FC = () => {
                     onChange={(message) => setForm({ email: form.email, message: message })}
                     onEnterPress={sendMessage}
                     pl="0"
-                    pt="2"
-                    pb="2"
+                    py="2"
                     mb="5"
                   />
                   <ErrorMessagesView messages={errorMessage} />
-                  <Button onClick={sendMessage} light pb="3" pt="3">
+                  <Button onClick={sendMessage} light py="3">
                     Отправить
                   </Button>
-                  <TextField center mt="3" mb="3">
+                  <TextField center my="3">
                     Или напишите нам в социальных сетях
                   </TextField>
                   <Flexbox justifyContent="around">
