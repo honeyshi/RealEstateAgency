@@ -6,7 +6,7 @@ export const FiltersSection: React.FC = () => {
   return (
     <Section>
       <Container nonFluid>
-        <Row pb="5">
+        <Row pb="5" alignItems="center">
           <Column>
             <Flexbox justifyContent="center" vertical>
               <TextField tag="h2" mb="5" mt="5">
@@ -18,7 +18,7 @@ export const FiltersSection: React.FC = () => {
             </Flexbox>
           </Column>
           <Column>
-            <Block bg="light" h="100" />
+            <Block bg="light" style={{ height: '25rem' }} />
           </Column>
         </Row>
         <StartPageFilters />
