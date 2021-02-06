@@ -13,6 +13,7 @@ import {
   faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faTelegram, faVk } from '@fortawesome/free-brands-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { propsToSpace, SpaceProps } from './utils/spaceUtil';
@@ -27,6 +28,7 @@ library.add(
   faHome,
   faArrowRight,
   faArrowLeft,
+  faUser,
   faInstagram,
   faTelegram,
   faVk
@@ -44,7 +46,8 @@ export type ImportedIcon =
   | 'angle-down'
   | 'home'
   | 'arrow-right'
-  | 'arrow-left';
+  | 'arrow-left'
+  | 'user';
 
 interface IconProps extends SpaceProps, React.HTMLAttributes<any> {
   className?: string;
