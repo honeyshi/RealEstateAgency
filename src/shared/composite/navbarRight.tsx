@@ -1,15 +1,13 @@
 import React from 'react';
-import { Block, Icon, NavbarContainer, NavbarItem } from 'shared/base';
+import { Icon, NavbarContainer, NavbarItem } from 'shared/base';
 
 export const NavbarRight: React.FC = () => {
   return (
     <NavbarContainer ml="auto">
-      <NavbarItem text="Нижний Новгород" to="/" mr="2" linkClass="d-flex">
-        <Block px="2">
-          <Icon name="location-arrow" />
-        </Block>
+      <NavbarItem text="Подать обявление" to="/new-advertisment" linkClass="rounded-link" mt="1" mr="2" />
+      <NavbarItem to="/login">
+        <Icon prefix="far" name="user" />
       </NavbarItem>
-      <NavbarItem text="Войти" to="/login" linkClass="rounded-link" mt="1" />
     </NavbarContainer>
   );
 };

@@ -18,12 +18,13 @@ export const NavbarSmall: React.FC = () => {
 
   return (
     <NavbarContainer>
-      <NavbarItem text="Нижний Новгород" to="/" mr="2" linkClass="d-flex">
+      <NavbarItem text="Нижний Новгород" to="#" mr="2" linkClass="d-flex">
         <Block px="2">
           <Icon name="location-arrow" />
         </Block>
       </NavbarItem>
       <NavbarItem text="Войти" to="/login" mt="1" />
+      <NavbarItem text="Подать объявление" to="/new-advertisment" mt="1" />
       {navbarItemComponents}
     </NavbarContainer>
   );
