@@ -38,7 +38,7 @@ export const Footer: React.FC = () => {
             <TextField tag="h6" uppercase>
               Недвижимость
             </TextField>
-            <Link to="/advert" className="text-black-50">
+            <Link to="/flats" className="text-black-50">
               Объявления
             </Link>
             <Link to="/flats-map" className="text-black-50">

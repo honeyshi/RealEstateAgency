@@ -1,0 +1,26 @@
+@import 'shared/base/utils/styleVariables';
+
+.checkbox {
+  border: none;
+  background-color: white;
+  box-shadow: 0 0rem 0.7rem rgba(0, 0, 0, 0.07) !important;
+  &.selected {
+    background-color: $accent-color;
+    color: white;
+  }
+  &.disabled {
+    background-color: $light-color;
+    border: none;
+    color: black;
+    cursor: not-allowed;
+  }
+}
+
+.checkbox:focus {
+  outline: none;
+}
+
+.checkbox:hover:not(.disabled) {
+  background-color: $accent-color;
+  color: white;
+}
