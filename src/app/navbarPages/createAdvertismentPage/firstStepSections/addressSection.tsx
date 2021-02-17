@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import { AddressSuggestions, DaDataAddress, DaDataSuggestion } from 'react-dadata';
+
 import { Column, Flexbox, Row, TextField } from 'shared/base';
 import { Select } from 'shared/composite/select';
 import { AddressSuggestionConfig } from 'core/configFiles/appSettings';
@@ -8,6 +10,11 @@ import { AddressSuggestionConfig } from 'core/configFiles/appSettings';
 import 'react-dadata/dist/react-dadata.css';
 
 const config: AddressSuggestionConfig = require('core/configFiles/appSettings.json');
+
+const defaultGeo = {
+  lat: 55.75,
+  lon: 37.57,
+};
 
 export const AddressSection: React.FC = () => {
   const [address, setAddress] = useState<DaDataSuggestion<DaDataAddress>>();
@@ -48,6 +55,22 @@ export const AddressSection: React.FC = () => {
         defaultQuery="Нижний Новгород"
         onChange={(address) => setAddress(address)}
       />
+      <YMaps>
+        <Map
+          state={{
+            center: [
+              address == null ? defaultGeo.lat : Number(address?.data.geo_lat),
+              address == null ? defaultGeo.lon : Number(address?.data.geo_lon),
+            ],
+            zoom: 12,
+            controls: ['zoomControl'],
+          }}
+          modules={['control.ZoomControl']}
+          style={{ height: '20rem' }}
+          className="mt-3 w-100">
+          <Placemark geometry={[Number(address?.data.geo_lat), Number(address?.data.geo_lon)]} />
+        </Map>
+      </YMaps>
     </>
   );
 };
