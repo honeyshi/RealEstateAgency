@@ -1,8 +1,8 @@
-import { StepSwitcher } from 'pageParts/stepsSwitcher';
+import { StepSwitcher } from './stepsSwitcher';
 import React from 'react';
 import { Container, Section, TextField } from 'shared/base';
 import { DefaultPage } from 'shared/layout/defaultPage';
-import { PropertyDescriptionPage } from './propertyDescriptionPage';
+import { PropertyDescriptionPage } from './firstStepSections';
 
 export const CreateAdvertismentPage: React.FC = () => {
   return (

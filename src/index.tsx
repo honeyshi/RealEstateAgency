@@ -5,6 +5,7 @@ import { App } from 'app/app';
 import { history } from 'core/history';
 
 import './style.scss';
+import './typography.scss';
 
 const root = (
   <Router history={history}>

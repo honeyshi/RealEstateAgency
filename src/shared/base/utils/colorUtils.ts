@@ -12,7 +12,8 @@ export interface ColorProps {
     | 'muted'
     | 'white'
     | 'black-50'
-    | 'white-50';
+    | 'white-50'
+    | 'accent';
   bg?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'white' | 'transparent';
 }
 
