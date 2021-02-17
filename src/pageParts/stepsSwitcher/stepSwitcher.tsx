@@ -23,7 +23,7 @@ export const StepSwitcher: React.FC = () => {
     return stepItems;
   }, [active]);
   return (
-    <Flexbox justifyContent="center" px="3">
+    <Flexbox justifyContent="center" px="3" py="3">
       {stepItemComponents}
     </Flexbox>
   );
