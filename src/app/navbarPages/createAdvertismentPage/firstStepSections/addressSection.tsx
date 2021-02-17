@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Column, Flexbox, Input, Row, TextField } from 'shared/base';
+import { AddressSuggestions, DaDataAddress, DaDataSuggestion } from 'react-dadata';
+import { Column, Flexbox, Row, TextField } from 'shared/base';
 import { Select } from 'shared/composite/select';
+import { AddressSuggestionConfig } from 'core/configFiles/appSettings';
+
+import 'react-dadata/dist/react-dadata.css';
+
+const config: AddressSuggestionConfig = require('core/configFiles/appSettings.json');
 
 export const AddressSection: React.FC = () => {
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState<DaDataSuggestion<DaDataAddress>>();
   return (
     <>
       <Flexbox alignItems="baseline" mt="5" mb="4">
@@ -34,15 +40,13 @@ export const AddressSection: React.FC = () => {
           />
         </Column>
       </Row>
-      <Input
-        borderBottom
-        light
-        form
-        placeholder="Введите адрес"
+      <AddressSuggestions
+        token={config.addressSuggestToken}
+        containerClassName="pt-3 position-relative"
+        currentSuggestionClassName="font-weight-light text-accent"
         value={address}
+        defaultQuery="Нижний Новгород"
         onChange={(address) => setAddress(address)}
-        onEnterPress={() => void 0}
-        p="0"
       />
     </>
   );
