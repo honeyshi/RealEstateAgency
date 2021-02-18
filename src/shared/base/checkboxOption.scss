@@ -12,7 +12,6 @@
     background-color: $light-color;
     border: none;
     color: black;
-    cursor: not-allowed;
   }
 }
 
@@ -20,7 +19,7 @@
   outline: none;
 }
 
-.checkbox:hover:not(.disabled) {
+.checkbox:hover {
   background-color: $accent-color;
   color: white;
 }

@@ -5,6 +5,7 @@ import { PropertyType } from '../propertyType';
 import { ImportedIcon } from 'shared/base/icon';
 import { SectionHeader } from '../sectionHeader';
 import { AddressSection } from './addressSection';
+import { FlatDetails } from './detailsSection/flatDetails';
 
 const propertyTypes = [
   { iconName: 'home', type: 'Квартира', key: 'flat-type' },
@@ -33,6 +34,8 @@ export const PropertyDescriptionPage: React.FC = () => {
       <SectionHeader>Выберите тип недвижимости</SectionHeader>
       <Flexbox justifyContent="between">{propertyTypeComponents}</Flexbox>
       <AddressSection />
+      <SectionHeader>Информация об объекте</SectionHeader>
+      <FlatDetails />
     </>
   );
 };

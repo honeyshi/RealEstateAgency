@@ -1,26 +1,38 @@
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React from 'react';
+import { propsToSpace, SpaceProps } from './utils/spaceUtil';
 
 import './checkboxOption.scss';
 
-interface ICheckboxOptionProps {
+interface ICheckboxOptionProps extends SpaceProps {
   id: string;
-  disabled: boolean;
+  selected: boolean;
+  circle?: boolean;
+  disabled?: boolean;
+  onClick: (e: React.MouseEvent) => void;
 }
 
-export const CheckboxOption: React.FC<ICheckboxOptionProps> = ({ id, disabled, children }) => {
-  const [checked, setChecked] = useState(false);
+export const CheckboxOption: React.FC<ICheckboxOptionProps> = ({
+  id,
+  selected,
+  circle,
+  disabled,
+  onClick,
+  children,
+  ...other
+}) => {
   const classes = classNames(
     'checkbox',
-    'rounded-50',
     'font-weight-light',
-    'px-4',
     'py-2',
-    { selected: checked },
-    { disabled: disabled }
+    circle ? 'rounded-circle' : 'rounded-50',
+    circle ? 'px-3' : 'px-4',
+    { selected: selected },
+    { disabled: disabled },
+    propsToSpace(other)
   );
   return (
-    <button id={id} disabled={disabled} className={classes} onClick={() => setChecked(!checked)}>
+    <button id={id} className={classes} onClick={onClick}>
       {children}
     </button>
   );

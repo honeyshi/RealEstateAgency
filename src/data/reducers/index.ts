@@ -1,0 +1,1 @@
+export { propertyDetailsReducer } from './propertyDetailsReducer';
