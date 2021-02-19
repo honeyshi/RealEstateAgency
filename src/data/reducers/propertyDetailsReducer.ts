@@ -11,6 +11,8 @@ interface IPropertyDetailsInitialState {
   kitchenSpace: string;
   bathroomType: string;
   renovationType: string;
+  houseType: string;
+  showerType: string;
 }
 
 const propertyDetailsInitialState: IPropertyDetailsInitialState = {
@@ -23,6 +25,8 @@ const propertyDetailsInitialState: IPropertyDetailsInitialState = {
   kitchenSpace: '',
   bathroomType: '',
   renovationType: '',
+  houseType: '',
+  showerType: '',
 };
 
 export const propertyDetailsReducer = createReducer(propertyDetailsInitialState, {
@@ -72,6 +76,18 @@ export const propertyDetailsReducer = createReducer(propertyDetailsInitialState,
     return {
       ...state,
       renovationType: action.payload,
+    };
+  },
+  [Action.setHouseType.type]: (state, action) => {
+    return {
+      ...state,
+      houseType: action.payload,
+    };
+  },
+  [Action.setShowerType.type]: (state, action) => {
+    return {
+      ...state,
+      showerType: action.payload,
     };
   },
 });

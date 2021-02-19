@@ -7,6 +7,7 @@ import { SectionHeader } from '../sectionHeader';
 import { AddressSection } from './addressSection';
 import { FlatDetails } from './detailsSection/flatDetails';
 import { RoomDetails } from './detailsSection/roomDetails';
+import { HouseDetails } from './detailsSection/houseDetails';
 
 const propertyTypes = [
   { iconName: 'home', type: 'Квартира', key: 'flat-type' },
@@ -38,6 +39,7 @@ export const PropertyDescriptionPage: React.FC = () => {
       <SectionHeader>Информация об объекте</SectionHeader>
       <FlatDetails />
       <RoomDetails />
+      <HouseDetails />
     </>
   );
 };

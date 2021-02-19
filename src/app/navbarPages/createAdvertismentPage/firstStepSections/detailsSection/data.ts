@@ -33,6 +33,25 @@ export const bathroomTypes = [
   { id: 'many-bathrooms', text: 'Более одного' },
 ];
 
+export const houseTypes = [
+  { id: 'separate-house', text: 'Отдельный дом' },
+  { id: 'part-house', text: 'Часть дома' },
+  { id: 'townhouse', text: 'Таунхаус' },
+  { id: 'duplex', text: 'Дюплекс' },
+];
+
+export const bathroomHouseTypes = [
+  { id: 'in-house-bathroom', text: 'В доме' },
+  { id: 'outside-bathroom', text: 'На улице' },
+  { id: 'no-bathroom', text: 'Отсутствует' },
+];
+
+export const showerHouseTypes = [
+  { id: 'in-house-shower', text: 'В доме' },
+  { id: 'outside-shower', text: 'На улице' },
+  { id: 'no-shower', text: 'Отсутствует' },
+];
+
 export const renovationTypes = [
   { id: 'cosmetic-renovation', text: 'Косметический' },
   { id: 'euro-renovation', text: 'Евро' },

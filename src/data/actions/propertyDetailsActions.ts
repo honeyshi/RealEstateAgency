@@ -10,3 +10,5 @@ export const setLivingSpace = createAction<string>(PropertyDetailsActionTypes.SE
 export const setKitchenSpace = createAction<string>(PropertyDetailsActionTypes.SET_KITCHEN_SPACE);
 export const setBathroomType = createAction<string>(PropertyDetailsActionTypes.SET_BATHROOM_TYPE);
 export const setRenovationType = createAction<string>(PropertyDetailsActionTypes.SET_RENOVATION_TYPE);
+export const setHouseType = createAction<string>(PropertyDetailsActionTypes.SET_HOUSE_TYPE);
+export const setShowerType = createAction<string>(PropertyDetailsActionTypes.SET_SHOWER_TYPE);

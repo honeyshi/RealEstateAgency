@@ -8,4 +8,6 @@ export {
   setKitchenSpace,
   setBathroomType,
   setRenovationType,
+  setHouseType,
+  setShowerType,
 } from './propertyDetailsActions';
