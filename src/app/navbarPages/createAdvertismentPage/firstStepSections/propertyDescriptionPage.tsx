@@ -6,6 +6,7 @@ import { ImportedIcon } from 'shared/base/icon';
 import { SectionHeader } from '../sectionHeader';
 import { AddressSection } from './addressSection';
 import { FlatDetails } from './detailsSection/flatDetails';
+import { RoomDetails } from './detailsSection/roomDetails';
 
 const propertyTypes = [
   { iconName: 'home', type: 'Квартира', key: 'flat-type' },
@@ -36,6 +37,7 @@ export const PropertyDescriptionPage: React.FC = () => {
       <AddressSection />
       <SectionHeader>Информация об объекте</SectionHeader>
       <FlatDetails />
+      <RoomDetails />
     </>
   );
 };

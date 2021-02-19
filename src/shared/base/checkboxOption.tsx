@@ -7,6 +7,7 @@ import './checkboxOption.scss';
 interface ICheckboxOptionProps extends SpaceProps {
   id: string;
   selected: boolean;
+  notSelected?: boolean;
   circle?: boolean;
   disabled?: boolean;
   onClick: (e: React.MouseEvent) => void;
@@ -15,6 +16,7 @@ interface ICheckboxOptionProps extends SpaceProps {
 export const CheckboxOption: React.FC<ICheckboxOptionProps> = ({
   id,
   selected,
+  notSelected,
   circle,
   disabled,
   onClick,
@@ -27,12 +29,13 @@ export const CheckboxOption: React.FC<ICheckboxOptionProps> = ({
     'py-2',
     circle ? 'rounded-circle' : 'rounded-50',
     circle ? 'px-3' : 'px-4',
+    { 'not-selected': notSelected },
     { selected: selected },
     { disabled: disabled },
     propsToSpace(other)
   );
   return (
-    <button id={id} className={classes} onClick={onClick}>
+    <button id={id} disabled={disabled} className={classes} onClick={onClick}>
       {children}
     </button>
   );

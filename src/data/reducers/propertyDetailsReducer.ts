@@ -3,6 +3,7 @@ import * as Action from 'data/actions';
 
 interface IPropertyDetailsInitialState {
   roomsAmount: string;
+  roomsRentAmount: string;
   currentFloor: string;
   totalFloors: string;
   totalSpace: string;
@@ -14,6 +15,7 @@ interface IPropertyDetailsInitialState {
 
 const propertyDetailsInitialState: IPropertyDetailsInitialState = {
   roomsAmount: '',
+  roomsRentAmount: '',
   currentFloor: '',
   totalFloors: '',
   totalSpace: '',
@@ -28,6 +30,12 @@ export const propertyDetailsReducer = createReducer(propertyDetailsInitialState,
     return {
       ...state,
       roomsAmount: action.payload,
+    };
+  },
+  [Action.setRoomsRentAmount.type]: (state, action) => {
+    return {
+      ...state,
+      roomsRentAmount: action.payload,
     };
   },
   [Action.setCurrentFloor.type]: (state, action) => {

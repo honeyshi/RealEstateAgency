@@ -1,5 +1,6 @@
 export {
   setRoomsAmount,
+  setRoomsRentAmount,
   setCurrentFloor,
   setTotalFloors,
   setTotalSpace,
