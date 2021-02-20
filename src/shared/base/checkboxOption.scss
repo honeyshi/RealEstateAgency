@@ -18,13 +18,11 @@
     border: none;
     color: black;
   }
-}
-
-.checkbox:focus {
-  outline: none;
-}
-
-.checkbox:hover:not(.disabled) {
-  background-color: $accent-color;
-  color: white;
+  &:focus {
+    outline: none;
+  }
+  &:hover:not(.disabled) {
+    background-color: $accent-color;
+    color: white;
+  }
 }

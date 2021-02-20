@@ -34,16 +34,12 @@ export const ForgetPassword: React.FC = () => {
       <Flexbox vertical className="registration-form">
         <Input
           borderBottom
-          light
-          form
+          formSpaces
           placeholder="Email"
           invalid={checkInvalidInput('Email', errorMessage)}
           value={email}
           onChange={(email) => setEmail(email)}
           onEnterPress={sendPassword}
-          pl="0"
-          py="2"
-          mb="5"
         />
         <ErrorMessagesView messages={errorMessage} />
         <Button light onClick={sendPassword} py="3">

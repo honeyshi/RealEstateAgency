@@ -16,8 +16,6 @@ export const DetailsInput: React.FC<IDetailsInputProps> = ({ placeholder, value,
     <Input
       className={classNames(propsToSpace(other))}
       borderBottom
-      light
-      form
       placeholder={placeholder == null ? '' : placeholder}
       value={value}
       onChange={(details) => dispatch(setMethod(details))}

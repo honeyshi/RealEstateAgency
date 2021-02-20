@@ -12,4 +12,5 @@ export { NavbarItem } from './navbarItem';
 export { Row } from './row';
 export { Section } from './section';
 export { SelectOption } from './selectOption';
+export { Textarea } from './textarea';
 export { TextField } from './textField';

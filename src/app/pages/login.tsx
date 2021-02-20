@@ -51,30 +51,22 @@ export const Login: React.FC = () => {
       <Flexbox vertical className="registration-form">
         <Input
           borderBottom
-          light
-          form
+          formSpaces
           placeholder="Email"
           invalid={checkInvalidInput('Email', errorMessage)}
           value={form.email}
           onChange={(email) => setForm({ email: email, password: form.password })}
           onEnterPress={login}
-          pl="0"
-          py="2"
-          mb="5"
         />
         <Input
-          form
           borderBottom
-          light
+          formSpaces
           placeholder="Пароль"
           type="password"
           invalid={checkInvalidInput('Пароль', errorMessage)}
           value={form.password}
           onChange={(password) => setForm({ email: form.email, password: password })}
           onEnterPress={login}
-          pl="0"
-          py="2"
-          mb="5"
         />
         <ErrorMessagesView messages={errorMessage} />
         <Button light onClick={login} py="3">

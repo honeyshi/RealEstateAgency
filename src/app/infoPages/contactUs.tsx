@@ -12,6 +12,7 @@ import {
   Input,
   Row,
   Section,
+  Textarea,
   TextField,
 } from 'shared/base';
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
@@ -67,30 +68,20 @@ export const ContactUs: React.FC = () => {
                 <Flexbox vertical className="contact-form">
                   <Input
                     borderBottom
-                    light
-                    form
+                    formSpaces
                     placeholder="Email"
                     invalid={checkInvalidInput('Email', errorMessage)}
                     value={form.email}
                     onChange={(email) => setForm({ email: email, message: form.message })}
                     onEnterPress={sendMessage}
-                    pl="0"
-                    py="2"
-                    mb="5"
                   />
-                  <Input
-                    borderBottom
-                    light
-                    form
+                  <Textarea
+                    formSpaces
                     placeholder="Сообщение"
-                    tag="textarea"
                     invalid={checkInvalidInput('Сообщение', errorMessage)}
                     value={form.message}
                     onChange={(message) => setForm({ email: form.email, message: message })}
                     onEnterPress={sendMessage}
-                    pl="0"
-                    py="2"
-                    mb="5"
                   />
                   <ErrorMessagesView messages={errorMessage} />
                   <Button onClick={sendMessage} light py="3">

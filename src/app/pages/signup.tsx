@@ -54,8 +54,7 @@ export const Signup: React.FC = () => {
       <Flexbox vertical className="registration-form">
         <Input
           borderBottom
-          light
-          form
+          formSpaces
           placeholder="Email"
           invalid={checkInvalidInput('Email', errorMessage)}
           value={form.email}
@@ -63,14 +62,10 @@ export const Signup: React.FC = () => {
             setForm({ email: email, password: form.password, confirmPassword: form.confirmPassword })
           }
           onEnterPress={signup}
-          pl="0"
-          py="2"
-          mb="5"
         />
         <Input
-          form
           borderBottom
-          light
+          formSpaces
           placeholder="Пароль"
           type="password"
           invalid={checkInvalidInput('Пароль', errorMessage)}
@@ -79,14 +74,10 @@ export const Signup: React.FC = () => {
             setForm({ email: form.email, password: password, confirmPassword: form.confirmPassword })
           }
           onEnterPress={signup}
-          pl="0"
-          py="2"
-          mb="5"
         />
         <Input
-          form
           borderBottom
-          light
+          formSpaces
           placeholder="Повторите пароль"
           type="password"
           invalid={checkInvalidInput('Повторите пароль', errorMessage)}
@@ -95,9 +86,6 @@ export const Signup: React.FC = () => {
             setForm({ email: form.email, password: form.password, confirmPassword: confirmPassword })
           }
           onEnterPress={signup}
-          pl="0"
-          py="2"
-          mb="5"
         />
         <ErrorMessagesView messages={errorMessage} />
         <Button light onClick={signup} py="3">

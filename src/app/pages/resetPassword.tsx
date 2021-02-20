@@ -47,32 +47,24 @@ export const ResetPassword: React.FC = () => {
       </TextField>
       <Flexbox vertical className="registration-form">
         <Input
-          form
           borderBottom
-          light
+          formSpaces
           placeholder="Пароль"
           type="password"
           invalid={checkInvalidInput('Пароль', errorMessage)}
           value={form.password}
           onChange={(password) => setForm({ password: password, confirmPassword: form.confirmPassword })}
           onEnterPress={resetPassword}
-          pl="0"
-          py="2"
-          mb="5"
         />
         <Input
-          form
           borderBottom
-          light
+          formSpaces
           placeholder="Повторите пароль"
           type="password"
           invalid={checkInvalidInput('Повторите пароль', errorMessage)}
           value={form.confirmPassword}
           onChange={(confirmPassword) => setForm({ password: form.password, confirmPassword: confirmPassword })}
           onEnterPress={resetPassword}
-          pl="0"
-          py="2"
-          mb="5"
         />
         <ErrorMessagesView messages={errorMessage} />
         <Button light onClick={resetPassword} py="3">
