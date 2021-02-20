@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { CheckboxOption } from 'shared/base';
 import { StoreType } from 'core/store';
+import { CommonDetails, DetailsRow } from '../detailsSection';
 import { roomsAmount, roomsAmountRoomRent } from './data';
-import { DetailsRow } from './detailsRow';
 import { setRoomsAmount, setRoomsRentAmount } from 'data/actions';
-import { CommonDetails } from './commonDetails';
 
 export const RoomDetails: React.FC = () => {
   const dispatch = useDispatch();

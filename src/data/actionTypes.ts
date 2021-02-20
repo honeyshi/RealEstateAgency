@@ -1,3 +1,7 @@
+export enum CleanActionTypes {
+  CLEAN_PROPERTY_DETAILS = 'CLEAN_PROPERTY_DETAILS',
+}
+
 export enum PropertyDetailsActionTypes {
   SET_ROOMS_AMOUNT = 'SET_ROOMS_AMOUNT',
   SET_RENT_ROOMS_AMOUNT = 'SET_RENT_ROOMS_AMOUNT',
@@ -10,4 +14,8 @@ export enum PropertyDetailsActionTypes {
   SET_RENOVATION_TYPE = 'SET_RENOVATION_TYPE',
   SET_HOUSE_TYPE = 'SET_HOUSE_TYPE',
   SET_SHOWER_TYPE = 'SET_SHOWER_TYPE',
+}
+
+export enum NewAdvertismentActionTypes {
+  SET_ACTIVE_STEP = 'SET_ACTIVE_STEP',
 }

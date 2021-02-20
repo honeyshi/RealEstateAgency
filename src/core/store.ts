@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
-import { rootReducer } from 'data/reducer';
+import { appReducer } from 'data/reducer';
 
-export const store = createStore(rootReducer);
+export const store = createStore(appReducer);
 
-export interface StoreType extends ReturnType<typeof rootReducer> {}
+export interface StoreType extends ReturnType<typeof appReducer> {}

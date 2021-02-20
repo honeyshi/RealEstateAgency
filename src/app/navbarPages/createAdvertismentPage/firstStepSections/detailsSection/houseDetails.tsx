@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { StoreType } from 'core/store';
 import {
   setBathroomType,
@@ -9,8 +10,7 @@ import {
   setShowerType,
   setTotalSpace,
 } from 'data/actions';
-import { DetailsInput } from './detailsInput';
-import { DetailsRow } from './detailsRow';
+import { DetailsInput, DetailsRow } from '../detailsSection';
 import { bathroomHouseTypes, houseTypes, renovationTypes, showerHouseTypes } from './data';
 import { CheckboxOption } from 'shared/base';
 

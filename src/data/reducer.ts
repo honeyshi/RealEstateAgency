@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
+import { propertyDetailsReducer, newAdvertismentReducer } from './reducers';
 
-import { propertyDetailsReducer } from './reducers';
-
-export const rootReducer = combineReducers({
+export const appReducer = combineReducers({
   propertyDetails: propertyDetailsReducer,
+  newAdvertisment: newAdvertismentReducer,
 });

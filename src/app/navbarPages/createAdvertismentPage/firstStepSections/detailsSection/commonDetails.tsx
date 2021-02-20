@@ -1,3 +1,7 @@
+import React, { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { CheckboxOption, TextField } from 'shared/base';
 import { StoreType } from 'core/store';
 import {
   setBathroomType,
@@ -8,12 +12,8 @@ import {
   setTotalFloors,
   setTotalSpace,
 } from 'data/actions';
-import React, { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { CheckboxOption, TextField } from 'shared/base';
 import { bathroomTypes, renovationTypes } from './data';
-import { DetailsInput } from './detailsInput';
-import { DetailsRow } from './detailsRow';
+import { DetailsInput, DetailsRow } from '../detailsSection';
 
 export const CommonDetails: React.FC = () => {
   const dispatch = useDispatch();

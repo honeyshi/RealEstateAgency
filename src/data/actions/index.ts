@@ -1,3 +1,5 @@
+export { cleanPropertyDetails } from './cleanActions';
+
 export {
   setRoomsAmount,
   setRoomsRentAmount,
@@ -11,3 +13,5 @@ export {
   setHouseType,
   setShowerType,
 } from './propertyDetailsActions';
+
+export { setActiveStep } from './newAdvertismentActions';
