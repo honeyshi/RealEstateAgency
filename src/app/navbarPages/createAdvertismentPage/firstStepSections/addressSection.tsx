@@ -5,11 +5,10 @@ import { AddressSuggestions, DaDataAddress, DaDataSuggestion } from 'react-dadat
 
 import { Column, Flexbox, Row, TextField } from 'shared/base';
 import { Select } from 'shared/composite/select';
-import { AddressSuggestionConfig } from 'core/configFiles/appSettings';
 
 import 'react-dadata/dist/react-dadata.css';
 
-const config: AddressSuggestionConfig = require('core/configFiles/appSettings.json');
+import config from 'core/configFiles/appSettings.json';
 
 const defaultGeo = {
   lat: 55.75,

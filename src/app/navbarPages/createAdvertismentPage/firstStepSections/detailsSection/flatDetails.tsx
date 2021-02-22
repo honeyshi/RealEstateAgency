@@ -14,7 +14,6 @@ export const FlatDetails: React.FC = () => {
     const roomItems = roomsAmountFlat.map((room) => {
       return (
         <CheckboxOption
-          id={room.id}
           circle={room.circle}
           selected={room.text === flatDetails.roomsAmount}
           onClick={() => dispatch(setRoomsAmount(room.text))}

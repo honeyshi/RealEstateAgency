@@ -22,7 +22,7 @@ export const PropertyDescriptionPage: React.FC = () => {
   const [activePropertyType, setActivePropertyType] = useState('flat-type');
 
   const propertyTypeComponents = useMemo(() => {
-    const stepItems = propertyTypes.map((propertyType) => {
+    const propertyTypeItems = propertyTypes.map((propertyType) => {
       return (
         <PropertyType
           text={propertyType.type}
@@ -36,11 +36,11 @@ export const PropertyDescriptionPage: React.FC = () => {
         </PropertyType>
       );
     });
-    return stepItems;
+    return propertyTypeItems;
   }, [dispatch, activePropertyType]);
 
-  const renderSwitch = (param: string) => {
-    switch (param) {
+  const renderSwitch = (propertyType: string) => {
+    switch (propertyType) {
       case 'flat-type':
         return <FlatDetails />;
       case 'room-type':

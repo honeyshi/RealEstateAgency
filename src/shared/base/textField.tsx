@@ -8,6 +8,7 @@ interface ITextFieldProps extends SpaceProps, ColorProps {
   bold?: boolean;
   center?: boolean;
   light?: boolean;
+  left?: boolean;
   small?: boolean;
   tag?: React.ElementType;
   uppercase?: boolean;
@@ -18,6 +19,7 @@ export const TextField: React.FC<ITextFieldProps> = ({
   bold,
   center,
   light,
+  left,
   small,
   tag: Tag = 'p',
   uppercase,
@@ -30,8 +32,9 @@ export const TextField: React.FC<ITextFieldProps> = ({
       'font-weight-bold': bold,
       'font-weight-light': light,
       'text-center': center,
-      small: small,
+      'text-left': left,
       'text-uppercase': uppercase,
+      small: small,
     },
     propsToSpace(other),
     propsToColor(other)

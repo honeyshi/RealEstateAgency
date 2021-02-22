@@ -1,5 +1,7 @@
 export { cleanPropertyDetails } from './cleanActions';
 
+export { setActiveStep } from './newAdvertismentActions';
+
 export {
   setRoomsAmount,
   setRoomsRentAmount,
@@ -14,4 +16,10 @@ export {
   setShowerType,
 } from './propertyDetailsActions';
 
-export { setActiveStep } from './newAdvertismentActions';
+export {
+  setFacilities,
+  setFurnitureType,
+  setLivingRules,
+  setHeader,
+  setDescription,
+} from './propertyFacilitiesActions';

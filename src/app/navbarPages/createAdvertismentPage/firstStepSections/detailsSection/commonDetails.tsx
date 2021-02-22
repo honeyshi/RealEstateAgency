@@ -22,7 +22,6 @@ export const CommonDetails: React.FC = () => {
     const renovationTypeItems = renovationTypes.map((renovationType) => {
       return (
         <CheckboxOption
-          id={renovationType.id}
           notSelected={flatDetails.renovationType !== '' && renovationType.id !== flatDetails.renovationType}
           selected={renovationType.id === flatDetails.renovationType}
           onClick={() => dispatch(setRenovationType(renovationType.id))}
@@ -38,7 +37,6 @@ export const CommonDetails: React.FC = () => {
     const bathroomTypeItems = bathroomTypes.map((bathroomType) => {
       return (
         <CheckboxOption
-          id={bathroomType.id}
           notSelected={flatDetails.bathroomType !== '' && bathroomType.id !== flatDetails.bathroomType}
           selected={bathroomType.id === flatDetails.bathroomType}
           onClick={() => dispatch(setBathroomType(bathroomType.id))}

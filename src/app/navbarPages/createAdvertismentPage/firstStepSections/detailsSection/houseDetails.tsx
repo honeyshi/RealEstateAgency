@@ -22,7 +22,6 @@ export const HouseDetails: React.FC = () => {
     const houseTypeItems = houseTypes.map((houseType) => {
       return (
         <CheckboxOption
-          id={houseType.id}
           notSelected={houseDetails.houseType !== '' && houseType.id !== houseDetails.houseType}
           selected={houseType.id === houseDetails.houseType}
           onClick={() => dispatch(setHouseType(houseType.id))}
@@ -38,7 +37,6 @@ export const HouseDetails: React.FC = () => {
     const bathroomTypeItems = bathroomHouseTypes.map((bathroomType) => {
       return (
         <CheckboxOption
-          id={bathroomType.id}
           notSelected={houseDetails.bathroomType !== '' && bathroomType.id !== houseDetails.bathroomType}
           selected={bathroomType.id === houseDetails.bathroomType}
           onClick={() => dispatch(setBathroomType(bathroomType.id))}
@@ -54,7 +52,6 @@ export const HouseDetails: React.FC = () => {
     const showerTypeItems = showerHouseTypes.map((showerType) => {
       return (
         <CheckboxOption
-          id={showerType.id}
           notSelected={houseDetails.showerType !== '' && showerType.id !== houseDetails.showerType}
           selected={showerType.id === houseDetails.showerType}
           onClick={() => dispatch(setShowerType(showerType.id))}
@@ -70,7 +67,6 @@ export const HouseDetails: React.FC = () => {
     const renovationTypeItems = renovationTypes.map((renovationType) => {
       return (
         <CheckboxOption
-          id={renovationType.id}
           notSelected={houseDetails.renovationType !== '' && renovationType.id !== houseDetails.renovationType}
           selected={renovationType.id === houseDetails.renovationType}
           onClick={() => dispatch(setRenovationType(renovationType.id))}

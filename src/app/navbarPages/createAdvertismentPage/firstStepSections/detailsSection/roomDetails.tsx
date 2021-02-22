@@ -14,7 +14,6 @@ export const RoomDetails: React.FC = () => {
     const roomItems = roomsAmount.map((room) => {
       return (
         <CheckboxOption
-          id={room.id}
           circle={room.circle}
           disabled={Number(room.text) <= Number(flatDetails.roomsRentAmount)}
           selected={room.text === flatDetails.roomsAmount}
@@ -31,7 +30,6 @@ export const RoomDetails: React.FC = () => {
     const availableRoomItems = roomsAmountRoomRent.map((room) => {
       return (
         <CheckboxOption
-          id={room.id}
           circle={room.circle}
           disabled={Number(room.text) >= Number(flatDetails.roomsAmount.replace('+', ''))}
           selected={room.text === flatDetails.roomsRentAmount}

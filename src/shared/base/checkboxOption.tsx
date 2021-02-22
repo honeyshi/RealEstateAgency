@@ -5,18 +5,18 @@ import { propsToSpace, SpaceProps } from './utils/spaceUtil';
 import './checkboxOption.scss';
 
 interface ICheckboxOptionProps extends SpaceProps {
-  id: string;
   selected: boolean;
   notSelected?: boolean;
+  big?: boolean;
   circle?: boolean;
   disabled?: boolean;
   onClick: (e: React.MouseEvent) => void;
 }
 
 export const CheckboxOption: React.FC<ICheckboxOptionProps> = ({
-  id,
   selected,
   notSelected,
+  big,
   circle,
   disabled,
   onClick,
@@ -26,7 +26,7 @@ export const CheckboxOption: React.FC<ICheckboxOptionProps> = ({
   const classes = classNames(
     'checkbox',
     'font-weight-light',
-    'py-2',
+    big ? 'py-4' : 'py-2',
     circle ? 'rounded-circle' : 'rounded-50',
     circle ? 'px-3' : 'px-4',
     { 'not-selected': notSelected },
@@ -35,7 +35,7 @@ export const CheckboxOption: React.FC<ICheckboxOptionProps> = ({
     propsToSpace(other)
   );
   return (
-    <button id={id} disabled={disabled} className={classes} onClick={onClick}>
+    <button disabled={disabled} className={classes} onClick={onClick}>
       {children}
     </button>
   );

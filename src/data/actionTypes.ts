@@ -16,6 +16,14 @@ export enum PropertyDetailsActionTypes {
   SET_SHOWER_TYPE = 'SET_SHOWER_TYPE',
 }
 
+export enum PropertyFacilitiesActionTypes {
+  SET_FACILITIES = 'SET_FACILITIES',
+  SET_FURNITURE_TYPE = 'SET_FURNITURE_TYPE',
+  SET_LIVING_RULES = 'SET_LIVING_RULES',
+  SET_AD_HEADER = 'SET_AD_HEADER',
+  SET_AD_DESCRIPTION = 'SET_AD_DESCRIPTION',
+}
+
 export enum NewAdvertismentActionTypes {
   SET_ACTIVE_STEP = 'SET_ACTIVE_STEP',
 }
