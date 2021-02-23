@@ -6,7 +6,7 @@ import { Container, Section, TextField } from 'shared/base';
 import { DefaultPage } from 'shared/layout/defaultPage';
 import { StoreType } from 'core/store';
 import { PropertyDescriptionPage } from './firstStepSections';
-import { PropertyFacilitiesPage } from './secondStepSections/propertyFacilitiesPage';
+import { PropertyFacilitiesPage } from './secondStepSections';
 
 export const CreateAdvertismentPage: React.FC = () => {
   const activeStep = useSelector((state: StoreType) => state.newAdvertisment.activeStep);

@@ -2,23 +2,17 @@ import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { StoreType } from 'core/store';
-import { Button, CheckboxOption, Column, Flexbox, Icon, Input, Row, Textarea, TextField } from 'shared/base';
+import { CheckboxOption, Column, Flexbox, Icon, Input, Row, Textarea, TextField } from 'shared/base';
 import { ImportedIcon } from 'shared/base/icon';
 import { SectionHeader } from '../sectionHeader';
-import {
-  setActiveStep,
-  setDescription,
-  setFacilities,
-  setFurnitureType,
-  setHeader,
-  setLivingRules,
-} from 'data/actions';
+import { setDescription, setFacilities, setFurnitureType, setHeader, setLivingRules } from 'data/actions';
 import { facilityOptions, furnitureTypes, livingRules } from './data';
+import { PreviousStep } from '../stepsSwitcher/previousStep';
+import { NextStep } from '../stepsSwitcher/nextStep';
 
 export const PropertyFacilitiesPage: React.FC = () => {
   const dispatch = useDispatch();
   const propertyFacilities = useSelector((state: StoreType) => state.propertyFacilities);
-  const activeStep = useSelector((state: StoreType) => state.newAdvertisment.activeStep);
 
   const facilityOptionsComponents = useMemo(() => {
     const facilityItems = facilityOptions.map((facilityOption) => {
@@ -115,12 +109,8 @@ export const PropertyFacilitiesPage: React.FC = () => {
         mb="4"
       />
       <Flexbox justifyContent="between">
-        <Button fontLight text="accent" onClick={() => dispatch(setActiveStep(activeStep - 1))}>
-          <Icon name="arrow-left" mr="3" /> Предыдущий шаг
-        </Button>
-        <Button fontLight text="accent" onClick={() => dispatch(setActiveStep(activeStep + 1))}>
-          Следующий шаг <Icon name="arrow-right" ml="3" />
-        </Button>
+        <PreviousStep />
+        <NextStep />
       </Flexbox>
     </>
   );

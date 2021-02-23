@@ -1,14 +1,14 @@
 import React, { useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { Button, Flexbox, Icon } from 'shared/base';
+import { Flexbox, Icon } from 'shared/base';
 import { ImportedIcon } from 'shared/base/icon';
 import { PropertyType } from '../propertyType';
 import { SectionHeader } from '../sectionHeader';
 import { AddressSection } from './addressSection';
 import { FlatDetails, RoomDetails, HouseDetails } from './detailsSection';
-import { cleanPropertyDetails, setActiveStep } from 'data/actions';
-import { StoreType } from 'core/store';
+import { cleanPropertyDetails } from 'data/actions';
+import { NextStep } from '../stepsSwitcher/nextStep';
 
 const propertyTypes = [
   { iconName: 'home', type: 'Квартира', key: 'flat-type' },
@@ -18,7 +18,6 @@ const propertyTypes = [
 
 export const PropertyDescriptionPage: React.FC = () => {
   const dispatch = useDispatch();
-  const activeStep = useSelector((state: StoreType) => state.newAdvertisment.activeStep);
   const [activePropertyType, setActivePropertyType] = useState('flat-type');
 
   const propertyTypeComponents = useMemo(() => {
@@ -57,9 +56,7 @@ export const PropertyDescriptionPage: React.FC = () => {
       <SectionHeader>Информация об объекте</SectionHeader>
       {renderSwitch(activePropertyType)}
       <Flexbox justifyContent="end">
-        <Button fontLight text="accent" onClick={() => dispatch(setActiveStep(activeStep + 1))}>
-          Следующий шаг <Icon name="arrow-right" ml="3" />
-        </Button>
+        <NextStep />
       </Flexbox>
     </>
   );

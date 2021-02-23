@@ -1,0 +1,1 @@
+export { PropertyFacilitiesPage } from './propertyFacilitiesPage';
