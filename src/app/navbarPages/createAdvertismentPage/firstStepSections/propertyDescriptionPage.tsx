@@ -8,7 +8,7 @@ import { SectionHeader } from '../sectionHeader';
 import { AddressSection } from './addressSection';
 import { FlatDetails, RoomDetails, HouseDetails } from './detailsSection';
 import { cleanPropertyDetails } from 'data/actions';
-import { NextStep } from '../stepsSwitcher/nextStep';
+import { NextStep } from '../stepsSwitcher';
 
 const propertyTypes = [
   { iconName: 'home', type: 'Квартира', key: 'flat-type' },

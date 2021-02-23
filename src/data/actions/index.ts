@@ -23,3 +23,5 @@ export {
   setHeader,
   setDescription,
 } from './propertyFacilitiesActions';
+
+export { setVideoLink } from './propertyPhotosActions';

@@ -24,6 +24,10 @@ export enum PropertyFacilitiesActionTypes {
   SET_AD_DESCRIPTION = 'SET_AD_DESCRIPTION',
 }
 
+export enum PropertyPhotosActionTypes {
+  SET_VIDEO_LINK = 'SET_VIDEO_LINK',
+}
+
 export enum NewAdvertismentActionTypes {
   SET_ACTIVE_STEP = 'SET_ACTIVE_STEP',
 }

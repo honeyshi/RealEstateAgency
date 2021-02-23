@@ -1,0 +1,1 @@
+export { PropertyPhotosPage } from './propertyPhotosPage';

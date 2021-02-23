@@ -7,8 +7,7 @@ import { ImportedIcon } from 'shared/base/icon';
 import { SectionHeader } from '../sectionHeader';
 import { setDescription, setFacilities, setFurnitureType, setHeader, setLivingRules } from 'data/actions';
 import { facilityOptions, furnitureTypes, livingRules } from './data';
-import { PreviousStep } from '../stepsSwitcher/previousStep';
-import { NextStep } from '../stepsSwitcher/nextStep';
+import { PreviousStep, NextStep } from '../stepsSwitcher';
 
 export const PropertyFacilitiesPage: React.FC = () => {
   const dispatch = useDispatch();
