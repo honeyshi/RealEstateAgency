@@ -48,4 +48,9 @@ export const propertyFacilitiesReducer = createReducer(propertyFacilitiesInitial
       description: action.payload,
     };
   },
+  [Action.cleanNewAdvertisment.type]: () => {
+    return {
+      ...propertyFacilitiesInitialState,
+    };
+  },
 });

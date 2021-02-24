@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { StepSwitcher } from './stepsSwitcher';
 import { Container, Section, TextField } from 'shared/base';
@@ -9,8 +9,14 @@ import { PropertyDescriptionPage } from './firstStepSections';
 import { PropertyFacilitiesPage } from './secondStepSections';
 import { PropertyPhotosPage } from './thirdStepSections';
 import { OwnerContactsPage } from './fourthStepSections';
+import { cleanNewAdvertisment } from 'data/actions';
 
 export const CreateAdvertismentPage: React.FC = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(cleanNewAdvertisment());
+  }, [dispatch]);
+
   const activeStep = useSelector((state: StoreType) => state.newAdvertisment.activeStep);
 
   const renderSwitch = (activeStep: number) => {

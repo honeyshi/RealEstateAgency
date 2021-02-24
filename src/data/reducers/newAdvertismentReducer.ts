@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setActiveStep } from 'data/actions';
+import { cleanNewAdvertisment, setActiveStep } from 'data/actions';
 
 interface INewAdvertismentInitialState {
   activeStep: number;
@@ -14,6 +14,11 @@ export const newAdvertismentReducer = createReducer(newAdvertismentInitialState,
     return {
       ...state,
       activeStep: action.payload,
+    };
+  },
+  [cleanNewAdvertisment.type]: () => {
+    return {
+      ...newAdvertismentInitialState,
     };
   },
 });

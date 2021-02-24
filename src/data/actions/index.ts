@@ -1,4 +1,4 @@
-export { cleanPropertyDetails } from './cleanActions';
+export { cleanPropertyDetails, cleanNewAdvertisment } from './cleanActions';
 
 export { setActiveStep } from './newAdvertismentActions';
 

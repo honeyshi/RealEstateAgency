@@ -1,5 +1,6 @@
 export enum CleanActionTypes {
   CLEAN_PROPERTY_DETAILS = 'CLEAN_PROPERTY_DETAILS',
+  CLEAN_NEW_ADVERTISMENT = 'CLEAN_NEW_ADVERTISMENT',
 }
 
 export enum PropertyDetailsActionTypes {

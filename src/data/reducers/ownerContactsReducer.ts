@@ -48,4 +48,9 @@ export const ownerContactsReducer = createReducer(ownerContactsInitialState, {
       telephoneNumber: action.payload,
     };
   },
+  [Action.cleanNewAdvertisment.type]: () => {
+    return {
+      ...ownerContactsInitialState,
+    };
+  },
 });

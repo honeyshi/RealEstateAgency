@@ -1,6 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
 import * as Action from 'data/actions';
-import { cleanPropertyDetails } from 'data/actions/cleanActions';
 
 interface IPropertyDetailsInitialState {
   roomsAmount: string;
@@ -91,7 +90,12 @@ export const propertyDetailsReducer = createReducer(propertyDetailsInitialState,
       showerType: action.payload,
     };
   },
-  [cleanPropertyDetails.type]: () => {
+  [Action.cleanPropertyDetails.type]: () => {
+    return {
+      ...propertyDetailsInitialState,
+    };
+  },
+  [Action.cleanNewAdvertisment.type]: () => {
     return {
       ...propertyDetailsInitialState,
     };
