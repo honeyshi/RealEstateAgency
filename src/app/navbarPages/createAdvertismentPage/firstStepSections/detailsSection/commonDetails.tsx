@@ -13,7 +13,8 @@ import {
   setTotalSpace,
 } from 'data/actions';
 import { bathroomTypes, renovationTypes } from './data';
-import { DetailsInput, DetailsRow } from '../detailsSection';
+import { DetailsInput } from '../../detailsInput';
+import { DetailsRow } from '../../detailsRow';
 
 export const CommonDetails: React.FC = () => {
   const dispatch = useDispatch();

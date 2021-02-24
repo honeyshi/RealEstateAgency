@@ -14,7 +14,18 @@ export interface ColorProps {
     | 'black-50'
     | 'white-50'
     | 'accent';
-  bg?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'white' | 'transparent';
+  bg?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'info'
+    | 'light'
+    | 'dark'
+    | 'white'
+    | 'transparent'
+    | 'accent';
 }
 
 export function propsToColor(props: ColorProps) {

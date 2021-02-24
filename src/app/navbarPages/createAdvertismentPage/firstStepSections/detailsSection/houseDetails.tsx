@@ -10,7 +10,8 @@ import {
   setShowerType,
   setTotalSpace,
 } from 'data/actions';
-import { DetailsInput, DetailsRow } from '../detailsSection';
+import { DetailsInput } from '../../detailsInput';
+import { DetailsRow } from '../../detailsRow';
 import { bathroomHouseTypes, houseTypes, renovationTypes, showerHouseTypes } from './data';
 import { CheckboxOption } from 'shared/base';
 

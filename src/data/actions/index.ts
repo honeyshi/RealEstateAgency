@@ -25,3 +25,11 @@ export {
 } from './propertyFacilitiesActions';
 
 export { setVideoLink } from './propertyPhotosActions';
+
+export {
+  setRentPayment,
+  setRentPaymentRules,
+  setRentDeposit,
+  setOwnerName,
+  setTelephoneNumber,
+} from './ownerContactsActions';

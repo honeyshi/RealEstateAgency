@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { StoreType } from 'core/store';
 import { CheckboxOption } from 'shared/base';
-import { DetailsRow, CommonDetails } from '../detailsSection';
+import { CommonDetails } from '../detailsSection';
+import { DetailsRow } from '../../detailsRow';
 import { setRoomsAmount } from 'data/actions';
 import { roomsAmountFlat } from './data';
 

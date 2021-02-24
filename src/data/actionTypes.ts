@@ -28,6 +28,14 @@ export enum PropertyPhotosActionTypes {
   SET_VIDEO_LINK = 'SET_VIDEO_LINK',
 }
 
+export enum OwnerContactsActionTypes {
+  SET_RENT_PAYMENT = 'SET_RENT_PAYMENT',
+  SET_RENT_PAYMENT_RULES = 'SET_RENT_PAYMENT_RULES',
+  SET_RENT_DEPOSIT = 'SET_RENT_DEPOSIT',
+  SET_OWNER_NAME = 'SET_OWNER_NAME',
+  SET_TELEPHONE_NUMBER = 'SET_TELEPHONE_NUMBER',
+}
+
 export enum NewAdvertismentActionTypes {
   SET_ACTIVE_STEP = 'SET_ACTIVE_STEP',
 }

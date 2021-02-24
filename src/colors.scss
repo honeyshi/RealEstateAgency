@@ -4,6 +4,13 @@
   color: $accent-color;
 }
 
+.bg-accent {
+  background-color: $accent-color;
+  &:hover {
+    background-color: $accent-color-hover !important;
+  }
+}
+
 a.text-accent:hover,
 a.text-accent:focus {
   color: $accent-color-hover !important;

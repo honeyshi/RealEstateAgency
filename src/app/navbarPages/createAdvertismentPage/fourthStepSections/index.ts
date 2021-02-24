@@ -1,0 +1,1 @@
+export { OwnerContactsPage } from './ownerContactsPage';

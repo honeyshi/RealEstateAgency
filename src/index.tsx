@@ -7,7 +7,7 @@ import { history } from 'core/history';
 import { store } from 'core/store';
 
 import './style.scss';
-import './typography.scss';
+import './colors.scss';
 
 const root = (
   <Provider store={store}>

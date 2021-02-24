@@ -8,6 +8,7 @@ import { StoreType } from 'core/store';
 import { PropertyDescriptionPage } from './firstStepSections';
 import { PropertyFacilitiesPage } from './secondStepSections';
 import { PropertyPhotosPage } from './thirdStepSections';
+import { OwnerContactsPage } from './fourthStepSections';
 
 export const CreateAdvertismentPage: React.FC = () => {
   const activeStep = useSelector((state: StoreType) => state.newAdvertisment.activeStep);
@@ -20,6 +21,8 @@ export const CreateAdvertismentPage: React.FC = () => {
         return <PropertyFacilitiesPage />;
       case 3:
         return <PropertyPhotosPage />;
+      case 4:
+        return <OwnerContactsPage />;
     }
   };
 
