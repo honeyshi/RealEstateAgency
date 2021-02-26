@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import * as Action from 'data/actions';
 
-interface IOwnerContactsInitialState {
+export interface IOwnerContactsInitialState {
   rentPayment: string;
   rentPaymentRules: string[];
   rentDeposit: string;

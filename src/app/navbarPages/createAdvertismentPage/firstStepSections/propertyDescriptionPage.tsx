@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Flexbox, Icon } from 'shared/base';
 import { ImportedIcon } from 'shared/base/icon';
@@ -7,8 +7,9 @@ import { PropertyType } from '../propertyType';
 import { SectionHeader } from '../sectionHeader';
 import { AddressSection } from './addressSection';
 import { FlatDetails, RoomDetails, HouseDetails } from './detailsSection';
-import { cleanPropertyDetails } from 'data/actions';
+import { cleanPropertyDetails, setPropertyType } from 'data/actions';
 import { NextStep } from '../stepsSwitcher';
+import { StoreType } from 'core/store';
 
 const propertyTypes = [
   { iconName: 'home', type: 'Квартира', key: 'flat-type' },
@@ -18,7 +19,7 @@ const propertyTypes = [
 
 export const PropertyDescriptionPage: React.FC = () => {
   const dispatch = useDispatch();
-  const [activePropertyType, setActivePropertyType] = useState('flat-type');
+  const activePropertyType = useSelector((state: StoreType) => state.newAdvertisment.propertyType);
 
   const propertyTypeComponents = useMemo(() => {
     const propertyTypeItems = propertyTypes.map((propertyType) => {
@@ -27,7 +28,7 @@ export const PropertyDescriptionPage: React.FC = () => {
           text={propertyType.type}
           active={propertyType.key === activePropertyType}
           onClick={() => {
-            setActivePropertyType(propertyType.key);
+            dispatch(setPropertyType(propertyType.key));
             dispatch(cleanPropertyDetails());
           }}
           key={propertyType.key}>

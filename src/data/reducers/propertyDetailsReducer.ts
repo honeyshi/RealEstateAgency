@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import * as Action from 'data/actions';
 
-interface IPropertyDetailsInitialState {
+export interface IPropertyDetailsInitialState {
   roomsAmount: string;
   roomsRentAmount: string;
   currentFloor: string;
@@ -46,6 +46,12 @@ export const propertyDetailsReducer = createReducer(propertyDetailsInitialState,
     return {
       ...state,
       currentFloor: action.payload,
+    };
+  },
+  [Action.setTotalFloors.type]: (state, action) => {
+    return {
+      ...state,
+      totalFloors: action.payload,
     };
   },
   [Action.setTotalSpace.type]: (state, action) => {

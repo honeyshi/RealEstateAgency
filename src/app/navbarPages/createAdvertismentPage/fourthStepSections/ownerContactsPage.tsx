@@ -4,10 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StoreType } from 'core/store';
 import { Button, CheckboxOption, Flexbox, Input } from 'shared/base';
 import { SectionHeader } from '../sectionHeader';
-import { setOwnerName, setRentDeposit, setRentPayment, setRentPaymentRules, setTelephoneNumber } from 'data/actions';
+import {
+  setOwnerName,
+  setRentDeposit,
+  setRentPayment,
+  setRentPaymentRules,
+  setTelephoneNumber,
+  setWrongSteps,
+} from 'data/actions';
 import { DetailsInput } from '../detailsInput';
 import { DetailsRow } from '../detailsRow';
 import { PreviousStep } from '../stepsSwitcher';
+import { checkNewAdvertismentFields } from 'core/checkNewAdvertismentFields';
 
 export const paymentRules = [
   { id: 'new-ad-with-deposit', opposite: 'Без залога', text: 'Есть залог' },
@@ -19,6 +27,7 @@ export const paymentRules = [
 export const OwnerContactsPage: React.FC = () => {
   const dispatch = useDispatch();
   const ownerContacts = useSelector((state: StoreType) => state.ownerContacts);
+  const state = useSelector((state: StoreType) => state);
 
   const paymentRuleComponents = useMemo(() => {
     const paymentRuleItems = paymentRules.map((paymentRule) => {
@@ -80,7 +89,22 @@ export const OwnerContactsPage: React.FC = () => {
       </DetailsRow>
       <Flexbox justifyContent="between">
         <PreviousStep />
-        <Button fontLight text="white" bg="accent">
+        <Button
+          fontLight
+          text="white"
+          bg="accent"
+          onClick={() => {
+            dispatch(
+              setWrongSteps(
+                checkNewAdvertismentFields(
+                  state.newAdvertisment.propertyType,
+                  state.propertyDetails,
+                  state.propertyFacilities,
+                  state.ownerContacts
+                )
+              )
+            );
+          }}>
           Опубликовать
         </Button>
       </Flexbox>

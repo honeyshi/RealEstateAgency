@@ -39,4 +39,6 @@ export enum OwnerContactsActionTypes {
 
 export enum NewAdvertismentActionTypes {
   SET_ACTIVE_STEP = 'SET_ACTIVE_STEP',
+  SET_PROPERTY_TYPE = 'SET_PROPERTY_TYPE',
+  SET_WRONG_STEPS = 'SET_WRONG_STEPS',
 }

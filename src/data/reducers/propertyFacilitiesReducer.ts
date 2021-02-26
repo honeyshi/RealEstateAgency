@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import * as Action from 'data/actions';
 
-interface IPropertyFacilitiesInitialState {
+export interface IPropertyFacilitiesInitialState {
   facilities: string[];
   furnitureType: string;
   livingRules: string[];

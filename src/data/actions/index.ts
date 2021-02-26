@@ -1,6 +1,6 @@
 export { cleanPropertyDetails, cleanNewAdvertisment } from './cleanActions';
 
-export { setActiveStep } from './newAdvertismentActions';
+export { setActiveStep, setPropertyType, setWrongSteps } from './newAdvertismentActions';
 
 export {
   setRoomsAmount,
