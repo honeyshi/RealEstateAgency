@@ -7,7 +7,7 @@ import { PropertyType } from '../propertyType';
 import { SectionHeader } from '../sectionHeader';
 import { AddressSection } from './addressSection';
 import { FlatDetails, RoomDetails, HouseDetails } from './detailsSection';
-import { cleanPropertyDetails, setPropertyType } from 'data/actions';
+import { cleanPropertyDetails, setPropertyType, setValidatedForm } from 'data/actions';
 import { NextStep } from '../stepsSwitcher';
 import { StoreType } from 'core/store';
 
@@ -29,6 +29,7 @@ export const PropertyDescriptionPage: React.FC = () => {
           active={propertyType.key === activePropertyType}
           onClick={() => {
             dispatch(setPropertyType(propertyType.key));
+            dispatch(setValidatedForm(false));
             dispatch(cleanPropertyDetails());
           }}
           key={propertyType.key}>

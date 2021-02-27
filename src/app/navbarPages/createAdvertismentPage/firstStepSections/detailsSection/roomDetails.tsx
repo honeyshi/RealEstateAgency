@@ -7,10 +7,13 @@ import { CommonDetails } from '../detailsSection';
 import { DetailsRow } from '../../detailsRow';
 import { roomsAmount, roomsAmountRoomRent } from './data';
 import { setRoomsAmount, setRoomsRentAmount } from 'data/actions';
+import { ErrorMessage } from '../../errorMessage';
 
 export const RoomDetails: React.FC = () => {
   const dispatch = useDispatch();
   const flatDetails = useSelector((state: StoreType) => state.propertyDetails);
+  const validated = useSelector((state: StoreType) => state.newAdvertisment.validated);
+
   const checkboxItemComponents = useMemo(() => {
     const roomItems = roomsAmount.map((room) => {
       return (
@@ -46,7 +49,13 @@ export const RoomDetails: React.FC = () => {
   return (
     <>
       <DetailsRow text="Количество комнат">{checkboxItemComponents}</DetailsRow>
+      <ErrorMessage column validated={validated} fieldValue={flatDetails.roomsAmount}>
+        Выберите количество комнат
+      </ErrorMessage>
       <DetailsRow text="Количество комнат в сделке">{availableRoomItemComponents}</DetailsRow>
+      <ErrorMessage column validated={validated} fieldValue={flatDetails.roomsRentAmount}>
+        Выберите количество комнат в сделке
+      </ErrorMessage>
       <CommonDetails />
     </>
   );

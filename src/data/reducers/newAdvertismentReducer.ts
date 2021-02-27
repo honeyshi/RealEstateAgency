@@ -1,16 +1,18 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { cleanNewAdvertisment, setActiveStep, setPropertyType, setWrongSteps } from 'data/actions';
+import { cleanNewAdvertisment, setActiveStep, setPropertyType, setValidatedForm, setWrongSteps } from 'data/actions';
 
 interface INewAdvertismentInitialState {
   activeStep: number;
   propertyType: string;
   wrongSteps: number[];
+  validated: boolean;
 }
 
 const newAdvertismentInitialState: INewAdvertismentInitialState = {
   activeStep: 1,
   propertyType: 'flat-type',
   wrongSteps: [],
+  validated: false,
 };
 
 export const newAdvertismentReducer = createReducer(newAdvertismentInitialState, {
@@ -35,6 +37,12 @@ export const newAdvertismentReducer = createReducer(newAdvertismentInitialState,
     return {
       ...state,
       wrongSteps: action.payload,
+    };
+  },
+  [setValidatedForm.type]: (state, action) => {
+    return {
+      ...state,
+      validated: action.payload,
     };
   },
 });

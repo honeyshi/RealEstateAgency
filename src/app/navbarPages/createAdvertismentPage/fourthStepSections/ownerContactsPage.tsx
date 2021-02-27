@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { StoreType } from 'core/store';
-import { Button, CheckboxOption, Flexbox, Input } from 'shared/base';
+import { Button, CheckboxOption, Flexbox } from 'shared/base';
 import { SectionHeader } from '../sectionHeader';
 import {
   setOwnerName,
@@ -10,12 +10,15 @@ import {
   setRentPayment,
   setRentPaymentRules,
   setTelephoneNumber,
+  setValidatedForm,
   setWrongSteps,
 } from 'data/actions';
 import { DetailsInput } from '../detailsInput';
 import { DetailsRow } from '../detailsRow';
 import { PreviousStep } from '../stepsSwitcher';
 import { checkNewAdvertismentFields } from 'core/checkNewAdvertismentFields';
+import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
+import { ErrorMessage } from '../errorMessage';
 
 export const paymentRules = [
   { id: 'new-ad-with-deposit', opposite: 'Без залога', text: 'Есть залог' },
@@ -56,33 +59,38 @@ export const OwnerContactsPage: React.FC = () => {
   return (
     <>
       <SectionHeader>Стоимость аренды</SectionHeader>
-      <Input
-        borderBottom
+      <DetailsInput
         placeholder="₽/месяц"
+        invalid={checkAdvertismentField(state.newAdvertisment.validated, ownerContacts.rentPayment)}
         value={ownerContacts.rentPayment}
-        onChange={(payment) => dispatch(setRentPayment(payment))}
-        onEnterPress={() => void 0}
-        mb="4"
+        setMethod={setRentPayment}
       />
       <SectionHeader>Особенности оплаты</SectionHeader>
       <Flexbox justifyContent="between">{paymentRuleComponents}</Flexbox>
+      <ErrorMessage validated={state.newAdvertisment.validated} fieldValue={ownerContacts.rentPaymentRules}>
+        Выберите условия проживания
+      </ErrorMessage>
       {ownerContacts.rentPaymentRules.includes('Есть залог') && (
-        <Input
-          borderBottom
+        <DetailsInput
           placeholder="Сумма залога"
+          invalid={checkAdvertismentField(state.newAdvertisment.validated, ownerContacts.rentDeposit)}
           value={ownerContacts.rentDeposit}
-          onChange={(payment) => dispatch(setRentDeposit(payment))}
-          onEnterPress={() => void 0}
-          mb="4"
+          setMethod={setRentDeposit}
         />
       )}
       <SectionHeader>Контакты</SectionHeader>
       <DetailsRow small text="Как к Вам обращаться">
-        <DetailsInput placeholder="Укажем в объявлении" value={ownerContacts.ownerName} setMethod={setOwnerName} />
+        <DetailsInput
+          placeholder="Укажем в объявлении"
+          invalid={checkAdvertismentField(state.newAdvertisment.validated, ownerContacts.ownerName)}
+          value={ownerContacts.ownerName}
+          setMethod={setOwnerName}
+        />
       </DetailsRow>
       <DetailsRow small text="Номер телефона">
         <DetailsInput
           placeholder="+7 (000) 000 - 00 - 00"
+          invalid={checkAdvertismentField(state.newAdvertisment.validated, ownerContacts.telephoneNumber)}
           value={ownerContacts.telephoneNumber}
           setMethod={setTelephoneNumber}
         />
@@ -94,6 +102,7 @@ export const OwnerContactsPage: React.FC = () => {
           text="white"
           bg="accent"
           onClick={() => {
+            dispatch(setValidatedForm(true));
             dispatch(
               setWrongSteps(
                 checkNewAdvertismentFields(

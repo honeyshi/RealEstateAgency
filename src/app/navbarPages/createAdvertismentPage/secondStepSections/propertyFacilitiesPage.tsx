@@ -2,16 +2,20 @@ import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { StoreType } from 'core/store';
-import { CheckboxOption, Column, Flexbox, Icon, Input, Row, Textarea, TextField } from 'shared/base';
+import { CheckboxOption, Column, Flexbox, Icon, Row, Textarea, TextField } from 'shared/base';
 import { ImportedIcon } from 'shared/base/icon';
 import { SectionHeader } from '../sectionHeader';
 import { setDescription, setFacilities, setFurnitureType, setHeader, setLivingRules } from 'data/actions';
 import { facilityOptions, furnitureTypes, livingRules } from './data';
 import { PreviousStep, NextStep } from '../stepsSwitcher';
+import { ErrorMessage } from '../errorMessage';
+import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
+import { DetailsInput } from '../detailsInput';
 
 export const PropertyFacilitiesPage: React.FC = () => {
   const dispatch = useDispatch();
   const propertyFacilities = useSelector((state: StoreType) => state.propertyFacilities);
+  const validated = useSelector((state: StoreType) => state.newAdvertisment.validated);
 
   const facilityOptionsComponents = useMemo(() => {
     const facilityItems = facilityOptions.map((facilityOption) => {
@@ -47,7 +51,8 @@ export const PropertyFacilitiesPage: React.FC = () => {
           selected={propertyFacilities.furnitureType === furnitureType.text}
           onClick={() => dispatch(setFurnitureType(furnitureType.text))}
           key={furnitureType.id}
-          mr="4">
+          mr="4"
+          mb="4">
           {furnitureType.text}
         </CheckboxOption>
       );
@@ -84,24 +89,33 @@ export const PropertyFacilitiesPage: React.FC = () => {
     <>
       <SectionHeader>Удобства</SectionHeader>
       <Row alignItems="center">{facilityOptionsComponents}</Row>
+      <ErrorMessage validated={validated} fieldValue={propertyFacilities.facilities}>
+        Выберите удобства
+      </ErrorMessage>
       <SectionHeader>Меблировка</SectionHeader>
       <Flexbox>{furnitureTypeComponents}</Flexbox>
+      <ErrorMessage validated={validated} fieldValue={propertyFacilities.furnitureType}>
+        Выберите меблировку
+      </ErrorMessage>
       <SectionHeader>Условия проживания</SectionHeader>
       <Flexbox wrap justifyContent="between">
         {livingRuleComponents}
       </Flexbox>
+      <ErrorMessage validated={validated} fieldValue={propertyFacilities.livingRules}>
+        Выберите условия проживания
+      </ErrorMessage>
       <SectionHeader>Подробности</SectionHeader>
       <TextField mb="4">Вы можете указать дополнительную информацию об объявлении</TextField>
-      <Input
-        borderBottom
+      <DetailsInput
         placeholder="Введите заголовок объявления"
+        invalid={checkAdvertismentField(validated, propertyFacilities.header)}
         value={propertyFacilities.header}
-        onChange={(header) => dispatch(setHeader(header))}
-        onEnterPress={() => void 0}
+        setMethod={setHeader}
         mb="4"
       />
       <Textarea
         placeholder="Введите описание"
+        invalid={checkAdvertismentField(validated, propertyFacilities.description)}
         value={propertyFacilities.description}
         onChange={(desciption) => dispatch(setDescription(desciption))}
         onEnterPress={() => void 0}

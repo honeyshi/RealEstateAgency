@@ -8,12 +8,14 @@ interface IDetailsInputProps extends SpaceProps {
   setMethod: (value: string) => void;
   placeholder?: string;
   value: string;
+  invalid?: boolean;
 }
 
-export const DetailsInput: React.FC<IDetailsInputProps> = ({ placeholder, value, setMethod, ...other }) => {
+export const DetailsInput: React.FC<IDetailsInputProps> = ({ placeholder, invalid, value, setMethod, ...other }) => {
   const dispatch = useDispatch();
   return (
     <Input
+      invalid={invalid}
       className={classNames(propsToSpace(other))}
       borderBottom
       placeholder={placeholder == null ? '' : placeholder}
