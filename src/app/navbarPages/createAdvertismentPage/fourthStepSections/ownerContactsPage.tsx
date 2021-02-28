@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { StoreType } from 'core/store';
 import { Button, CheckboxOption, Flexbox } from 'shared/base';
-import { SectionHeader } from '../sectionHeader';
+import { DetailsInput, DetailsRow, ErrorMessage, SectionHeader } from '../base';
 import {
   setOwnerName,
   setRentDeposit,
@@ -13,12 +13,9 @@ import {
   setValidatedForm,
   setWrongSteps,
 } from 'data/actions';
-import { DetailsInput } from '../detailsInput';
-import { DetailsRow } from '../detailsRow';
 import { PreviousStep } from '../stepsSwitcher';
 import { checkNewAdvertismentFields } from 'core/checkNewAdvertismentFields';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
-import { ErrorMessage } from '../errorMessage';
 
 export const paymentRules = [
   { id: 'new-ad-with-deposit', opposite: 'Без залога', text: 'Есть залог' },

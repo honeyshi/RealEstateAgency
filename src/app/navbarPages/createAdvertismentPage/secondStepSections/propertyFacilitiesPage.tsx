@@ -4,13 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StoreType } from 'core/store';
 import { CheckboxOption, Column, Flexbox, Icon, Row, Textarea, TextField } from 'shared/base';
 import { ImportedIcon } from 'shared/base/icon';
-import { SectionHeader } from '../sectionHeader';
+import { DetailsInput, ErrorMessage, SectionHeader } from '../base';
 import { setDescription, setFacilities, setFurnitureType, setHeader, setLivingRules } from 'data/actions';
 import { facilityOptions, furnitureTypes, livingRules } from './data';
 import { PreviousStep, NextStep } from '../stepsSwitcher';
-import { ErrorMessage } from '../errorMessage';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
-import { DetailsInput } from '../detailsInput';
 
 export const PropertyFacilitiesPage: React.FC = () => {
   const dispatch = useDispatch();

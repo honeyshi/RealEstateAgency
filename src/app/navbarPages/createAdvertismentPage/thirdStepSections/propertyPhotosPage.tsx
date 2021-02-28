@@ -1,14 +1,13 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { StoreType } from 'core/store';
 import { setVideoLink } from 'data/actions';
-import { Flexbox, Input, TextField } from 'shared/base';
-import { SectionHeader } from '../sectionHeader';
+import { Flexbox, TextField } from 'shared/base';
+import { DetailsInput, SectionHeader } from '../base';
 import { PreviousStep, NextStep } from '../stepsSwitcher';
 
 export const PropertyPhotosPage: React.FC = () => {
-  const dispatch = useDispatch();
   const videoLink = useSelector((state: StoreType) => state.propertyPhotos.videoLink);
   return (
     <>
@@ -21,14 +20,7 @@ export const PropertyPhotosPage: React.FC = () => {
       <TextField mb="4">
         Укажите ссылку на видео вашей недвижимости. Объявление с видео привлечет больше внимания и звонков.
       </TextField>
-      <Input
-        borderBottom
-        placeholder="Введите ссылку на YouTube"
-        value={videoLink}
-        onChange={(videoLink) => dispatch(setVideoLink(videoLink))}
-        onEnterPress={() => void 0}
-        mb="4"
-      />
+      <DetailsInput placeholder="Введите ссылку на YouTube" value={videoLink} setMethod={setVideoLink} mb="4" />
       <Flexbox justifyContent="between">
         <PreviousStep />
         <NextStep />

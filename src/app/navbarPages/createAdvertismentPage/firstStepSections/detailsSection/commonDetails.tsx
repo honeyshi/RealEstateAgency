@@ -13,10 +13,8 @@ import {
   setTotalSpace,
 } from 'data/actions';
 import { bathroomTypes, renovationTypes } from './data';
-import { DetailsInput } from '../../detailsInput';
-import { DetailsRow } from '../../detailsRow';
+import { DetailsInput, DetailsRow, ErrorMessage } from '../../base';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
-import { ErrorMessage } from '../../errorMessage';
 
 export const CommonDetails: React.FC = () => {
   const dispatch = useDispatch();

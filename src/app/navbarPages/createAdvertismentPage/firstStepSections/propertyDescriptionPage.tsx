@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Flexbox, Icon } from 'shared/base';
 import { ImportedIcon } from 'shared/base/icon';
 import { PropertyType } from '../propertyType';
-import { SectionHeader } from '../sectionHeader';
+import { SectionHeader } from '../base';
 import { AddressSection } from './addressSection';
 import { FlatDetails, RoomDetails, HouseDetails } from './detailsSection';
 import { cleanPropertyDetails, setPropertyType, setValidatedForm } from 'data/actions';

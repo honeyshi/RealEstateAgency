@@ -10,12 +10,10 @@ import {
   setShowerType,
   setTotalSpace,
 } from 'data/actions';
-import { DetailsInput } from '../../detailsInput';
-import { DetailsRow } from '../../detailsRow';
+import { DetailsInput, DetailsRow, ErrorMessage } from '../../base';
 import { bathroomHouseTypes, houseTypes, renovationTypes, showerHouseTypes } from './data';
 import { CheckboxOption } from 'shared/base';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
-import { ErrorMessage } from '../../errorMessage';
 
 export const HouseDetails: React.FC = () => {
   const dispatch = useDispatch();

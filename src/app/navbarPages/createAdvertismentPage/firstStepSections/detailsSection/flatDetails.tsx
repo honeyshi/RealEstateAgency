@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StoreType } from 'core/store';
 import { CheckboxOption } from 'shared/base';
 import { CommonDetails } from '../detailsSection';
-import { DetailsRow } from '../../detailsRow';
+import { DetailsRow, ErrorMessage } from '../../base';
 import { setRoomsAmount } from 'data/actions';
 import { roomsAmountFlat } from './data';
-import { ErrorMessage } from '../../errorMessage';
 
 export const FlatDetails: React.FC = () => {
   const dispatch = useDispatch();
