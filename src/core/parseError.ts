@@ -3,6 +3,7 @@ import { ValidationError } from 'yup';
 export const parseError = (error: any): string | string[] => {
   if (error == null) return 'Network error';
   if (error instanceof ValidationError) return error.errors;
+  if (error instanceof Error) return error.message;
   if (error.status === 400) {
     return error.response && error.response.isError ? error.response.message : 'Bad request';
   }

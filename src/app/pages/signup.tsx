@@ -6,6 +6,7 @@ import { Button, Flexbox, Icon, Input, TextField } from 'shared/base';
 import { parseError } from 'core/parseError';
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
 import { checkInvalidInput } from 'core/checkInvalidInput';
+import { performSignupRequest } from 'core/signup/api';
 
 const schema = yup.object().shape({
   name: yup
@@ -46,6 +47,7 @@ export const Signup: React.FC = () => {
     try {
       setErrorMessage('');
       await schema.validate(form, { abortEarly: false });
+      await performSignupRequest(form.name, form.email, form.password);
     } catch (error) {
       setErrorMessage(parseError(error));
     }
