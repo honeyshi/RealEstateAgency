@@ -7,6 +7,7 @@ import { parseError } from 'core/parseError';
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
 import { checkInvalidInput } from 'core/checkInvalidInput';
 import { performSignupRequest } from 'core/signup/api';
+import { history } from 'core/history';
 
 const schema = yup.object().shape({
   name: yup
@@ -48,6 +49,7 @@ export const Signup: React.FC = () => {
       setErrorMessage('');
       await schema.validate(form, { abortEarly: false });
       await performSignupRequest(form.name, form.email, form.password);
+      history.push('/successful-signup');
     } catch (error) {
       setErrorMessage(parseError(error));
     }
