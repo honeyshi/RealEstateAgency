@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { AppSettingsConfig } from 'core/configFiles/appSettings';
+
 import { SignupModel } from './signupModel';
 
-const config: AppSettingsConfig = require('core/configFiles/appSettings.json');
+import config from 'core/configFiles/appSettings.json';
 
 export const performSignupRequest = async (name: string, email: string, password: string) => {
   const signupConfig: SignupModel = {
