@@ -1,3 +1,4 @@
-export interface AddressSuggestionConfig {
+export interface AppSettingsConfig {
   addressSuggestToken: string;
+  apiUrl: string;
 }

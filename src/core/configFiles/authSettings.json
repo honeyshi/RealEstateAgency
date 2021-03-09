@@ -1,0 +1,6 @@
+{
+    "apiUrl": "https://space.artmik.ru/oauth/token",
+    "grantType": "password",
+    "clientId": 2,
+    "clientSecret": "9yfZwofnVpDzytNW33H4CnLNn5clRAiqaYUuvWyW"
+}
