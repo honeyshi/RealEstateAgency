@@ -6,6 +6,7 @@ import { setVideoLink } from 'data/actions';
 import { Flexbox, TextField } from 'shared/base';
 import { DetailsInput, SectionHeader } from '../base';
 import { PreviousStep, NextStep } from '../stepsSwitcher';
+import { FilesUploader } from './filesUploader';
 
 export const PropertyPhotosPage: React.FC = () => {
   const videoLink = useSelector((state: StoreType) => state.propertyPhotos.videoLink);
@@ -16,6 +17,7 @@ export const PropertyPhotosPage: React.FC = () => {
         Загрузите фотографии, чтобы получить больше откликов на объявление. Допустимый формат изображений JPEG, JPG и
         PNG. Максимальный размер файлов 10 Мб.
       </TextField>
+      <FilesUploader />
       <SectionHeader>Видео</SectionHeader>
       <TextField mb="4">
         Укажите ссылку на видео вашей недвижимости. Объявление с видео привлечет больше внимания и звонков.
