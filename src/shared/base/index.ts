@@ -6,6 +6,7 @@ export { Container } from './container';
 export { ExternalLink } from './externalLink';
 export { Flexbox } from './flexbox';
 export { Icon } from './icon';
+export { Image } from './image';
 export { Input } from './input';
 export { NavbarContainer } from './navbarContainer';
 export { NavbarItem } from './navbarItem';

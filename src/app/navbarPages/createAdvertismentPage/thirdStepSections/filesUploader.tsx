@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { FileWithPath, useDropzone } from 'react-dropzone';
+import { Block, Button, Flexbox, Icon, Image, TextField } from 'shared/base';
+
+import './filesUploader.scss';
+
+const maxFiles = 5;
 
 export const FilesUploader: React.FC = () => {
   const [files, setFiles] = useState<any[]>([]);
   const { fileRejections, getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
-    maxFiles: 2,
+    maxFiles: maxFiles,
     onDrop: (acceptedFiles) => {
       setFiles([
         ...files,
-        ...acceptedFiles.map((file) =>
+        ...acceptedFiles.slice(0, maxFiles - files.length).map((file) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
           })
@@ -18,12 +23,10 @@ export const FilesUploader: React.FC = () => {
     },
   });
 
-  const thumbs = files.map((file) => (
-    <div key={file.name}>
-      <div>
-        <img src={file.preview} alt={file.preview} />
-      </div>
-    </div>
+  const filePreviews = files.map((file) => (
+    <Block className="property-image-container" key={file.name} mx="4" mb="4">
+      <Image src={file.preview} alt={file.preview} className="shadow" />
+    </Block>
   ));
 
   const acceptedFileItems = files.map((file) => {
@@ -50,19 +53,31 @@ export const FilesUploader: React.FC = () => {
   });
 
   return (
-    <section className="container">
+    <Block border mb="4" pt="5" px="4" className="files-uploader-container" borderColor="secondary" rounded="50">
       <div {...getRootProps({ className: 'dropzone' })}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
-        <em>(2 files are the maximum number of files you can drop here)</em>
+        <Flexbox wrap justifyContent="around" mb="4">
+          {filePreviews}
+        </Flexbox>
+        <Flexbox vertical alignItems="center" mb="4">
+          {files.length === 0 && <Icon name="home" my="4" />}
+          {files.length < maxFiles ? (
+            <Button fontLight className="rounded-link" text="accent" mb="4">
+              Добавить фото и планировку
+            </Button>
+          ) : (
+            <TextField text="accent">
+              Вы можете загрузить не более 10 изображений. Удалите старые фото, чтобы добавить новые.
+            </TextField>
+          )}
+        </Flexbox>
       </div>
       <aside>
         <h4>Accepted files</h4>
         <ul>{acceptedFileItems}</ul>
         <h4>Rejected files</h4>
         <ul>{fileRejectionItems}</ul>
-        {thumbs}
       </aside>
-    </section>
+    </Block>
   );
 };
