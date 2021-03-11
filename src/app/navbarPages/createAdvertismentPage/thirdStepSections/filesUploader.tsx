@@ -1,5 +1,6 @@
+import classNames from 'classnames';
 import React, { useState } from 'react';
-import { FileWithPath, useDropzone } from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 import { Block, Button, Flexbox, Icon, Image, TextField } from 'shared/base';
 
 import './filesUploader.scss';
@@ -8,7 +9,8 @@ const maxFiles = 5;
 
 export const FilesUploader: React.FC = () => {
   const [files, setFiles] = useState<any[]>([]);
-  const { fileRejections, getRootProps, getInputProps } = useDropzone({
+  const [primaryImage, setPrimaryImage] = useState('');
+  const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     maxFiles: maxFiles,
     onDrop: (acceptedFiles) => {
@@ -25,32 +27,29 @@ export const FilesUploader: React.FC = () => {
 
   const filePreviews = files.map((file) => (
     <Block className="property-image-container" key={file.name} mx="4" mb="4">
+      <Button
+        fontLight
+        className={classNames('primary-image', { selected: primaryImage === file.name })}
+        onClick={(event) => {
+          event.stopPropagation();
+          setPrimaryImage(file.name);
+        }}>
+        <Icon name="check" mr="2" />
+        Главное
+      </Button>
+      <Button
+        className="delete-image"
+        bg="danger"
+        onClick={(event) => {
+          event.stopPropagation();
+          setFiles(files.filter((selectedFile) => selectedFile.name !== file.name));
+          primaryImage === file.name && setPrimaryImage('');
+        }}>
+        <Icon name="times" className="delete-image-icon" />
+      </Button>
       <Image src={file.preview} alt={file.preview} className="shadow" />
     </Block>
   ));
-
-  const acceptedFileItems = files.map((file) => {
-    const fileWithPath = file as FileWithPath;
-    return (
-      <li key={fileWithPath.path}>
-        {fileWithPath.path} - {file.size} bytes
-      </li>
-    );
-  });
-
-  const fileRejectionItems = fileRejections.map(({ file, errors }) => {
-    const fileWithPath = file as FileWithPath;
-    return (
-      <li key={fileWithPath.path}>
-        {fileWithPath.path} - {file.size} bytes
-        <ul>
-          {errors.map((e) => (
-            <li key={e.code}>{e.message}</li>
-          ))}
-        </ul>
-      </li>
-    );
-  });
 
   return (
     <Block border mb="4" pt="5" px="4" className="files-uploader-container" borderColor="secondary" rounded="50">
@@ -60,24 +59,18 @@ export const FilesUploader: React.FC = () => {
           {filePreviews}
         </Flexbox>
         <Flexbox vertical alignItems="center" mb="4">
-          {files.length === 0 && <Icon name="home" my="4" />}
+          {files.length === 0 && <Icon className="files-uploader-icon" name="home" my="4" />}
           {files.length < maxFiles ? (
             <Button fontLight className="rounded-link" text="accent" mb="4">
               Добавить фото и планировку
             </Button>
           ) : (
             <TextField text="accent">
-              Вы можете загрузить не более 10 изображений. Удалите старые фото, чтобы добавить новые.
+              Вы не можете загрузить более 10 изображений. Удалите старые фото, чтобы добавить новые.
             </TextField>
           )}
         </Flexbox>
       </div>
-      <aside>
-        <h4>Accepted files</h4>
-        <ul>{acceptedFileItems}</ul>
-        <h4>Rejected files</h4>
-        <ul>{fileRejectionItems}</ul>
-      </aside>
     </Block>
   );
 };
