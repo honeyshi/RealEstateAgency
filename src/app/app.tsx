@@ -5,6 +5,7 @@ import { ForgetPassword, Login, ResetPassword, Signup, SuccessfulSignup } from '
 import { ContactUs } from './infoPages/contactUs';
 import { StartPage } from './navbarPages/startPage';
 import { CreateAdvertismentPage } from './navbarPages/createAdvertismentPage';
+import { AdvertismentListPage } from './navbarPages/advertismentsListPage';
 
 import './pagesStyle.scss';
 
@@ -19,6 +20,7 @@ export const App: React.FC = () => {
 
       <Route exact path="/contact" component={ContactUs} />
       <Route exact path="/new-advertisment" component={CreateAdvertismentPage} />
+      <Route exact path="/flats" component={AdvertismentListPage} />
       <Route exact path="/" component={StartPage} />
     </Switch>
   );

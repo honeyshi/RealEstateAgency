@@ -1,5 +1,6 @@
 export { Block } from './block';
 export { Button } from './button';
+export { CheckBox } from './checkbox';
 export { CheckboxOption } from './checkboxOption';
 export { Column } from './column';
 export { Container } from './container';
