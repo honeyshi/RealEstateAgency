@@ -43,3 +43,7 @@ export enum NewAdvertismentActionTypes {
   SET_WRONG_STEPS = 'SET_WRONG_STEPS',
   SET_VALIDATED_FORM = 'SET_VALIDATED_FORM',
 }
+
+export enum AdvertismentFilterActionTypes {
+  SET_PROPERTY_TYPE = 'SET_PROPERTY_TYPE',
+}

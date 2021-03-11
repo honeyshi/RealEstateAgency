@@ -5,9 +5,11 @@ import {
   propertyFacilitiesReducer,
   propertyPhotosReducer,
   ownerContactsReducer,
+  advertismentFilterReducer,
 } from './reducers';
 
 export const appReducer = combineReducers({
+  advertismentFilter: advertismentFilterReducer,
   propertyDetails: propertyDetailsReducer,
   propertyFacilities: propertyFacilitiesReducer,
   propertyPhotos: propertyPhotosReducer,

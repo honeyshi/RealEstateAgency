@@ -1,3 +1,5 @@
+export { setPropertyTypeFilter } from './advertismentFilterActions';
+
 export { cleanPropertyDetails, cleanNewAdvertisment } from './cleanActions';
 
 export { setActiveStep, setPropertyType, setWrongSteps, setValidatedForm } from './newAdvertismentActions';
