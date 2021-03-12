@@ -8,6 +8,7 @@ import { store } from 'core/store';
 
 import './style.scss';
 import './colors.scss';
+import 'remixicon/fonts/remixicon.css';
 
 const root = (
   <Provider store={store}>
