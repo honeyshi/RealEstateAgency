@@ -46,4 +46,5 @@ export enum NewAdvertismentActionTypes {
 
 export enum AdvertismentFilterActionTypes {
   SET_PROPERTY_TYPE = 'SET_PROPERTY_TYPE',
+  SET_DISTRICT = 'SET_DISTRICT',
 }

@@ -2,13 +2,14 @@ import React, { useMemo } from 'react';
 import ReactTooltip from 'react-tooltip';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CheckboxOption, Column, Flexbox, Icon, TextField } from 'shared/base';
+import { CheckBox, CheckboxOption, Column, Flexbox, Icon, TextField } from 'shared/base';
 import { ImportedIcon } from 'shared/base/icon';
-import { propertyTypes } from './data';
-import { setPropertyTypeFilter } from 'data/actions';
+import { districts, propertyTypes } from './data';
+import { setDistrictFilter, setPropertyTypeFilter } from 'data/actions';
 import { StoreType } from 'core/store';
+import { CheckboxFilter } from './chexboxFilter';
 
-import 'app/tooltip.scss';
+import './filters.scss';
 
 export const FiltersContainer: React.FC = () => {
   const dispatch = useDispatch();
@@ -32,12 +33,36 @@ export const FiltersContainer: React.FC = () => {
     return propertyTypeItems;
   }, [dispatch, advertismentFilter.propertyType]);
 
+  const districtItemComponents = useMemo(() => {
+    const districtItems = districts.map((district) => {
+      return (
+        <CheckBox
+          name={district.id}
+          value={advertismentFilter.districts.includes(district.id)}
+          onChange={(value) =>
+            value
+              ? dispatch(setDistrictFilter(advertismentFilter.districts.concat(district.id)))
+              : dispatch(
+                  setDistrictFilter(
+                    advertismentFilter.districts.filter((selectedDistrict) => {
+                      return selectedDistrict !== district.id;
+                    })
+                  )
+                )
+          }
+          key={district.id}>
+          {district.name}
+        </CheckBox>
+      );
+    });
+    return districtItems;
+  }, [dispatch, advertismentFilter.districts]);
+
   return (
     <Column size={3}>
-      <TextField bold mb="4">
-        Тип недвижимости
-      </TextField>
+      <TextField mb="4">Тип недвижимости</TextField>
       <Flexbox justifyContent="between">{propertyTypeItemComponents}</Flexbox>
+      <CheckboxFilter filterName="Район">{districtItemComponents}</CheckboxFilter>
     </Column>
   );
 };

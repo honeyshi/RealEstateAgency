@@ -8,6 +8,7 @@ import { CreateAdvertismentPage } from './navbarPages/createAdvertismentPage';
 import { AdvertismentListPage } from './navbarPages/advertismentsListPage';
 
 import './pagesStyle.scss';
+import './tooltip.scss';
 
 export const App: React.FC = () => {
   return (
