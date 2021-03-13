@@ -5,7 +5,6 @@ export interface IPropertyFacilitiesInitialState {
   facilities: string[];
   furnitureType: string;
   livingRules: string[];
-  header: string;
   description: string;
 }
 
@@ -13,7 +12,6 @@ const propertyFacilitiesInitialState: IPropertyFacilitiesInitialState = {
   facilities: [],
   furnitureType: '',
   livingRules: [],
-  header: '',
   description: '',
 };
 
@@ -34,12 +32,6 @@ export const propertyFacilitiesReducer = createReducer(propertyFacilitiesInitial
     return {
       ...state,
       livingRules: action.payload,
-    };
-  },
-  [Action.setHeader.type]: (state, action) => {
-    return {
-      ...state,
-      header: action.payload,
     };
   },
   [Action.setDescription.type]: (state, action) => {

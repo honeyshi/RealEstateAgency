@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CheckboxOption, TextField } from 'shared/base';
 import { StoreType } from 'core/store';
 import {
-  setBathroomType,
   setCurrentFloor,
   setKitchenSpace,
   setLivingSpace,
@@ -12,7 +11,7 @@ import {
   setTotalFloors,
   setTotalSpace,
 } from 'data/actions';
-import { bathroomTypes, renovationTypes } from './data';
+import { renovationTypes } from './data';
 import { DetailsInput, DetailsRow, ErrorMessage } from '../../base';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
 
@@ -35,21 +34,6 @@ export const CommonDetails: React.FC = () => {
     });
     return renovationTypeItems;
   }, [dispatch, flatDetails.renovationType]);
-
-  const bathroomTypeItemComponents = useMemo(() => {
-    const bathroomTypeItems = bathroomTypes.map((bathroomType) => {
-      return (
-        <CheckboxOption
-          notSelected={flatDetails.bathroomType !== '' && bathroomType.id !== flatDetails.bathroomType}
-          selected={bathroomType.id === flatDetails.bathroomType}
-          onClick={() => dispatch(setBathroomType(bathroomType.id))}
-          key={bathroomType.id}>
-          {bathroomType.text}
-        </CheckboxOption>
-      );
-    });
-    return bathroomTypeItems;
-  }, [dispatch, flatDetails.bathroomType]);
 
   return (
     <>
@@ -90,10 +74,6 @@ export const CommonDetails: React.FC = () => {
           invalid={checkAdvertismentField(validated, flatDetails.kitchenSpace)}
         />
       </DetailsRow>
-      <DetailsRow text="Санузел">{bathroomTypeItemComponents}</DetailsRow>
-      <ErrorMessage column validated={validated} fieldValue={flatDetails.bathroomType}>
-        Выберите тип санузла
-      </ErrorMessage>
       <DetailsRow text="Ремонт">{renovationTypeItemComponents}</DetailsRow>
       <ErrorMessage column validated={validated} fieldValue={flatDetails.renovationType}>
         Выберите тип ремонта

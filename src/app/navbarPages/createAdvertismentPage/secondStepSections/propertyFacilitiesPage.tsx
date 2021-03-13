@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StoreType } from 'core/store';
 import { CheckboxOption, Column, Flexbox, Icon, Row, Textarea, TextField } from 'shared/base';
 import { ImportedIcon } from 'shared/base/icon';
-import { DetailsInput, ErrorMessage, SectionHeader } from '../base';
-import { setDescription, setFacilities, setFurnitureType, setHeader, setLivingRules } from 'data/actions';
+import { ErrorMessage, SectionHeader } from '../base';
+import { setDescription, setFacilities, setFurnitureType, setLivingRules } from 'data/actions';
 import { facilityOptions, furnitureTypes, livingRules } from './data';
 import { PreviousStep, NextStep } from '../stepsSwitcher';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
@@ -104,13 +104,6 @@ export const PropertyFacilitiesPage: React.FC = () => {
       </ErrorMessage>
       <SectionHeader>Подробности</SectionHeader>
       <TextField mb="4">Вы можете указать дополнительную информацию об объявлении</TextField>
-      <DetailsInput
-        placeholder="Введите заголовок объявления"
-        invalid={checkAdvertismentField(validated, propertyFacilities.header)}
-        value={propertyFacilities.header}
-        setMethod={setHeader}
-        mb="4"
-      />
       <Textarea
         placeholder="Введите описание"
         invalid={checkAdvertismentField(validated, propertyFacilities.description)}
