@@ -1,7 +1,7 @@
 export const propertyTypes = [
-  { iconName: 'home', id: 'flat-type', text: 'Квартира' },
-  { iconName: 'home', id: 'room-type', text: 'Комната' },
-  { iconName: 'home', id: 'house-type', text: 'Дом' },
+  { iconName: 'building', id: 'flat-type', text: 'Квартира' },
+  { iconName: 'collage', id: 'room-type', text: 'Комната' },
+  { iconName: 'home-4', id: 'house-type', text: 'Дом' },
 ];
 
 export const districts = [

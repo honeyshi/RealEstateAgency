@@ -11,6 +11,7 @@ export { Image } from './image';
 export { Input } from './input';
 export { NavbarContainer } from './navbarContainer';
 export { NavbarItem } from './navbarItem';
+export { RemixIcon } from './remixIcon';
 export { Row } from './row';
 export { Section } from './section';
 export { SelectOption } from './selectOption';

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import { Block, Flexbox, Icon, TextField } from 'shared/base';
+import { Block, Flexbox, TextField } from 'shared/base';
+import { RemixIcon } from 'shared/base/remixIcon';
 
 export const CheckboxFilter: React.FC<{ filterName: string }> = ({ filterName, children }) => {
   const [opened, setOpened] = useState(false);
@@ -15,8 +16,8 @@ export const CheckboxFilter: React.FC<{ filterName: string }> = ({ filterName, c
         <TextField tag="span" pr="4">
           {filterName}
         </TextField>
-        <Icon name="angle-down" className={classNames({ 'd-none': opened })} />
-        <Icon name="angle-up" className={classNames({ 'd-none': !opened })} />
+        <RemixIcon name="arrow-down-s" className={classNames({ 'd-none': opened })} />
+        <RemixIcon name="arrow-up-s" className={classNames({ 'd-none': !opened })} />
       </Flexbox>
       <div className={classNames('filter-checkboxes', { 'd-none': !opened }, { 'd-flex flex-column': opened })}>
         {children}

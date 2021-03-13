@@ -2,8 +2,7 @@ import React, { useMemo } from 'react';
 import ReactTooltip from 'react-tooltip';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CheckBox, CheckboxOption, Column, Flexbox, Icon, TextField } from 'shared/base';
-import { ImportedIcon } from 'shared/base/icon';
+import { CheckBox, CheckboxOption, Column, Flexbox, RemixIcon, TextField } from 'shared/base';
 import { districts, propertyTypes } from './data';
 import { setDistrictFilter, setPropertyTypeFilter } from 'data/actions';
 import { StoreType } from 'core/store';
@@ -23,7 +22,7 @@ export const FiltersContainer: React.FC = () => {
           selected={propertyType.id === advertismentFilter.propertyType}
           onClick={() => dispatch(setPropertyTypeFilter(propertyType.id))}
           key={propertyType.id}>
-          <Icon name={propertyType.iconName as ImportedIcon} data-tip data-for={propertyType.id} />
+          <RemixIcon name={propertyType.iconName} data-tip data-for={propertyType.id} />
           <ReactTooltip id={propertyType.id} arrowColor="white" className="tooltip-light">
             {propertyType.text}
           </ReactTooltip>
