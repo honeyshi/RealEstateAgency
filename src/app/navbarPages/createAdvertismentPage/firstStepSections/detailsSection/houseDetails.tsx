@@ -2,16 +2,9 @@ import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { StoreType } from 'core/store';
-import {
-  setBathroomType,
-  setCurrentFloor,
-  setHouseType,
-  setRenovationType,
-  setShowerType,
-  setTotalSpace,
-} from 'data/actions';
+import { setCurrentFloor, setHouseType, setRenovationType, setTotalSpace } from 'data/actions';
 import { DetailsInput, DetailsRow, ErrorMessage } from '../../base';
-import { bathroomHouseTypes, houseTypes, renovationTypes, showerHouseTypes } from './data';
+import { houseTypes, renovationTypes } from './data';
 import { CheckboxOption } from 'shared/base';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
 
@@ -34,36 +27,6 @@ export const HouseDetails: React.FC = () => {
     });
     return houseTypeItems;
   }, [dispatch, houseDetails.houseType]);
-
-  const bathroomTypeItemComponents = useMemo(() => {
-    const bathroomTypeItems = bathroomHouseTypes.map((bathroomType) => {
-      return (
-        <CheckboxOption
-          notSelected={houseDetails.bathroomType !== '' && bathroomType.id !== houseDetails.bathroomType}
-          selected={bathroomType.id === houseDetails.bathroomType}
-          onClick={() => dispatch(setBathroomType(bathroomType.id))}
-          key={bathroomType.id}>
-          {bathroomType.text}
-        </CheckboxOption>
-      );
-    });
-    return bathroomTypeItems;
-  }, [dispatch, houseDetails.bathroomType]);
-
-  const showerTypeItemComponents = useMemo(() => {
-    const showerTypeItems = showerHouseTypes.map((showerType) => {
-      return (
-        <CheckboxOption
-          notSelected={houseDetails.showerType !== '' && showerType.id !== houseDetails.showerType}
-          selected={showerType.id === houseDetails.showerType}
-          onClick={() => dispatch(setShowerType(showerType.id))}
-          key={showerType.id}>
-          {showerType.text}
-        </CheckboxOption>
-      );
-    });
-    return showerTypeItems;
-  }, [dispatch, houseDetails.showerType]);
 
   const renovationTypeItemComponents = useMemo(() => {
     const renovationTypeItems = renovationTypes.map((renovationType) => {
@@ -100,14 +63,6 @@ export const HouseDetails: React.FC = () => {
       <DetailsRow text="Тип дома">{houseTypeItemComponents}</DetailsRow>
       <ErrorMessage column validated={validated} fieldValue={houseDetails.houseType}>
         Выберите тип дома
-      </ErrorMessage>
-      <DetailsRow text="Санузел">{bathroomTypeItemComponents}</DetailsRow>
-      <ErrorMessage column validated={validated} fieldValue={houseDetails.bathroomType}>
-        Выберите тип санузла
-      </ErrorMessage>
-      <DetailsRow text="Душ">{showerTypeItemComponents}</DetailsRow>
-      <ErrorMessage column validated={validated} fieldValue={houseDetails.showerType}>
-        Выберите тип душа
       </ErrorMessage>
       <DetailsRow text="Ремонт">{renovationTypeItemComponents}</DetailsRow>
       <ErrorMessage column validated={validated} fieldValue={houseDetails.renovationType}>

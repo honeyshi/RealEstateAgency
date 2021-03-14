@@ -1,12 +1,12 @@
 export const facilityOptions = [
-  { id: 'new-ad-conditioner', text: 'Кондиционер', iconName: 'home' },
-  { id: 'new-ad-fridge', text: 'Холодильник', iconName: 'home' },
-  { id: 'new-ad-tv', text: 'Телевизор', iconName: 'home' },
-  { id: 'new-ad-microwave', text: 'Микроволновка', iconName: 'home' },
-  { id: 'new-ad-dishwasher', text: 'Посудомоечная машина', iconName: 'home' },
-  { id: 'new-ad-washer', text: 'Стиральная машина', iconName: 'home' },
-  { id: 'new-ad-internet', text: 'Интернет', iconName: 'home' },
-  { id: 'new-ad-phone', text: 'Телефон', iconName: 'home' },
+  { id: 'new-ad-conditioner', text: 'Кондиционер', iconName: 'windy' },
+  { id: 'new-ad-fridge', text: 'Холодильник', iconName: 'fridge' },
+  { id: 'new-ad-tv', text: 'Телевизор', iconName: 'tv' },
+  { id: 'new-ad-microwave', text: 'Микроволновка', iconName: 'blaze' },
+  { id: 'new-ad-dishwasher', text: 'Посудомоечная машина', iconName: 'bubble-chart' },
+  { id: 'new-ad-washer', text: 'Стиральная машина', iconName: 't-shirt-air' },
+  { id: 'new-ad-internet', text: 'Интернет', iconName: 'wifi' },
+  { id: 'new-ad-phone', text: 'Телефон', iconName: 'phone' },
 ];
 
 export const furnitureTypes = [

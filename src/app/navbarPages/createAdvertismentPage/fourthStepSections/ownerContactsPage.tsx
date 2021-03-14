@@ -5,7 +5,6 @@ import { StoreType } from 'core/store';
 import { Button, CheckboxOption, Flexbox } from 'shared/base';
 import { DetailsInput, DetailsRow, ErrorMessage, SectionHeader } from '../base';
 import {
-  setOwnerName,
   setRentDeposit,
   setRentPayment,
   setRentPaymentRules,
@@ -76,14 +75,6 @@ export const OwnerContactsPage: React.FC = () => {
         />
       )}
       <SectionHeader>Контакты</SectionHeader>
-      <DetailsRow small text="Как к Вам обращаться">
-        <DetailsInput
-          placeholder="Укажем в объявлении"
-          invalid={checkAdvertismentField(state.newAdvertisment.validated, ownerContacts.ownerName)}
-          value={ownerContacts.ownerName}
-          setMethod={setOwnerName}
-        />
-      </DetailsRow>
       <DetailsRow small text="Номер телефона">
         <DetailsInput
           placeholder="+7 (000) 000 - 00 - 00"

@@ -9,10 +9,8 @@ export interface IPropertyDetailsInitialState {
   totalSpace: string;
   livingSpace: string;
   kitchenSpace: string;
-  bathroomType: string;
   renovationType: string;
   houseType: string;
-  showerType: string;
 }
 
 const propertyDetailsInitialState: IPropertyDetailsInitialState = {
@@ -23,10 +21,8 @@ const propertyDetailsInitialState: IPropertyDetailsInitialState = {
   totalSpace: '',
   livingSpace: '',
   kitchenSpace: '',
-  bathroomType: '',
   renovationType: '',
   houseType: '',
-  showerType: '',
 };
 
 export const propertyDetailsReducer = createReducer(propertyDetailsInitialState, {
@@ -72,12 +68,6 @@ export const propertyDetailsReducer = createReducer(propertyDetailsInitialState,
       kitchenSpace: action.payload,
     };
   },
-  [Action.setBathroomType.type]: (state, action) => {
-    return {
-      ...state,
-      bathroomType: action.payload,
-    };
-  },
   [Action.setRenovationType.type]: (state, action) => {
     return {
       ...state,
@@ -88,12 +78,6 @@ export const propertyDetailsReducer = createReducer(propertyDetailsInitialState,
     return {
       ...state,
       houseType: action.payload,
-    };
-  },
-  [Action.setShowerType.type]: (state, action) => {
-    return {
-      ...state,
-      showerType: action.payload,
     };
   },
   [Action.cleanPropertyDetails.type]: () => {
