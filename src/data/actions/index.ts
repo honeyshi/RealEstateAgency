@@ -1,4 +1,9 @@
-export { setPropertyTypeFilter, setDistrictFilter } from './advertismentFilterActions';
+export {
+  setPropertyTypeFilter,
+  setDistrictFilter,
+  setFacilitiesFilter,
+  setLivingRulesFilter,
+} from './advertismentFilterActions';
 
 export { cleanPropertyDetails, cleanNewAdvertisment } from './cleanActions';
 

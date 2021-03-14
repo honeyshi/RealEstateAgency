@@ -15,3 +15,25 @@ export const districts = [
   { id: 'sovetskiy', name: 'Советский' },
   { id: 'novinki', name: 'поселок Новинки' },
 ];
+
+export const facilityOptions = [
+  { id: 'filter-conditioner', text: 'Кондиционер' },
+  { id: 'filter-fridge', text: 'Холодильник' },
+  { id: 'filter-tv', text: 'Телевизор' },
+  { id: 'filter-microwave', text: 'Микроволновка' },
+  { id: 'filter-dishwasher', text: 'Посудомоечная машина' },
+  { id: 'filter-washer', text: 'Стиральная машина' },
+  { id: 'filter-internet', text: 'Интернет' },
+  { id: 'filter-phone', text: 'Телефон' },
+  { id: 'filter-without-furniture', text: 'Без мебели' },
+  { id: 'filter-room-furniture', text: 'Комнатная мебель' },
+  { id: 'filter-kitchen-furniture', text: 'Кухонная мебель' },
+];
+
+export const livingRules = [
+  { id: 'filter-with-kids', text: 'Можно с детьми' },
+  { id: 'filter-with-animals', text: 'Можно с животными' },
+  { id: 'filter-can-foreigners', text: 'Можно иностранцам' },
+  { id: 'filter-without-deposit', text: 'Без залога' },
+  { id: 'filter-only-rent', text: 'Только оплата аренды' },
+];
