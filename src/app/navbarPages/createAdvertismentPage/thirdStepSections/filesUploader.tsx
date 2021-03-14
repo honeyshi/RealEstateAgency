@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Block, Button, Flexbox, Icon, Image, TextField } from 'shared/base';
+import { Block, Button, Flexbox, Image, TextField } from 'shared/base';
+import { RemixIcon } from 'shared/base/remixIcon';
 
 import './filesUploader.scss';
 
@@ -34,7 +35,7 @@ export const FilesUploader: React.FC = () => {
           event.stopPropagation();
           setPrimaryImage(file.name);
         }}>
-        <Icon name="check" mr="2" />
+        <RemixIcon name="check" className="mr-2" />
         Главное
       </Button>
       <Button
@@ -45,7 +46,7 @@ export const FilesUploader: React.FC = () => {
           setFiles(files.filter((selectedFile) => selectedFile.name !== file.name));
           primaryImage === file.name && setPrimaryImage('');
         }}>
-        <Icon name="times" className="delete-image-icon" />
+        <RemixIcon name="close" className="delete-image-icon" />
       </Button>
       <Image src={file.preview} alt={file.preview} className="shadow" />
     </Block>
@@ -59,7 +60,7 @@ export const FilesUploader: React.FC = () => {
           {filePreviews}
         </Flexbox>
         <Flexbox vertical alignItems="center" mb="4">
-          {files.length === 0 && <Icon className="files-uploader-icon" name="home" my="4" />}
+          {files.length === 0 && <RemixIcon className="files-uploader-icon my-4" name="image" size="3x" />}
           {files.length < maxFiles ? (
             <Button fontLight className="rounded-link" text="accent" mb="4">
               Добавить фото и планировку

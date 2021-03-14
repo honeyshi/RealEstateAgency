@@ -2,13 +2,13 @@ import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { StoreType } from 'core/store';
-import { CheckboxOption, Column, Flexbox, Icon, Row, Textarea, TextField } from 'shared/base';
-import { ImportedIcon } from 'shared/base/icon';
+import { CheckboxOption, Column, Flexbox, Row, Textarea, TextField } from 'shared/base';
 import { ErrorMessage, SectionHeader } from '../base';
 import { setDescription, setFacilities, setFurnitureType, setLivingRules } from 'data/actions';
 import { facilityOptions, furnitureTypes, livingRules } from './data';
 import { PreviousStep, NextStep } from '../stepsSwitcher';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
+import { RemixIcon } from 'shared/base/remixIcon';
 
 export const PropertyFacilitiesPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -30,8 +30,8 @@ export const PropertyFacilitiesPage: React.FC = () => {
               dispatch(setFacilities(propertyFacilitiesItems));
             }}>
             <Flexbox alignItems="center">
-              <Icon name={facilityOption.iconName as ImportedIcon} style={{ height: '2rem', width: '2rem' }} mr="3" />
-              <TextField left tag="span">
+              <RemixIcon name={facilityOption.iconName} size="lg" />
+              <TextField left tag="span" ml="3">
                 {facilityOption.text}
               </TextField>
             </Flexbox>

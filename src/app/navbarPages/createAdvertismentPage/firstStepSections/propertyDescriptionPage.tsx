@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Flexbox, Icon } from 'shared/base';
-import { ImportedIcon } from 'shared/base/icon';
+import { Flexbox } from 'shared/base';
 import { PropertyType } from '../propertyType';
 import { SectionHeader } from '../base';
 import { AddressSection } from './addressSection';
@@ -10,11 +9,12 @@ import { FlatDetails, RoomDetails, HouseDetails } from './detailsSection';
 import { cleanPropertyDetails, setPropertyType, setValidatedForm } from 'data/actions';
 import { NextStep } from '../stepsSwitcher';
 import { StoreType } from 'core/store';
+import { RemixIcon } from 'shared/base/remixIcon';
 
 const propertyTypes = [
-  { iconName: 'home', type: 'Квартира', key: 'flat-type' },
-  { iconName: 'home', type: 'Комната', key: 'room-type' },
-  { iconName: 'home', type: 'Дом', key: 'house-type' },
+  { iconName: 'building', type: 'Квартира', key: 'flat-type' },
+  { iconName: 'collage', type: 'Комната', key: 'room-type' },
+  { iconName: 'home-4', type: 'Дом', key: 'house-type' },
 ];
 
 export const PropertyDescriptionPage: React.FC = () => {
@@ -33,7 +33,7 @@ export const PropertyDescriptionPage: React.FC = () => {
             dispatch(cleanPropertyDetails());
           }}
           key={propertyType.key}>
-          <Icon name={propertyType.iconName as ImportedIcon} style={{ height: '3.75rem', width: '3.75rem' }} mt="3" />
+          <RemixIcon name={propertyType.iconName} size="xl" />
         </PropertyType>
       );
     });
