@@ -16,6 +16,16 @@ export const districts = [
   { id: 'novinki', name: 'поселок Новинки' },
 ];
 
+export const roomsAmount = [
+  { id: 'studio-room', circle: false, text: 'Студия' },
+  { id: 'one-room', circle: true, text: '1' },
+  { id: 'two-rooms', circle: true, text: '2' },
+  { id: 'three-rooms', circle: true, text: '3' },
+  { id: 'four-rooms', circle: true, text: '4' },
+  { id: 'five-rooms', circle: true, text: '5' },
+  { id: 'six-rooms', circle: true, text: '6+' },
+];
+
 export const facilityOptions = [
   { id: 'filter-conditioner', text: 'Кондиционер' },
   { id: 'filter-fridge', text: 'Холодильник' },

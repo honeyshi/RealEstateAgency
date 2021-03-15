@@ -1,11 +1,12 @@
 export {
   setPropertyTypeFilter,
   setDistrictFilter,
+  setRoomsFilter,
   setFacilitiesFilter,
   setLivingRulesFilter,
 } from './advertismentFilterActions';
 
-export { cleanPropertyDetails, cleanNewAdvertisment } from './cleanActions';
+export { cleanPropertyDetails, cleanNewAdvertisment, cleanFilters } from './cleanActions';
 
 export { setActiveStep, setPropertyType, setWrongSteps, setValidatedForm } from './newAdvertismentActions';
 

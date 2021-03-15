@@ -1,6 +1,7 @@
 export enum CleanActionTypes {
   CLEAN_PROPERTY_DETAILS = 'CLEAN_PROPERTY_DETAILS',
   CLEAN_NEW_ADVERTISMENT = 'CLEAN_NEW_ADVERTISMENT',
+  CLEAN_FILTERS = 'CLEAN_FILTERS',
 }
 
 export enum PropertyDetailsActionTypes {
@@ -43,6 +44,7 @@ export enum NewAdvertismentActionTypes {
 export enum AdvertismentFilterActionTypes {
   SET_PROPERTY_TYPE = 'SET_PROPERTY_TYPE',
   SET_DISTRICT = 'SET_DISTRICT',
+  SET_ROOMS = 'SET_ROOMS',
   SET_FACILITIES = 'SET_FACILITIES',
   SET_LIVING_RULES = 'SET_LIVING_RULES',
 }

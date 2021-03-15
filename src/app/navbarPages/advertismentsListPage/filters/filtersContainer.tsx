@@ -2,9 +2,16 @@ import React, { useMemo } from 'react';
 import ReactTooltip from 'react-tooltip';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CheckBox, CheckboxOption, Column, Flexbox, RemixIcon, TextField } from 'shared/base';
-import { districts, propertyTypes, facilityOptions, livingRules } from './data';
-import { setDistrictFilter, setFacilitiesFilter, setLivingRulesFilter, setPropertyTypeFilter } from 'data/actions';
+import { Button, CheckBox, CheckboxOption, Column, Flexbox, RemixIcon, TextField } from 'shared/base';
+import { districts, propertyTypes, facilityOptions, livingRules, roomsAmount } from './data';
+import {
+  cleanFilters,
+  setDistrictFilter,
+  setFacilitiesFilter,
+  setLivingRulesFilter,
+  setPropertyTypeFilter,
+  setRoomsFilter,
+} from 'data/actions';
 import { StoreType } from 'core/store';
 import { CheckboxFilter } from './chexboxFilter';
 
@@ -56,6 +63,33 @@ export const FiltersContainer: React.FC = () => {
     });
     return districtItems;
   }, [dispatch, advertismentFilter.districts]);
+
+  const roomItemComponents = useMemo(() => {
+    const roomItems = roomsAmount.map((room) => {
+      return (
+        <CheckboxOption
+          circle={room.circle}
+          selected={advertismentFilter.rooms.includes(room.text)}
+          onClick={() =>
+            advertismentFilter.rooms.includes(room.text)
+              ? dispatch(
+                  setRoomsFilter(
+                    advertismentFilter.rooms.filter((selectedRoom) => {
+                      return selectedRoom !== room.text;
+                    })
+                  )
+                )
+              : dispatch(setRoomsFilter(advertismentFilter.rooms.concat(room.text)))
+          }
+          key={room.id}
+          mr="2"
+          mb="3">
+          {room.text}
+        </CheckboxOption>
+      );
+    });
+    return roomItems;
+  }, [dispatch, advertismentFilter.rooms]);
 
   const facilitiesItemComponents = useMemo(() => {
     const facilityItems = facilityOptions.map((facility) => {
@@ -112,8 +146,31 @@ export const FiltersContainer: React.FC = () => {
       <TextField mb="4">Тип недвижимости</TextField>
       <Flexbox justifyContent="between">{propertyTypeItemComponents}</Flexbox>
       <CheckboxFilter filterName="Район">{districtItemComponents}</CheckboxFilter>
+      {advertismentFilter.propertyType !== 'house-type' && (
+        <>
+          <TextField mb="4">Количество комнат</TextField>
+          <Flexbox wrap justifyContent="between">
+            {roomItemComponents}
+          </Flexbox>
+        </>
+      )}
       <CheckboxFilter filterName="Удобства">{facilitiesItemComponents}</CheckboxFilter>
       <CheckboxFilter filterName="Условия проживания">{livingRulesItemComponents}</CheckboxFilter>
+      <Flexbox
+        justifyContent="between"
+        text="accent"
+        className="cursor-pointer"
+        mb="4"
+        onClick={() => {
+          console.log(advertismentFilter.livingRules);
+          dispatch(cleanFilters());
+        }}>
+        Сбросить фильтры
+        <RemixIcon name="refresh" />{' '}
+      </Flexbox>
+      <Button fontLight text="white" bg="accent" w="100">
+        Поиск
+      </Button>
     </Column>
   );
 };

@@ -19,7 +19,7 @@ export const CheckboxFilter: React.FC<{ filterName: string }> = ({ filterName, c
         <RemixIcon name="arrow-down-s" className={classNames({ 'd-none': opened })} />
         <RemixIcon name="arrow-up-s" className={classNames({ 'd-none': !opened })} />
       </Flexbox>
-      <div className={classNames('filter-checkboxes', { 'd-none': !opened }, { 'd-flex flex-column': opened })}>
+      <div className={classNames('filter-checkboxes flex-column', { 'd-none': !opened }, { 'd-flex': opened })}>
         {children}
       </div>
     </Block>

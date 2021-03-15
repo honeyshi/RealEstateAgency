@@ -1,9 +1,17 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setDistrictFilter, setFacilitiesFilter, setLivingRulesFilter, setPropertyTypeFilter } from 'data/actions';
+import {
+  cleanFilters,
+  setDistrictFilter,
+  setFacilitiesFilter,
+  setLivingRulesFilter,
+  setPropertyTypeFilter,
+  setRoomsFilter,
+} from 'data/actions';
 
 interface IAdvertismentFilterInitialState {
   propertyType: string;
   districts: string[];
+  rooms: string[];
   facilities: string[];
   livingRules: string[];
 }
@@ -11,6 +19,7 @@ interface IAdvertismentFilterInitialState {
 const advertismentFilterInitialState: IAdvertismentFilterInitialState = {
   propertyType: 'flat-type',
   districts: [],
+  rooms: [],
   facilities: [],
   livingRules: [],
 };
@@ -28,6 +37,12 @@ export const advertismentFilterReducer = createReducer(advertismentFilterInitial
       districts: action.payload,
     };
   },
+  [setRoomsFilter.type]: (state, action) => {
+    return {
+      ...state,
+      rooms: action.payload,
+    };
+  },
   [setFacilitiesFilter.type]: (state, action) => {
     return {
       ...state,
@@ -38,6 +53,11 @@ export const advertismentFilterReducer = createReducer(advertismentFilterInitial
     return {
       ...state,
       livingRules: action.payload,
+    };
+  },
+  [cleanFilters.type]: () => {
+    return {
+      ...advertismentFilterInitialState,
     };
   },
 });
