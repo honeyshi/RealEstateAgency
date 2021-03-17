@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import ReactTooltip from 'react-tooltip';
 import { useDispatch, useSelector } from 'react-redux';
+import InputRange from 'react-input-range';
 
 import { Button, CheckBox, CheckboxOption, Column, Flexbox, RemixIcon, TextField } from 'shared/base';
 import { districts, propertyTypes, facilityOptions, livingRules, roomsAmount } from './data';
@@ -10,12 +11,15 @@ import {
   setFacilitiesFilter,
   setLivingRulesFilter,
   setPropertyTypeFilter,
+  setRentPaymentFilter,
   setRoomsFilter,
+  setSpaceFilter,
 } from 'data/actions';
 import { StoreType } from 'core/store';
 import { CheckboxFilter } from './chexboxFilter';
 
 import './filters.scss';
+import 'react-input-range/lib/css/index.css';
 
 export const FiltersContainer: React.FC = () => {
   const dispatch = useDispatch();
@@ -146,14 +150,36 @@ export const FiltersContainer: React.FC = () => {
       <TextField mb="4">Тип недвижимости</TextField>
       <Flexbox justifyContent="between">{propertyTypeItemComponents}</Flexbox>
       <CheckboxFilter filterName="Район">{districtItemComponents}</CheckboxFilter>
+      <TextField mb="4">Стоимость аренды</TextField>
+      <Flexbox py="4">
+        <InputRange
+          formatLabel={(value) => `${value} тыс. руб.`}
+          maxValue={300}
+          minValue={5}
+          value={advertismentFilter.rentPayment}
+          step={5}
+          onChange={(value) => dispatch(setRentPaymentFilter(value))}
+        />
+      </Flexbox>
       {advertismentFilter.propertyType !== 'house-type' && (
         <>
-          <TextField mb="4">Количество комнат</TextField>
+          <TextField my="4">Количество комнат</TextField>
           <Flexbox wrap justifyContent="between">
             {roomItemComponents}
           </Flexbox>
         </>
       )}
+      <TextField mb="4">Площадь</TextField>
+      <Flexbox py="4">
+        <InputRange
+          formatLabel={(value) => `${value} м²`}
+          maxValue={300}
+          minValue={5}
+          value={advertismentFilter.space}
+          step={5}
+          onChange={(value) => dispatch(setSpaceFilter(value))}
+        />
+      </Flexbox>
       <CheckboxFilter filterName="Удобства">{facilitiesItemComponents}</CheckboxFilter>
       <CheckboxFilter filterName="Условия проживания">{livingRulesItemComponents}</CheckboxFilter>
       <Flexbox
@@ -161,10 +187,7 @@ export const FiltersContainer: React.FC = () => {
         text="accent"
         className="cursor-pointer"
         mb="4"
-        onClick={() => {
-          console.log(advertismentFilter.livingRules);
-          dispatch(cleanFilters());
-        }}>
+        onClick={() => dispatch(cleanFilters())}>
         Сбросить фильтры
         <RemixIcon name="refresh" />{' '}
       </Flexbox>

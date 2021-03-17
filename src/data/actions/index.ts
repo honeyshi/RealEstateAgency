@@ -1,7 +1,9 @@
 export {
   setPropertyTypeFilter,
   setDistrictFilter,
+  setRentPaymentFilter,
   setRoomsFilter,
+  setSpaceFilter,
   setFacilitiesFilter,
   setLivingRulesFilter,
 } from './advertismentFilterActions';

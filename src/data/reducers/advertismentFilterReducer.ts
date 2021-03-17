@@ -1,17 +1,22 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { Range } from 'react-input-range';
 import {
   cleanFilters,
   setDistrictFilter,
   setFacilitiesFilter,
   setLivingRulesFilter,
   setPropertyTypeFilter,
+  setRentPaymentFilter,
   setRoomsFilter,
+  setSpaceFilter,
 } from 'data/actions';
 
 interface IAdvertismentFilterInitialState {
   propertyType: string;
   districts: string[];
+  rentPayment: Range | number;
   rooms: string[];
+  space: Range | number;
   facilities: string[];
   livingRules: string[];
 }
@@ -19,7 +24,9 @@ interface IAdvertismentFilterInitialState {
 const advertismentFilterInitialState: IAdvertismentFilterInitialState = {
   propertyType: 'flat-type',
   districts: [],
+  rentPayment: { min: 5, max: 300 },
   rooms: [],
+  space: { min: 5, max: 300 },
   facilities: [],
   livingRules: [],
 };
@@ -37,10 +44,22 @@ export const advertismentFilterReducer = createReducer(advertismentFilterInitial
       districts: action.payload,
     };
   },
+  [setRentPaymentFilter.type]: (state, action) => {
+    return {
+      ...state,
+      rentPayment: action.payload,
+    };
+  },
   [setRoomsFilter.type]: (state, action) => {
     return {
       ...state,
       rooms: action.payload,
+    };
+  },
+  [setSpaceFilter.type]: (state, action) => {
+    return {
+      ...state,
+      space: action.payload,
     };
   },
   [setFacilitiesFilter.type]: (state, action) => {
