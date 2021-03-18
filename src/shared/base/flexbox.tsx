@@ -4,10 +4,11 @@ import classNames from 'classnames';
 import { propsToSpace, SpaceProps } from './utils/spaceUtil';
 import { propsToSize, SizeProps } from './utils/sizeUtil';
 import { ColorProps, propsToColor } from './utils/colorUtils';
+import { BorderProps, propsToBorder } from './utils/borderUtil';
 
 type Breakpoint = 'sm' | 'md' | 'lg' | 'xl';
 
-interface IFlexboxProps extends SpaceProps, SizeProps, ColorProps {
+interface IFlexboxProps extends SpaceProps, SizeProps, ColorProps, BorderProps {
   tag?: React.ElementType;
   className?: string;
   vertical?: boolean;
@@ -52,6 +53,7 @@ export const Flexbox: React.FC<IFlexboxProps> = ({
     propsToSpace(other),
     propsToSize(other),
     propsToColor(other),
+    propsToBorder(other),
     className
   );
   return (
