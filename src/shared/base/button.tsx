@@ -1,12 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
+
 import { propsToSpace, SpaceProps } from './utils/spaceUtil';
 import { propsToSize, SizeProps } from './utils/sizeUtil';
 import { ColorProps, propsToColor } from './utils/colorUtils';
 
-import './button.scss';
-
-interface IButtonProps extends SpaceProps, SizeProps, ColorProps {
+interface IButtonProps extends SpaceProps, SizeProps, ColorProps, React.ButtonHTMLAttributes<any> {
   className?: string;
   fontLight?: boolean;
   light?: boolean;
@@ -23,7 +22,7 @@ export const Button: React.FC<IButtonProps> = ({ fontLight, light, className, on
     className
   );
   return (
-    <button className={classes} type="button" onClick={onClick}>
+    <button className={classes} type="button" onClick={onClick} {...other}>
       {children}
     </button>
   );
