@@ -20,6 +20,7 @@ import { CheckboxFilter } from './chexboxFilter';
 
 import './filters.scss';
 import 'react-input-range/lib/css/index.css';
+import classNames from 'classnames';
 
 export const FiltersContainer: React.FC = () => {
   const dispatch = useDispatch();
@@ -165,11 +166,13 @@ export const FiltersContainer: React.FC = () => {
         <>
           <TextField my="4">Количество комнат</TextField>
           <Flexbox wrap justifyContent="between">
-            {roomItemComponents}
+            {advertismentFilter.propertyType === 'room-type' ? roomItemComponents.slice(1) : roomItemComponents}
           </Flexbox>
         </>
       )}
-      <TextField mb="4">Площадь</TextField>
+      <TextField classes={classNames(advertismentFilter.propertyType !== 'house-type' ? 'mb-4' : 'my-4')}>
+        Площадь
+      </TextField>
       <Flexbox py="4">
         <InputRange
           formatLabel={(value) => `${value} м²`}
