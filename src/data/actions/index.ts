@@ -6,6 +6,7 @@ export {
   setSpaceFilter,
   setFacilitiesFilter,
   setLivingRulesFilter,
+  setSortingFilter,
 } from './advertismentFilterActions';
 
 export { cleanPropertyDetails, cleanNewAdvertisment, cleanFilters } from './cleanActions';

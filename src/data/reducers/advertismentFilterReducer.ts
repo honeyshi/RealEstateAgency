@@ -8,6 +8,7 @@ import {
   setPropertyTypeFilter,
   setRentPaymentFilter,
   setRoomsFilter,
+  setSortingFilter,
   setSpaceFilter,
 } from 'data/actions';
 
@@ -19,6 +20,7 @@ interface IAdvertismentFilterInitialState {
   space: Range | number;
   facilities: string[];
   livingRules: string[];
+  sorting: string;
 }
 
 const advertismentFilterInitialState: IAdvertismentFilterInitialState = {
@@ -29,6 +31,7 @@ const advertismentFilterInitialState: IAdvertismentFilterInitialState = {
   space: { min: 5, max: 300 },
   facilities: [],
   livingRules: [],
+  sorting: '',
 };
 
 export const advertismentFilterReducer = createReducer(advertismentFilterInitialState, {
@@ -72,6 +75,12 @@ export const advertismentFilterReducer = createReducer(advertismentFilterInitial
     return {
       ...state,
       livingRules: action.payload,
+    };
+  },
+  [setSortingFilter.type]: (state, action) => {
+    return {
+      ...state,
+      sorting: action.payload,
     };
   },
   [cleanFilters.type]: () => {

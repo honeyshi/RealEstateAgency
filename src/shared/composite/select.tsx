@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Flexbox, Icon, SelectOption, TextField } from 'shared/base';
+import { Flexbox, RemixIcon, SelectOption, TextField } from 'shared/base';
 
 import './select.scss';
 
@@ -60,8 +60,8 @@ export const Select: React.FC<ISelectProps> = ({ selectOptions, selectText, clas
         <TextField tag="span" classes="placeholder" pr="4">
           {text === '' ? selectText : text}
         </TextField>
-        <Icon name="angle-down" className={classNames({ 'd-none': opened })} />
-        <Icon name="angle-up" className={classNames({ 'd-none': !opened })} />
+        <RemixIcon name="arrow-down-s" className={classNames({ 'd-none': opened })} />
+        <RemixIcon name="arrow-up-s" className={classNames({ 'd-none': !opened })} />
       </Flexbox>
       <div className={classNames({ 'd-none': !opened }, { 'd-flex flex-column': opened })}>
         {selectOptionComponents}

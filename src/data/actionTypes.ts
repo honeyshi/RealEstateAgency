@@ -49,4 +49,5 @@ export enum AdvertismentFilterActionTypes {
   SET_SPACE = 'SET_SPACE',
   SET_FACILITIES = 'SET_FACILITIES',
   SET_LIVING_RULES = 'SET_LIVING_RULES',
+  SET_SORTING = 'SET_SORTING',
 }

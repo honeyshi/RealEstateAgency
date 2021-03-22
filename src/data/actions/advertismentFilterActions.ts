@@ -9,3 +9,4 @@ export const setRoomsFilter = createAction<string[]>(AdvertismentFilterActionTyp
 export const setSpaceFilter = createAction<Range | number>(AdvertismentFilterActionTypes.SET_SPACE);
 export const setFacilitiesFilter = createAction<string[]>(AdvertismentFilterActionTypes.SET_FACILITIES);
 export const setLivingRulesFilter = createAction<string[]>(AdvertismentFilterActionTypes.SET_LIVING_RULES);
+export const setSortingFilter = createAction<string>(AdvertismentFilterActionTypes.SET_SORTING);

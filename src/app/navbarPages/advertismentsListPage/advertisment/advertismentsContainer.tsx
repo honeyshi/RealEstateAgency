@@ -1,5 +1,10 @@
 import React, { useMemo } from 'react';
-import { Column, TextField } from 'shared/base';
+import { useDispatch } from 'react-redux';
+
+import { Column, Flexbox, TextField } from 'shared/base';
+import { Select } from 'shared/composite/select';
+import { setSortingFilter } from 'data/actions';
+
 import { Advertisment } from './advertisment';
 
 const advertisments = [
@@ -33,6 +38,8 @@ const advertisments = [
 ];
 
 export const AdvertismentsContainer: React.FC = () => {
+  const dispatch = useDispatch();
+
   const advertismentItemComponents = useMemo(() => {
     const advertismentItems = advertisments.map((advertisment) => {
       return (
@@ -52,7 +59,17 @@ export const AdvertismentsContainer: React.FC = () => {
   return (
     <Column size={9} ml="5">
       {advertismentItemComponents.length !== 0 ? (
-        advertismentItemComponents
+        <>
+          <Flexbox alignItems="baseline" justifyContent="between">
+            <TextField>Найдено 517 объявлений</TextField>
+            <Select
+              selectOptions={['Сначала новые', 'По возрастанию цены', 'По убыванию цены']}
+              selectText="Сортировка"
+              onSelectValue={(value) => dispatch(setSortingFilter(value))}
+            />
+          </Flexbox>
+          {advertismentItemComponents}
+        </>
       ) : (
         <TextField classes="lead">
           По вашему запросу не было найдено ни одного объявления. Попробуйте смягчить критерии поиска.

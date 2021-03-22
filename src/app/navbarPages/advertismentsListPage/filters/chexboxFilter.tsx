@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import { Block, Flexbox, TextField } from 'shared/base';
-import { RemixIcon } from 'shared/base/remixIcon';
+import { Block, Flexbox, TextField, RemixIcon } from 'shared/base';
 
 export const CheckboxFilter: React.FC<{ filterName: string }> = ({ filterName, children }) => {
   const [opened, setOpened] = useState(false);
