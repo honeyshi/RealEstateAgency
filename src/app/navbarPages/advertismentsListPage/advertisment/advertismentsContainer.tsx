@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Column } from 'shared/base';
+import { Column, TextField } from 'shared/base';
 import { Advertisment } from './advertisment';
 
 const advertisments = [
@@ -51,7 +51,13 @@ export const AdvertismentsContainer: React.FC = () => {
   }, []);
   return (
     <Column size={9} ml="5">
-      {advertismentItemComponents}
+      {advertismentItemComponents.length !== 0 ? (
+        advertismentItemComponents
+      ) : (
+        <TextField classes="lead">
+          По вашему запросу не было найдено ни одного объявления. Попробуйте смягчить критерии поиска.
+        </TextField>
+      )}
     </Column>
   );
 };
