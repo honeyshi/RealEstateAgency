@@ -6,6 +6,7 @@ import { Select } from 'shared/composite/select';
 import { setSortingFilter } from 'data/actions';
 
 import { Advertisment } from './advertisment';
+import { NumberPagination } from 'shared/pagination';
 
 const advertisments = [
   {
@@ -69,6 +70,7 @@ export const AdvertismentsContainer: React.FC = () => {
             />
           </Flexbox>
           {advertismentItemComponents}
+          <NumberPagination amountPages={10} />
         </>
       ) : (
         <TextField classes="lead">

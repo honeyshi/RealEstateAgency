@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Column, Flexbox, Icon } from 'shared/base';
+import { Column, Flexbox, RemixIcon } from 'shared/base';
 import { LinePaginationItem } from 'shared/pagination';
 import { decrementIndex, incrementIndex } from 'core/paginationHandler';
 
@@ -26,7 +26,7 @@ export const LinePagination: React.FC<ILinePaginationProps> = ({ amountItems, on
       <Flexbox w="100" className="line-pagination">
         {paginationItemComponents}
       </Flexbox>
-      <Icon
+      <RemixIcon
         name="arrow-left"
         mr="1"
         ml="4"
@@ -35,7 +35,7 @@ export const LinePagination: React.FC<ILinePaginationProps> = ({ amountItems, on
           onLeftClick();
         }}
       />
-      <Icon
+      <RemixIcon
         name="arrow-right"
         ml="1"
         onClick={() => {
