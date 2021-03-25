@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Column, Flexbox, TextField } from 'shared/base';
+import { NumberPagination } from 'shared/pagination';
 import { Select } from 'shared/composite/select';
-import { setSortingFilter } from 'data/actions';
+import { StoreType } from 'core/store';
+import { setAdvertismentPageFilter, setSortingFilter } from 'data/actions';
 
 import { Advertisment } from './advertisment';
-import { NumberPagination } from 'shared/pagination';
 
 const advertisments = [
   {
@@ -40,6 +41,7 @@ const advertisments = [
 
 export const AdvertismentsContainer: React.FC = () => {
   const dispatch = useDispatch();
+  const activePage = useSelector((state: StoreType) => state.advertismentFilter.activePage);
 
   const advertismentItemComponents = useMemo(() => {
     const advertismentItems = advertisments.map((advertisment) => {
@@ -70,7 +72,7 @@ export const AdvertismentsContainer: React.FC = () => {
             />
           </Flexbox>
           {advertismentItemComponents}
-          <NumberPagination amountPages={10} />
+          <NumberPagination amountPages={10} activePage={activePage} setActivePage={setAdvertismentPageFilter} />
         </>
       ) : (
         <TextField classes="lead">

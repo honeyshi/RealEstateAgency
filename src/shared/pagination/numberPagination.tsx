@@ -1,21 +1,29 @@
 import classNames from 'classnames';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Flexbox, RemixIcon } from 'shared/base';
 
+interface INumberPaginationProps {
+  activePage: number;
+  amountPages: number;
+  setActivePage: (page: number) => void;
+}
+
 const showPages = 5;
 const bias = 2; // in order to include current page and previous
 
-export const NumberPagination: React.FC<{ amountPages: number }> = ({ amountPages }) => {
-  const [activeIndex, setActiveIndex] = useState(1);
-  const lastPage = activeIndex + showPages - bias > amountPages ? amountPages : activeIndex + showPages - bias;
+export const NumberPagination: React.FC<INumberPaginationProps> = ({ activePage, amountPages, setActivePage }) => {
+  const dispatch = useDispatch();
+
+  const lastPage = activePage + showPages - bias > amountPages ? amountPages : activePage + showPages - bias;
   const visiblePagesNumbers =
-    lastPage - activeIndex + bias === showPages
+    lastPage - activePage + bias === showPages
       ? Array(showPages)
           .fill(0)
           .map((_, idx) => {
-            return activeIndex === 1 ? activeIndex + idx : activeIndex - 1 + idx;
+            return activePage === 1 ? activePage + idx : activePage - 1 + idx;
           })
       : Array(showPages)
           .fill(0)
@@ -25,24 +33,26 @@ export const NumberPagination: React.FC<{ amountPages: number }> = ({ amountPage
       return (
         <Link
           to="#"
-          className={classNames('pagination-item', { active: visiblePageNumber === activeIndex })}
-          onClick={() => setActiveIndex(visiblePageNumber)}
+          className={classNames('pagination-item', { active: visiblePageNumber === activePage })}
+          onClick={() => dispatch(setActivePage(visiblePageNumber))}
           key={`pagination-link-${visiblePageNumber}`}>
           {visiblePageNumber}
         </Link>
       );
     });
     return visiblePagesItems;
-  }, [activeIndex, visiblePagesNumbers]);
+  }, [activePage, dispatch, setActivePage, visiblePagesNumbers]);
 
   return (
     <Flexbox alignItems="center" justifyContent="center" className="pagination">
-      {activeIndex !== 1 && <RemixIcon name="arrow-left" mr="4" onClick={() => setActiveIndex(activeIndex - 1)} />}
+      {activePage !== 1 && (
+        <RemixIcon name="arrow-left" mr="4" onClick={() => dispatch(setActivePage(activePage - 1))} />
+      )}
       <Flexbox justifyContent="between" w="25" className="number-pagination">
         {visiblePagesItemComponents}
       </Flexbox>
       {lastPage !== amountPages && (
-        <RemixIcon name="arrow-right" ml="4" onClick={() => setActiveIndex(activeIndex + 1)} />
+        <RemixIcon name="arrow-right" ml="4" onClick={() => dispatch(setActivePage(activePage + 1))} />
       )}
     </Flexbox>
   );

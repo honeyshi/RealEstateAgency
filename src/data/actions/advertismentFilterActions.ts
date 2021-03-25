@@ -10,3 +10,4 @@ export const setSpaceFilter = createAction<Range | number>(AdvertismentFilterAct
 export const setFacilitiesFilter = createAction<string[]>(AdvertismentFilterActionTypes.SET_FACILITIES);
 export const setLivingRulesFilter = createAction<string[]>(AdvertismentFilterActionTypes.SET_LIVING_RULES);
 export const setSortingFilter = createAction<string>(AdvertismentFilterActionTypes.SET_SORTING);
+export const setAdvertismentPageFilter = createAction<number>(AdvertismentFilterActionTypes.SET_ACTIVE_PAGE);

@@ -2,6 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { Range } from 'react-input-range';
 import {
   cleanFilters,
+  setAdvertismentPageFilter,
   setDistrictFilter,
   setFacilitiesFilter,
   setLivingRulesFilter,
@@ -21,6 +22,7 @@ interface IAdvertismentFilterInitialState {
   facilities: string[];
   livingRules: string[];
   sorting: string;
+  activePage: number;
 }
 
 const advertismentFilterInitialState: IAdvertismentFilterInitialState = {
@@ -32,6 +34,7 @@ const advertismentFilterInitialState: IAdvertismentFilterInitialState = {
   facilities: [],
   livingRules: [],
   sorting: '',
+  activePage: 1,
 };
 
 export const advertismentFilterReducer = createReducer(advertismentFilterInitialState, {
@@ -83,9 +86,16 @@ export const advertismentFilterReducer = createReducer(advertismentFilterInitial
       sorting: action.payload,
     };
   },
-  [cleanFilters.type]: () => {
+  [setAdvertismentPageFilter.type]: (state, action) => {
+    return {
+      ...state,
+      activePage: action.payload,
+    };
+  },
+  [cleanFilters.type]: (state) => {
     return {
       ...advertismentFilterInitialState,
+      activePage: state.activePage,
     };
   },
 });
