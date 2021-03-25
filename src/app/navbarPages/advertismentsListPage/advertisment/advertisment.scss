@@ -1,6 +1,7 @@
 @import 'shared/base/utils/styleVariables';
 
 .advertisment-container {
+  height: 20rem;
   &:hover {
     box-shadow: $shadow;
   }

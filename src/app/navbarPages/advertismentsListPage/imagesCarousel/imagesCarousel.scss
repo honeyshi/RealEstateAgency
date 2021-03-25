@@ -1,0 +1,31 @@
+@import 'shared/base/utils/styleVariables';
+
+.images-carousel {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  .images-carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .images-carousel-item {
+      width: 100%;
+      height: 100%;
+      img {
+        border-radius: 3.125rem 0rem 0rem 3.125rem;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .arrows-container {
+      position: absolute;
+      i {
+        cursor: pointer;
+        color: white;
+        &:hover {
+          color: $accent-color;
+        }
+      }
+    }
+  }
+}
