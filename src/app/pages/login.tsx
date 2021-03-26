@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { Button, Flexbox, Icon, Input, TextField } from 'shared/base';
+import { Button, Column, Container, Flexbox, Image, Input, Row, TextField } from 'shared/base';
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
 import { checkInvalidInput } from 'core/checkInvalidInput';
 import { parseError } from 'core/parseError';
 import { performSigninRequest } from 'core/auth/api';
 import { history } from 'core/history';
+import image from 'icons/authentication.svg';
 
 const schema = yup.object().shape({
   email: yup
@@ -41,48 +42,58 @@ export const Login: React.FC = () => {
     }
   };
   return (
-    <Flexbox justifyContent="center" alignItems="center" vertical vh>
-      <TextField tag="h2" mb="3">
-        Вход
-      </TextField>
-      <TextField center mb="3" px="2">
-        С возвращением! Войдите, чтобы получить доступ к множеству объявлений.
-      </TextField>
-      <Link to="/forget-password" className="text-info mb-3">
-        Забыли пароль?
-      </Link>
-      <Flexbox vertical className="registration-form">
-        <Input
-          borderBottom
-          formSpaces
-          placeholder="Email"
-          invalid={checkInvalidInput('Email', errorMessage)}
-          value={form.email}
-          onChange={(email) => setForm({ email: email, password: form.password })}
-          onEnterPress={login}
-        />
-        <Input
-          borderBottom
-          formSpaces
-          placeholder="Пароль"
-          type="password"
-          invalid={checkInvalidInput('Пароль', errorMessage)}
-          value={form.password}
-          onChange={(password) => setForm({ email: form.email, password: password })}
-          onEnterPress={login}
-        />
-        <ErrorMessagesView messages={errorMessage} />
-        <Button light onClick={login} py="3">
-          <Icon name="arrow-alt-circle-right" mr="3" />
-          Продолжить
-        </Button>
-      </Flexbox>
-      <TextField center mt="5">
-        Ещё нет аккаунта?{' '}
-        <Link to="/signup" className="text-info">
-          Зарегистрируйтесь.
-        </Link>
-      </TextField>
-    </Flexbox>
+    <Container>
+      <Row>
+        <Column size={5}>
+          <Flexbox justifyContent="center" alignItems="center" vertical vh ml="5">
+            <Image src={image} ml="5" />
+          </Flexbox>
+        </Column>
+        <Column size={7}>
+          <Flexbox justifyContent="center" alignItems="center" vertical vh>
+            <TextField tag="h2" mb="3">
+              Вход
+            </TextField>
+            <TextField center mb="3" px="2">
+              С возвращением! Войдите, чтобы получить доступ к множеству объявлений.
+            </TextField>
+            <Link to="/forget-password" className="text-accent mb-3">
+              Забыли пароль?
+            </Link>
+            <Flexbox vertical w="50">
+              <Input
+                borderBottom
+                formSpaces
+                placeholder="Email"
+                invalid={checkInvalidInput('Email', errorMessage)}
+                value={form.email}
+                onChange={(email) => setForm({ email: email, password: form.password })}
+                onEnterPress={login}
+              />
+              <Input
+                borderBottom
+                formSpaces
+                placeholder="Пароль"
+                type="password"
+                invalid={checkInvalidInput('Пароль', errorMessage)}
+                value={form.password}
+                onChange={(password) => setForm({ email: form.email, password: password })}
+                onEnterPress={login}
+              />
+              <ErrorMessagesView messages={errorMessage} />
+              <Button fontLight text="white" bg="accent" onClick={login} py="3">
+                Продолжить
+              </Button>
+            </Flexbox>
+            <TextField center mt="5">
+              Ещё нет аккаунта?{' '}
+              <Link to="/signup" className="text-accent">
+                Зарегистрируйтесь.
+              </Link>
+            </TextField>
+          </Flexbox>
+        </Column>
+      </Row>
+    </Container>
   );
 };
