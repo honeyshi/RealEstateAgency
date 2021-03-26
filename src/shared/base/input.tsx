@@ -6,13 +6,11 @@ import './input.scss';
 
 interface InputProps extends SpaceProps {
   borderBottom?: boolean;
+  formSpaces?: boolean;
   className?: string;
   id?: string;
   invalid?: boolean;
-  form?: boolean;
-  light?: boolean;
   placeholder: string;
-  tag?: React.ElementType;
   type?: string;
   value: string;
   onChange: (value: string) => void;
@@ -21,13 +19,11 @@ interface InputProps extends SpaceProps {
 
 export const Input: React.FC<InputProps> = ({
   borderBottom,
+  formSpaces,
   className,
   id,
   invalid,
-  form,
-  light,
   placeholder,
-  tag: Tag = 'input',
   type,
   value,
   onChange,
@@ -41,16 +37,15 @@ export const Input: React.FC<InputProps> = ({
   const classes = classNames(
     className,
     {
-      'font-weight-light': light,
-      'input-border-bottom': borderBottom,
+      'form-control font-weight-light input-border-bottom': borderBottom,
+      'pl-0 py-2 mb-5': formSpaces,
       'is-invalid': invalid,
-      'form-control': form,
     },
     propsToSpace(other)
   );
   return (
-    <Tag
-      className={classNames(classes)}
+    <input
+      className={classes}
       id={id}
       placeholder={placeholder}
       type={type}

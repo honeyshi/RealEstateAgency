@@ -1,0 +1,1 @@
+export { CreateAdvertismentPage } from './createAdvertismentPage';

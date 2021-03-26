@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { NavbarContainer, NavbarItem } from 'shared/base';
 
 const navbarItems = [
-  { text: 'Объявления', to: '/advert', key: 'navbar-advert' },
+  { text: 'Объявления', to: '/flats', key: 'navbar-flats' },
   { text: 'На карте', to: '/flats-map', key: 'navbar-flats-map' },
   { text: 'Тарифы', to: '/rates', key: 'navbar-rates' },
   { text: 'Поиск сожителей', to: '/search-roommates', key: 'navbar-search-roommates' },

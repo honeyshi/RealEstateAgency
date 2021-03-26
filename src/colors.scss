@@ -1,0 +1,22 @@
+@import 'shared/base/utils/styleVariables';
+
+.text-accent {
+  color: $accent-color;
+  &:hover {
+    color: $accent-color-hover !important;
+  }
+  &:focus {
+    color: $accent-color-hover !important;
+  }
+}
+
+.bg-accent {
+  background-color: $accent-color;
+  &:hover {
+    background-color: $accent-color-hover !important;
+  }
+}
+
+.text-danger {
+  color: $invalid-color !important;
+}

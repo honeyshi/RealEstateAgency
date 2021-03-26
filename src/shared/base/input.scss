@@ -1,4 +1,4 @@
-$invalid-color: #dc3545;
+@import 'shared/base/utils/styleVariables';
 
 .input-border-bottom {
   border: 0 !important;
@@ -9,15 +9,12 @@ input:focus {
   outline: none;
 }
 
-.form-control.is-invalid {
-  color: $invalid-color;
-  border-bottom-color: $invalid-color !important;
-}
-
-.form-control:focus {
-  box-shadow: none !important;
-}
-
-textarea {
-  resize: none !important;
+.form-control {
+  &.is-invalid {
+    color: $invalid-color;
+    border-bottom-color: $invalid-color !important;
+  }
+  &:focus {
+    box-shadow: none !important;
+  }
 }

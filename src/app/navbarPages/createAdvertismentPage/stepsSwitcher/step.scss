@@ -1,0 +1,63 @@
+@import 'shared/base/utils/styleVariables';
+
+.step-container {
+  width: 10rem;
+  cursor: pointer;
+  color: $light-color;
+  &.active {
+    color: $accent-color;
+    font-weight: 600;
+    .step-circle {
+      border: 2px solid $accent-color;
+    }
+  }
+  &.visited {
+    .step-circle {
+      background-color: $accent-color;
+    }
+    .step-number {
+      color: white;
+      font-weight: 600;
+    }
+    .step-name {
+      color: $accent-color;
+    }
+  }
+  &.invalid {
+    .step-circle {
+      background-color: red;
+    }
+    .step-number {
+      color: white;
+      font-weight: 600;
+    }
+    .step-name {
+      color: red;
+    }
+  }
+}
+
+.step-circle {
+  border: 1px solid $light-color;
+  width: 3.125rem;
+  height: 3.125rem;
+  line-height: 3.125rem;
+  text-align: center;
+  margin: 0 3.125rem;
+}
+
+.step-line {
+  height: 0.1rem;
+  width: 12.5rem;
+  background-color: $light-color;
+  margin: 0 -2.8125rem;
+  &.not-visited {
+    background-color: $light-color;
+  }
+  &.visited {
+    background-color: $accent-color;
+  }
+  &.invalid {
+    background-color: red;
+  }
+}

@@ -1,0 +1,13 @@
+@import 'shared/base/utils/styleVariables';
+
+.advertisment-container {
+  height: 20rem;
+  &:hover {
+    box-shadow: $shadow;
+  }
+  .add-favourite {
+    z-index: 999;
+    height: fit-content;
+    width: fit-content;
+  }
+}

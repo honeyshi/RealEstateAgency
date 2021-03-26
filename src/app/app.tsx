@@ -1,13 +1,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Login } from './pages/login';
-import { Signup } from './pages/signup';
-import { ResetPassword } from './pages/resetPassword';
-import { ForgetPassword } from './pages/forgetPassword';
+
+import { ForgetPassword, Login, ResetPassword, Signup, SuccessfulSignup } from './pages';
 import { ContactUs } from './infoPages/contactUs';
 import { StartPage } from './navbarPages/startPage';
+import { CreateAdvertismentPage } from './navbarPages/createAdvertismentPage';
+import { AdvertismentListPage } from './navbarPages/advertismentsListPage';
 
 import './pagesStyle.scss';
+import './tooltip.scss';
 
 export const App: React.FC = () => {
   return (
@@ -16,7 +17,11 @@ export const App: React.FC = () => {
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/forget-password" component={ForgetPassword} />
       <Route exact path="/reset-password" component={ResetPassword} />
+      <Route exact path="/successful-signup" component={SuccessfulSignup} />
+
       <Route exact path="/contact" component={ContactUs} />
+      <Route exact path="/new-advertisment" component={CreateAdvertismentPage} />
+      <Route exact path="/flats" component={AdvertismentListPage} />
       <Route exact path="/" component={StartPage} />
     </Switch>
   );

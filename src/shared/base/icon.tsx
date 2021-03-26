@@ -11,6 +11,7 @@ import {
   faHome,
   faArrowRight,
   faArrowLeft,
+  faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faTelegram, faVk } from '@fortawesome/free-brands-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
@@ -28,6 +29,7 @@ library.add(
   faHome,
   faArrowRight,
   faArrowLeft,
+  faCheck,
   faUser,
   faInstagram,
   faTelegram,
@@ -47,7 +49,8 @@ export type ImportedIcon =
   | 'home'
   | 'arrow-right'
   | 'arrow-left'
-  | 'user';
+  | 'user'
+  | 'check';
 
 interface IconProps extends SpaceProps, React.HTMLAttributes<any> {
   className?: string;
