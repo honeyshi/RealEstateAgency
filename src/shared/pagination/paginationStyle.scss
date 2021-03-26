@@ -1,24 +1,34 @@
 @import 'shared/base/utils/styleVariables';
 
-.pagination-item {
-  background-color: $light-color;
-  &.active {
-    background-color: $accent-color;
-  }
-}
-
-.line-pagination {
-  .pagination-item {
-    height: 0.25rem;
-  }
-}
-
 .pagination {
-  svg {
+  i {
     cursor: pointer;
     color: $light-color;
+    &:hover {
+      color: $accent-color;
+    }
   }
-  svg:hover {
-    color: $accent-color;
+  .line-pagination {
+    .pagination-item {
+      height: 0.25rem;
+      background-color: $light-color;
+      &.active {
+        background-color: $accent-color;
+      }
+    }
+  }
+  .number-pagination {
+    .pagination-item {
+      color: $light-color;
+      &.active {
+        color: $accent-color;
+        &:hover {
+          color: $accent-color-hover;
+        }
+      }
+      &:hover {
+        color: $accent-color;
+      }
+    }
   }
 }

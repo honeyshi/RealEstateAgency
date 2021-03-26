@@ -2,6 +2,12 @@
 
 .text-accent {
   color: $accent-color;
+  &:hover {
+    color: $accent-color-hover !important;
+  }
+  &:focus {
+    color: $accent-color-hover !important;
+  }
 }
 
 .bg-accent {
@@ -11,14 +17,6 @@
   }
 }
 
-a.text-accent:hover,
-a.text-accent:focus {
-  color: $accent-color-hover !important;
-}
-
-.text-accent:hover,
-.text-accent:focus {
-  &.btn {
-    color: $accent-color-hover !important;
-  }
+.text-danger {
+  color: $invalid-color !important;
 }

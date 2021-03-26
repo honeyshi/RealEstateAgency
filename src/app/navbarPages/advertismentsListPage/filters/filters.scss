@@ -1,0 +1,36 @@
+@import 'shared/base/utils/styleVariables';
+
+.filter-header {
+  cursor: pointer;
+}
+
+.filter-checkboxes {
+  margin-left: 0.5rem;
+}
+
+.input-range__label {
+  color: $light-color !important;
+  font-family: 'Aeroport' !important;
+}
+
+.input-range__slider {
+  appearance: none;
+  background: white !important;
+  border: 1px solid $light-color !important;
+}
+
+.input-range__track {
+  background: $light-color !important;
+}
+
+.input-range__track--active {
+  background: $accent-color !important;
+}
+
+.input-range__label-container {
+  left: 0 !important;
+
+  .input-range__label--max & {
+    left: 0 !important;
+  }
+}

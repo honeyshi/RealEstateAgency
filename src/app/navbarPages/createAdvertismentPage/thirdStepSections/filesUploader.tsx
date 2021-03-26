@@ -35,7 +35,7 @@ export const FilesUploader: React.FC = () => {
           event.stopPropagation();
           setPrimaryImage(file.name);
         }}>
-        <RemixIcon name="check" className="mr-2" />
+        <RemixIcon name="check" mr="2" />
         Главное
       </Button>
       <Button
@@ -60,7 +60,7 @@ export const FilesUploader: React.FC = () => {
           {filePreviews}
         </Flexbox>
         <Flexbox vertical alignItems="center" mb="4">
-          {files.length === 0 && <RemixIcon className="files-uploader-icon my-4" name="image" size="3x" />}
+          {files.length === 0 && <RemixIcon className="files-uploader-icon" my="4" name="image" size="3x" />}
           {files.length < maxFiles ? (
             <Button fontLight className="rounded-link" text="accent" mb="4">
               Добавить фото и планировку

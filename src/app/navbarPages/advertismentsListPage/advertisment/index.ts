@@ -1,0 +1,1 @@
+export { AdvertismentsContainer } from './advertismentsContainer';

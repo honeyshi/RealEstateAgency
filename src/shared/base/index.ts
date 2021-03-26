@@ -1,5 +1,6 @@
 export { Block } from './block';
 export { Button } from './button';
+export { CheckBox } from './checkbox';
 export { CheckboxOption } from './checkboxOption';
 export { Column } from './column';
 export { Container } from './container';
@@ -10,6 +11,7 @@ export { Image } from './image';
 export { Input } from './input';
 export { NavbarContainer } from './navbarContainer';
 export { NavbarItem } from './navbarItem';
+export { RemixIcon } from './remixIcon';
 export { Row } from './row';
 export { Section } from './section';
 export { SelectOption } from './selectOption';
