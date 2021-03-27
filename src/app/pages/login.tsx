@@ -42,11 +42,11 @@ export const Login: React.FC = () => {
     }
   };
   return (
-    <Container>
+    <Container nonFluid>
       <Row>
         <Column size={5}>
-          <Flexbox justifyContent="center" alignItems="center" vertical vh ml="5">
-            <Image src={image} ml="5" />
+          <Flexbox justifyContent="center" alignItems="center" vertical vh>
+            <Image src={image} />
           </Flexbox>
         </Column>
         <Column size={7}>
@@ -60,7 +60,7 @@ export const Login: React.FC = () => {
             <Link to="/forget-password" className="text-accent mb-3">
               Забыли пароль?
             </Link>
-            <Flexbox vertical w="50">
+            <Flexbox vertical w="75">
               <Input
                 borderBottom
                 formSpaces
