@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { Button, Column, Container, Flexbox, Image, Input, Row, TextField } from 'shared/base';
-import { parseError } from 'core/parseError';
+import { Button, Flexbox, Input, TextField } from 'shared/base';
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
+import { FormPage } from 'shared/layout/formPage';
+import { parseError } from 'core/parseError';
 import { checkInvalidInput } from 'core/checkInvalidInput';
 import { performSignupRequest } from 'core/signup/api';
 import { history } from 'core/history';
@@ -56,104 +57,88 @@ export const Signup: React.FC = () => {
     }
   };
   return (
-    <Container nonFluid>
-      <Row>
-        <Column size={5}>
-          <Flexbox justifyContent="center" alignItems="center" vertical vh>
-            <Image src={image} />
-          </Flexbox>
-        </Column>
-        <Column size={7}>
-          <Flexbox justifyContent="center" alignItems="center" vertical vh>
-            <TextField tag="h2" mb="3">
-              Регистрация
-            </TextField>
-            <TextField center mb="3" px="2">
-              Вы ещё не с нами? Зарегистрируйтесь, чтобы получить доступ к множеству объявлений.
-            </TextField>
-            <Flexbox vertical w="75">
-              <Input
-                borderBottom
-                formSpaces
-                placeholder="Имя"
-                invalid={checkInvalidInput('Имя', errorMessage)}
-                value={form.name}
-                onChange={(name) =>
-                  setForm({
-                    name: name,
-                    email: form.email,
-                    password: form.password,
-                    confirmPassword: form.confirmPassword,
-                  })
-                }
-                onEnterPress={signup}
-              />
-              <Input
-                borderBottom
-                formSpaces
-                placeholder="Email"
-                invalid={checkInvalidInput('Email', errorMessage)}
-                value={form.email}
-                onChange={(email) =>
-                  setForm({
-                    name: form.name,
-                    email: email,
-                    password: form.password,
-                    confirmPassword: form.confirmPassword,
-                  })
-                }
-                onEnterPress={signup}
-              />
-              <Input
-                borderBottom
-                formSpaces
-                placeholder="Пароль"
-                type="password"
-                invalid={checkInvalidInput('Пароль', errorMessage)}
-                value={form.password}
-                onChange={(password) =>
-                  setForm({
-                    name: form.name,
-                    email: form.email,
-                    password: password,
-                    confirmPassword: form.confirmPassword,
-                  })
-                }
-                onEnterPress={signup}
-              />
-              <Input
-                borderBottom
-                formSpaces
-                placeholder="Повторите пароль"
-                type="password"
-                invalid={
-                  checkInvalidInput('Повторите пароль', errorMessage) || checkInvalidInput('Пароли', errorMessage)
-                }
-                value={form.confirmPassword}
-                onChange={(confirmPassword) =>
-                  setForm({
-                    name: form.name,
-                    email: form.email,
-                    password: form.password,
-                    confirmPassword: confirmPassword,
-                  })
-                }
-                onEnterPress={signup}
-              />
-              <ErrorMessagesView messages={errorMessage} />
-              <Button fontLight text="white" bg="accent" onClick={signup} py="3">
-                Продолжить
-              </Button>
-            </Flexbox>
-            <TextField center mt="5">
-              Уже есть аккаунт?{' '}
-              <Link to="/login" className="text-accent">
-                Войти.
-              </Link>
-            </TextField>
-          </Flexbox>
-        </Column>
-      </Row>
-    </Container>
+    <FormPage
+      header="Регистрация"
+      helperText="Вы ещё не с нами? Зарегистрируйтесь, чтобы получить доступ к множеству объявлений."
+      image={image}>
+      <Flexbox vertical w="75">
+        <Input
+          borderBottom
+          formSpaces
+          placeholder="Имя"
+          invalid={checkInvalidInput('Имя', errorMessage)}
+          value={form.name}
+          onChange={(name) =>
+            setForm({
+              name: name,
+              email: form.email,
+              password: form.password,
+              confirmPassword: form.confirmPassword,
+            })
+          }
+          onEnterPress={signup}
+        />
+        <Input
+          borderBottom
+          formSpaces
+          placeholder="Email"
+          invalid={checkInvalidInput('Email', errorMessage)}
+          value={form.email}
+          onChange={(email) =>
+            setForm({
+              name: form.name,
+              email: email,
+              password: form.password,
+              confirmPassword: form.confirmPassword,
+            })
+          }
+          onEnterPress={signup}
+        />
+        <Input
+          borderBottom
+          formSpaces
+          placeholder="Пароль"
+          type="password"
+          invalid={checkInvalidInput('Пароль', errorMessage)}
+          value={form.password}
+          onChange={(password) =>
+            setForm({
+              name: form.name,
+              email: form.email,
+              password: password,
+              confirmPassword: form.confirmPassword,
+            })
+          }
+          onEnterPress={signup}
+        />
+        <Input
+          borderBottom
+          formSpaces
+          placeholder="Повторите пароль"
+          type="password"
+          invalid={checkInvalidInput('Повторите пароль', errorMessage) || checkInvalidInput('Пароли', errorMessage)}
+          value={form.confirmPassword}
+          onChange={(confirmPassword) =>
+            setForm({
+              name: form.name,
+              email: form.email,
+              password: form.password,
+              confirmPassword: confirmPassword,
+            })
+          }
+          onEnterPress={signup}
+        />
+        <ErrorMessagesView messages={errorMessage} />
+        <Button fontLight text="white" bg="accent" onClick={signup} py="3">
+          Продолжить
+        </Button>
+      </Flexbox>
+      <TextField center mt="5">
+        Уже есть аккаунт?{' '}
+        <Link to="/login" className="text-accent">
+          Войти.
+        </Link>
+      </TextField>
+    </FormPage>
   );
 };
