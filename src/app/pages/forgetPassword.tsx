@@ -38,7 +38,7 @@ export const ForgetPassword: React.FC = () => {
           onEnterPress={sendPassword}
         />
         <ErrorMessagesView messages={errorMessage} />
-        <Button fontLight text="white" bg="accent" onClick={sendPassword} py="3">
+        <Button primary onClick={sendPassword} py="3">
           Отправить пароль
         </Button>
       </Flexbox>

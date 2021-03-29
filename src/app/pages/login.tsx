@@ -71,7 +71,7 @@ export const Login: React.FC = () => {
           onEnterPress={login}
         />
         <ErrorMessagesView messages={errorMessage} />
-        <Button fontLight text="white" bg="accent" onClick={login} py="3">
+        <Button primary onClick={login} py="3">
           Продолжить
         </Button>
       </Flexbox>

@@ -129,7 +129,7 @@ export const Signup: React.FC = () => {
           onEnterPress={signup}
         />
         <ErrorMessagesView messages={errorMessage} />
-        <Button fontLight text="white" bg="accent" onClick={signup} py="3">
+        <Button primary onClick={signup} py="3">
           Продолжить
         </Button>
       </Flexbox>

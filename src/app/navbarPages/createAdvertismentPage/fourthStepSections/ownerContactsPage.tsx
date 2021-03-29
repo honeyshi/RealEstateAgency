@@ -86,9 +86,7 @@ export const OwnerContactsPage: React.FC = () => {
       <Flexbox justifyContent="between">
         <PreviousStep />
         <Button
-          fontLight
-          text="white"
-          bg="accent"
+          primary
           onClick={() => {
             dispatch(setValidatedForm(true));
             dispatch(

@@ -63,7 +63,7 @@ export const ResetPassword: React.FC = () => {
           onEnterPress={resetPassword}
         />
         <ErrorMessagesView messages={errorMessage} />
-        <Button fontLight text="white" bg="accent" onClick={resetPassword} py="3">
+        <Button primary onClick={resetPassword} py="3">
           Изменить пароль
         </Button>
       </Flexbox>
