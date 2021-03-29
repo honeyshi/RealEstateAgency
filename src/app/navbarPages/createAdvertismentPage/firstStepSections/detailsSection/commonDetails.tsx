@@ -3,14 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { CheckboxOption, TextField } from 'shared/base';
 import { StoreType } from 'core/store';
-import {
-  setCurrentFloor,
-  setKitchenSpace,
-  setLivingSpace,
-  setRenovationType,
-  setTotalFloors,
-  setTotalSpace,
-} from 'data/actions';
+import { setCurrentFloor, setRenovationType, setTotalFloors, setTotalSpace } from 'data/actions';
 import { renovationTypes } from './data';
 import { DetailsInput, DetailsRow, ErrorMessage } from '../../base';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
@@ -52,26 +45,13 @@ export const CommonDetails: React.FC = () => {
           invalid={checkAdvertismentField(validated, flatDetails.totalFloors)}
         />
       </DetailsRow>
-      <DetailsRow text="Площадь">
+      <DetailsRow small text="Площадь">
         <DetailsInput
           placeholder="Общая, м²"
           value={flatDetails.totalSpace}
           setMethod={setTotalSpace}
           invalid={checkAdvertismentField(validated, flatDetails.totalSpace)}
           mr="5"
-        />
-        <DetailsInput
-          placeholder="Жилая, м²"
-          value={flatDetails.livingSpace}
-          setMethod={setLivingSpace}
-          invalid={checkAdvertismentField(validated, flatDetails.livingSpace)}
-          mr="5"
-        />
-        <DetailsInput
-          placeholder="Кухня, м²"
-          value={flatDetails.kitchenSpace}
-          setMethod={setKitchenSpace}
-          invalid={checkAdvertismentField(validated, flatDetails.kitchenSpace)}
         />
       </DetailsRow>
       <DetailsRow text="Ремонт">{renovationTypeItemComponents}</DetailsRow>

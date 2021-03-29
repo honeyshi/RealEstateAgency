@@ -20,10 +20,7 @@ export {
   setCurrentFloor,
   setTotalFloors,
   setTotalSpace,
-  setLivingSpace,
-  setKitchenSpace,
   setRenovationType,
-  setHouseType,
 } from './propertyDetailsActions';
 
 export { setFacilities, setFurnitureType, setLivingRules, setDescription } from './propertyFacilitiesActions';

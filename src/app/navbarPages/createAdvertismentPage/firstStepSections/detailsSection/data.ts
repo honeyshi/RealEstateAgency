@@ -27,13 +27,6 @@ export const roomsAmountRoomRent = [
   { id: 'six-rooms', circle: true, text: '6' },
 ];
 
-export const houseTypes = [
-  { id: 'separate-house', text: 'Отдельный дом' },
-  { id: 'part-house', text: 'Часть дома' },
-  { id: 'townhouse', text: 'Таунхаус' },
-  { id: 'duplex', text: 'Дюплекс' },
-];
-
 export const renovationTypes = [
   { id: 'cosmetic-renovation', text: 'Косметический' },
   { id: 'euro-renovation', text: 'Евро' },
