@@ -1,7 +1,7 @@
 @import 'shared/base/utils/styleVariables';
 
 .text-accent {
-  color: $accent-color;
+  color: $accent-color !important;
   &:hover {
     color: $accent-color-hover !important;
   }

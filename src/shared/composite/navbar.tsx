@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Icon } from 'shared/base';
+import { Button, Container, Flexbox, Icon, RemixIcon, TextField } from 'shared/base';
 import { NavbarLeft } from 'shared/composite/navbarLeft';
 import { NavbarRight } from 'shared/composite/navbarRight';
 import { NavbarSmall } from 'shared/composite/navbarSmall';
@@ -16,8 +16,13 @@ export const Navbar: React.FC = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light fixed-top bg-light">
       <Container nonFluid>
-        <Link to="/" className="navbar-brand">
-          Название
+        <Link to="/" className="navbar-brand text-accent">
+          <Flexbox>
+            <RemixIcon name="home-heart" />
+            <TextField tag="span" ml="2">
+              dwelly.
+            </TextField>
+          </Flexbox>
         </Link>
         <div className={defaultNavbarClasses}>
           <NavbarLeft />

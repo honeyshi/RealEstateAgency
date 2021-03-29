@@ -4,6 +4,9 @@
 
 .navbar {
   flex-direction: column;
+  .navbar-brand {
+    font-family: 'Pacifico', cursive;
+  }
 }
 
 .collapse:not(.show) {
