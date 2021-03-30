@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import { AddressSuggestions, DaDataAddress, DaDataSuggestion } from 'react-dadata';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Column, Flexbox, Row, TextField } from 'shared/base';
 import { Select } from 'shared/composite/select';
+import { districts, metroValues } from 'data/values';
+import { StoreType } from 'core/store';
+import { setCreateAdDistrict, setCreateAdMetro } from 'data/actions';
+import { ErrorMessage } from '../base';
 
 import 'react-dadata/dist/react-dadata.css';
 
@@ -16,6 +21,9 @@ const defaultGeo = {
 };
 
 export const AddressSection: React.FC = () => {
+  const dispatch = useDispatch();
+  const houseDetails = useSelector((state: StoreType) => state.propertyDetails);
+  const validated = useSelector((state: StoreType) => state.newAdvertisment.validated);
   const [address, setAddress] = useState<DaDataSuggestion<DaDataAddress>>();
   return (
     <>
@@ -30,26 +38,28 @@ export const AddressSection: React.FC = () => {
       <Row>
         <Column size={3}>
           <Select
-            selectOptions={[
-              'Автозаводский',
-              'Ленинский',
-              'Сормовский',
-              'Канавинский',
-              'Московский',
-              'Нижегородский',
-              'Приокский',
-              'Советский',
-              'поселок Новинки',
-            ]}
-            selectText="Автозаводский"
-            onSelectValue={() => void 0}
+            selectOptions={districts}
+            selectText="Район"
+            onSelectValue={(district) => dispatch(setCreateAdDistrict(districts.indexOf(district)))}
+          />
+        </Column>
+        <Column size={3}>
+          <Select
+            selectOptions={metroValues}
+            selectText="Метро"
+            onSelectValue={(metro) => dispatch(setCreateAdMetro(metroValues.indexOf(metro)))}
           />
         </Column>
       </Row>
+      <ErrorMessage
+        validated={validated}
+        fieldValue={houseDetails.district === -1 ? '' : String(houseDetails.district)}>
+        Выберите район
+      </ErrorMessage>
       <AddressSuggestions
         token={config.addressSuggestToken}
         containerClassName="pt-3 position-relative"
-        currentSuggestionClassName="font-weight-light text-accent"
+        currentSuggestionClassName="font-weight-light"
         value={address}
         defaultQuery="Нижний Новгород"
         onChange={(address) => setAddress(address)}

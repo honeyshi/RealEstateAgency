@@ -5,6 +5,8 @@ export enum CleanActionTypes {
 }
 
 export enum PropertyDetailsActionTypes {
+  SET_DISTRICT = 'SET_DISTRICT',
+  SET_METRO = 'SET_METRO',
   SET_ROOMS_AMOUNT = 'SET_ROOMS_AMOUNT',
   SET_RENT_ROOMS_AMOUNT = 'SET_RENT_ROOMS_AMOUNT',
   SET_CURRENT_FLOOR = 'SET_CURRENT_FLOOR',

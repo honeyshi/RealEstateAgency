@@ -1,6 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
 import { PropertyDetailsActionTypes } from 'data/actionTypes';
 
+export const setCreateAdDistrict = createAction<number>(PropertyDetailsActionTypes.SET_DISTRICT);
+export const setCreateAdMetro = createAction<number>(PropertyDetailsActionTypes.SET_METRO);
 export const setRoomsAmount = createAction<string>(PropertyDetailsActionTypes.SET_ROOMS_AMOUNT);
 export const setRoomsRentAmount = createAction<string>(PropertyDetailsActionTypes.SET_RENT_ROOMS_AMOUNT);
 export const setCurrentFloor = createAction<string>(PropertyDetailsActionTypes.SET_CURRENT_FLOOR);

@@ -2,6 +2,8 @@ import { createReducer } from '@reduxjs/toolkit';
 import * as Action from 'data/actions';
 
 export interface IPropertyDetailsInitialState {
+  district: number;
+  metro: number;
   roomsAmount: string;
   roomsRentAmount: string;
   currentFloor: string;
@@ -11,6 +13,8 @@ export interface IPropertyDetailsInitialState {
 }
 
 const propertyDetailsInitialState: IPropertyDetailsInitialState = {
+  district: -1,
+  metro: 0,
   roomsAmount: '',
   roomsRentAmount: '',
   currentFloor: '',
@@ -20,6 +24,18 @@ const propertyDetailsInitialState: IPropertyDetailsInitialState = {
 };
 
 export const propertyDetailsReducer = createReducer(propertyDetailsInitialState, {
+  [Action.setCreateAdDistrict.type]: (state, action) => {
+    return {
+      ...state,
+      district: action.payload,
+    };
+  },
+  [Action.setCreateAdMetro.type]: (state, action) => {
+    return {
+      ...state,
+      metro: action.payload,
+    };
+  },
   [Action.setRoomsAmount.type]: (state, action) => {
     return {
       ...state,

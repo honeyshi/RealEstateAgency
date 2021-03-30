@@ -15,6 +15,8 @@ export { cleanPropertyDetails, cleanNewAdvertisment, cleanFilters } from './clea
 export { setActiveStep, setPropertyType, setWrongSteps, setValidatedForm } from './newAdvertismentActions';
 
 export {
+  setCreateAdDistrict,
+  setCreateAdMetro,
   setRoomsAmount,
   setRoomsRentAmount,
   setCurrentFloor,
