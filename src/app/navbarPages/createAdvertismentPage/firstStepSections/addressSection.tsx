@@ -8,7 +8,13 @@ import { Column, Flexbox, Row, TextField } from 'shared/base';
 import { Select } from 'shared/composite/select';
 import { districts, metroValues } from 'data/values';
 import { StoreType } from 'core/store';
-import { setCreateAdDistrict, setCreateAdMetro } from 'data/actions';
+import {
+  setCreateAdDistrict,
+  setCreateAdGeo,
+  setCreateAdHouseNumber,
+  setCreateAdMetro,
+  setCreateAdStreet,
+} from 'data/actions';
 import { ErrorMessage } from '../base';
 
 import 'react-dadata/dist/react-dadata.css';
@@ -62,8 +68,16 @@ export const AddressSection: React.FC = () => {
         currentSuggestionClassName="font-weight-light"
         value={address}
         defaultQuery="Нижний Новгород"
-        onChange={(address) => setAddress(address)}
+        onChange={(address) => {
+          setAddress(address);
+          dispatch(setCreateAdStreet(String(address?.data.street)));
+          dispatch(setCreateAdHouseNumber(String(address?.data.house)));
+          dispatch(setCreateAdGeo(String(`${address?.data.geo_lat}, ${address?.data.geo_lon}`)));
+        }}
       />
+      <ErrorMessage validated={validated} fieldValue={houseDetails.geoLocation}>
+        Введите адрес объекта
+      </ErrorMessage>
       <YMaps>
         <Map
           state={{

@@ -4,6 +4,9 @@ import * as Action from 'data/actions';
 export interface IPropertyDetailsInitialState {
   district: number;
   metro: number;
+  street: string;
+  houseNumber: string;
+  geoLocation: string;
   roomsAmount: string;
   roomsRentAmount: string;
   currentFloor: string;
@@ -15,6 +18,9 @@ export interface IPropertyDetailsInitialState {
 const propertyDetailsInitialState: IPropertyDetailsInitialState = {
   district: -1,
   metro: 0,
+  street: '',
+  houseNumber: '',
+  geoLocation: '',
   roomsAmount: '',
   roomsRentAmount: '',
   currentFloor: '',

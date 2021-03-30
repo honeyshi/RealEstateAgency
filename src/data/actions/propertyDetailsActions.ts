@@ -3,6 +3,9 @@ import { PropertyDetailsActionTypes } from 'data/actionTypes';
 
 export const setCreateAdDistrict = createAction<number>(PropertyDetailsActionTypes.SET_DISTRICT);
 export const setCreateAdMetro = createAction<number>(PropertyDetailsActionTypes.SET_METRO);
+export const setCreateAdStreet = createAction<string>(PropertyDetailsActionTypes.SET_STREET);
+export const setCreateAdHouseNumber = createAction<string>(PropertyDetailsActionTypes.SET_HOUSE_NUMBER);
+export const setCreateAdGeo = createAction<string>(PropertyDetailsActionTypes.SET_GEO);
 export const setRoomsAmount = createAction<string>(PropertyDetailsActionTypes.SET_ROOMS_AMOUNT);
 export const setRoomsRentAmount = createAction<string>(PropertyDetailsActionTypes.SET_RENT_ROOMS_AMOUNT);
 export const setCurrentFloor = createAction<string>(PropertyDetailsActionTypes.SET_CURRENT_FLOOR);

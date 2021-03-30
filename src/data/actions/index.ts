@@ -17,6 +17,9 @@ export { setActiveStep, setPropertyType, setWrongSteps, setValidatedForm } from 
 export {
   setCreateAdDistrict,
   setCreateAdMetro,
+  setCreateAdStreet,
+  setCreateAdHouseNumber,
+  setCreateAdGeo,
   setRoomsAmount,
   setRoomsRentAmount,
   setCurrentFloor,
