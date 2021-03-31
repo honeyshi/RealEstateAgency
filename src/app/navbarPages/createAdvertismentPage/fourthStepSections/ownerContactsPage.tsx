@@ -1,9 +1,6 @@
-import React, { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { StoreType } from 'core/store';
 import { Button, CheckboxOption, Flexbox } from 'shared/base';
 import { DetailsInput, DetailsRow, ErrorMessage, SectionHeader } from '../base';
+import React, { useMemo } from 'react';
 import {
   setRentDeposit,
   setRentPayment,
@@ -12,9 +9,12 @@ import {
   setValidatedForm,
   setWrongSteps,
 } from 'data/actions';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { PreviousStep } from '../stepsSwitcher';
-import { checkNewAdvertismentFields } from 'core/checkNewAdvertismentFields';
+import { StoreType } from 'core/store';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
+import { checkNewAdvertismentFields } from 'core/checkNewAdvertismentFields';
 
 export const paymentRules = [
   { id: 'new-ad-with-deposit', opposite: 'Без залога', text: 'Есть залог' },
@@ -95,6 +95,7 @@ export const OwnerContactsPage: React.FC = () => {
                   state.newAdvertisment.propertyType,
                   state.propertyDetails,
                   state.propertyFacilities,
+                  state.propertyPhotos.photos,
                   state.ownerContacts
                 )
               )

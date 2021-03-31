@@ -1,20 +1,35 @@
-import classNames from 'classnames';
-import React, { useState } from 'react';
-import { useDropzone } from 'react-dropzone';
-import { Block, Button, Flexbox, Image, TextField } from 'shared/base';
-import { RemixIcon } from 'shared/base/remixIcon';
-
 import './filesUploader.scss';
 
-const maxFiles = 5;
+import { Block, Button, Flexbox, Image, TextField } from 'shared/base';
+import React, { useState } from 'react';
+import { setPropertyPhotos, setPropertyPrimaryImage } from 'data/actions';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { ErrorMessage } from '../base';
+import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
+import { RemixIcon } from 'shared/base/remixIcon';
+import { StoreType } from 'core/store';
+import classNames from 'classnames';
+import { parseError } from 'core/parseError';
+import { performUploadImageRequest } from 'core/createAdvertisment/uploadFile';
+import { useDropzone } from 'react-dropzone';
+
+const maxFiles = 10;
 
 export const FilesUploader: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const propertyPhotosState = useSelector((state: StoreType) => state.propertyPhotos);
+  const validated = useSelector((state: StoreType) => state.newAdvertisment.validated);
+
   const [files, setFiles] = useState<any[]>([]);
   const [primaryImage, setPrimaryImage] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string | string[]>('');
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     maxFiles: maxFiles,
-    onDrop: (acceptedFiles) => {
+    onDrop: async (acceptedFiles) => {
       setFiles([
         ...files,
         ...acceptedFiles.slice(0, maxFiles - files.length).map((file) =>
@@ -23,10 +38,19 @@ export const FilesUploader: React.FC = () => {
           })
         ),
       ]);
+      try {
+        setErrorMessage('');
+        const uploadedFilesId = await Promise.all(
+          acceptedFiles.slice(0, maxFiles - files.length).map((file) => performUploadImageRequest(file))
+        );
+        dispatch(setPropertyPhotos(propertyPhotosState.photos.concat(uploadedFilesId)));
+      } catch (error) {
+        setErrorMessage(parseError(error));
+      }
     },
   });
 
-  const filePreviews = files.map((file) => (
+  const filePreviews = files.map((file, index) => (
     <Block className="property-image-container" key={file.name} mx="4" mb="4">
       <Button
         fontLight
@@ -34,19 +58,28 @@ export const FilesUploader: React.FC = () => {
         onClick={(event) => {
           event.stopPropagation();
           setPrimaryImage(file.name);
+          dispatch(setPropertyPrimaryImage(propertyPhotosState.photos[index]));
         }}>
-        <RemixIcon name="check" mr="2" />
-        Главное
+        <Flexbox>
+          <RemixIcon name="check" mr="2" />
+          <TextField tag="span">Главное</TextField>
+        </Flexbox>
       </Button>
       <Button
         className="delete-image"
         bg="danger"
         onClick={(event) => {
           event.stopPropagation();
+          dispatch(
+            setPropertyPhotos(propertyPhotosState.photos.filter((id) => id !== propertyPhotosState.photos[index]))
+          );
           setFiles(files.filter((selectedFile) => selectedFile.name !== file.name));
           primaryImage === file.name && setPrimaryImage('');
+          dispatch(setPropertyPrimaryImage(-1));
         }}>
-        <RemixIcon name="close" className="delete-image-icon" />
+        <Flexbox>
+          <RemixIcon name="close" className="delete-image-icon" />
+        </Flexbox>
       </Button>
       <Image src={file.preview} alt={file.preview} className="shadow" />
     </Block>
@@ -70,6 +103,10 @@ export const FilesUploader: React.FC = () => {
               Вы не можете загрузить более 10 изображений. Удалите старые фото, чтобы добавить новые.
             </TextField>
           )}
+          <ErrorMessagesView messages={errorMessage} />
+          <ErrorMessage validated={validated} fieldValue={propertyPhotosState.photos.map(String)}>
+            Загрузите фотографии объекта
+          </ErrorMessage>
         </Flexbox>
       </div>
     </Block>

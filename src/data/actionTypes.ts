@@ -1,3 +1,7 @@
+export enum AuthorizationActionTypes {
+  SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN',
+}
+
 export enum CleanActionTypes {
   CLEAN_PROPERTY_DETAILS = 'CLEAN_PROPERTY_DETAILS',
   CLEAN_NEW_ADVERTISMENT = 'CLEAN_NEW_ADVERTISMENT',
@@ -26,7 +30,8 @@ export enum PropertyFacilitiesActionTypes {
 }
 
 export enum PropertyPhotosActionTypes {
-  SET_VIDEO_LINK = 'SET_VIDEO_LINK',
+  SET_PHOTOS = 'SET_PHOTOS',
+  SET_PRIMARY_IMAGE = 'SET_PRIMARY_IMAGE',
 }
 
 export enum OwnerContactsActionTypes {

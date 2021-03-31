@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 
 import { Button, Flexbox, Input, TextField } from 'shared/base';
+import React, { useState } from 'react';
+
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
 import { FormPage } from 'shared/layout/formPage';
+import { Link } from 'react-router-dom';
 import { checkInvalidInput } from 'core/checkInvalidInput';
-import { parseError } from 'core/parseError';
-import { performSigninRequest } from 'core/auth/api';
 import { history } from 'core/history';
 import image from 'icons/authentication.svg';
+import { parseError } from 'core/parseError';
+import { performSigninRequest } from 'core/auth/api';
 
 const schema = yup.object().shape({
   email: yup
@@ -39,7 +40,7 @@ export const Login: React.FC = () => {
       await performSigninRequest(form.email, form.password);
       history.push('/');
     } catch (error) {
-      setErrorMessage(parseError(error));
+      setErrorMessage(parseError(error, true));
     }
   };
   return (

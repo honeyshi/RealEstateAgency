@@ -1,4 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
 import { PropertyPhotosActionTypes } from 'data/actionTypes';
 
-export const setVideoLink = createAction<string>(PropertyPhotosActionTypes.SET_VIDEO_LINK);
+export const setPropertyPhotos = createAction<number[]>(PropertyPhotosActionTypes.SET_PHOTOS);
+export const setPropertyPrimaryImage = createAction<number>(PropertyPhotosActionTypes.SET_PRIMARY_IMAGE);

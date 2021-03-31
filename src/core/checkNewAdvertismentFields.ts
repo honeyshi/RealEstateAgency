@@ -16,6 +16,7 @@ export const checkNewAdvertismentFields = (
   propertyType: string,
   propertyDetails: IPropertyDetailsInitialState,
   propertyFacilities: IPropertyFacilitiesInitialState,
+  propertyPhotos: number[],
   ownerContacts: IOwnerContactsInitialState
 ) => {
   let notIncludedProps: string[] = [];
@@ -34,6 +35,8 @@ export const checkNewAdvertismentFields = (
     wrongSteps.push(1);
 
   !checkAllFieldsAreFilled(propertyFacilities) && wrongSteps.push(2);
+
+  propertyPhotos.length === 0 && wrongSteps.push(3);
 
   ownerContacts.rentPaymentRules.includes('Есть залог')
     ? !checkAllFieldsAreFilled(ownerContacts) && wrongSteps.push(4)
