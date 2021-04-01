@@ -1,16 +1,19 @@
-import { createReducer } from '@reduxjs/toolkit';
 import * as Action from 'data/actions';
+
+import { createReducer } from '@reduxjs/toolkit';
 
 export interface IOwnerContactsInitialState {
   rentPayment: string;
-  rentPaymentRules: string[];
+  rentPaymentRule: string;
+  withDeposit: boolean;
   rentDeposit: string;
   telephoneNumber: string;
 }
 
 const ownerContactsInitialState: IOwnerContactsInitialState = {
   rentPayment: '',
-  rentPaymentRules: [],
+  rentPaymentRule: '',
+  withDeposit: false,
   rentDeposit: '',
   telephoneNumber: '',
 };
@@ -22,10 +25,16 @@ export const ownerContactsReducer = createReducer(ownerContactsInitialState, {
       rentPayment: action.payload,
     };
   },
-  [Action.setRentPaymentRules.type]: (state, action) => {
+  [Action.setRentPaymentRule.type]: (state, action) => {
     return {
       ...state,
-      rentPaymentRules: action.payload,
+      rentPaymentRule: action.payload,
+    };
+  },
+  [Action.setWithDeposit.type]: (state, action) => {
+    return {
+      ...state,
+      withDeposit: action.payload,
     };
   },
   [Action.setRentDeposit.type]: (state, action) => {

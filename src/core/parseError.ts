@@ -8,5 +8,5 @@ export const parseError = (error: any, isAuth = false): string | string[] => {
       return isAuth ? 'Введен неправильный Email или Пароль' : 'Для выполнения этого действия необходима авторизация';
   } else if (error instanceof Error)
     return error.message === 'Network Error' ? 'Произошла ошибка. Попробуйте позже.' : error.message;
-  return 'Unknown error';
+  return 'Произошла ошибка. Попробуйте позже.';
 };

@@ -1,5 +1,6 @@
-import { createReducer } from '@reduxjs/toolkit';
 import { cleanNewAdvertisment, setActiveStep, setPropertyType, setValidatedForm, setWrongSteps } from 'data/actions';
+
+import { createReducer } from '@reduxjs/toolkit';
 
 interface INewAdvertismentInitialState {
   activeStep: number;
@@ -10,7 +11,7 @@ interface INewAdvertismentInitialState {
 
 const newAdvertismentInitialState: INewAdvertismentInitialState = {
   activeStep: 1,
-  propertyType: 'flat-type',
+  propertyType: '0',
   wrongSteps: [],
   validated: false,
 };

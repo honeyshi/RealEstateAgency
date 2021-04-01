@@ -20,12 +20,16 @@ export const checkNewAdvertismentFields = (
   ownerContacts: IOwnerContactsInitialState
 ) => {
   let notIncludedProps: string[] = [];
+
   switch (propertyType) {
-    case 'flat-type':
-      notIncludedProps = ['roomsRentAmount'];
+    case '1': // room
+      notIncludedProps = ['roomsAmount'];
       break;
-    case 'house-type':
-      notIncludedProps = ['roomsAmount', 'roomsRentAmount', 'totalFloors'];
+    case '2': // house
+      notIncludedProps = ['roomsAmount', 'currentFloor'];
+      break;
+    default:
+      notIncludedProps = [];
       break;
   }
 
@@ -38,7 +42,7 @@ export const checkNewAdvertismentFields = (
 
   propertyPhotos.length === 0 && wrongSteps.push(3);
 
-  ownerContacts.rentPaymentRules.includes('Есть залог')
+  ownerContacts.withDeposit
     ? !checkAllFieldsAreFilled(ownerContacts) && wrongSteps.push(4)
     : !checkSpecificFieldsAreFilled(ownerContacts, ['rentDeposit']) && wrongSteps.push(4);
 

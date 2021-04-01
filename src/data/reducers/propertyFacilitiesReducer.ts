@@ -1,16 +1,15 @@
-import { createReducer } from '@reduxjs/toolkit';
 import * as Action from 'data/actions';
+
+import { createReducer } from '@reduxjs/toolkit';
 
 export interface IPropertyFacilitiesInitialState {
   facilities: string[];
-  furnitureType: string;
   livingRules: string[];
   description: string;
 }
 
 const propertyFacilitiesInitialState: IPropertyFacilitiesInitialState = {
   facilities: [],
-  furnitureType: '',
   livingRules: [],
   description: '',
 };
@@ -20,12 +19,6 @@ export const propertyFacilitiesReducer = createReducer(propertyFacilitiesInitial
     return {
       ...state,
       facilities: action.payload,
-    };
-  },
-  [Action.setFurnitureType.type]: (state, action) => {
-    return {
-      ...state,
-      furnitureType: action.payload,
     };
   },
   [Action.setLivingRules.type]: (state, action) => {

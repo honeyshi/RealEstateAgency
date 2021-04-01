@@ -1,7 +1,8 @@
-import { createReducer } from '@reduxjs/toolkit';
 import { cleanNewAdvertisment, setPropertyPhotos, setPropertyPrimaryImage } from 'data/actions';
 
-interface IPropertyPhotosInitialState {
+import { createReducer } from '@reduxjs/toolkit';
+
+export interface IPropertyPhotosInitialState {
   photos: number[];
   primaryImage: number;
 }

@@ -1,12 +1,12 @@
+import { CheckboxOption, TextField } from 'shared/base';
+import { DetailsInput, DetailsRow, ErrorMessage } from '../../base';
 import React, { useMemo } from 'react';
+import { setCurrentFloor, setRenovationType, setTotalFloors, setTotalSpace } from 'data/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CheckboxOption, TextField } from 'shared/base';
 import { StoreType } from 'core/store';
-import { setCurrentFloor, setRenovationType, setTotalFloors, setTotalSpace } from 'data/actions';
-import { renovationTypes } from './data';
-import { DetailsInput, DetailsRow, ErrorMessage } from '../../base';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
+import { renovationTypes } from './data';
 
 export const CommonDetails: React.FC = () => {
   const dispatch = useDispatch();
@@ -17,9 +17,9 @@ export const CommonDetails: React.FC = () => {
     const renovationTypeItems = renovationTypes.map((renovationType) => {
       return (
         <CheckboxOption
-          notSelected={flatDetails.renovationType !== '' && renovationType.id !== flatDetails.renovationType}
-          selected={renovationType.id === flatDetails.renovationType}
-          onClick={() => dispatch(setRenovationType(renovationType.id))}
+          notSelected={flatDetails.renovationType !== '' && renovationType.value !== flatDetails.renovationType}
+          selected={renovationType.value === flatDetails.renovationType}
+          onClick={() => dispatch(setRenovationType(renovationType.value))}
           key={renovationType.id}>
           {renovationType.text}
         </CheckboxOption>

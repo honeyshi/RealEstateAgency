@@ -19,19 +19,25 @@ export { setActiveStep, setPropertyType, setWrongSteps, setValidatedForm } from 
 export {
   setCreateAdDistrict,
   setCreateAdMetro,
+  setCreateAdAddress,
   setCreateAdStreet,
   setCreateAdHouseNumber,
   setCreateAdGeo,
   setRoomsAmount,
-  setRoomsRentAmount,
   setCurrentFloor,
   setTotalFloors,
   setTotalSpace,
   setRenovationType,
 } from './propertyDetailsActions';
 
-export { setFacilities, setFurnitureType, setLivingRules, setDescription } from './propertyFacilitiesActions';
+export { setFacilities, setLivingRules, setDescription } from './propertyFacilitiesActions';
 
 export { setPropertyPhotos, setPropertyPrimaryImage } from './propertyPhotosActions';
 
-export { setRentPayment, setRentPaymentRules, setRentDeposit, setTelephoneNumber } from './ownerContactsActions';
+export {
+  setRentPayment,
+  setRentPaymentRule,
+  setWithDeposit,
+  setRentDeposit,
+  setTelephoneNumber,
+} from './ownerContactsActions';

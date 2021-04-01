@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { YMaps, Map, Placemark } from 'react-yandex-maps';
-import { AddressSuggestions, DaDataAddress, DaDataSuggestion } from 'react-dadata';
-import { useDispatch, useSelector } from 'react-redux';
+import 'react-dadata/dist/react-dadata.css';
 
 import { Column, Flexbox, Row, TextField } from 'shared/base';
-import { Select } from 'shared/composite/select';
+import { Map, Placemark, YMaps } from 'react-yandex-maps';
 import { districts, metroValues } from 'data/values';
-import { StoreType } from 'core/store';
 import {
+  setCreateAdAddress,
   setCreateAdDistrict,
   setCreateAdGeo,
   setCreateAdHouseNumber,
   setCreateAdMetro,
   setCreateAdStreet,
 } from 'data/actions';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { AddressSuggestions } from 'react-dadata';
 import { ErrorMessage } from '../base';
-
-import 'react-dadata/dist/react-dadata.css';
-
+import { Link } from 'react-router-dom';
+import React from 'react';
+import { Select } from 'shared/composite/select';
+import { StoreType } from 'core/store';
 import config from 'core/configFiles/appSettings.json';
 
 const defaultGeo = {
@@ -28,9 +28,10 @@ const defaultGeo = {
 
 export const AddressSection: React.FC = () => {
   const dispatch = useDispatch();
+
   const houseDetails = useSelector((state: StoreType) => state.propertyDetails);
   const validated = useSelector((state: StoreType) => state.newAdvertisment.validated);
-  const [address, setAddress] = useState<DaDataSuggestion<DaDataAddress>>();
+
   return (
     <>
       <Flexbox alignItems="baseline" mt="5" mb="4">
@@ -66,13 +67,13 @@ export const AddressSection: React.FC = () => {
         token={config.addressSuggestToken}
         containerClassName="pt-3 position-relative"
         currentSuggestionClassName="font-weight-light"
-        value={address}
-        defaultQuery="Нижний Новгород"
-        onChange={(address) => {
-          setAddress(address);
-          dispatch(setCreateAdStreet(String(address?.data.street)));
-          dispatch(setCreateAdHouseNumber(String(address?.data.house)));
-          dispatch(setCreateAdGeo(String(`${address?.data.geo_lat}, ${address?.data.geo_lon}`)));
+        value={houseDetails.address}
+        defaultQuery={houseDetails.address == null ? 'Нижний Новгород' : houseDetails.address.value}
+        onChange={(selectedAddress) => {
+          dispatch(setCreateAdAddress(selectedAddress));
+          dispatch(setCreateAdStreet(String(selectedAddress?.data.street)));
+          dispatch(setCreateAdHouseNumber(String(selectedAddress?.data.house)));
+          dispatch(setCreateAdGeo(`${selectedAddress?.data.geo_lat}, ${selectedAddress?.data.geo_lon}`));
         }}
       />
       <ErrorMessage validated={validated} fieldValue={houseDetails.geoLocation}>
@@ -82,8 +83,8 @@ export const AddressSection: React.FC = () => {
         <Map
           state={{
             center: [
-              address == null ? defaultGeo.lat : Number(address?.data.geo_lat),
-              address == null ? defaultGeo.lon : Number(address?.data.geo_lon),
+              houseDetails.address == null ? defaultGeo.lat : Number(houseDetails.address?.data.geo_lat),
+              houseDetails.address == null ? defaultGeo.lon : Number(houseDetails.address?.data.geo_lon),
             ],
             zoom: 12,
             controls: ['zoomControl'],
@@ -91,7 +92,9 @@ export const AddressSection: React.FC = () => {
           modules={['control.ZoomControl']}
           style={{ height: '20rem' }}
           className="mt-3 w-100">
-          <Placemark geometry={[Number(address?.data.geo_lat), Number(address?.data.geo_lon)]} />
+          <Placemark
+            geometry={[Number(houseDetails.address?.data.geo_lat), Number(houseDetails.address?.data.geo_lon)]}
+          />
         </Map>
       </YMaps>
     </>

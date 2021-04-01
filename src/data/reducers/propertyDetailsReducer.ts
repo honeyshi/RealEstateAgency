@@ -1,14 +1,17 @@
-import { createReducer } from '@reduxjs/toolkit';
 import * as Action from 'data/actions';
 
+import { DaDataAddress, DaDataSuggestion } from 'react-dadata';
+
+import { createReducer } from '@reduxjs/toolkit';
+
 export interface IPropertyDetailsInitialState {
+  address: DaDataSuggestion<DaDataAddress> | undefined;
   district: number;
   metro: number;
   street: string;
   houseNumber: string;
   geoLocation: string;
   roomsAmount: string;
-  roomsRentAmount: string;
   currentFloor: string;
   totalFloors: string;
   totalSpace: string;
@@ -16,13 +19,13 @@ export interface IPropertyDetailsInitialState {
 }
 
 const propertyDetailsInitialState: IPropertyDetailsInitialState = {
+  address: undefined,
   district: -1,
   metro: 0,
   street: '',
   houseNumber: '',
   geoLocation: '',
   roomsAmount: '',
-  roomsRentAmount: '',
   currentFloor: '',
   totalFloors: '',
   totalSpace: '',
@@ -42,16 +45,34 @@ export const propertyDetailsReducer = createReducer(propertyDetailsInitialState,
       metro: action.payload,
     };
   },
+  [Action.setCreateAdAddress.type]: (state, action) => {
+    return {
+      ...state,
+      address: action.payload,
+    };
+  },
+  [Action.setCreateAdStreet.type]: (state, action) => {
+    return {
+      ...state,
+      street: action.payload,
+    };
+  },
+  [Action.setCreateAdHouseNumber.type]: (state, action) => {
+    return {
+      ...state,
+      houseNumber: action.payload,
+    };
+  },
+  [Action.setCreateAdGeo.type]: (state, action) => {
+    return {
+      ...state,
+      geoLocation: action.payload,
+    };
+  },
   [Action.setRoomsAmount.type]: (state, action) => {
     return {
       ...state,
       roomsAmount: action.payload,
-    };
-  },
-  [Action.setRoomsRentAmount.type]: (state, action) => {
-    return {
-      ...state,
-      roomsRentAmount: action.payload,
     };
   },
   [Action.setCurrentFloor.type]: (state, action) => {
