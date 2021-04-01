@@ -38,5 +38,6 @@ export const performPublishAdvertismentRequest = async (
     renovation: propertyDetails.renovationType,
   };
   console.log(advertismentConfig);
-  await axios.post(`${config.apiUrl}/apartment`, advertismentConfig);
+  const response = await axios.post(`${config.apiUrl}/apartment`, advertismentConfig);
+  return response.data.status;
 };

@@ -17,6 +17,7 @@ import { PreviousStep } from '../stepsSwitcher';
 import { StoreType } from 'core/store';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
 import { checkNewAdvertismentFields } from 'core/checkNewAdvertismentFields';
+import { history } from 'core/history';
 import { parseError } from 'core/parseError';
 import { performPublishAdvertismentRequest } from 'core/createAdvertisment/publishAdvertisment';
 
@@ -49,16 +50,17 @@ export const OwnerContactsPage: React.FC = () => {
     );
     dispatch(setWrongSteps(wrongSteps));
     try {
-      !(wrongSteps.length > 0) &&
-        (await performPublishAdvertismentRequest(
+      if (!(wrongSteps.length > 0)) {
+        const result = await performPublishAdvertismentRequest(
           state.newAdvertisment.propertyType,
           state.propertyDetails,
           state.propertyFacilities,
           state.propertyPhotos,
           state.ownerContacts
-        ));
+        );
+        result === 'success' && history.push('/successful-advertisment-publishing');
+      }
     } catch (error) {
-      console.log('I CTACH');
       setErrorMessage(parseError(error));
     }
   };
