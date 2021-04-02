@@ -50,6 +50,7 @@ export const OwnerContactsPage: React.FC = () => {
     );
     dispatch(setWrongSteps(wrongSteps));
     try {
+      setErrorMessage('');
       if (!(wrongSteps.length > 0)) {
         const result = await performPublishAdvertismentRequest(
           state.newAdvertisment.propertyType,
@@ -59,7 +60,7 @@ export const OwnerContactsPage: React.FC = () => {
           state.ownerContacts
         );
         result === 'success' && history.push('/successful-advertisment-publishing');
-      }
+      } else setErrorMessage('Вы заполнили не все обязательные поля');
     } catch (error) {
       setErrorMessage(parseError(error));
     }
@@ -119,7 +120,7 @@ export const OwnerContactsPage: React.FC = () => {
           setMethod={setTelephoneNumber}
         />
       </DetailsRow>
-      <Flexbox justifyContent="between">
+      <Flexbox justifyContent="between" mb="5">
         <PreviousStep />
         <Button primary onClick={() => publishAdvertisment()}>
           Опубликовать

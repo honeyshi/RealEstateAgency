@@ -23,13 +23,13 @@ export const checkNewAdvertismentFields = (
 
   switch (propertyType) {
     case '1': // room
-      notIncludedProps = ['roomsAmount'];
+      notIncludedProps = ['address', 'roomsAmount'];
       break;
     case '2': // house
-      notIncludedProps = ['roomsAmount', 'currentFloor'];
+      notIncludedProps = ['address', 'roomsAmount', 'currentFloor'];
       break;
     default:
-      notIncludedProps = [];
+      notIncludedProps = ['address'];
       break;
   }
 

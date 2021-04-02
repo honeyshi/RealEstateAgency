@@ -2,17 +2,13 @@
 
 .property-type-container {
   cursor: pointer;
-  color: $accent-color;
-}
-
-.property-type-container:hover {
-  background-color: $accent-color;
-  color: white;
-}
-
-.property-type-container {
-  &.active {
-    background-color: $accent-color;
+  color: $accent-secondary-color;
+  background-color: white;
+  border-radius: 1rem;
+  flex: 1;
+  &.active,
+  &:hover {
+    background-color: $accent-secondary-color;
     color: white;
   }
 }

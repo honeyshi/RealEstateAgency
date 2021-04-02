@@ -1,9 +1,9 @@
-import React from 'react';
-
 import { Flexbox, TextField } from 'shared/base';
-import { SectionHeader } from '../base';
-import { PreviousStep, NextStep } from '../stepsSwitcher';
+import { NextStep, PreviousStep } from '../stepsSwitcher';
+
 import { FilesUploader } from './filesUploader';
+import React from 'react';
+import { SectionHeader } from '../base';
 
 export const PropertyPhotosPage: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ export const PropertyPhotosPage: React.FC = () => {
         PNG. Максимальный размер файлов 10 Мб.
       </TextField>
       <FilesUploader />
-      <Flexbox justifyContent="between">
+      <Flexbox justifyContent="between" mb="5">
         <PreviousStep />
         <NextStep />
       </Flexbox>

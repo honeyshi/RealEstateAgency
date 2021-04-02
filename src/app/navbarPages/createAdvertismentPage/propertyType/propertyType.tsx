@@ -1,8 +1,9 @@
-import classNames from 'classnames';
-import React from 'react';
-import { Column, Flexbox, TextField } from 'shared/base';
-
 import './propertyType.scss';
+
+import { Flexbox, TextField } from 'shared/base';
+
+import React from 'react';
+import classNames from 'classnames';
 
 interface IPropertyTypeProps {
   active: boolean;
@@ -13,13 +14,11 @@ interface IPropertyTypeProps {
 export const PropertyType: React.FC<IPropertyTypeProps> = ({ active, text, onClick, children }) => {
   const classes = classNames('shadow property-type-container', { active: active });
   return (
-    <Column size={3} rounded="50" py="5" px="1" className={classes}>
-      <Flexbox vertical alignItems="center" onClick={onClick}>
-        {children}
-        <TextField tag="span" pt="4">
-          {text}
-        </TextField>
-      </Flexbox>
-    </Column>
+    <Flexbox vertical alignItems="center" p="2" mx="2" className={classes} onClick={onClick}>
+      {children}
+      <TextField tag="span" pt="1" px="2">
+        {text}
+      </TextField>
+    </Flexbox>
   );
 };

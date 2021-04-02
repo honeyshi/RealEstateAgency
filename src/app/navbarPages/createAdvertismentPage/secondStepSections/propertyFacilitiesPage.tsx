@@ -91,7 +91,7 @@ export const PropertyFacilitiesPage: React.FC = () => {
         onEnterPress={() => void 0}
         mb="4"
       />
-      <Flexbox justifyContent="between">
+      <Flexbox justifyContent="between" mb="5">
         <PreviousStep />
         <NextStep />
       </Flexbox>

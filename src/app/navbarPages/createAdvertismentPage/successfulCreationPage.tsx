@@ -23,7 +23,7 @@ export const SuccessfulCreationPage: React.FC = () => {
                 оно будет опубликовано
               </TextField>
               <Button primary onClick={() => history.push('/')} py="3">
-                Вернуться на сайт
+                Вернуться на главную
               </Button>
             </Flexbox>
           </Flexbox>
