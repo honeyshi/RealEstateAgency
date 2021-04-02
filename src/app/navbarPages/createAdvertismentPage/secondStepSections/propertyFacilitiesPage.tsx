@@ -28,10 +28,11 @@ export const PropertyFacilitiesPage: React.FC = () => {
                 ? propertyFacilitiesItems.splice(propertyFacilitiesItems.indexOf(facilityOption.value), 1)
                 : propertyFacilitiesItems.push(facilityOption.value);
               dispatch(setFacilities(propertyFacilitiesItems));
-            }}>
+            }}
+            w="100">
             <Flexbox alignItems="center">
               <RemixIcon name={facilityOption.iconName} size="lg" />
-              <TextField left tag="span" ml="3">
+              <TextField truncate titleName={facilityOption.text} tag="span" pl="4">
                 {facilityOption.text}
               </TextField>
             </Flexbox>
