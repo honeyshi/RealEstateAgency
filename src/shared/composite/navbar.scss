@@ -1,16 +1,24 @@
 @import '~bootstrap/scss/_functions';
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/mixins/_breakpoints';
+@import 'shared/base/utils/styleVariables';
 
 .navbar {
   flex-direction: column;
   .navbar-brand {
     font-family: 'Pacifico', cursive;
   }
-}
-
-.collapse:not(.show) {
-  display: none !important;
+  &.collapse:not(.show) {
+    display: none !important;
+  }
+  .navbar-nav {
+    .nav-link {
+      color: $light-color;
+      &:hover {
+        color: $accent-color-hover;
+      }
+    }
+  }
 }
 
 @include media-breakpoint-down(lg) {

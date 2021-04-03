@@ -1,12 +1,13 @@
-import classNames from 'classnames';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import './navbar.scss';
+
 import { Button, Container, Flexbox, Icon, RemixIcon, TextField } from 'shared/base';
+import React, { useState } from 'react';
+
+import { Link } from 'react-router-dom';
 import { NavbarLeft } from 'shared/composite/navbarLeft';
 import { NavbarRight } from 'shared/composite/navbarRight';
 import { NavbarSmall } from 'shared/composite/navbarSmall';
-
-import './navbar.scss';
+import classNames from 'classnames';
 
 export const Navbar: React.FC = () => {
   const [show, setShow] = useState<boolean>(false);
@@ -14,7 +15,7 @@ export const Navbar: React.FC = () => {
   const smallNavbarClasses = classNames('navbar-small collapse', { show: show });
   const buttonClasses = classNames('navbar-toggler', { collapsed: !show });
   return (
-    <nav className="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+    <nav className="navbar navbar-expand-lg fixed-top bg-white">
       <Container nonFluid>
         <Link to="/" className="navbar-brand text-accent">
           <Flexbox>
