@@ -4,10 +4,16 @@
   overflow-y: hidden;
   .left-container {
     height: 100vh !important;
-    border-top-right-radius: 3.125rem !important;
-    border-bottom-right-radius: 3.125rem !important;
+    border-top-right-radius: $border-radius-50 !important;
+    border-bottom-right-radius: $border-radius-50 !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     .navbar-brand {
-      font-family: 'Pacifico', cursive;
       font-size: 1.75rem;
     }
   }

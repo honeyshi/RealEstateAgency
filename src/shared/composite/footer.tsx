@@ -1,17 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Container, ExternalLink, Flexbox, Icon, TextField } from 'shared/base';
-
 import './footer.scss';
+
+import { Container, ExternalLink, Flexbox, Icon, RemixIcon, TextField } from 'shared/base';
+
+import { Link } from 'react-router-dom';
+import React from 'react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="footer bg-light">
+    <footer className="footer shadow">
       <Container nonFluid pt="5">
         <Flexbox justifyContent="between" directionSize="md" pb="4" className="border-bottom flex-column">
           <Flexbox vertical>
-            <TextField tag="h3">Название</TextField>
-            <TextField mb="0">
+            <Link to="/" className="navbar-brand text-accent">
+              <Flexbox>
+                <RemixIcon name="home-heart" />
+                <TextField tag="span" ml="2">
+                  dwelly.
+                </TextField>
+              </Flexbox>
+            </Link>
+            <TextField mb="0" mt="3">
               Сервис для аренды
               <br /> недвижимости напрямую от
               <br /> собственников
@@ -21,16 +29,16 @@ export const Footer: React.FC = () => {
             <TextField tag="h6" uppercase>
               Информация
             </TextField>
-            <Link to="/rates" className="text-black-50">
+            <Link to="/rates" className="footer-link">
               Тарифы
             </Link>
-            <Link to="/about" className="text-black-50">
+            <Link to="/about" className="footer-link">
               О компании
             </Link>
-            <Link to="/reviews" className="text-black-50">
+            <Link to="/reviews" className="footer-link">
               Отзывы
             </Link>
-            <Link to="/faq" className="text-black-50">
+            <Link to="/faq" className="footer-link">
               FAQ
             </Link>
           </Flexbox>
@@ -38,14 +46,14 @@ export const Footer: React.FC = () => {
             <TextField tag="h6" uppercase>
               Недвижимость
             </TextField>
-            <Link to="/flats" className="text-black-50">
+            <Link to="/flats" className="footer-link">
               Объявления
             </Link>
-            <Link to="/flats-map" className="text-black-50">
+            <Link to="/flats-map" className="footer-link">
               На карте
             </Link>
-            <Link to="/search-roommates" className="text-black-50">
-              Поиск сожителей
+            <Link to="/search-roommates" className="footer-link">
+              Поиск соарендаторов
             </Link>
           </Flexbox>
           <Flexbox vertical>
@@ -54,24 +62,24 @@ export const Footer: React.FC = () => {
             </TextField>
             <TextField mb="0">+7 (831) 212-34-56</TextField>
             <TextField mb="0">example@email.com</TextField>
-            <Link to="/contact" className="text-black-50">
+            <Link to="/contact" className="footer-link">
               Напишите нам
             </Link>
           </Flexbox>
         </Flexbox>
         <Flexbox justifyContent="between" directionSize="md" py="4" className="flex-column">
           <TextField light small center>
-            © 2020 All Rights Reserved
+            © 2020-2021 All Rights Reserved
           </TextField>
           <div className="social-media">
-            <ExternalLink to="https://www.instagram.com/" text="black-50">
-              <Icon name="instagram" prefix="fab" />
+            <ExternalLink to="https://www.instagram.com/" className="footer-link">
+              <RemixIcon name="instagram" />
             </ExternalLink>
-            <ExternalLink to="https://vk.com/" text="black-50">
+            <ExternalLink to="https://vk.com/" className="footer-link">
               <Icon name="vk" prefix="fab" />
             </ExternalLink>
-            <ExternalLink to="https://web.telegram.org/" text="black-50">
-              <Icon name="telegram" prefix="fab" />
+            <ExternalLink to="https://web.telegram.org/" className="footer-link">
+              <RemixIcon name="telegram" />
             </ExternalLink>
           </div>
           <Link to="/user-agreement" className="font-weight-light small text-dark text-center">
