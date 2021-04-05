@@ -7,6 +7,7 @@ import { Route, Switch } from 'react-router-dom';
 import { AdvertismentListPage } from './navbarPages/advertismentsListPage';
 import { ContactUs } from './infoPages/contactUs';
 import { CreateAdvertismentPage } from './navbarPages/createAdvertismentPage';
+import { PricingPage } from './navbarPages/pricingPage';
 import React from 'react';
 import { StartPage } from './navbarPages/startPage';
 import { SuccessfulCreationPage } from './navbarPages/createAdvertismentPage';
@@ -24,6 +25,7 @@ export const App: React.FC = () => {
       <Route exact path="/new-advertisment" component={CreateAdvertismentPage} />
       <Route exact path="/flats" component={AdvertismentListPage} />
       <Route exact path="/successful-advertisment-publishing" component={SuccessfulCreationPage} />
+      <Route exact path="/pricing" component={PricingPage} />
       <Route exact path="/" component={StartPage} />
     </Switch>
   );

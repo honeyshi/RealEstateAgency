@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
             <TextField tag="h6" uppercase>
               Информация
             </TextField>
-            <Link to="/rates" className="footer-link">
+            <Link to="/pricing" className="footer-link">
               Тарифы
             </Link>
             <Link to="/about" className="footer-link">
