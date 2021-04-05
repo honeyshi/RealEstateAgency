@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import * as yup from 'yup';
 
-import { Button, Flexbox, Input, TextField } from 'shared/base';
-import { parseError } from 'core/parseError';
+import { Button, Flexbox, Input } from 'shared/base';
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
+import { FormPage } from 'shared/layout/formPage';
+import { parseError } from 'core/parseError';
 import { checkInvalidInput } from 'core/checkInvalidInput';
+import image from 'icons/resetpassword.svg';
 
 const schema = yup.object().shape({
   password: yup
@@ -38,14 +40,8 @@ export const ResetPassword: React.FC = () => {
   };
 
   return (
-    <Flexbox justifyContent="center" alignItems="center" vertical vh>
-      <TextField tag="h2" mb="3">
-        Смена пароля
-      </TextField>
-      <TextField center mb="3" px="2">
-        Установите новый пароль для своего аккаунта.
-      </TextField>
-      <Flexbox vertical className="registration-form">
+    <FormPage header="Смена пароля" helperText="Установите новый пароль для своего аккаунта." image={image}>
+      <Flexbox vertical w="75">
         <Input
           borderBottom
           formSpaces
@@ -67,10 +63,10 @@ export const ResetPassword: React.FC = () => {
           onEnterPress={resetPassword}
         />
         <ErrorMessagesView messages={errorMessage} />
-        <Button light onClick={resetPassword} py="3">
+        <Button primary onClick={resetPassword} py="3">
           Изменить пароль
         </Button>
       </Flexbox>
-    </Flexbox>
+    </FormPage>
   );
 };

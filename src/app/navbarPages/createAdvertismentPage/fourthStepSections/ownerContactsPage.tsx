@@ -1,49 +1,78 @@
-import React, { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { StoreType } from 'core/store';
 import { Button, CheckboxOption, Flexbox } from 'shared/base';
 import { DetailsInput, DetailsRow, ErrorMessage, SectionHeader } from '../base';
+import React, { useMemo, useState } from 'react';
 import {
   setRentDeposit,
   setRentPayment,
-  setRentPaymentRules,
+  setRentPaymentRule,
   setTelephoneNumber,
   setValidatedForm,
+  setWithDeposit,
   setWrongSteps,
 } from 'data/actions';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
 import { PreviousStep } from '../stepsSwitcher';
-import { checkNewAdvertismentFields } from 'core/checkNewAdvertismentFields';
+import { StoreType } from 'core/store';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
+import { checkNewAdvertismentFields } from 'core/checkNewAdvertismentFields';
+import { history } from 'core/history';
+import { parseError } from 'core/parseError';
+import { performPublishAdvertismentRequest } from 'core/createAdvertisment/publishAdvertisment';
 
 export const paymentRules = [
-  { id: 'new-ad-with-deposit', opposite: 'Без залога', text: 'Есть залог' },
-  { id: 'new-ad-without-deposit', opposite: 'Есть залог', text: 'Без залога' },
-  { id: 'new-ad-only-rent', opposite: 'Оплата коммунальных услуг', text: 'Только стоимость аренды' },
-  { id: 'new-ad-communal-payments', opposite: 'Только стоимость аренды', text: 'Оплата коммунальных услуг' },
+  { id: 'new-ad-only-rent', text: 'Только стоимость аренды', value: '0' },
+  { id: 'new-ad-counters', text: 'Оплата счетчиков', value: '1' },
+  {
+    id: 'new-ad-communal-payments',
+    text: 'Оплата коммунальных услуг',
+    value: '2',
+  },
 ];
 
 export const OwnerContactsPage: React.FC = () => {
   const dispatch = useDispatch();
+
   const ownerContacts = useSelector((state: StoreType) => state.ownerContacts);
   const state = useSelector((state: StoreType) => state);
+
+  const [errorMessage, setErrorMessage] = useState<string | string[]>('');
+
+  const publishAdvertisment = async () => {
+    dispatch(setValidatedForm(true));
+    const wrongSteps = checkNewAdvertismentFields(
+      state.newAdvertisment.propertyType,
+      state.propertyDetails,
+      state.propertyFacilities,
+      state.propertyPhotos.photos,
+      state.ownerContacts
+    );
+    dispatch(setWrongSteps(wrongSteps));
+    try {
+      setErrorMessage('');
+      if (!(wrongSteps.length > 0)) {
+        const result = await performPublishAdvertismentRequest(
+          state.newAdvertisment.propertyType,
+          state.propertyDetails,
+          state.propertyFacilities,
+          state.propertyPhotos,
+          state.ownerContacts
+        );
+        result === 'success' && history.push('/successful-advertisment-publishing');
+      } else setErrorMessage('Вы заполнили не все обязательные поля');
+    } catch (error) {
+      setErrorMessage(parseError(error));
+    }
+  };
 
   const paymentRuleComponents = useMemo(() => {
     const paymentRuleItems = paymentRules.map((paymentRule) => {
       return (
         <CheckboxOption
-          selected={ownerContacts.rentPaymentRules.includes(paymentRule.text)}
-          notSelected={ownerContacts.rentPaymentRules.includes(paymentRule.opposite)}
-          onClick={() => {
-            const rulesItems = [...ownerContacts.rentPaymentRules];
-            if (rulesItems.includes(paymentRule.text)) rulesItems.splice(rulesItems.indexOf(paymentRule.text), 1);
-            else {
-              rulesItems.push(paymentRule.text);
-              rulesItems.indexOf(paymentRule.opposite) > -1 &&
-                rulesItems.splice(rulesItems.indexOf(paymentRule.opposite), 1);
-            }
-            dispatch(setRentPaymentRules(rulesItems));
-          }}
+          selected={ownerContacts.rentPaymentRule === paymentRule.value}
+          notSelected={ownerContacts.rentPaymentRule !== '' && ownerContacts.rentPaymentRule !== paymentRule.value}
+          onClick={() => dispatch(setRentPaymentRule(paymentRule.value))}
           key={paymentRule.id}
           mb="4">
           {paymentRule.text}
@@ -51,7 +80,7 @@ export const OwnerContactsPage: React.FC = () => {
       );
     });
     return paymentRuleItems;
-  }, [dispatch, ownerContacts.rentPaymentRules]);
+  }, [dispatch, ownerContacts.rentPaymentRule]);
   return (
     <>
       <SectionHeader>Стоимость аренды</SectionHeader>
@@ -62,11 +91,19 @@ export const OwnerContactsPage: React.FC = () => {
         setMethod={setRentPayment}
       />
       <SectionHeader>Особенности оплаты</SectionHeader>
-      <Flexbox justifyContent="between">{paymentRuleComponents}</Flexbox>
-      <ErrorMessage validated={state.newAdvertisment.validated} fieldValue={ownerContacts.rentPaymentRules}>
+      <Flexbox justifyContent="between">
+        <CheckboxOption
+          selected={ownerContacts.withDeposit}
+          onClick={() => dispatch(setWithDeposit(!ownerContacts.withDeposit))}
+          mb="4">
+          Есть залог
+        </CheckboxOption>
+        {paymentRuleComponents}
+      </Flexbox>
+      <ErrorMessage validated={state.newAdvertisment.validated} fieldValue={ownerContacts.rentPaymentRule}>
         Выберите условия проживания
       </ErrorMessage>
-      {ownerContacts.rentPaymentRules.includes('Есть залог') && (
+      {ownerContacts.withDeposit && (
         <DetailsInput
           placeholder="Сумма залога"
           invalid={checkAdvertismentField(state.newAdvertisment.validated, ownerContacts.rentDeposit)}
@@ -83,27 +120,14 @@ export const OwnerContactsPage: React.FC = () => {
           setMethod={setTelephoneNumber}
         />
       </DetailsRow>
-      <Flexbox justifyContent="between">
+      <Flexbox justifyContent="between" mb="5">
         <PreviousStep />
-        <Button
-          fontLight
-          text="white"
-          bg="accent"
-          onClick={() => {
-            dispatch(setValidatedForm(true));
-            dispatch(
-              setWrongSteps(
-                checkNewAdvertismentFields(
-                  state.newAdvertisment.propertyType,
-                  state.propertyDetails,
-                  state.propertyFacilities,
-                  state.ownerContacts
-                )
-              )
-            );
-          }}>
+        <Button primary onClick={() => publishAdvertisment()}>
           Опубликовать
         </Button>
+      </Flexbox>
+      <Flexbox justifyContent="end" mt="4">
+        <ErrorMessagesView messages={errorMessage} />
       </Flexbox>
     </>
   );

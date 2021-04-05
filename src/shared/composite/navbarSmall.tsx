@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
 import { Block, Icon, NavbarContainer, NavbarItem } from 'shared/base';
+import React, { useMemo } from 'react';
 
 const navbarItems = [
   { text: 'Объявления', to: '/advert', key: 'navbar-advert' },
   { text: 'Квартиры на карте', to: '/flats-map', key: 'navbar-flats-map' },
-  { text: 'Тарифы', to: '/rates', key: 'navbar-rates' },
+  { text: 'Тарифы', to: '/pricing', key: 'navbar-pricing' },
   { text: 'Поиск сожителей', to: '/search-roommates', key: 'navbar-search-roommates' },
 ];
 

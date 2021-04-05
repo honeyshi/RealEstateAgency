@@ -1,11 +1,24 @@
 @import '~bootstrap/scss/_functions';
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/mixins/_breakpoints';
+@import 'shared/base/utils/styleVariables';
 
 .footer {
   margin-top: auto;
   bottom: 0;
   width: 100%;
+  background-color: $light-color-secondary;
+  border-top-right-radius: $border-radius-50;
+  border-top-left-radius: $border-radius-50;
+  .footer-link {
+    color: $light-color;
+    &:hover {
+      color: $accent-color-hover;
+    }
+  }
+  .navbar-brand {
+    font-size: 1.75rem;
+  }
 }
 
 @include media-breakpoint-up(md) {

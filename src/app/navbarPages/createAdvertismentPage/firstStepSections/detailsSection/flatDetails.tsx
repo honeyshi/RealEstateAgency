@@ -1,12 +1,12 @@
+import { DetailsRow, ErrorMessage } from '../../base';
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { StoreType } from 'core/store';
 import { CheckboxOption } from 'shared/base';
 import { CommonDetails } from '../detailsSection';
-import { DetailsRow, ErrorMessage } from '../../base';
+import { StoreType } from 'core/store';
+import { roomsAmount } from './data';
 import { setRoomsAmount } from 'data/actions';
-import { roomsAmountFlat } from './data';
 
 export const FlatDetails: React.FC = () => {
   const dispatch = useDispatch();
@@ -14,12 +14,12 @@ export const FlatDetails: React.FC = () => {
   const validated = useSelector((state: StoreType) => state.newAdvertisment.validated);
 
   const checkboxItemComponents = useMemo(() => {
-    const roomItems = roomsAmountFlat.map((room) => {
+    const roomItems = roomsAmount.map((room) => {
       return (
         <CheckboxOption
           circle={room.circle}
-          selected={room.text === flatDetails.roomsAmount}
-          onClick={() => dispatch(setRoomsAmount(room.text))}
+          selected={room.value === flatDetails.roomsAmount}
+          onClick={() => dispatch(setRoomsAmount(room.value))}
           key={room.id}>
           {room.text}
         </CheckboxOption>

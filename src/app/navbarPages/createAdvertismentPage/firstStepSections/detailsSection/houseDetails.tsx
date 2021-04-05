@@ -1,11 +1,11 @@
+import { DetailsInput, DetailsRow, ErrorMessage } from 'app/navbarPages/createAdvertismentPage/base';
 import React, { useMemo } from 'react';
+import { renovationTypes, roomsAmount } from './data';
+import { setRenovationType, setRoomsAmount, setTotalFloors, setTotalSpace } from 'data/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { StoreType } from 'core/store';
-import { setCurrentFloor, setHouseType, setRenovationType, setTotalSpace } from 'data/actions';
-import { DetailsInput, DetailsRow, ErrorMessage } from '../../base';
-import { houseTypes, renovationTypes } from './data';
 import { CheckboxOption } from 'shared/base';
+import { StoreType } from 'core/store';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
 
 export const HouseDetails: React.FC = () => {
@@ -13,28 +13,28 @@ export const HouseDetails: React.FC = () => {
   const houseDetails = useSelector((state: StoreType) => state.propertyDetails);
   const validated = useSelector((state: StoreType) => state.newAdvertisment.validated);
 
-  const houseTypeItemComponents = useMemo(() => {
-    const houseTypeItems = houseTypes.map((houseType) => {
+  const checkboxItemComponents = useMemo(() => {
+    const roomItems = roomsAmount.slice(0, -1).map((room) => {
       return (
         <CheckboxOption
-          notSelected={houseDetails.houseType !== '' && houseType.id !== houseDetails.houseType}
-          selected={houseType.id === houseDetails.houseType}
-          onClick={() => dispatch(setHouseType(houseType.id))}
-          key={houseType.id}>
-          {houseType.text}
+          circle={room.circle}
+          selected={room.value === houseDetails.roomsAmount}
+          onClick={() => dispatch(setRoomsAmount(room.value))}
+          key={room.id}>
+          {room.text}
         </CheckboxOption>
       );
     });
-    return houseTypeItems;
-  }, [dispatch, houseDetails.houseType]);
+    return roomItems;
+  }, [dispatch, houseDetails.roomsAmount]);
 
   const renovationTypeItemComponents = useMemo(() => {
     const renovationTypeItems = renovationTypes.map((renovationType) => {
       return (
         <CheckboxOption
-          notSelected={houseDetails.renovationType !== '' && renovationType.id !== houseDetails.renovationType}
-          selected={renovationType.id === houseDetails.renovationType}
-          onClick={() => dispatch(setRenovationType(renovationType.id))}
+          notSelected={houseDetails.renovationType !== '' && renovationType.value !== houseDetails.renovationType}
+          selected={renovationType.value === houseDetails.renovationType}
+          onClick={() => dispatch(setRenovationType(renovationType.value))}
           key={renovationType.id}>
           {renovationType.text}
         </CheckboxOption>
@@ -45,11 +45,12 @@ export const HouseDetails: React.FC = () => {
 
   return (
     <>
+      <DetailsRow text="Количество комнат">{checkboxItemComponents}</DetailsRow>
       <DetailsRow small text="Этажность">
         <DetailsInput
-          value={houseDetails.currentFloor}
-          setMethod={setCurrentFloor}
-          invalid={checkAdvertismentField(validated, houseDetails.currentFloor)}
+          value={houseDetails.totalFloors}
+          setMethod={setTotalFloors}
+          invalid={checkAdvertismentField(validated, houseDetails.totalFloors)}
         />
       </DetailsRow>
       <DetailsRow small text="Площадь">
@@ -60,10 +61,6 @@ export const HouseDetails: React.FC = () => {
           invalid={checkAdvertismentField(validated, houseDetails.totalSpace)}
         />
       </DetailsRow>
-      <DetailsRow text="Тип дома">{houseTypeItemComponents}</DetailsRow>
-      <ErrorMessage column validated={validated} fieldValue={houseDetails.houseType}>
-        Выберите тип дома
-      </ErrorMessage>
       <DetailsRow text="Ремонт">{renovationTypeItemComponents}</DetailsRow>
       <ErrorMessage column validated={validated} fieldValue={houseDetails.renovationType}>
         Выберите тип ремонта

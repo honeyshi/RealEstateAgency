@@ -1,4 +1,5 @@
 export { advertismentFilterReducer } from './advertismentFilterReducer';
+export { authorizationReducer } from './authorizationReducer';
 export { newAdvertismentReducer } from './newAdvertismentReducer';
 export { ownerContactsReducer } from './ownerContactsReducer';
 export { propertyDetailsReducer } from './propertyDetailsReducer';

@@ -1,14 +1,16 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-
-import { ForgetPassword, Login, ResetPassword, Signup, SuccessfulSignup } from './pages';
-import { ContactUs } from './infoPages/contactUs';
-import { StartPage } from './navbarPages/startPage';
-import { CreateAdvertismentPage } from './navbarPages/createAdvertismentPage';
-import { AdvertismentListPage } from './navbarPages/advertismentsListPage';
-
 import './pagesStyle.scss';
 import './tooltip.scss';
+
+import { ForgetPassword, Login, ResetPassword, Signup, SuccessfulSignup } from './pages';
+import { Route, Switch } from 'react-router-dom';
+
+import { AdvertismentListPage } from './navbarPages/advertismentsListPage';
+import { ContactUs } from './infoPages/contactUs';
+import { CreateAdvertismentPage } from './navbarPages/createAdvertismentPage';
+import { PricingPage } from './navbarPages/pricingPage';
+import React from 'react';
+import { StartPage } from './navbarPages/startPage';
+import { SuccessfulCreationPage } from './navbarPages/createAdvertismentPage';
 
 export const App: React.FC = () => {
   return (
@@ -22,6 +24,8 @@ export const App: React.FC = () => {
       <Route exact path="/contact" component={ContactUs} />
       <Route exact path="/new-advertisment" component={CreateAdvertismentPage} />
       <Route exact path="/flats" component={AdvertismentListPage} />
+      <Route exact path="/successful-advertisment-publishing" component={SuccessfulCreationPage} />
+      <Route exact path="/pricing" component={PricingPage} />
       <Route exact path="/" component={StartPage} />
     </Switch>
   );

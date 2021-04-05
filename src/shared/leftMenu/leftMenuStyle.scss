@@ -1,0 +1,22 @@
+@import 'shared/base/utils/styleVariables';
+
+.left-menu-container {
+  padding: 0;
+  .left-menu-item {
+    padding: 1rem 0rem;
+    list-style-type: none;
+    cursor: pointer;
+    color: $light-color;
+    margin-right: 3rem;
+    margin-top: 1rem;
+    &.active {
+      background-color: $accent-color;
+      color: white;
+      border-top-right-radius: 3.125rem !important;
+      border-bottom-right-radius: 3.125rem !important;
+    }
+    &:hover:not(.active) {
+      color: $accent-color;
+    }
+  }
+}

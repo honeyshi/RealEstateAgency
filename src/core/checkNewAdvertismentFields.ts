@@ -16,37 +16,35 @@ export const checkNewAdvertismentFields = (
   propertyType: string,
   propertyDetails: IPropertyDetailsInitialState,
   propertyFacilities: IPropertyFacilitiesInitialState,
+  propertyPhotos: number[],
   ownerContacts: IOwnerContactsInitialState
 ) => {
   let notIncludedProps: string[] = [];
+
   switch (propertyType) {
-    case 'flat-type':
-      notIncludedProps = ['roomsRentAmount', 'houseType', 'showerType'];
+    case '1': // room
+      notIncludedProps = ['address', 'roomsAmount'];
       break;
-    case 'room-type':
-      notIncludedProps = ['houseType', 'showerType'];
+    case '2': // house
+      notIncludedProps = ['address', 'roomsAmount', 'currentFloor'];
       break;
-    case 'house-type':
-      notIncludedProps = [
-        'roomsAmount',
-        'roomsRentAmount',
-        'totalFloors',
-        'livingSpace',
-        'kitchenSpace',
-        'bathroomType',
-      ];
+    default:
+      notIncludedProps = ['address'];
       break;
   }
 
   const wrongSteps: number[] = [];
 
-  !checkSpecificFieldsAreFilled(propertyDetails, notIncludedProps) && wrongSteps.push(1);
+  (!checkSpecificFieldsAreFilled(propertyDetails, notIncludedProps) || propertyDetails.district === -1) &&
+    wrongSteps.push(1);
 
   !checkAllFieldsAreFilled(propertyFacilities) && wrongSteps.push(2);
 
-  ownerContacts.rentPaymentRules.includes('Есть залог')
+  propertyPhotos.length === 0 && wrongSteps.push(3);
+
+  ownerContacts.withDeposit
     ? !checkAllFieldsAreFilled(ownerContacts) && wrongSteps.push(4)
     : !checkSpecificFieldsAreFilled(ownerContacts, ['rentDeposit']) && wrongSteps.push(4);
-    
+
   return wrongSteps;
 };

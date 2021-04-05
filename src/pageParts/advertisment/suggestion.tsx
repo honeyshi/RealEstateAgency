@@ -1,6 +1,7 @@
-import React from 'react';
+import { Block, Column, Flexbox, RemixIcon, TextField } from 'shared/base';
+
 import { Link } from 'react-router-dom';
-import { Block, Column, Flexbox, Icon, TextField } from 'shared/base';
+import React from 'react';
 
 interface ISuggestionProps {
   address: string;
@@ -22,8 +23,13 @@ export const Suggestion: React.FC<ISuggestionProps> = ({ address, header, price,
         </TextField>
         <Flexbox justifyContent="between">
           <TextField bold>{price}</TextField>
-          <Link to={link} className="text-info">
-            Подробнее <Icon name="arrow-right" />
+          <Link to={link} className="text-accent">
+            <Flexbox>
+              <TextField tag="span" mr="2">
+                Подробнее
+              </TextField>
+              <RemixIcon name="arrow-right" mr="2" />
+            </Flexbox>
           </Link>
         </Flexbox>
       </Flexbox>

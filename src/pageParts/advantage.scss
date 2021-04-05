@@ -1,0 +1,12 @@
+@import 'shared/base/utils/styleVariables';
+
+.advantage-icon-container {
+  padding: 1.875rem;
+  height: 7rem;
+  width: 7rem;
+  background-color: rgba(192, 194, 209, 0.2);
+  .advantage-icon {
+    color: $accent-color;
+    font-size: xx-large;
+  }
+}

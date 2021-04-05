@@ -194,7 +194,7 @@ export const FiltersContainer: React.FC = () => {
         Сбросить фильтры
         <RemixIcon name="refresh" />{' '}
       </Flexbox>
-      <Button fontLight text="white" bg="accent" w="100">
+      <Button primary w="100">
         Поиск
       </Button>
     </Column>

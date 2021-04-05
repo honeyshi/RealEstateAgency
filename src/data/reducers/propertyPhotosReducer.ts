@@ -1,19 +1,28 @@
-import { createReducer } from '@reduxjs/toolkit';
-import { cleanNewAdvertisment, setVideoLink } from 'data/actions';
+import { cleanNewAdvertisment, setPropertyPhotos, setPropertyPrimaryImage } from 'data/actions';
 
-interface IPropertyPhotosInitialState {
-  videoLink: string;
+import { createReducer } from '@reduxjs/toolkit';
+
+export interface IPropertyPhotosInitialState {
+  photos: number[];
+  primaryImage: number;
 }
 
 const propertyPhotosInitialState: IPropertyPhotosInitialState = {
-  videoLink: '',
+  photos: [],
+  primaryImage: -1,
 };
 
 export const propertyPhotosReducer = createReducer(propertyPhotosInitialState, {
-  [setVideoLink.type]: (state, action) => {
+  [setPropertyPhotos.type]: (state, action) => {
     return {
       ...state,
-      videoLink: action.payload,
+      photos: action.payload,
+    };
+  },
+  [setPropertyPrimaryImage.type]: (state, action) => {
+    return {
+      ...state,
+      primaryImage: action.payload,
     };
   },
   [cleanNewAdvertisment.type]: () => {

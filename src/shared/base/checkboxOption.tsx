@@ -1,10 +1,12 @@
-import classNames from 'classnames';
-import React from 'react';
-import { propsToSpace, SpaceProps } from './utils/spaceUtil';
-
 import './checkboxOption.scss';
 
-interface ICheckboxOptionProps extends SpaceProps {
+import { SizeProps, propsToSize } from './utils/sizeUtil';
+import { SpaceProps, propsToSpace } from './utils/spaceUtil';
+
+import React from 'react';
+import classNames from 'classnames';
+
+interface ICheckboxOptionProps extends SpaceProps, SizeProps {
   selected: boolean;
   notSelected?: boolean;
   big?: boolean;
@@ -32,7 +34,8 @@ export const CheckboxOption: React.FC<ICheckboxOptionProps> = ({
     { 'not-selected': notSelected },
     { selected: selected },
     { disabled: disabled },
-    propsToSpace(other)
+    propsToSpace(other),
+    propsToSize(other)
   );
   return (
     <button disabled={disabled} className={classes} onClick={onClick}>

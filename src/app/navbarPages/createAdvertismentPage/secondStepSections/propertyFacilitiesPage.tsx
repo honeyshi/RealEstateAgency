@@ -1,14 +1,14 @@
+import { CheckboxOption, Column, Flexbox, Row, TextField, Textarea } from 'shared/base';
+import { ErrorMessage, SectionHeader } from '../base';
+import { NextStep, PreviousStep } from '../stepsSwitcher';
 import React, { useMemo } from 'react';
+import { facilityOptions, livingRules } from './data';
+import { setDescription, setFacilities, setLivingRules } from 'data/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { StoreType } from 'core/store';
-import { CheckboxOption, Column, Flexbox, Row, Textarea, TextField } from 'shared/base';
-import { ErrorMessage, SectionHeader } from '../base';
-import { setDescription, setFacilities, setFurnitureType, setLivingRules } from 'data/actions';
-import { facilityOptions, furnitureTypes, livingRules } from './data';
-import { PreviousStep, NextStep } from '../stepsSwitcher';
-import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
 import { RemixIcon } from 'shared/base/remixIcon';
+import { StoreType } from 'core/store';
+import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
 
 export const PropertyFacilitiesPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,17 +21,18 @@ export const PropertyFacilitiesPage: React.FC = () => {
         <Column size={3} key={facilityOption.id} mb="4">
           <CheckboxOption
             big
-            selected={propertyFacilities.facilities.includes(facilityOption.text)}
+            selected={propertyFacilities.facilities.includes(facilityOption.value)}
             onClick={() => {
               const propertyFacilitiesItems = [...propertyFacilities.facilities];
-              propertyFacilitiesItems.includes(facilityOption.text)
-                ? propertyFacilitiesItems.splice(propertyFacilitiesItems.indexOf(facilityOption.text), 1)
-                : propertyFacilitiesItems.push(facilityOption.text);
+              propertyFacilitiesItems.includes(facilityOption.value)
+                ? propertyFacilitiesItems.splice(propertyFacilitiesItems.indexOf(facilityOption.value), 1)
+                : propertyFacilitiesItems.push(facilityOption.value);
               dispatch(setFacilities(propertyFacilitiesItems));
-            }}>
+            }}
+            w="100">
             <Flexbox alignItems="center">
               <RemixIcon name={facilityOption.iconName} size="lg" />
-              <TextField left tag="span" ml="3">
+              <TextField truncate titleName={facilityOption.text} tag="span" pl="4">
                 {facilityOption.text}
               </TextField>
             </Flexbox>
@@ -41,22 +42,6 @@ export const PropertyFacilitiesPage: React.FC = () => {
     });
     return facilityItems;
   }, [dispatch, propertyFacilities.facilities]);
-
-  const furnitureTypeComponents = useMemo(() => {
-    const furnitureItems = furnitureTypes.map((furnitureType) => {
-      return (
-        <CheckboxOption
-          selected={propertyFacilities.furnitureType === furnitureType.text}
-          onClick={() => dispatch(setFurnitureType(furnitureType.text))}
-          key={furnitureType.id}
-          mr="4"
-          mb="4">
-          {furnitureType.text}
-        </CheckboxOption>
-      );
-    });
-    return furnitureItems;
-  }, [dispatch, propertyFacilities.furnitureType]);
 
   const livingRuleComponents = useMemo(() => {
     const livingRuleItems = livingRules.map((livingRule) => {
@@ -90,11 +75,6 @@ export const PropertyFacilitiesPage: React.FC = () => {
       <ErrorMessage validated={validated} fieldValue={propertyFacilities.facilities}>
         Выберите удобства
       </ErrorMessage>
-      <SectionHeader>Меблировка</SectionHeader>
-      <Flexbox>{furnitureTypeComponents}</Flexbox>
-      <ErrorMessage validated={validated} fieldValue={propertyFacilities.furnitureType}>
-        Выберите меблировку
-      </ErrorMessage>
       <SectionHeader>Условия проживания</SectionHeader>
       <Flexbox wrap justifyContent="between">
         {livingRuleComponents}
@@ -112,7 +92,7 @@ export const PropertyFacilitiesPage: React.FC = () => {
         onEnterPress={() => void 0}
         mb="4"
       />
-      <Flexbox justifyContent="between">
+      <Flexbox justifyContent="between" mb="5">
         <PreviousStep />
         <NextStep />
       </Flexbox>

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import * as yup from 'yup';
 
-import { Button, Flexbox, Input, TextField } from 'shared/base';
+import { Button, Flexbox, Input } from 'shared/base';
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
 import { checkInvalidInput } from 'core/checkInvalidInput';
 import { parseError } from 'core/parseError';
+import { FormPage } from 'shared/layout/formPage';
+import image from 'icons/forgotpassword.svg';
 
 const schema = yup
   .string()
@@ -24,14 +26,8 @@ export const ForgetPassword: React.FC = () => {
     }
   };
   return (
-    <Flexbox justifyContent="center" alignItems="center" vertical vh>
-      <TextField tag="h2" mb="3">
-        Смена пароля
-      </TextField>
-      <TextField center mb="3" px="2">
-        Введите email для отправки нового пароля.
-      </TextField>
-      <Flexbox vertical className="registration-form">
+    <FormPage header="Смена пароля" helperText="Введите email для отправки нового пароля." image={image}>
+      <Flexbox vertical w="75">
         <Input
           borderBottom
           formSpaces
@@ -42,10 +38,10 @@ export const ForgetPassword: React.FC = () => {
           onEnterPress={sendPassword}
         />
         <ErrorMessagesView messages={errorMessage} />
-        <Button light onClick={sendPassword} py="3">
+        <Button primary onClick={sendPassword} py="3">
           Отправить пароль
         </Button>
       </Flexbox>
-    </Flexbox>
+    </FormPage>
   );
 };

@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { Button, Flexbox, Icon, Input, TextField } from 'shared/base';
+import { Button, Flexbox, Input, TextField } from 'shared/base';
+import React, { useState } from 'react';
+
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
+import { FormPage } from 'shared/layout/formPage';
+import { Link } from 'react-router-dom';
 import { checkInvalidInput } from 'core/checkInvalidInput';
+import { history } from 'core/history';
+import image from 'icons/authentication.svg';
 import { parseError } from 'core/parseError';
 import { performSigninRequest } from 'core/auth/api';
-import { history } from 'core/history';
 
 const schema = yup.object().shape({
   email: yup
@@ -37,21 +40,18 @@ export const Login: React.FC = () => {
       await performSigninRequest(form.email, form.password);
       history.push('/');
     } catch (error) {
-      setErrorMessage(parseError(error));
+      setErrorMessage(parseError(error, true));
     }
   };
   return (
-    <Flexbox justifyContent="center" alignItems="center" vertical vh>
-      <TextField tag="h2" mb="3">
-        Вход
-      </TextField>
-      <TextField center mb="3" px="2">
-        С возвращением! Войдите, чтобы получить доступ к множеству объявлений.
-      </TextField>
-      <Link to="/forget-password" className="text-info mb-3">
+    <FormPage
+      header="Вход"
+      helperText="С возвращением! Войдите, чтобы получить доступ к множеству объявлений."
+      image={image}>
+      <Link to="/forget-password" className="text-accent mb-3">
         Забыли пароль?
       </Link>
-      <Flexbox vertical className="registration-form">
+      <Flexbox vertical w="75">
         <Input
           borderBottom
           formSpaces
@@ -72,17 +72,16 @@ export const Login: React.FC = () => {
           onEnterPress={login}
         />
         <ErrorMessagesView messages={errorMessage} />
-        <Button light onClick={login} py="3">
-          <Icon name="arrow-alt-circle-right" mr="3" />
+        <Button primary onClick={login} py="3">
           Продолжить
         </Button>
       </Flexbox>
       <TextField center mt="5">
         Ещё нет аккаунта?{' '}
-        <Link to="/signup" className="text-info">
+        <Link to="/signup" className="text-accent">
           Зарегистрируйтесь.
         </Link>
       </TextField>
-    </Flexbox>
+    </FormPage>
   );
 };

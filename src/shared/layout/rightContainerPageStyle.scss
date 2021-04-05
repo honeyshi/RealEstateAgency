@@ -1,0 +1,40 @@
+@import 'shared/base/utils/styleVariables';
+
+.right-container-page {
+  overflow-y: hidden;
+  .left-container {
+    height: 100vh !important;
+    border-top-right-radius: $border-radius-50 !important;
+    border-bottom-right-radius: $border-radius-50 !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .navbar-brand {
+      font-size: 1.75rem;
+    }
+  }
+  .right-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .navbar {
+      margin-top: 3rem !important;
+      padding-left: 0;
+      padding-right: 0;
+      .nav-link {
+        color: $light-color;
+        &:hover {
+          color: $accent-color-hover;
+        }
+      }
+    }
+  }
+}
