@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 
 import { Button, Flexbox, Input, TextField } from 'shared/base';
+import React, { useState } from 'react';
+
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
 import { FormPage } from 'shared/layout/formPage';
-import { parseError } from 'core/parseError';
+import { Link } from 'react-router-dom';
 import { checkInvalidInput } from 'core/checkInvalidInput';
-import { performSignupRequest } from 'core/signup/api';
 import { history } from 'core/history';
 import image from 'icons/signup.svg';
+import { parseError } from 'core/parseError';
+import { performSignupRequest } from 'core/signup/api';
 
 const schema = yup.object().shape({
   name: yup
     .string()
     .nullable()
     .required('Имя обязательное поле')
-    .max(255, 'Имя должен иметь длину не более 255 символов'),
+    .max(255, 'Имя должно иметь длину не более 255 символов'),
   email: yup
     .string()
     .nullable()

@@ -74,6 +74,7 @@ export const CreateAdvertismentPage: React.FC = () => {
             {propertyTypeItemComponents}
           </Flexbox>
           <LeftMenu
+            withDispatch
             activeItemIndex={activeStep}
             leftMenuItems={[
               { iconName: 'draft', header: 'Описание объекта' },

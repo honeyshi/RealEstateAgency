@@ -17,6 +17,13 @@
   }
 }
 
+.bg-light {
+  background-color: $light-color-secondary !important;
+  &:hover {
+    background-color: $light-color !important;
+  }
+}
+
 .text-danger {
   color: $invalid-color !important;
 }
