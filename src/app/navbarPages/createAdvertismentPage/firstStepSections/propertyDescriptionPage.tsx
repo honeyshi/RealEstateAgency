@@ -14,11 +14,11 @@ export const PropertyDescriptionPage: React.FC = () => {
   const renderSwitch = (propertyType: string) => {
     switch (propertyType) {
       case '0':
-        return <FlatDetails />;
-      case '1':
-        return <CommonDetails />;
-      case '2':
         return <HouseDetails />;
+      case '1':
+        return <FlatDetails />;
+      case '2':
+        return <CommonDetails />;
     }
   };
   return (

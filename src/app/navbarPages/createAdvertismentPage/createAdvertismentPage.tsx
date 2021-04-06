@@ -19,9 +19,9 @@ import { RightContainerPage } from 'shared/layout/rightContainerPage';
 import { StoreType } from 'core/store';
 
 const propertyTypes = [
-  { iconName: 'building', type: 'Квартира', key: 'flat-type', value: '0' },
-  { iconName: 'collage', type: 'Комната', key: 'room-type', value: '1' },
-  { iconName: 'home-4', type: 'Дом', key: 'house-type', value: '2' },
+  { iconName: 'building', type: 'Квартира', key: 'flat-type', value: '1' },
+  { iconName: 'collage', type: 'Комната', key: 'room-type', value: '2' },
+  { iconName: 'home-4', type: 'Дом', key: 'house-type', value: '0' },
 ];
 
 export const CreateAdvertismentPage: React.FC = () => {
