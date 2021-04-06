@@ -11,6 +11,7 @@ import { PricingPage } from './navbarPages/pricingPage';
 import React from 'react';
 import { StartPage } from './navbarPages/startPage';
 import { SuccessfulCreationPage } from './navbarPages/createAdvertismentPage';
+import { SuccessfulSendLink } from './formPages/successfulSendLink';
 import { UserProfilePage } from './userProfile';
 
 export const App: React.FC = () => {
@@ -21,6 +22,7 @@ export const App: React.FC = () => {
       <Route exact path="/forget-password" component={ForgetPassword} />
       <Route exact path="/reset-password" component={ResetPassword} />
       <Route exact path="/successful-signup" component={SuccessfulSignup} />
+      <Route exact path="/successful-send-link" component={SuccessfulSendLink} />
 
       <Route exact path="/contact" component={ContactUs} />
       <Route exact path="/new-advertisment" component={CreateAdvertismentPage} />
