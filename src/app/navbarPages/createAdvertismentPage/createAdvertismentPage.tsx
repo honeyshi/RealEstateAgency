@@ -17,12 +17,7 @@ import { PropertyPhotosPage } from './thirdStepSections';
 import { PropertyType } from './propertyType';
 import { RightContainerPage } from 'shared/layout/rightContainerPage';
 import { StoreType } from 'core/store';
-
-const propertyTypes = [
-  { iconName: 'building', type: 'Квартира', key: 'flat-type', value: '1' },
-  { iconName: 'collage', type: 'Комната', key: 'room-type', value: '2' },
-  { iconName: 'home-4', type: 'Дом', key: 'house-type', value: '0' },
-];
+import { propertyTypes } from 'data/values';
 
 export const CreateAdvertismentPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -37,14 +32,14 @@ export const CreateAdvertismentPage: React.FC = () => {
     const propertyTypeItems = propertyTypes.map((propertyType) => {
       return (
         <PropertyType
-          text={propertyType.type}
+          text={propertyType.text}
           active={propertyType.value === activePropertyType}
           onClick={() => {
             dispatch(setPropertyType(propertyType.value));
             dispatch(setValidatedForm(false));
             dispatch(cleanPropertyDetails());
           }}
-          key={propertyType.key}>
+          key={propertyType.id}>
           <RemixIcon name={propertyType.iconName} />
         </PropertyType>
       );

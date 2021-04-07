@@ -27,3 +27,17 @@ export const metroValues = [
   'Буревестник',
   'Стрелка',
 ];
+
+export const propertyTypes = [
+  { iconName: 'building', id: 'flat-type', text: 'Квартира', value: '1' },
+  { iconName: 'collage', id: 'room-type', text: 'Комната', value: '2' },
+  { iconName: 'home-4', id: 'house-type', text: 'Дом', value: '0' },
+];
+
+export const roomsAmount = [
+  { id: 'one-room', circle: true, text: '1', value: '1' },
+  { id: 'two-rooms', circle: true, text: '2', value: '2' },
+  { id: 'three-rooms', circle: true, text: '3', value: '3' },
+  { id: 'four-rooms', circle: true, text: '4+', value: '4' },
+  { id: 'studio-room', circle: false, text: 'Студия', value: '0' },
+];
