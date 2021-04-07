@@ -1,10 +1,10 @@
 import './advertisment.scss';
 
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
 import { Button, Column, Flexbox, RemixIcon, TextField } from 'shared/base';
+import React, { useState } from 'react';
+
 import { ImagesCarousel } from '../imagesCarousel';
+import { Link } from 'react-router-dom';
 
 interface IAdvertismentProps {
   header: string;
@@ -13,6 +13,8 @@ interface IAdvertismentProps {
   additionalInformation: string;
   payment: string;
   link: string;
+  images: string[];
+  id: string;
 }
 
 const imageUrls = [
@@ -29,6 +31,8 @@ export const Advertisment: React.FC<IAdvertismentProps> = ({
   additionalInformation,
   payment,
   link,
+  images,
+  id,
 }) => {
   const [favourite, setFavourite] = useState(false);
   const [hover, setHover] = useState(false);
@@ -37,9 +41,9 @@ export const Advertisment: React.FC<IAdvertismentProps> = ({
       <Column size={5} className="images-carousel">
         <ImagesCarousel imageUrls={imageUrls} />
       </Column>
-      <Column flex vertical size={7} p="4" pr="5">
+      <Column flex vertical justifyContent="between" size={7} p="4" pr="5">
         <Flexbox justifyContent="between">
-          <TextField bold tag="h5" mb="4">
+          <TextField bold tag="h5" mb="3">
             {header}
           </TextField>
           <Button
@@ -57,10 +61,12 @@ export const Advertisment: React.FC<IAdvertismentProps> = ({
         <TextField tag="span" mb="2">
           {address}
         </TextField>
-        <Flexbox alignItems="center" mb="2">
-          <RemixIcon size="xl" name="train" className="text-danger" mr="3" />
-          <TextField tag="span">{metro}</TextField>
-        </Flexbox>
+        {metro !== '' && metro !== 'Не указано' && (
+          <Flexbox alignItems="center" mb="2">
+            <RemixIcon size="xl" name="train" className="text-danger" mr="3" />
+            <TextField tag="span">{metro}</TextField>
+          </Flexbox>
+        )}
         <TextField tag="span" mb="4">
           {additionalInformation}
         </TextField>
