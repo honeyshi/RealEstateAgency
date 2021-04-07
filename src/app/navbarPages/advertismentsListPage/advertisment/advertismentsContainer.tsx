@@ -1,4 +1,4 @@
-import { Column, Flexbox, TextField } from 'shared/base';
+import { Block, Flexbox, TextField } from 'shared/base';
 import React, { useEffect, useMemo, useState } from 'react';
 import { setAdvertismentPageFilter, setSortingFilter } from 'data/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -72,13 +72,15 @@ export const AdvertismentsContainer: React.FC = () => {
   const activePage = useSelector((state: StoreType) => state.advertismentFilter.activePage);
 
   const [advertisments, setAdvertisments] = useState<IAdvertisment[]>();
-  const [amountPages, setAmountPages] = useState(0);
+  const [amountPages, setAmountPages] = useState(10);
+  const [totalAds, setTotalAds] = useState(10);
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await performGetAdvertismentRequest(activePage);
       setAdvertisments(result.apartments);
       setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
+      setTotalAds(result.total_count);
       console.log(advertisments);
     };
     fetchData();
@@ -111,11 +113,11 @@ export const AdvertismentsContainer: React.FC = () => {
     return advertismentItems;
   }, [advertisments]);
   return (
-    <Column size={9} ml="5">
+    <Block mr="5" mt="3" mb="5">
       {advertismentItemComponents?.length !== 0 ? (
         <>
-          <Flexbox alignItems="baseline" justifyContent="between">
-            <TextField>Найдено 517 объявлений</TextField>
+          <Flexbox alignItems="baseline" justifyContent="between" mb="4">
+            <TextField>Найдено {totalAds} объявлений</TextField>
             <Select
               selectOptions={['Сначала новые', 'По возрастанию цены', 'По убыванию цены']}
               selectText="Сортировка"
@@ -134,6 +136,6 @@ export const AdvertismentsContainer: React.FC = () => {
           По вашему запросу не было найдено ни одного объявления. Попробуйте смягчить критерии поиска.
         </TextField>
       )}
-    </Column>
+    </Block>
   );
 };

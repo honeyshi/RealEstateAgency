@@ -14,7 +14,7 @@ import { OwnerContactsPage } from './fourthStepSections';
 import { PropertyDescriptionPage } from './firstStepSections';
 import { PropertyFacilitiesPage } from './secondStepSections';
 import { PropertyPhotosPage } from './thirdStepSections';
-import { PropertyType } from './propertyType';
+import { PropertyType } from 'pageParts/propertyType';
 import { RightContainerPage } from 'shared/layout/rightContainerPage';
 import { StoreType } from 'core/store';
 import { propertyTypes } from 'data/values';

@@ -1,7 +1,7 @@
 import './filters.scss';
 import 'react-input-range/lib/css/index.css';
 
-import { Button, CheckBox, CheckboxOption, Column, Flexbox, RemixIcon, TextField } from 'shared/base';
+import { Button, CheckBox, CheckboxOption, Flexbox, RemixIcon, TextField } from 'shared/base';
 import React, { useMemo } from 'react';
 import {
   cleanFilters,
@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { CheckboxFilter } from './chexboxFilter';
 import InputRange from 'react-input-range';
-import ReactTooltip from 'react-tooltip';
+import { PropertyType } from 'pageParts/propertyType';
 import { StoreType } from 'core/store';
 import classNames from 'classnames';
 
@@ -30,16 +30,13 @@ export const FiltersContainer: React.FC = () => {
   const propertyTypeItemComponents = useMemo(() => {
     const propertyTypeItems = propertyTypes.map((propertyType) => {
       return (
-        <CheckboxOption
-          circle
-          selected={propertyType.value === advertismentFilter.propertyType}
+        <PropertyType
+          text={propertyType.text}
+          active={propertyType.value === advertismentFilter.propertyType}
           onClick={() => dispatch(setPropertyTypeFilter(propertyType.value))}
           key={propertyType.id}>
-          <RemixIcon name={propertyType.iconName} data-tip data-for={propertyType.id} />
-          <ReactTooltip id={propertyType.id} arrowColor="white" className="tooltip-light">
-            {propertyType.text}
-          </ReactTooltip>
-        </CheckboxOption>
+          <RemixIcon name={propertyType.iconName} />
+        </PropertyType>
       );
     });
     return propertyTypeItems;
@@ -148,54 +145,59 @@ export const FiltersContainer: React.FC = () => {
   }, [dispatch, advertismentFilter.livingRules]);
 
   return (
-    <Column size={3}>
-      <TextField mb="4">Тип недвижимости</TextField>
-      <Flexbox justifyContent="between">{propertyTypeItemComponents}</Flexbox>
-      <CheckboxFilter filterName="Район">{districtItemComponents}</CheckboxFilter>
-      <TextField mb="4">Стоимость аренды</TextField>
-      <Flexbox py="4">
-        <InputRange
-          formatLabel={(value) => `${value} тыс. руб.`}
-          maxValue={300}
-          minValue={5}
-          value={advertismentFilter.rentPayment}
-          step={5}
-          onChange={(value) => dispatch(setRentPaymentFilter(value))}
-        />
+    <>
+      <Flexbox justifyContent="between" mx="3">
+        {propertyTypeItemComponents}
       </Flexbox>
-      {advertismentFilter.propertyType !== '2' && ( // room doesn't have rooms amount and house can not be studio
-        <>
-          <TextField my="4">Количество комнат</TextField>
-          <Flexbox wrap justifyContent="between">
-            {advertismentFilter.propertyType === '0' ? roomItemComponents.slice(0, -1) : roomItemComponents}
-          </Flexbox>
-        </>
-      )}
-      <TextField classes={classNames(advertismentFilter.propertyType !== '2' ? 'mb-4' : 'my-4')}>Площадь</TextField>
-      <Flexbox py="4">
-        <InputRange
-          formatLabel={(value) => `${value} м²`}
-          maxValue={300}
-          minValue={5}
-          value={advertismentFilter.space}
-          step={5}
-          onChange={(value) => dispatch(setSpaceFilter(value))}
-        />
+      <Flexbox vertical mx="5" mb="5">
+        <CheckboxFilter filterName="Район">{districtItemComponents}</CheckboxFilter>
+        <TextField mb="4">Стоимость аренды</TextField>
+        <Flexbox py="4">
+          <InputRange
+            formatLabel={(value) => `${value} тыс. руб.`}
+            maxValue={300}
+            minValue={5}
+            value={advertismentFilter.rentPayment}
+            step={5}
+            onChange={(value) => dispatch(setRentPaymentFilter(value))}
+          />
+        </Flexbox>
+        {advertismentFilter.propertyType !== '2' && ( // room doesn't have rooms amount and house can not be studio
+          <>
+            <TextField my="4">Количество комнат</TextField>
+            <Flexbox wrap justifyContent="between">
+              {advertismentFilter.propertyType === '0' ? roomItemComponents.slice(0, -1) : roomItemComponents}
+            </Flexbox>
+          </>
+        )}
+        <TextField classes={classNames(advertismentFilter.propertyType !== '2' ? 'mb-4' : 'my-4')}>Площадь</TextField>
+        <Flexbox py="4">
+          <InputRange
+            formatLabel={(value) => `${value} м²`}
+            maxValue={300}
+            minValue={5}
+            value={advertismentFilter.space}
+            step={5}
+            onChange={(value) => dispatch(setSpaceFilter(value))}
+          />
+        </Flexbox>
+        <CheckboxFilter filterName="Удобства">{facilitiesItemComponents}</CheckboxFilter>
+        <CheckboxFilter after filterName="Условия проживания">
+          {livingRulesItemComponents}
+        </CheckboxFilter>
+        <Flexbox
+          justifyContent="between"
+          text="accent"
+          className="cursor-pointer"
+          mb="4"
+          onClick={() => dispatch(cleanFilters())}>
+          Сбросить фильтры
+          <RemixIcon name="refresh" />{' '}
+        </Flexbox>
+        <Button primary w="100">
+          Поиск
+        </Button>
       </Flexbox>
-      <CheckboxFilter filterName="Удобства">{facilitiesItemComponents}</CheckboxFilter>
-      <CheckboxFilter filterName="Условия проживания">{livingRulesItemComponents}</CheckboxFilter>
-      <Flexbox
-        justifyContent="between"
-        text="accent"
-        className="cursor-pointer"
-        mb="4"
-        onClick={() => dispatch(cleanFilters())}>
-        Сбросить фильтры
-        <RemixIcon name="refresh" />{' '}
-      </Flexbox>
-      <Button primary w="100">
-        Поиск
-      </Button>
-    </Column>
+    </>
   );
 };
