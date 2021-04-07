@@ -29,7 +29,7 @@ export const App: React.FC = () => {
       <Route exact path="/flats" component={AdvertismentListPage} />
       <Route exact path="/successful-advertisment-publishing" component={SuccessfulCreationPage} />
       <Route exact path="/pricing" component={PricingPage} />
-      <Route exact path="/profile" component={UserProfilePage} />
+      <Route exact path="/profile/*" component={UserProfilePage} />
       <Route exact path="/" component={StartPage} />
     </Switch>
   );

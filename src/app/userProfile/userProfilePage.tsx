@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { LeftMenu } from 'shared/leftMenu';
 import { ProfileInformationPage } from './profielInformationPage';
 import { RightContainerPage } from 'shared/layout/rightContainerPage';
+import { history } from 'core/history';
 
 export const UserProfilePage: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState(1);
+  const [activePage, setActivePage] = useState(<ProfileInformationPage />);
 
-  const renderSwitch = (activeStep: number) => {
-    switch (activeStep) {
+  useEffect(() => {
+    switch (activeMenu) {
       case 1:
-        return <ProfileInformationPage />;
+        history.push(`/profile/info`);
+        setActivePage(<ProfileInformationPage />);
     }
-  };
+  }, [activeMenu]);
+
   return (
     <RightContainerPage
       header="Профиль"
@@ -30,7 +34,7 @@ export const UserProfilePage: React.FC = () => {
           setActiveMethod={setActiveMenu}
         />
       }>
-      {renderSwitch(activeMenu)}
+      {activePage}
     </RightContainerPage>
   );
 };
