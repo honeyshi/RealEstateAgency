@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { CreateCoRequestPage } from './createCoRequestPage';
 import { LeftMenu } from 'shared/leftMenu';
 import { ProfileInformationPage } from './profielInformationPage';
 import { RightContainerPage } from 'shared/layout/rightContainerPage';
@@ -10,11 +11,13 @@ export const UserProfilePage: React.FC = () => {
   const [activePage, setActivePage] = useState(<ProfileInformationPage />);
 
   useEffect(() => {
-    switch (activeMenu) {
-      case 1:
-        history.push(`/profile/info`);
-        setActivePage(<ProfileInformationPage />);
-    }
+    if (history.location.pathname.includes('/profile/create-cotenant-request')) setActivePage(<CreateCoRequestPage />);
+    else
+      switch (activeMenu) {
+        case 1:
+          history.push('/profile/info');
+          setActivePage(<ProfileInformationPage />);
+      }
   }, [activeMenu]);
 
   return (

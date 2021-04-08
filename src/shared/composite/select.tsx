@@ -1,17 +1,19 @@
-import classNames from 'classnames';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Flexbox, RemixIcon, SelectOption, TextField } from 'shared/base';
-
 import './select.scss';
 
+import { Flexbox, RemixIcon, SelectOption, TextField } from 'shared/base';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
+import classNames from 'classnames';
+
 interface ISelectProps {
+  solid?: boolean;
   selectOptions: string[];
   selectText: string;
   className?: string;
   onSelectValue: (value: string) => void;
 }
 
-export const Select: React.FC<ISelectProps> = ({ selectOptions, selectText, className, onSelectValue }) => {
+export const Select: React.FC<ISelectProps> = ({ solid, selectOptions, selectText, className, onSelectValue }) => {
   const selectRef = useRef<HTMLDivElement>(null);
 
   const [opened, setOpened] = useState(false);
@@ -55,15 +57,20 @@ export const Select: React.FC<ISelectProps> = ({ selectOptions, selectText, clas
   }, [selectOptions, onselectvalue, text]);
 
   return (
-    <div className={classNames('select p-2', className)} ref={selectRef}>
-      <Flexbox alignItems="center" justifyContent="between" pb="2" onClick={() => setOpened(!opened)}>
+    <div className={classNames('select p-2', { solid: solid }, className)} ref={selectRef}>
+      <Flexbox
+        alignItems="center"
+        justifyContent="between"
+        pb="2"
+        className="placeholder-container"
+        onClick={() => setOpened(!opened)}>
         <TextField tag="span" classes="placeholder" pr="4">
           {text === '' ? selectText : text}
         </TextField>
         <RemixIcon name="arrow-down-s" className={classNames({ 'd-none': opened })} />
         <RemixIcon name="arrow-up-s" className={classNames({ 'd-none': !opened })} />
       </Flexbox>
-      <div className={classNames({ 'd-none': !opened }, { 'd-flex flex-column': opened })}>
+      <div className={classNames({ 'd-none': !opened }, { 'd-flex flex-column': opened }, 'options-container')}>
         {selectOptionComponents}
       </div>
     </div>

@@ -1,5 +1,18 @@
+@import 'shared/base/utils/styleVariables';
+
 .select {
   cursor: pointer;
   box-shadow: 0px 1em 2em -1.5em rgba(0, 0, 0, 0.5);
   margin-left: -0.5rem;
+  &.solid {
+    background-color: $light-color-secondary;
+    border-color: $light-color-secondary;
+    border-radius: $solid-form-radius;
+    .placeholder-container {
+      padding: 0.375rem 0.75rem !important;
+    }
+    .options-container {
+      padding: 0.375rem 0.75rem !important;
+    }
+  }
 }

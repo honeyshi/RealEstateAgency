@@ -114,32 +114,34 @@ export const ProfileInformationPage: React.FC = () => {
         />
       </ProfileInfromationRow>
       <ErrorMessagesView messages={errorMessage} />
-      <Row justifyContent="between" alignItems="center" mt="5">
-        <Flexbox>
-          <Button primary onClick={saveChanges}>
-            Сохранить
-          </Button>
-          <Button
-            secondary
-            ml="5"
-            onClick={() => {
-              setErrorMessage('');
-              setForm(initialState);
-            }}>
-            Отменить
-          </Button>
-        </Flexbox>
-        <Flexbox>
-          <Link to="/" className="text-accent">
-            <Flexbox>
-              <TextField tag="span" mr="3">
-                Выйти
-              </TextField>
-              <RemixIcon name="logout-circle-r" />
-            </Flexbox>
-          </Link>
-        </Flexbox>
-      </Row>
+      <ProfileInfromationRow label="">
+        <Row justifyContent="between" alignItems="center">
+          <Flexbox>
+            <Button primary onClick={saveChanges}>
+              Сохранить
+            </Button>
+            <Button
+              secondary
+              ml="5"
+              onClick={() => {
+                setErrorMessage('');
+                setForm(initialState);
+              }}>
+              Отменить
+            </Button>
+          </Flexbox>
+          <Flexbox>
+            <Link to="/" className="text-accent">
+              <Flexbox>
+                <TextField tag="span" mr="3">
+                  Выйти
+                </TextField>
+                <RemixIcon name="logout-circle-r" />
+              </Flexbox>
+            </Link>
+          </Flexbox>
+        </Row>
+      </ProfileInfromationRow>
     </>
   );
 };

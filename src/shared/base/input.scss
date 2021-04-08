@@ -20,7 +20,7 @@ input:focus {
     background-color: $light-color-secondary;
     border-color: $light-color-secondary;
     font-size: 1.15rem;
-    border-radius: 0.65rem !important;
+    border-radius: $solid-form-radius;
     &:focus {
       background-color: $light-color-secondary;
       border-color: $accent-color;

@@ -1,3 +1,15 @@
-textarea {
+@import 'shared/base/utils/styleVariables';
+
+.textarea {
   resize: none !important;
+  &.solid {
+    background-color: $light-color-secondary;
+    border-color: $light-color-secondary;
+    border-radius: $solid-form-radius;
+    &:focus {
+      background-color: $light-color-secondary;
+      border-color: $accent-color;
+      outline: 0;
+    }
+  }
 }
