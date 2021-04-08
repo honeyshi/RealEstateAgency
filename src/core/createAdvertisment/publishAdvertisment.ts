@@ -37,7 +37,7 @@ export const performPublishAdvertismentRequest = async (
     rooms: propertyDetails.roomsAmount,
     renovation: propertyDetails.renovationType,
   };
-  console.log(advertismentConfig);
+  axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authInfo')}`;
   const response = await axios.post(`${config.apiUrl}/apartment`, advertismentConfig);
   return response.data.status;
 };

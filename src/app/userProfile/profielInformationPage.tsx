@@ -1,12 +1,13 @@
 import * as yup from 'yup';
 
 import { Button, Flexbox, Input, RemixIcon, Row, TextField } from 'shared/base';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
 import { Link } from 'react-router-dom';
 import { ProfileInfromationRow } from './profileInformationRow';
 import { parseError } from 'core/parseError';
+import { performGetUserInfoRequest } from 'core/profile/getUserInformation';
 
 const schema = yup.object().shape({
   name: yup
@@ -52,15 +53,26 @@ interface Form {
 }
 
 const initialState: Form = {
-  name: 'Екатерина',
-  email: 'myemail@e.com',
+  name: '',
+  email: '',
   password: '',
   confirmPassword: '',
 };
 
 export const ProfileInformationPage: React.FC = () => {
   const [form, setForm] = useState<Form>(initialState);
+  const [formInitialState, setFormInitialState] = useState<Form>(initialState);
   const [errorMessage, setErrorMessage] = useState<string | string[]>('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await performGetUserInfoRequest();
+      setFormInitialState({ ...initialState, email: result.email, name: result.name });
+      setForm({ ...initialState, email: result.email, name: result.name });
+    };
+    fetchData();
+  }, []);
+
   const saveChanges = async () => {
     try {
       setErrorMessage('');
@@ -125,13 +137,19 @@ export const ProfileInformationPage: React.FC = () => {
               ml="5"
               onClick={() => {
                 setErrorMessage('');
-                setForm(initialState);
+                setForm(formInitialState);
               }}>
               Отменить
             </Button>
           </Flexbox>
           <Flexbox>
-            <Link to="/" className="text-accent">
+            <Link
+              to="/"
+              className="text-accent"
+              onClick={() => {
+                localStorage.removeItem('authInfo');
+                localStorage.removeItem('userRole');
+              }}>
               <Flexbox>
                 <TextField tag="span" mr="3">
                   Выйти
