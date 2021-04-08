@@ -65,12 +65,18 @@ export const ProfileInformationPage: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | string[]>('');
 
   useEffect(() => {
+    let mounted = false;
     const fetchData = async () => {
       const result = await performGetUserInfoRequest();
-      setFormInitialState({ ...initialState, email: result.email, name: result.name });
-      setForm({ ...initialState, email: result.email, name: result.name });
+      if (!mounted) {
+        setFormInitialState({ ...initialState, email: result.email, name: result.name });
+        setForm({ ...initialState, email: result.email, name: result.name });
+      }
     };
     fetchData();
+    return () => {
+      mounted = true;
+    };
   }, []);
 
   const saveChanges = async () => {

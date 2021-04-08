@@ -14,5 +14,4 @@ export const performSignupRequest = async (name: string, email: string, password
     if ([...Object(JSON.parse(json.fields))['email']].includes('validation.unique'))
       throw new Error('Пользователь с таким Email уже зарегистрирован');
   } else localStorage.setItem('authInfo', Object(json)['accessToken']);
-  axios.defaults.headers.common['Authorization'] = `Bearer ${Object(json)['access_token']}`;
 };
