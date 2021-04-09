@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { useDispatch } from 'react-redux';
 
 interface INumberPaginationProps {
   activePage: number;

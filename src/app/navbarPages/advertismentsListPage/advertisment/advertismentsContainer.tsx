@@ -1,16 +1,15 @@
 import { Block, Flexbox, TextField } from 'shared/base';
 import React, { useEffect, useMemo, useState } from 'react';
-import { setAdvertismentPageFilter, setSortingFilter } from 'data/actions';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { Advertisment } from 'pageParts/advertisment';
 import { IAdvertisment } from 'core/getAdvertisment/advertismentModel';
 import { NumberPagination } from 'shared/pagination';
 import { Select } from 'shared/composite/select';
-import { StoreType } from 'core/store';
 import { amountAdvertismentOnPage } from 'data/values';
 import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
 import { performGetAdvertismentRequest } from 'core/getAdvertisment/getAdvertisment';
+import { setSortingFilter } from 'data/actions';
+import { useDispatch } from 'react-redux';
 
 // const advertisments = [
 //   {

@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react';
 
 import { AdminAdvertismentsListPage } from './adminAdvertismentsListPage';
 import { CreateCoRequestPage } from './createCoRequestPage';
-import { LeftMenu } from 'shared/leftMenu';
+import { LeftMenuLinks } from 'shared/leftMenu';
 import { ProfileInformationPage } from './profielInformationPage';
 import { RightContainerPage } from 'shared/layout/rightContainerPage';
 import { history } from 'core/history';
+import { useLocation } from 'react-router-dom';
 
 enum PagesLink {
   Information = '/profile/info',
@@ -17,26 +18,43 @@ enum PagesLink {
 const userRole = '2';
 
 export const UserProfilePage: React.FC = () => {
-  const [activeMenu, setActiveMenu] = useState(1);
+  const [activeMenu, setActiveMenu] = useState(PagesLink.Information);
   const [activePage, setActivePage] = useState(<ProfileInformationPage />);
   const [adminState, setAdminState] = useState(false);
 
+  const currentUserRole = localStorage.getItem('userRole');
+
+  let location = useLocation();
+
+  const changeLocation = (link: PagesLink, adminState: boolean, page: JSX.Element) => {
+    setActiveMenu(link);
+    setAdminState(adminState);
+    setActivePage(page);
+  };
+
   useEffect(() => {
-    if (history.location.pathname.includes(PagesLink.CreateCoRequest)) setActivePage(<CreateCoRequestPage />);
-    else
-      switch (activeMenu) {
-        case 1:
-          history.push(adminState ? PagesLink.AdminAdvertisments : PagesLink.Information);
-          setActivePage(adminState ? <AdminAdvertismentsListPage /> : <ProfileInformationPage />);
-      }
-  }, [activeMenu, adminState]);
+    switch (location.pathname) {
+      case PagesLink.Information:
+        changeLocation(PagesLink.Information, false, <ProfileInformationPage />);
+        break;
+      case PagesLink.AdminAdvertisments:
+        if (currentUserRole !== userRole)
+          changeLocation(PagesLink.AdminAdvertisments, true, <AdminAdvertismentsListPage />);
+        break;
+      case PagesLink.CreateCoRequest:
+        changeLocation(PagesLink.CreateCoRequest, false, <CreateCoRequestPage />);
+        break;
+      default:
+        break;
+    }
+  }, [activeMenu, adminState, currentUserRole, location.pathname]);
 
   return (
     <RightContainerPage
       header="Профиль"
       leftMenu={
         <>
-          {localStorage.getItem('userRole') !== userRole && (
+          {currentUserRole !== userRole && (
             <Flexbox justifyContent="between" mb="5" mx="5">
               <TextField tag="span">Режим администратора</TextField>
               <CheckBox
@@ -44,7 +62,8 @@ export const UserProfilePage: React.FC = () => {
                 name="admin-checkbox"
                 value={adminState}
                 onChange={(state) => {
-                  setActiveMenu(1);
+                  setActiveMenu(state ? PagesLink.AdminAdvertisments : PagesLink.Information);
+                  history.push(state ? PagesLink.AdminAdvertisments : PagesLink.Information);
                   setAdminState(state);
                 }}
               />
@@ -52,28 +71,26 @@ export const UserProfilePage: React.FC = () => {
           )}
           {adminState ? (
             <>
-              <LeftMenu
-                activeItemIndex={activeMenu}
+              <LeftMenuLinks
+                activeLink={activeMenu}
                 leftMenuItems={[
-                  { iconName: 'file-list', header: 'Объявления' },
-                  { iconName: 'emotion-unhappy', header: 'Активные жалобы' },
-                  { iconName: 'contacts', header: 'Список пользователей' },
+                  { iconName: 'file-list', header: 'Объявления', link: PagesLink.AdminAdvertisments },
+                  { iconName: 'emotion-unhappy', header: 'Активные жалобы', link: 'PagesLink.AdminAdvertisments' },
+                  { iconName: 'contacts', header: 'Список пользователей', link: 'PagesLink.AdminAdvertisments' },
                 ]}
-                setActiveMethod={setActiveMenu}
               />
             </>
           ) : (
-            <LeftMenu
-              activeItemIndex={activeMenu}
+            <LeftMenuLinks
+              activeLink={activeMenu}
               leftMenuItems={[
-                { iconName: 'account-box', header: 'Мои данные' },
-                { iconName: 'heart-3', header: 'Избранное' },
-                { iconName: 'file-edit', header: 'Мои объявления' },
-                { iconName: 'coins', header: 'Тарифный план' },
-                { iconName: 'mail-send', header: 'Подписки' },
-                { iconName: 'group', header: 'Поиск соарендатора' },
+                { iconName: 'account-box', header: 'Мои данные', link: PagesLink.Information },
+                { iconName: 'heart-3', header: 'Избранное', link: 'PagesLink.Information' },
+                { iconName: 'file-edit', header: 'Мои объявления', link: ' PagesLink.Information' },
+                { iconName: 'coins', header: 'Тарифный план', link: 'PagesLink.Information' },
+                { iconName: 'mail-send', header: 'Подписки', link: 'PagesLink.Information ' },
+                { iconName: 'group', header: 'Поиск соарендатора', link: PagesLink.CreateCoRequest },
               ]}
-              setActiveMethod={setActiveMenu}
             />
           )}
         </>

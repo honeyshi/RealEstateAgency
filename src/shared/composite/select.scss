@@ -5,6 +5,8 @@
   box-shadow: 0px 1em 2em -1.5em rgba(0, 0, 0, 0.5);
   margin-left: -0.5rem;
   &.solid {
+    position: absolute;
+    z-index: 999;
     background-color: $light-color-secondary;
     border-color: $light-color-secondary;
     border-radius: $solid-form-radius;

@@ -11,7 +11,7 @@
     margin-top: 1rem;
     &.active {
       background-color: $accent-color;
-      color: white;
+      color: white !important;
       border-top-right-radius: 3.125rem !important;
       border-bottom-right-radius: 3.125rem !important;
     }

@@ -43,3 +43,11 @@ export const roomsAmount = [
 ];
 
 export const amountAdvertismentOnPage = 10;
+
+export enum Statuses {
+  unpublished = 0,
+  published = 1,
+  moderation = 2,
+  declined = 3,
+  blocked = 4,
+}

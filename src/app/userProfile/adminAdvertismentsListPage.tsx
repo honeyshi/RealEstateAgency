@@ -1,20 +1,12 @@
 import { Block, CheckBox, Flexbox, TextField } from 'shared/base';
 import React, { useEffect, useMemo, useState } from 'react';
+import { Statuses, amountAdvertismentOnPage } from 'data/values';
 
 import { Advertisment } from 'pageParts/advertisment';
 import { IAdvertisment } from 'core/getAdvertisment/advertismentModel';
 import { NumberPagination } from 'shared/pagination';
-import { amountAdvertismentOnPage } from 'data/values';
 import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
 import { performGetAdvertismentByStatusRequest } from 'core/getAdvertisment/getAdvertismentByStatus';
-
-enum Statuses {
-  unpublished = 0,
-  published = 1,
-  moderation = 2,
-  declined = 3,
-  blocked = 4,
-}
 
 const chekboxes = [
   { id: 'status-unpublished', text: 'Неопубликованные', statusCode: Statuses.unpublished },
@@ -51,6 +43,9 @@ export const AdminAdvertismentsListPage: React.FC = () => {
     const advertismentItems = advertisments?.map((advertisment) => {
       return (
         <Advertisment
+          withMenu
+          admin
+          status={activeStatus}
           header={advertisment.header}
           address={`Нижегородская область, Нижний Новгород, р-н ${advertisment.district}, ${advertisment.address}`}
           metro={advertisment.metro}
@@ -71,7 +66,7 @@ export const AdminAdvertismentsListPage: React.FC = () => {
       );
     });
     return advertismentItems;
-  }, [advertisments]);
+  }, [advertisments, activeStatus]);
 
   return (
     <>
@@ -93,9 +88,7 @@ export const AdminAdvertismentsListPage: React.FC = () => {
             <NumberPagination amountPages={amountPages} activePage={activePage} setActivePage={setActivePage} />
           </>
         ) : (
-          <TextField classes="lead">
-            По вашему запросу не было найдено ни одного объявления.
-          </TextField>
+          <TextField classes="lead">По вашему запросу не было найдено ни одного объявления.</TextField>
         )}
       </Block>
     </>
