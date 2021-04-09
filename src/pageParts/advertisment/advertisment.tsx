@@ -3,7 +3,7 @@ import './advertisment.scss';
 import { Button, Column, Flexbox, RemixIcon, TextField } from 'shared/base';
 import React, { useState } from 'react';
 
-import { ImagesCarousel } from '../imagesCarousel';
+import { ImagesCarousel } from 'pageParts/imagesCarousel';
 import { Link } from 'react-router-dom';
 
 interface IAdvertismentProps {

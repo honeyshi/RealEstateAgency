@@ -3,11 +3,13 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { setAdvertismentPageFilter, setSortingFilter } from 'data/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Advertisment } from './advertisment';
+import { Advertisment } from 'pageParts/advertisment';
 import { IAdvertisment } from 'core/getAdvertisment/advertismentModel';
 import { NumberPagination } from 'shared/pagination';
 import { Select } from 'shared/composite/select';
 import { StoreType } from 'core/store';
+import { amountAdvertismentOnPage } from 'data/values';
+import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
 import { performGetAdvertismentRequest } from 'core/getAdvertisment/getAdvertisment';
 
 // const advertisments = [
@@ -40,37 +42,10 @@ import { performGetAdvertismentRequest } from 'core/getAdvertisment/getAdvertism
 //   },
 // ];
 
-const amountAdvertismentOnPage = 10;
-
-const buildAdditionalInformationString = (
-  deposit: string,
-  paymentCondition: string,
-  withAnimals: number,
-  withKids: number
-) => {
-  const depositString = deposit != null ? `Залог ${deposit} ₽.` : 'Без залога.';
-  const paymentString = () => {
-    switch (paymentCondition) {
-      case '0':
-        return 'Только оплата аренды.';
-      case '1':
-        return 'Оплата счетчиков.';
-      case '2':
-        return 'Оплата коммунальных услуг.';
-      default:
-        return '';
-    }
-  };
-  const animalsString = withAnimals === 1 ? 'Разрешено заселение с животными.' : 'Заселение с животными запрещено.';
-  const kidsString = withKids === 1 ? 'Разрешено заселение с детьми.' : 'Заселение с детьми запрещено.';
-  return `${depositString} ${paymentString()} ${animalsString} ${kidsString}`;
-};
-
 export const AdvertismentsContainer: React.FC = () => {
   const dispatch = useDispatch();
 
-  const activePage = useSelector((state: StoreType) => state.advertismentFilter.activePage);
-
+  const [activePage, setActivePage] = useState(1);
   const [advertisments, setAdvertisments] = useState<IAdvertisment[]>();
   const [amountPages, setAmountPages] = useState(10);
   const [totalAds, setTotalAds] = useState(10);
@@ -125,11 +100,7 @@ export const AdvertismentsContainer: React.FC = () => {
             />
           </Flexbox>
           {advertismentItemComponents}
-          <NumberPagination
-            amountPages={amountPages}
-            activePage={activePage}
-            setActivePage={setAdvertismentPageFilter}
-          />
+          <NumberPagination amountPages={amountPages} activePage={activePage} setActivePage={setActivePage} />
         </>
       ) : (
         <TextField classes="lead">

@@ -1,11 +1,18 @@
 import { CheckBox, Flexbox, TextField } from 'shared/base';
 import React, { useEffect, useState } from 'react';
 
+import { AdminAdvertismentsListPage } from './adminAdvertismentsListPage';
 import { CreateCoRequestPage } from './createCoRequestPage';
 import { LeftMenu } from 'shared/leftMenu';
 import { ProfileInformationPage } from './profielInformationPage';
 import { RightContainerPage } from 'shared/layout/rightContainerPage';
 import { history } from 'core/history';
+
+enum PagesLink {
+  Information = '/profile/info',
+  AdminAdvertisments = '/profile/admin/advertisments',
+  CreateCoRequest = '/profile/create-cotenant-request',
+}
 
 const userRole = '2';
 
@@ -15,14 +22,14 @@ export const UserProfilePage: React.FC = () => {
   const [adminState, setAdminState] = useState(false);
 
   useEffect(() => {
-    if (history.location.pathname.includes('/profile/create-cotenant-request')) setActivePage(<CreateCoRequestPage />);
+    if (history.location.pathname.includes(PagesLink.CreateCoRequest)) setActivePage(<CreateCoRequestPage />);
     else
       switch (activeMenu) {
         case 1:
-          history.push('/profile/info');
-          setActivePage(<ProfileInformationPage />);
+          history.push(adminState ? PagesLink.AdminAdvertisments : PagesLink.Information);
+          setActivePage(adminState ? <AdminAdvertismentsListPage /> : <ProfileInformationPage />);
       }
-  }, [activeMenu]);
+  }, [activeMenu, adminState]);
 
   return (
     <RightContainerPage

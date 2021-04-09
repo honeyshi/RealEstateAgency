@@ -41,3 +41,5 @@ export const roomsAmount = [
   { id: 'four-rooms', circle: true, text: '4+', value: '4' },
   { id: 'studio-room', circle: false, text: 'Студия', value: '0' },
 ];
+
+export const amountAdvertismentOnPage = 10;
