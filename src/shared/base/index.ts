@@ -9,6 +9,7 @@ export { Flexbox } from './flexbox';
 export { Icon } from './icon';
 export { Image } from './image';
 export { Input } from './input';
+export { Modal } from './modal';
 export { NavbarContainer } from './navbarContainer';
 export { NavbarItem } from './navbarItem';
 export { RemixIcon } from './remixIcon';

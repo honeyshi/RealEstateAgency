@@ -2,9 +2,10 @@
 
 .text-accent {
   color: $accent-color !important;
-  &:hover {
-    color: $accent-color-hover !important;
-  }
+}
+
+a.text-accent {
+  &:hover,
   &:focus {
     color: $accent-color-hover !important;
   }

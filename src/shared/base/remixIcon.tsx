@@ -1,8 +1,10 @@
-import classNames from 'classnames';
-import React from 'react';
-import { propsToSpace, SpaceProps } from './utils/spaceUtil';
+import { ColorProps, propsToColor } from './utils/colorUtils';
+import { SpaceProps, propsToSpace } from './utils/spaceUtil';
 
-interface IRemixIconProps extends React.HTMLAttributes<any>, SpaceProps {
+import React from 'react';
+import classNames from 'classnames';
+
+interface IRemixIconProps extends React.HTMLAttributes<any>, SpaceProps, ColorProps {
   className?: string;
   name: string;
   styleType?: 'line' | 'fill';
@@ -16,6 +18,7 @@ export const RemixIcon: React.FC<IRemixIconProps> = ({ className, name, styleTyp
       [`ri-${size}`]: size != null,
     },
     propsToSpace(other),
+    propsToColor(other),
     className
   );
   return <i className={classes} {...other} />;
