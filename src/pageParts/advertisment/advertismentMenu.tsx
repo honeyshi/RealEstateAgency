@@ -5,11 +5,13 @@ import React, { useState } from 'react';
 
 import { Statuses } from 'data/values';
 import classNames from 'classnames';
+import { performDeleteAdvertismentRequest } from 'core/profile/deleteAdvertisment';
 
 interface IAdvertismentMenuProps {
   admin?: boolean;
   status?: number;
   show: boolean;
+  id: string;
 }
 
 const DefaultButton: React.FC<{ iconName: string; className?: string; onClick?: (e: React.MouseEvent) => void }> = ({
@@ -52,12 +54,10 @@ const initialModalState: ModalProps = {
   text: 'Что-то пошло не так. Повторите попытку позже.',
 };
 
-export const AdvertismentMenu: React.FC<IAdvertismentMenuProps> = ({ admin, status, show }) => {
+export const AdvertismentMenu: React.FC<IAdvertismentMenuProps> = ({ admin, status, show, id }) => {
   const [modalProps, setModalProps] = useState(initialModalState);
 
-  const handleModalClose = () => {
-    setModalProps(initialModalState);
-  };
+  const handleModalClose = () => setModalProps(initialModalState);
 
   return (
     <>
@@ -76,7 +76,14 @@ export const AdvertismentMenu: React.FC<IAdvertismentMenuProps> = ({ admin, stat
         <DefaultButton
           iconName="delete-bin"
           className="delete-button"
-          onClick={() => setModalProps({ valid: true, text: 'text', show: true })}>
+          onClick={async () => {
+            try {
+              await performDeleteAdvertismentRequest(id);
+              setModalProps({ valid: true, text: 'Объявление было удалено', show: true });
+            } catch (error) {
+              setModalProps({ ...modalProps, show: true });
+            }
+          }}>
           Удалить
         </DefaultButton>
       </div>

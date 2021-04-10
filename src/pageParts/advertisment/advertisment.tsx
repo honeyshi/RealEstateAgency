@@ -74,7 +74,7 @@ export const Advertisment: React.FC<IAdvertismentProps> = ({
         </Flexbox>
         {withMenu && (
           <Flexbox justifyContent="end">
-            <AdvertismentMenu admin={admin} status={status} show={showMenu} />
+            <AdvertismentMenu admin={admin} status={status} show={showMenu} id={id} />
           </Flexbox>
         )}
         <TextField tag="span" mb="2">
