@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 import { Statuses } from 'data/values';
 import classNames from 'classnames';
+import { performChangeAdvertismentStatusRequest } from 'core/profile/changeAdvertismentStatus';
 import { performDeleteAdvertismentRequest } from 'core/profile/deleteAdvertisment';
 
 interface IAdvertismentMenuProps {
@@ -30,16 +31,36 @@ const DefaultButton: React.FC<{ iconName: string; className?: string; onClick?: 
   );
 };
 
-const DeclineButton: React.FC = () => {
-  return <DefaultButton iconName="close">Отклонить</DefaultButton>;
+const DeclineButton: React.FC<{ onClick: (e: React.MouseEvent) => void }> = ({ onClick }) => {
+  return (
+    <DefaultButton iconName="close" onClick={onClick}>
+      Отклонить
+    </DefaultButton>
+  );
 };
 
-const BlockButton: React.FC = () => {
-  return <DefaultButton iconName="forbid">Заблокировать</DefaultButton>;
+const BlockButton: React.FC<{ onClick: (e: React.MouseEvent) => void }> = ({ onClick }) => {
+  return (
+    <DefaultButton iconName="forbid" onClick={onClick}>
+      Заблокировать
+    </DefaultButton>
+  );
 };
 
-const PublishButton: React.FC = () => {
-  return <DefaultButton iconName="task">Опубликовать</DefaultButton>;
+const PublishButton: React.FC<{ onClick: (e: React.MouseEvent) => void }> = ({ onClick }) => {
+  return (
+    <DefaultButton iconName="task" onClick={onClick}>
+      Опубликовать
+    </DefaultButton>
+  );
+};
+
+const UnpublishButton: React.FC<{ onClick: (e: React.MouseEvent) => void }> = ({ onClick }) => {
+  return (
+    <DefaultButton iconName="eye-close" onClick={onClick}>
+      Скрыть
+    </DefaultButton>
+  );
 };
 
 interface ModalProps {
@@ -48,16 +69,36 @@ interface ModalProps {
   text: string;
 }
 
-const initialModalState: ModalProps = {
+const invalidModalState: ModalProps = {
   valid: false,
-  show: false,
+  show: true,
   text: 'Что-то пошло не так. Повторите попытку позже.',
 };
 
-export const AdvertismentMenu: React.FC<IAdvertismentMenuProps> = ({ admin, status, show, id }) => {
-  const [modalProps, setModalProps] = useState(initialModalState);
+const successModalState: ModalProps = {
+  valid: true,
+  show: true,
+  text: 'Статус объявления успешно изменен.',
+};
 
-  const handleModalClose = () => setModalProps(initialModalState);
+export const AdvertismentMenu: React.FC<IAdvertismentMenuProps> = ({ admin, status, show, id }) => {
+  const [modalProps, setModalProps] = useState({ ...invalidModalState, show: false });
+
+  const handleModalClose = () => setModalProps({ ...invalidModalState, show: false });
+
+  const setAdvertismentStatus = async (status: number) => {
+    try {
+      await performChangeAdvertismentStatusRequest(id, status);
+      setModalProps(successModalState);
+    } catch (error) {
+      setModalProps(invalidModalState);
+    }
+  };
+
+  const publishAdvertisment = () => setAdvertismentStatus(Statuses.published);
+  const declineAdvertisment = () => setAdvertismentStatus(Statuses.declined);
+  const blockAdvertisment = () => setAdvertismentStatus(Statuses.blocked);
+  const hideAdvertisment = () => setAdvertismentStatus(Statuses.unpublished);
 
   return (
     <>
@@ -66,22 +107,27 @@ export const AdvertismentMenu: React.FC<IAdvertismentMenuProps> = ({ admin, stat
         <DefaultButton iconName="edit">Редактировать</DefaultButton>
         {admin && status === Statuses.moderation && (
           <>
-            <PublishButton /> <DeclineButton />
+            <PublishButton onClick={() => publishAdvertisment()} />
+            <DeclineButton onClick={() => declineAdvertisment()} />
           </>
         )}
-        {admin && status === Statuses.unpublished && <PublishButton />}
-        {admin && status === Statuses.published && <BlockButton />}
-        {admin && status === Statuses.blocked && <PublishButton />}
-        {admin && status === Statuses.declined && <PublishButton />}
+        {admin && status === Statuses.unpublished && <PublishButton onClick={() => publishAdvertisment()} />}
+        {admin && status === Statuses.published && (
+          <>
+            <UnpublishButton onClick={() => hideAdvertisment()} /> <BlockButton onClick={() => blockAdvertisment()} />
+          </>
+        )}
+        {admin && status === Statuses.blocked && <PublishButton onClick={() => publishAdvertisment()} />}
+        {admin && status === Statuses.declined && <PublishButton onClick={() => publishAdvertisment()} />}
         <DefaultButton
           iconName="delete-bin"
           className="delete-button"
           onClick={async () => {
             try {
               await performDeleteAdvertismentRequest(id);
-              setModalProps({ valid: true, text: 'Объявление было удалено', show: true });
+              setModalProps({ ...successModalState, text: 'Объявление было удалено.' });
             } catch (error) {
-              setModalProps({ ...modalProps, show: true });
+              setModalProps(invalidModalState);
             }
           }}>
           Удалить

@@ -28,7 +28,7 @@ export const Modal: React.FC<IModalProps> = ({ text, valid, show, handleClose })
             ) : (
               <RemixIcon name="close-circle" styleType="fill" size="3x" text="danger" />
             )}
-            <TextField pt="3">{text}</TextField>
+            <TextField center pt="3">{text}</TextField>
           </Flexbox>
           <Flexbox justifyContent="center" p="3">
             <Button primary px="3" onClick={() => handleClose()}>
