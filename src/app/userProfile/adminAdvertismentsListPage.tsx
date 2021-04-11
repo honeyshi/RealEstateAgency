@@ -75,7 +75,10 @@ export const AdminAdvertismentsListPage: React.FC = () => {
           <CheckBox
             name={chekbox.id}
             value={activeStatus === chekbox.statusCode}
-            onChange={(value) => value && setActiveStatus(chekbox.statusCode)}
+            onChange={(value) => {
+              value && setActiveStatus(chekbox.statusCode);
+              setActivePage(1);
+            }}
             key={chekbox.id}>
             {chekbox.text}
           </CheckBox>
@@ -85,7 +88,9 @@ export const AdminAdvertismentsListPage: React.FC = () => {
         {advertismentItemComponents?.length !== 0 ? (
           <>
             {advertismentItemComponents}
-            <NumberPagination amountPages={amountPages} activePage={activePage} setActivePage={setActivePage} />
+            {amountPages !== 1 && (
+              <NumberPagination amountPages={amountPages} activePage={activePage} setActivePage={setActivePage} />
+            )}
           </>
         ) : (
           <TextField classes="lead">По вашему запросу не было найдено ни одного объявления.</TextField>

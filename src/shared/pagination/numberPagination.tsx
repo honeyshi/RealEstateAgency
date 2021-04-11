@@ -14,8 +14,8 @@ const showPages = 5;
 const bias = 2; // in order to include current page and previous
 
 export const NumberPagination: React.FC<INumberPaginationProps> = ({ activePage, amountPages, setActivePage }) => {
-  const lastPage = activePage + showPages - bias > amountPages ? amountPages : activePage + showPages - bias;
-  const visiblePagesNumbers =
+  let lastPage = activePage + showPages - bias > amountPages ? amountPages : activePage + showPages - bias;
+  let visiblePagesNumbers =
     lastPage - activePage + bias === showPages
       ? Array(showPages)
           .fill(0)
@@ -25,6 +25,14 @@ export const NumberPagination: React.FC<INumberPaginationProps> = ({ activePage,
       : Array(showPages)
           .fill(0)
           .map((_, idx) => lastPage - showPages + 1 + idx);
+  if (amountPages < showPages) {
+    lastPage = amountPages;
+    visiblePagesNumbers = Array(amountPages)
+      .fill(0)
+      .map((_, idx) => idx + 1);
+  }
+  console.log('PAGINATION');
+  console.log(amountPages);
   const visiblePagesItemComponents = useMemo(() => {
     const visiblePagesItems = visiblePagesNumbers.map((visiblePageNumber) => {
       return (
