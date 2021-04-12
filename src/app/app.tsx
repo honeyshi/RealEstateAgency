@@ -1,20 +1,36 @@
 import './pagesStyle.scss';
 import './tooltip.scss';
 
-import { ForgetPassword, Login, ResetPassword, Signup, SuccessfulSignup } from './formPages';
-import { Route, Switch } from 'react-router-dom';
+import {
+  AdminAdvertismentsListPage,
+  CreateCoRequestPage,
+  OwnAdvertismentsListPage,
+  ProfileInformationPage,
+  UserProfilePage,
+} from 'app/userProfile';
+import {
+  AdvertismentListPage,
+  CreateAdvertismentPage,
+  PricingPage,
+  StartPage,
+  SuccessfulCreationPage,
+} from 'app/navbarPages';
+import {
+  ForgetPassword,
+  Login,
+  NotFoundPage,
+  ResetPassword,
+  Signup,
+  SuccessfulSendLink,
+  SuccessfulSignup,
+} from 'app/formPages';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
-import { AdvertismentListPage } from './navbarPages/advertismentsListPage';
 import { ContactUs } from './infoPages/contactUs';
-import { CreateAdvertismentPage } from './navbarPages/createAdvertismentPage';
-import { PricingPage } from './navbarPages/pricingPage';
 import React from 'react';
-import { StartPage } from './navbarPages/startPage';
-import { SuccessfulCreationPage } from './navbarPages/createAdvertismentPage';
-import { SuccessfulSendLink } from './formPages/successfulSendLink';
-import { UserProfilePage } from './userProfile';
 
 export const App: React.FC = () => {
+  const currentUserRole = localStorage.getItem('userRole');
   return (
     <Switch>
       <Route exact path="/login" component={Login} />
@@ -29,8 +45,30 @@ export const App: React.FC = () => {
       <Route exact path="/flats" component={AdvertismentListPage} />
       <Route exact path="/successful-advertisment-publishing" component={SuccessfulCreationPage} />
       <Route exact path="/pricing" component={PricingPage} />
-      <Route exact path="/profile*" component={UserProfilePage} />
+
+      <Route exact path="/profile">
+        <Redirect to="/profile/info" />
+      </Route>
+      <Route exact path="/profile/info" render={() => <UserProfilePage activeSubPage={<ProfileInformationPage />} />} />
+      <Route
+        exact
+        path="/profile/my-advertisments"
+        render={() => <UserProfilePage activeSubPage={<OwnAdvertismentsListPage />} />}
+      />
+      <Route
+        exact
+        path="/profile/admin/advertisments"
+        render={() => <UserProfilePage activeSubPage={<AdminAdvertismentsListPage />} />}>
+        {currentUserRole === '2' && <Redirect to="/profile/info" />}
+      </Route>
+      <Route
+        exact
+        path="/profile/create-cotenant-request"
+        render={() => <UserProfilePage activeSubPage={<CreateCoRequestPage />} />}
+      />
+
       <Route exact path="/" component={StartPage} />
+      <Route component={NotFoundPage} />
     </Switch>
   );
 };

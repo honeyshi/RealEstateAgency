@@ -1,11 +1,7 @@
 import { CheckBox, Flexbox, TextField } from 'shared/base';
 import React, { useEffect, useState } from 'react';
 
-import { AdminAdvertismentsListPage } from './adminAdvertismentsListPage';
-import { CreateCoRequestPage } from './createCoRequestPage';
 import { LeftMenuLinks } from 'shared/leftMenu';
-import { OwnAdvertismentsListPage } from './ownAdvertismentsListPage';
-import { ProfileInformationPage } from './profielInformationPage';
 import { RightContainerPage } from 'shared/layout/rightContainerPage';
 import { history } from 'core/history';
 import { useLocation } from 'react-router-dom';
@@ -19,40 +15,22 @@ enum PagesLink {
 
 const userRole = '2';
 
-export const UserProfilePage: React.FC = () => {
-  const [activeMenu, setActiveMenu] = useState(PagesLink.Information);
-  const [activePage, setActivePage] = useState(<ProfileInformationPage />);
+export const UserProfilePage: React.FC<{ activeSubPage: JSX.Element }> = ({ activeSubPage }) => {
+  const [activeMenu, setActiveMenu] = useState('/profile/info');
   const [adminState, setAdminState] = useState(false);
 
   const currentUserRole = localStorage.getItem('userRole');
 
   let location = useLocation();
 
-  const changeLocation = (link: PagesLink, adminState: boolean, page: JSX.Element) => {
+  const changeLocation = (link: string, adminState: boolean) => {
     setActiveMenu(link);
     setAdminState(adminState);
-    setActivePage(page);
   };
 
   useEffect(() => {
-    switch (location.pathname) {
-      case PagesLink.Information:
-        changeLocation(PagesLink.Information, false, <ProfileInformationPage />);
-        break;
-      case PagesLink.OwnAdvertisments:
-        changeLocation(PagesLink.OwnAdvertisments, false, <OwnAdvertismentsListPage />);
-        break;
-      case PagesLink.AdminAdvertisments:
-        if (currentUserRole !== userRole)
-          changeLocation(PagesLink.AdminAdvertisments, true, <AdminAdvertismentsListPage />);
-        break;
-      case PagesLink.CreateCoRequest:
-        changeLocation(PagesLink.CreateCoRequest, false, <CreateCoRequestPage />);
-        break;
-      default:
-        break;
-    }
-  }, [activeMenu, adminState, currentUserRole, location.pathname]);
+    changeLocation(location.pathname, location.pathname.includes('admin'));
+  }, [location.pathname]);
 
   return (
     <RightContainerPage
@@ -100,7 +78,7 @@ export const UserProfilePage: React.FC = () => {
           )}
         </>
       }>
-      {activePage}
+      {activeSubPage}
     </RightContainerPage>
   );
 };
