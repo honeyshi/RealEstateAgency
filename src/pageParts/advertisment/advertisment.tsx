@@ -1,11 +1,13 @@
 import './advertisment.scss';
 
-import { Button, Column, Flexbox, RemixIcon, TextField } from 'shared/base';
+import { Badge, Button, Column, Flexbox, RemixIcon, TextField } from 'shared/base';
 import React, { useState } from 'react';
 
 import { AdvertismentMenu } from './advertismentMenu';
 import { ImagesCarousel } from 'pageParts/imagesCarousel';
 import { Link } from 'react-router-dom';
+import { Statuses } from 'data/values';
+import { mapStatusToText } from 'core/statusToText';
 
 interface IAdvertismentProps {
   header: string;
@@ -50,6 +52,9 @@ export const Advertisment: React.FC<IAdvertismentProps> = ({
         <ImagesCarousel imageUrls={imageUrls} />
       </Column>
       <Column flex vertical justifyContent="between" size={7} p="4" pr="5">
+        {withMenu && !admin && (
+          <Badge danger={status === Statuses.blocked || status === Statuses.declined}>{mapStatusToText(status)}</Badge>
+        )}
         <Flexbox justifyContent="between">
           <TextField bold tag="h5" mb="3">
             {header}

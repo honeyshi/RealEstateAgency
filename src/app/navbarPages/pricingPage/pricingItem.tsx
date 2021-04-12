@@ -1,6 +1,6 @@
 import './pricingItemStyle.scss';
 
-import { Block, Column, ExternalLink, Flexbox, RemixIcon, TextField } from 'shared/base';
+import { Badge, Block, Column, ExternalLink, Flexbox, RemixIcon, TextField } from 'shared/base';
 
 import React from 'react';
 import classNames from 'classnames';
@@ -31,13 +31,7 @@ export const PricingItem: React.FC<IPricingItemProps> = ({
       pt="5"
       pl="4"
       className={classNames({ primary: primary }, 'pricing-item-container rounded-50 align-items-center')}>
-      {primary && (
-        <Flexbox vertical alignItems="center">
-          <TextField uppercase tag="span" p="2" classes="badge">
-            Рекомендуем
-          </TextField>
-        </Flexbox>
-      )}
+      {primary && <Badge>Рекомендуем</Badge>}
       <Flexbox vertical alignItems="center" className="pricing-item">
         <Flexbox vertical alignItems="center" w="100" className="border-bottom">
           <TextField uppercase tag="h4" mb="5" classes="pricing-header">
