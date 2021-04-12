@@ -88,7 +88,7 @@ export const AdvertismentMenu: React.FC<IAdvertismentMenuProps> = ({ admin, stat
 
   const setAdvertismentStatus = async (status: number) => {
     try {
-      await performChangeAdvertismentStatusRequest(id, status);
+      await performChangeAdvertismentStatusRequest(id, String(status));
       setModalProps(successModalState);
     } catch (error) {
       setModalProps(invalidModalState);
@@ -112,9 +112,10 @@ export const AdvertismentMenu: React.FC<IAdvertismentMenuProps> = ({ admin, stat
           </>
         )}
         {admin && status === Statuses.unpublished && <PublishButton onClick={() => publishAdvertisment()} />}
-        {admin && status === Statuses.published && (
+        {status === Statuses.published && (
           <>
-            <UnpublishButton onClick={() => hideAdvertisment()} /> <BlockButton onClick={() => blockAdvertisment()} />
+            <UnpublishButton onClick={() => hideAdvertisment()} />
+            {admin && <BlockButton onClick={() => blockAdvertisment()} />}
           </>
         )}
         {admin && status === Statuses.blocked && <PublishButton onClick={() => publishAdvertisment()} />}

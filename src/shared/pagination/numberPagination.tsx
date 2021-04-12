@@ -31,8 +31,6 @@ export const NumberPagination: React.FC<INumberPaginationProps> = ({ activePage,
       .fill(0)
       .map((_, idx) => idx + 1);
   }
-  console.log('PAGINATION');
-  console.log(amountPages);
   const visiblePagesItemComponents = useMemo(() => {
     const visiblePagesItems = visiblePagesNumbers.map((visiblePageNumber) => {
       return (

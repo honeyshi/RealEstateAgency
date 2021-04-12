@@ -14,4 +14,5 @@ export interface IAdvertisment {
   payment_condition: string;
   with_animals: number;
   with_kids: number;
+  status: string;
 }

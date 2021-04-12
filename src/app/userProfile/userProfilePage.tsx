@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { AdminAdvertismentsListPage } from './adminAdvertismentsListPage';
 import { CreateCoRequestPage } from './createCoRequestPage';
 import { LeftMenuLinks } from 'shared/leftMenu';
+import { OwnAdvertismentsListPage } from './ownAdvertismentsListPage';
 import { ProfileInformationPage } from './profielInformationPage';
 import { RightContainerPage } from 'shared/layout/rightContainerPage';
 import { history } from 'core/history';
@@ -11,6 +12,7 @@ import { useLocation } from 'react-router-dom';
 
 enum PagesLink {
   Information = '/profile/info',
+  OwnAdvertisments = '/profile/my-advertisments',
   AdminAdvertisments = '/profile/admin/advertisments',
   CreateCoRequest = '/profile/create-cotenant-request',
 }
@@ -36,6 +38,9 @@ export const UserProfilePage: React.FC = () => {
     switch (location.pathname) {
       case PagesLink.Information:
         changeLocation(PagesLink.Information, false, <ProfileInformationPage />);
+        break;
+      case PagesLink.OwnAdvertisments:
+        changeLocation(PagesLink.OwnAdvertisments, false, <OwnAdvertismentsListPage />);
         break;
       case PagesLink.AdminAdvertisments:
         if (currentUserRole !== userRole)
@@ -86,7 +91,7 @@ export const UserProfilePage: React.FC = () => {
               leftMenuItems={[
                 { iconName: 'account-box', header: 'Мои данные', link: PagesLink.Information },
                 { iconName: 'heart-3', header: 'Избранное', link: 'PagesLink.Information' },
-                { iconName: 'file-edit', header: 'Мои объявления', link: ' PagesLink.Information' },
+                { iconName: 'file-edit', header: 'Мои объявления', link: PagesLink.OwnAdvertisments },
                 { iconName: 'coins', header: 'Тарифный план', link: 'PagesLink.Information' },
                 { iconName: 'mail-send', header: 'Подписки', link: 'PagesLink.Information ' },
                 { iconName: 'group', header: 'Поиск соарендатора', link: PagesLink.CreateCoRequest },
