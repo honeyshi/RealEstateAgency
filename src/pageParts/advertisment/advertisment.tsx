@@ -23,13 +23,6 @@ interface IAdvertismentProps {
   status?: number;
 }
 
-const imageUrls = [
-  'https://images.unsplash.com/photo-1611095788646-86737a001141?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-  'https://images.unsplash.com/photo-1616530277010-4c328803766f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80',
-  'https://images.unsplash.com/photo-1616587428989-382dcaaaa012?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
-  'https://images.unsplash.com/photo-1616578274010-0ddd36f1417f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80',
-];
-
 export const Advertisment: React.FC<IAdvertismentProps> = ({
   header,
   address,
@@ -49,7 +42,7 @@ export const Advertisment: React.FC<IAdvertismentProps> = ({
   return (
     <Flexbox rounded="50" className="advertisment-container" mb="5">
       <Column size={5} className="images-carousel">
-        <ImagesCarousel imageUrls={imageUrls} />
+        <ImagesCarousel imageUrls={images} />
       </Column>
       <Column flex vertical justifyContent="between" size={7} p="4" pr="5">
         {withMenu && !admin && (
