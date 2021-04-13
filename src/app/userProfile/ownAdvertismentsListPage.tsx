@@ -1,8 +1,9 @@
-import { Block, TextField } from 'shared/base';
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { Advertisment } from 'pageParts/advertisment';
+import { Block } from 'shared/base';
 import { IAdvertisment } from 'core/getAdvertisment/advertismentModel';
+import { NoResultsPage } from 'shared/layout/noResultsPage';
 import { NumberPagination } from 'shared/pagination';
 import { amountAdvertismentOnPage } from 'data/values';
 import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
@@ -68,7 +69,7 @@ export const OwnAdvertismentsListPage: React.FC = () => {
             )}
           </>
         ) : (
-          <TextField classes="lead">По вашему запросу не было найдено ни одного объявления.</TextField>
+          <NoResultsPage>Вы еще не разместили ни одного объявления.</NoResultsPage>
         )}
       </Block>
     </>
