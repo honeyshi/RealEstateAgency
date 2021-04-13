@@ -4,6 +4,7 @@ import './tooltip.scss';
 import {
   AdminAdvertismentsListPage,
   CreateCoRequestPage,
+  EditAdvertismentPage,
   OwnAdvertismentsListPage,
   ProfileInformationPage,
   UserProfilePage,
@@ -65,6 +66,11 @@ export const App: React.FC = () => {
         exact
         path="/profile/create-cotenant-request"
         render={() => <UserProfilePage activeSubPage={<CreateCoRequestPage />} />}
+      />
+      <Route
+        exact
+        path="/profile/advertisment/:id/edit"
+        render={() => <UserProfilePage activeSubPage={<EditAdvertismentPage />} />}
       />
 
       <Route exact path="/" component={StartPage} />

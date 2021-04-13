@@ -51,3 +51,15 @@ export enum Statuses {
   declined = 3,
   blocked = 4,
 }
+
+export interface ModalProps {
+  valid: boolean;
+  show: boolean;
+  text: string;
+}
+
+export const invalidModalState: ModalProps = {
+  valid: false,
+  show: true,
+  text: 'Что-то пошло не так. Повторите попытку позже.',
+};

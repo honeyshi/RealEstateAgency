@@ -1,10 +1,11 @@
 import './advertismentMenu.scss';
 
 import { Button, Flexbox, Modal, RemixIcon, TextField } from 'shared/base';
+import { ModalProps, Statuses, invalidModalState } from 'data/values';
 import React, { useState } from 'react';
 
-import { Statuses } from 'data/values';
 import classNames from 'classnames';
+import { history } from 'core/history';
 import { performChangeAdvertismentStatusRequest } from 'core/profile/changeAdvertismentStatus';
 import { performDeleteAdvertismentRequest } from 'core/profile/deleteAdvertisment';
 
@@ -63,18 +64,6 @@ const UnpublishButton: React.FC<{ onClick: (e: React.MouseEvent) => void }> = ({
   );
 };
 
-interface ModalProps {
-  valid: boolean;
-  show: boolean;
-  text: string;
-}
-
-const invalidModalState: ModalProps = {
-  valid: false,
-  show: true,
-  text: 'Что-то пошло не так. Повторите попытку позже.',
-};
-
 const successModalState: ModalProps = {
   valid: true,
   show: true,
@@ -104,7 +93,9 @@ export const AdvertismentMenu: React.FC<IAdvertismentMenuProps> = ({ admin, stat
     <>
       <Modal valid={modalProps.valid} text={modalProps.text} show={modalProps.show} handleClose={handleModalClose} />
       <div className={classNames('p-2 advertisment-menu shadow', show ? 'd-flex flex-column' : 'd-none')}>
-        <DefaultButton iconName="edit">Редактировать</DefaultButton>
+        <DefaultButton iconName="edit" onClick={() => history.push(`/profile/advertisment/${id}/edit`)}>
+          Редактировать
+        </DefaultButton>
         {admin && status === Statuses.moderation && (
           <>
             <PublishButton onClick={() => publishAdvertisment()} />
