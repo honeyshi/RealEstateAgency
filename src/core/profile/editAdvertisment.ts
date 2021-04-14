@@ -18,12 +18,11 @@ export const performEditAdvertismentRequest = async (
     contact_phone: phone,
     type: String(currentAdvertisment.type),
     house_floors: String(currentAdvertisment.house_floors),
-    apartment_floor: String(currentAdvertisment.apartment_floor),
+    apartment_floor: currentAdvertisment.apartment_floor === null ? '' : String(currentAdvertisment.apartment_floor),
     apartment_area: String(currentAdvertisment.apartment_area),
     district: String(districts.indexOf(currentAdvertisment.district)),
     price: payment,
-    payment_condition: currentAdvertisment.payment_condition,
-    furniture: currentAdvertisment.furniture,
+    payment_condition: String(currentAdvertisment.payment_condition),
     with_kids: currentAdvertisment.with_kids === 1,
     with_animals: currentAdvertisment.with_animals === 1,
     deposit: deposit,
@@ -42,7 +41,7 @@ export const performEditAdvertismentRequest = async (
       metroValues.indexOf(currentAdvertisment.metro) === -1
         ? '0'
         : String(metroValues.indexOf(currentAdvertisment.metro)),
-    rooms: String(currentAdvertisment.rooms),
+    rooms: currentAdvertisment.rooms === null ? '' : String(currentAdvertisment.rooms),
     renovation: String(currentAdvertisment.renovation),
   };
   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authInfo')}`;

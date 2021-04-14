@@ -19,10 +19,11 @@ export interface IAdvertisment {
 }
 
 export interface OneAdvertismentModel {
+  address: string;
   deposit: number;
   price: number;
   description: string;
-  type: string;
+  type: number;
   gps_point: string;
   street: string;
   house_number: string;

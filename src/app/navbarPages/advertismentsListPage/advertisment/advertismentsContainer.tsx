@@ -11,36 +11,6 @@ import { performGetAdvertismentRequest } from 'core/getAdvertisment/getAdvertism
 import { setSortingFilter } from 'data/actions';
 import { useDispatch } from 'react-redux';
 
-// const advertisments = [
-//   {
-//     header: '1-комнатная квартира, 45 м², этаж 4/7',
-//     address: 'Нижегородская область, Нижний Новгород, р-н Советский, мкр. Высоково, ул. Бориса Панина, 7к3',
-//     metro: 'Горьковская',
-//     additionalInformation: 'От года, 21 000 ₽ + 1 000 ₽ комм. платежи (без счётчиков), залог 10 000 ₽',
-//     payment: '21 000',
-//     link: '/test',
-//     id: 'advertisment-1',
-//   },
-//   {
-//     header: '1-комнатная квартира, 45 м², этаж 4/7',
-//     address: 'Нижегородская область, Нижний Новгород, р-н Советский, мкр. Высоково, ул. Бориса Панина, 7к3',
-//     metro: 'Горьковская',
-//     additionalInformation: 'От года, 21 000 ₽ + 1 000 ₽ комм. платежи (без счётчиков), залог 10 000 ₽',
-//     payment: '21 000',
-//     link: '#',
-//     id: 'advertisment-2',
-//   },
-//   {
-//     header: '1-комнатная квартира, 45 м², этаж 4/7',
-//     address: 'Нижегородская область, Нижний Новгород, р-н Советский, мкр. Высоково, ул. Бориса Панина, 7к3',
-//     metro: 'Горьковская',
-//     additionalInformation: 'От года, 21 000 ₽ + 1 000 ₽ комм. платежи (без счётчиков), залог 10 000 ₽',
-//     payment: '21 000',
-//     link: '#',
-//     id: 'advertisment-3',
-//   },
-// ];
-
 export const AdvertismentsContainer: React.FC = () => {
   const dispatch = useDispatch();
 
@@ -99,7 +69,9 @@ export const AdvertismentsContainer: React.FC = () => {
             />
           </Flexbox>
           {advertismentItemComponents}
-          <NumberPagination amountPages={amountPages} activePage={activePage} setActivePage={setActivePage} />
+          {amountPages !== 1 && (
+            <NumberPagination amountPages={amountPages} activePage={activePage} setActivePage={setActivePage} />
+          )}
         </>
       ) : (
         <TextField classes="lead">

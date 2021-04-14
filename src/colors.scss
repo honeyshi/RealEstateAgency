@@ -25,6 +25,13 @@ a.text-accent {
   }
 }
 
+.bg-danger {
+  background-color: $invalid-color !important;
+  &:hover {
+    background-color: $invalid-color-hover !important;
+  }
+}
+
 .text-danger {
   color: $invalid-color !important;
 }

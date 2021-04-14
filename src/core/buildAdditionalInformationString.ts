@@ -1,5 +1,5 @@
 export const buildAdditionalInformationString = (
-  deposit: string,
+  deposit: string | null,
   paymentCondition: string,
   withAnimals: number,
   withKids: number

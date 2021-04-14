@@ -1,0 +1,1 @@
+export { AdvertismentDescriptionPage } from './advertismentDescriptionPage';

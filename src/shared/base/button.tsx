@@ -11,6 +11,7 @@ interface IButtonProps extends SpaceProps, SizeProps, ColorProps, React.ButtonHT
   light?: boolean;
   primary?: boolean;
   secondary?: boolean;
+  danger?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -19,6 +20,7 @@ export const Button: React.FC<IButtonProps> = ({
   light,
   primary,
   secondary,
+  danger,
   className,
   onClick,
   children,
@@ -28,6 +30,7 @@ export const Button: React.FC<IButtonProps> = ({
     'btn',
     { 'btn-light': light, 'font-weight-light': fontLight },
     { 'font-weight-light text-white bg-accent': primary },
+    { 'font-weight-light text-white bg-danger': danger },
     { 'font-weight-light bg-light': secondary },
     propsToSpace(other),
     propsToSize(other),

@@ -10,6 +10,7 @@ import {
   UserProfilePage,
 } from 'app/userProfile';
 import {
+  AdvertismentDescriptionPage,
   AdvertismentListPage,
   CreateAdvertismentPage,
   PricingPage,
@@ -46,6 +47,7 @@ export const App: React.FC = () => {
       <Route exact path="/flats" component={AdvertismentListPage} />
       <Route exact path="/successful-advertisment-publishing" component={SuccessfulCreationPage} />
       <Route exact path="/pricing" component={PricingPage} />
+      <Route exact path="/advertisment-description/:id" component={AdvertismentDescriptionPage} />
 
       <Route exact path="/profile">
         <Redirect to="/profile/info" />
