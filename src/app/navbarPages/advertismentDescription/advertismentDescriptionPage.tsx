@@ -45,7 +45,7 @@ export const AdvertismentDescriptionPage: React.FC = () => {
         const result = await performGetOneAdvertismentRequest(id);
         setCurrentAdvertisment(result as OneAdvertismentModel);
       } catch (error) {
-        error.response.status === 404 && history.push('/not-found-advertisment');
+        error.response.status === 404 ? history.push('/not-found-advertisment') : history.push('/error');
       }
     };
     fetchData();

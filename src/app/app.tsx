@@ -29,6 +29,7 @@ import {
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { ContactUs } from './infoPages/contactUs';
+import { ErrorPage } from 'shared/layout/errorPage';
 import React from 'react';
 
 export const App: React.FC = () => {
@@ -41,6 +42,7 @@ export const App: React.FC = () => {
       <Route exact path="/reset-password" component={ResetPassword} />
       <Route exact path="/successful-signup" component={SuccessfulSignup} />
       <Route exact path="/successful-send-link" component={SuccessfulSendLink} />
+      <Route exact path="/error" component={ErrorPage} />
 
       <Route exact path="/contact" component={ContactUs} />
       <Route exact path="/new-advertisment" component={CreateAdvertismentPage} />

@@ -85,7 +85,7 @@ export const EditAdvertismentPage: React.FC = () => {
           setCurrentAdvertisment(advertisment);
         }
       } catch (error) {
-        error.response.status === 404 && history.push('/not-found-advertisment');
+        error.response.status === 404 ? history.push('/not-found-advertisment') : history.push('/error');
       }
     };
     fetchData();
