@@ -4,6 +4,7 @@ import { Badge, Button, Column, Flexbox, RemixIcon, TextField } from 'shared/bas
 import React, { useState } from 'react';
 
 import { AdvertismentMenu } from './advertismentMenu';
+import { FavouriteButton } from './favouriteButton';
 import { ImagesCarousel } from 'pageParts/imagesCarousel';
 import { Link } from 'react-router-dom';
 import { Statuses } from 'data/values';
@@ -21,6 +22,7 @@ interface IAdvertismentProps {
   withMenu?: boolean;
   admin?: boolean;
   status?: number;
+  favourite?: boolean;
 }
 
 export const Advertisment: React.FC<IAdvertismentProps> = ({
@@ -35,9 +37,8 @@ export const Advertisment: React.FC<IAdvertismentProps> = ({
   withMenu,
   admin,
   status,
+  favourite,
 }) => {
-  const [favourite, setFavourite] = useState(false);
-  const [hover, setHover] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   return (
     <Flexbox rounded="50" className="advertisment-container" mb="5">
@@ -57,17 +58,7 @@ export const Advertisment: React.FC<IAdvertismentProps> = ({
               <RemixIcon name="menu" size="sm" />
             </Button>
           ) : (
-            <Button
-              className="shadow add-favourite"
-              px="2"
-              pt="2"
-              pb="0"
-              onClick={() => setFavourite(!favourite)}
-              onMouseEnter={() => setHover(true)}
-              onMouseLeave={() => setHover(false)}>
-              {!favourite && !hover && <RemixIcon name="heart-3" size="sm" />}
-              {(favourite || hover) && <RemixIcon name="heart-3" styleType="fill" size="sm" className="text-danger" />}
-            </Button>
+            <FavouriteButton small isFavourite={favourite} />
           )}
         </Flexbox>
         {withMenu && (

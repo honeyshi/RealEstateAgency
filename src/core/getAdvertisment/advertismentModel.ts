@@ -16,6 +16,7 @@ export interface IAdvertisment {
   with_animals: number;
   with_kids: number;
   status: string;
+  favorite_apartments: Array<Object>;
 }
 
 export interface OneAdvertismentModel {
@@ -40,4 +41,5 @@ export interface OneAdvertismentModel {
   payment_condition: string;
   rooms: number;
   renovation: number;
+  favorite_apartments: Array<Object>;
 }

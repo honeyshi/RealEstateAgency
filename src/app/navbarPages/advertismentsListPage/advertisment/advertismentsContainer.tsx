@@ -50,6 +50,7 @@ export const AdvertismentsContainer: React.FC = () => {
             return image.url;
           })}
           id={advertisment.id}
+          favourite={advertisment.favorite_apartments.length !== 0}
           key={`advertisment-${advertisment.id}`}
         />
       );

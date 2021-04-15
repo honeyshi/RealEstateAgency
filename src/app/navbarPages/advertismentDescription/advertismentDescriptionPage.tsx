@@ -15,6 +15,7 @@ import {
 import { AdvertismentDescriptionColumn } from './advertismentDescriptionColumn';
 import { AdvertismentDescriptionRow } from './advertismentDescriptionRow';
 import { DefaultPage } from 'shared/layout/defaultPage';
+import { FavouriteButton } from 'pageParts/advertisment';
 import { ImagesCarousel } from 'pageParts/imagesCarousel';
 import { OneAdvertismentModel } from 'core/getAdvertisment/advertismentModel';
 import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
@@ -24,8 +25,6 @@ import { useParams } from 'react-router-dom';
 
 export const AdvertismentDescriptionPage: React.FC = () => {
   const [currentAdvertisment, setCurrentAdvertisment] = useState<OneAdvertismentModel>();
-  const [favourite, setFavourite] = useState(false);
-  const [hover, setHover] = useState(false);
 
   const { id } = useParams<{ id: string }>();
 
@@ -71,16 +70,7 @@ export const AdvertismentDescriptionPage: React.FC = () => {
                         <Button danger mr="3">
                           Пожаловаться
                         </Button>
-                        <Button
-                          className="shadow add-favourite"
-                          onClick={() => setFavourite(!favourite)}
-                          onMouseEnter={() => setHover(true)}
-                          onMouseLeave={() => setHover(false)}>
-                          {!favourite && !hover && <RemixIcon name="heart-3" />}
-                          {(favourite || hover) && (
-                            <RemixIcon name="heart-3" styleType="fill" className="text-danger" />
-                          )}
-                        </Button>
+                        <FavouriteButton isFavourite={currentAdvertisment.favorite_apartments.length !== 0} />
                       </Flexbox>
                     </Flexbox>
                     <TextField tag="span" mb="3">
