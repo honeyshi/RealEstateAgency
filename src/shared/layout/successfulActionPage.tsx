@@ -5,12 +5,13 @@ import React from 'react';
 import { history } from 'core/history';
 
 interface ISuccessfulActionPageProps {
+  auth?: boolean;
   description: string;
   header: string;
   image: string;
 }
 
-export const SuccessfulActionPage: React.FC<ISuccessfulActionPageProps> = ({ description, header, image }) => {
+export const SuccessfulActionPage: React.FC<ISuccessfulActionPageProps> = ({ auth, description, header, image }) => {
   return (
     <DefaultPage>
       <Section bottom>
@@ -26,8 +27,8 @@ export const SuccessfulActionPage: React.FC<ISuccessfulActionPageProps> = ({ des
               <TextField center mb="3" px="2">
                 {description}
               </TextField>
-              <Button primary onClick={() => history.push('/')} py="3">
-                Вернуться на главную
+              <Button primary onClick={() => history.push(auth ? '/login' : '/')} py="3">
+                {auth ? 'Перейти к авторизации' : 'Вернуться на главную'}
               </Button>
             </Flexbox>
           </Flexbox>

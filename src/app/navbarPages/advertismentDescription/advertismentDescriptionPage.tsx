@@ -44,7 +44,16 @@ export const AdvertismentDescriptionPage: React.FC = () => {
         const result = await performGetOneAdvertismentRequest(id);
         setCurrentAdvertisment(result as OneAdvertismentModel);
       } catch (error) {
-        error.response.status === 404 ? history.push('/not-found-advertisment') : history.push('/error');
+        switch (error.response.status) {
+          case 404:
+            history.push('/not-found-advertisment');
+            break;
+          case 401:
+            history.push('/unauthorized');
+            break;
+          default:
+            history.push('/error');
+        }
       }
     };
     fetchData();

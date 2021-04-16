@@ -1,6 +1,7 @@
 import { Button, Modal, RemixIcon } from 'shared/base';
 import React, { useState } from 'react';
 
+import { history } from 'core/history';
 import { invalidModalState } from 'data/values';
 import { performAddToFavouriteRequest } from 'core/favourite/addToFavourite';
 import { performDeleteFromFavouriteRequest } from 'core/favourite/deleteFromFavourite';
@@ -25,7 +26,9 @@ export const FavouriteButton: React.FC<IFavouriteButtonProps> = ({ isFavourite, 
       favourite ? await performDeleteFromFavouriteRequest(id) : await performAddToFavouriteRequest(id);
       setFavourite(!favourite);
     } catch (error) {
-      setModalProps({ ...invalidModalState, show: true });
+      error.response.status === 401
+        ? history.push('/unauthorized')
+        : setModalProps({ ...invalidModalState, show: true });
     }
   };
 
