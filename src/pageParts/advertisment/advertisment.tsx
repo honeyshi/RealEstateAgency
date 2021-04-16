@@ -58,7 +58,7 @@ export const Advertisment: React.FC<IAdvertismentProps> = ({
               <RemixIcon name="menu" size="sm" />
             </Button>
           ) : (
-            <FavouriteButton small isFavourite={favourite} />
+            <FavouriteButton small isFavourite={favourite} id={id} />
           )}
         </Flexbox>
         {withMenu && (

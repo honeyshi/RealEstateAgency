@@ -70,7 +70,7 @@ export const AdvertismentDescriptionPage: React.FC = () => {
                         <Button danger mr="3">
                           Пожаловаться
                         </Button>
-                        <FavouriteButton isFavourite={currentAdvertisment.favorite_apartments.length !== 0} />
+                        <FavouriteButton isFavourite={currentAdvertisment.favorite_apartments.length !== 0} id={id} />
                       </Flexbox>
                     </Flexbox>
                     <TextField tag="span" mb="3">
