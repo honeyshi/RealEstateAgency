@@ -21,6 +21,9 @@ export interface IAdvertisment {
 
 export interface OneAdvertismentModel {
   address: string;
+  author: {
+    name: string;
+  };
   deposit: number;
   price: number;
   description: string;

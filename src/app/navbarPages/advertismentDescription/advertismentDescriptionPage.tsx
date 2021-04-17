@@ -9,6 +9,7 @@ import {
   buildFurnitureString,
   buildKidsString,
   buildPaymentConditionString,
+  buildPropertyTypeString,
   buildRenovationString,
 } from 'core/advertismentPropsIdToValues';
 
@@ -25,6 +26,7 @@ import { useParams } from 'react-router-dom';
 
 export const AdvertismentDescriptionPage: React.FC = () => {
   const [currentAdvertisment, setCurrentAdvertisment] = useState<OneAdvertismentModel>();
+  const [showPhone, setShowPhone] = useState(false);
 
   const { id } = useParams<{ id: string }>();
 
@@ -91,7 +93,7 @@ export const AdvertismentDescriptionPage: React.FC = () => {
                         <TextField tag="span">{currentAdvertisment.metro}</TextField>
                       </Flexbox>
                     )}
-                    <Flexbox justifyContent="between" my="5">
+                    <Flexbox justifyContent="between" my="3">
                       <AdvertismentDescriptionColumn
                         header="Комнаты"
                         iconName="hotel-bed"
@@ -116,8 +118,7 @@ export const AdvertismentDescriptionPage: React.FC = () => {
                         text={`${currentAdvertisment.apartment_area} м²`}
                       />
                     </Flexbox>
-                    <TextField bold>Условия проживания</TextField>
-                    <TextField tag="span">
+                    <TextField tag="span" mb="5">
                       {buildAdditionalInformationString(
                         currentAdvertisment.deposit === null ? null : String(currentAdvertisment.deposit),
                         currentAdvertisment.payment_condition,
@@ -125,6 +126,18 @@ export const AdvertismentDescriptionPage: React.FC = () => {
                         currentAdvertisment.with_kids
                       )}
                     </TextField>
+                    {showPhone ? (
+                      <Flexbox>
+                        <TextField bold tag="span" mr="5">
+                          {currentAdvertisment.author.name}
+                        </TextField>
+                        <TextField tag="span">{currentAdvertisment.contact_phone}</TextField>
+                      </Flexbox>
+                    ) : (
+                      <Button primary onClick={() => setShowPhone(true)}>
+                        Показать телефон
+                      </Button>
+                    )}
                   </Column>
                 </Flexbox>
               </Row>
@@ -135,6 +148,10 @@ export const AdvertismentDescriptionPage: React.FC = () => {
                     <TextField tag="span">{currentAdvertisment.description}</TextField>
                   </Column>
                   <Column size={5} rounded="50" className="advertisment-secondary-description-container" p="5">
+                    <AdvertismentDescriptionRow
+                      header="Тип недвижимости"
+                      text={buildPropertyTypeString(String(currentAdvertisment.type))}
+                    />
                     <AdvertismentDescriptionRow
                       header="Условия оплаты"
                       text={buildPaymentConditionString(currentAdvertisment.payment_condition)}

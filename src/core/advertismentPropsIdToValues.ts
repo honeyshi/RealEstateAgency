@@ -1,3 +1,16 @@
+export const buildPropertyTypeString = (propertyType: string) => {
+  switch (propertyType) {
+    case '0':
+      return 'Дом';
+    case '1':
+      return 'Квартира';
+    case '2':
+      return 'Комната';
+    default:
+      return '';
+  }
+};
+
 export const buildPaymentConditionString = (paymentCondition: string) => {
   switch (paymentCondition) {
     case '0':
