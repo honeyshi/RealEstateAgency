@@ -36,6 +36,7 @@ import { UnauthorizedErrorPage } from 'shared/layout/unauthorizedErrorPage';
 
 export const App: React.FC = () => {
   const currentUserRole = localStorage.getItem('userRole');
+  const token = localStorage.getItem('authInfo');
   return (
     <Switch>
       <Route exact path="/login" component={Login} />
@@ -54,6 +55,7 @@ export const App: React.FC = () => {
       <Route exact path="/pricing" component={PricingPage} />
       <Route exact path="/advertisment-description/:id" component={AdvertismentDescriptionPage} />
 
+      {token == null && <Redirect from="/profile*" to="/unauthorized" />}
       <Route exact path="/profile">
         <Redirect to="/profile/info" />
       </Route>
