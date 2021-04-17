@@ -6,7 +6,7 @@ export const buildAdditionalInformationString = (
 ) => {
   const depositString = deposit != null ? `Залог ${deposit} ₽.` : 'Без залога.';
   const paymentString = () => {
-    switch (paymentCondition) {
+    switch (String(paymentCondition)) {
       case '0':
         return 'Только оплата аренды.';
       case '1':

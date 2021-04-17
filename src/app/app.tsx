@@ -5,6 +5,7 @@ import {
   AdminAdvertismentsListPage,
   CreateCoRequestPage,
   EditAdvertismentPage,
+  FavouriteAdvertismentsListPage,
   OwnAdvertismentsListPage,
   ProfileInformationPage,
   UserProfilePage,
@@ -61,6 +62,11 @@ export const App: React.FC = () => {
         exact
         path="/profile/my-advertisments"
         render={() => <UserProfilePage activeSubPage={<OwnAdvertismentsListPage />} />}
+      />
+      <Route
+        exact
+        path="/profile/favourite-advertisments"
+        render={() => <UserProfilePage activeSubPage={<FavouriteAdvertismentsListPage />} />}
       />
       <Route
         exact
