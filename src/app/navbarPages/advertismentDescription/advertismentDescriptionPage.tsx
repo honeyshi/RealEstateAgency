@@ -1,6 +1,6 @@
 import './advertismentDescriptionPage.scss';
 
-import { Button, Column, Container, Flexbox, RemixIcon, Row, Section, TextField } from 'shared/base';
+import { Button, Column, Container, Flexbox, Image, RemixIcon, Row, Section, TextField } from 'shared/base';
 import { Map, Placemark, YMaps } from 'react-yandex-maps';
 import React, { useEffect, useState } from 'react';
 import {
@@ -20,6 +20,9 @@ import { FavouriteButton } from 'pageParts/advertisment';
 import { ImagesCarousel } from 'pageParts/imagesCarousel';
 import { OneAdvertismentModel } from 'core/getAdvertisment/advertismentModel';
 import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
+import doodle1 from 'icons/doodle1.svg';
+import doodle2 from 'icons/doodle2.svg';
+import doodle3 from 'icons/doodle3.svg';
 import { history } from 'core/history';
 import { performGetOneAdvertismentRequest } from 'core/getAdvertisment/getOneAdvertisment';
 import { useParams } from 'react-router-dom';
@@ -67,8 +70,13 @@ export const AdvertismentDescriptionPage: React.FC = () => {
         <Container nonFluid>
           {currentAdvertisment !== undefined && (
             <>
+              <Row className="advertisment-doodle-container">
+                <Image src={doodle1} className="doodle top left" />
+                <Image src={doodle2} className="doodle middle right" />
+                <Image src={doodle3} className="doodle bottom left" />
+              </Row>
               <Row alignItems="center">
-                <Flexbox rounded="50" className="advertisment-main-description-container" w="100" mb="5">
+                <Flexbox rounded="50" bg="white" className="advertisment-main-description-container" w="100" mb="5">
                   <Column size={6} className="images-carousel">
                     <ImagesCarousel imageUrls={currentAdvertisment.images.map((image) => image.url)} />
                   </Column>
@@ -141,13 +149,24 @@ export const AdvertismentDescriptionPage: React.FC = () => {
                   </Column>
                 </Flexbox>
               </Row>
+
               <Row alignItems="center">
                 <Flexbox rounded="50" w="100" justifyContent="between" mb="5">
-                  <Column size={6} rounded="50" className="advertisment-secondary-description-container" p="5">
+                  <Column
+                    size={6}
+                    rounded="50"
+                    bg="white"
+                    className="advertisment-secondary-description-container"
+                    p="5">
                     <TextField bold>Описание объявления</TextField>
                     <TextField tag="span">{currentAdvertisment.description}</TextField>
                   </Column>
-                  <Column size={5} rounded="50" className="advertisment-secondary-description-container" p="5">
+                  <Column
+                    size={5}
+                    rounded="50"
+                    bg="white"
+                    className="advertisment-secondary-description-container"
+                    p="5">
                     <AdvertismentDescriptionRow
                       header="Тип недвижимости"
                       text={buildPropertyTypeString(String(currentAdvertisment.type))}

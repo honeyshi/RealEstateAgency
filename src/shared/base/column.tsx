@@ -1,10 +1,11 @@
 import { BorderProps, propsToBorder } from './utils/borderUtil';
+import { ColorProps, propsToColor } from './utils/colorUtils';
 import { SpaceProps, propsToSpace } from './utils/spaceUtil';
 
 import React from 'react';
 import classNames from 'classnames';
 
-interface IColumnProps extends SpaceProps, BorderProps {
+interface IColumnProps extends SpaceProps, BorderProps, ColorProps {
   tag?: React.ElementType;
   className?: string;
   flex?: boolean;
@@ -32,6 +33,7 @@ export const Column: React.FC<IColumnProps> = ({
     },
     propsToSpace(other),
     propsToBorder(other),
+    propsToColor(other),
     className
   );
   return (
