@@ -50,6 +50,7 @@ export const App: React.FC = () => {
       <Route exact path="/unauthorized" component={UnauthorizedErrorPage} />
 
       <Route exact path="/contact" component={ContactUs} />
+      {token == null && <Redirect from="/new-advertisment" to="/unauthorized" />}
       <Route exact path="/new-advertisment" component={CreateAdvertismentPage} />
       <Route exact path="/flats" component={AdvertismentListPage} />
       <Route exact path="/successful-advertisment-publishing" component={SuccessfulCreationPage} />

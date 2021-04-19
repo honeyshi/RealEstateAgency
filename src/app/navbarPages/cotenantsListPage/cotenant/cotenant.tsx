@@ -1,6 +1,6 @@
 import './cotenant.scss';
 
-import { Flexbox, Image, RemixIcon, TextField } from 'shared/base';
+import { Flexbox, Image, RemixIcon, Td, TextField, Tr } from 'shared/base';
 
 import { Link } from 'react-router-dom';
 import React from 'react';
@@ -15,17 +15,17 @@ interface ICotenantProps {
 
 export const Cotenant: React.FC<ICotenantProps> = ({ id, image, sex, district, age }) => {
   return (
-    <tr className="cotenant-container">
-      <td>
+    <Tr className="cotenant-container">
+      <Td>
         <Image
           className="cotenant-image rounded-circle"
           src="https://images.unsplash.com/photo-1618678900888-da259539f5ef?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=633&q=80"
         />
-      </td>
-      <td>{sex}</td>
-      <td>{district}</td>
-      <td>{age}</td>
-      <td>
+      </Td>
+      <Td>{sex}</Td>
+      <Td>{district}</Td>
+      <Td>{age}</Td>
+      <Td>
         <Link to={`cotenant-description-${id}`} className="text-accent">
           <Flexbox>
             <TextField tag="span" mr="3">
@@ -34,7 +34,7 @@ export const Cotenant: React.FC<ICotenantProps> = ({ id, image, sex, district, a
             <RemixIcon name="arrow-right" />
           </Flexbox>
         </Link>
-      </td>
-    </tr>
+      </Td>
+    </Tr>
   );
 };
