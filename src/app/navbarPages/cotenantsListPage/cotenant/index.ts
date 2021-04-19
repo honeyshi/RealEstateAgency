@@ -1,0 +1,1 @@
+export { CotenantListContainer } from './cotenantListContainer';

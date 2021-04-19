@@ -22,11 +22,11 @@ export const checkNewAdvertismentFields = (
   let notIncludedProps: string[] = [];
 
   switch (propertyType) {
-    case '1': // room
-      notIncludedProps = ['address', 'roomsAmount'];
-      break;
-    case '2': // house
+    case '0': // house
       notIncludedProps = ['address', 'roomsAmount', 'currentFloor'];
+      break;
+    case '2': // room
+      notIncludedProps = ['address', 'roomsAmount'];
       break;
     default:
       notIncludedProps = ['address'];

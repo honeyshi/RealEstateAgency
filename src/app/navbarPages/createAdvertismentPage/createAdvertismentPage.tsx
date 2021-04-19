@@ -14,15 +14,10 @@ import { OwnerContactsPage } from './fourthStepSections';
 import { PropertyDescriptionPage } from './firstStepSections';
 import { PropertyFacilitiesPage } from './secondStepSections';
 import { PropertyPhotosPage } from './thirdStepSections';
-import { PropertyType } from './propertyType';
+import { PropertyType } from 'pageParts/propertyType';
 import { RightContainerPage } from 'shared/layout/rightContainerPage';
 import { StoreType } from 'core/store';
-
-const propertyTypes = [
-  { iconName: 'building', type: 'Квартира', key: 'flat-type', value: '0' },
-  { iconName: 'collage', type: 'Комната', key: 'room-type', value: '1' },
-  { iconName: 'home-4', type: 'Дом', key: 'house-type', value: '2' },
-];
+import { propertyTypes } from 'data/values';
 
 export const CreateAdvertismentPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -37,14 +32,14 @@ export const CreateAdvertismentPage: React.FC = () => {
     const propertyTypeItems = propertyTypes.map((propertyType) => {
       return (
         <PropertyType
-          text={propertyType.type}
+          text={propertyType.text}
           active={propertyType.value === activePropertyType}
           onClick={() => {
             dispatch(setPropertyType(propertyType.value));
             dispatch(setValidatedForm(false));
             dispatch(cleanPropertyDetails());
           }}
-          key={propertyType.key}>
+          key={propertyType.id}>
           <RemixIcon name={propertyType.iconName} />
         </PropertyType>
       );
@@ -74,6 +69,7 @@ export const CreateAdvertismentPage: React.FC = () => {
             {propertyTypeItemComponents}
           </Flexbox>
           <LeftMenu
+            withDispatch
             activeItemIndex={activeStep}
             leftMenuItems={[
               { iconName: 'draft', header: 'Описание объекта' },

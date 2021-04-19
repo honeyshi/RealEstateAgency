@@ -1,5 +1,3 @@
-import { createReducer } from '@reduxjs/toolkit';
-import { Range } from 'react-input-range';
 import {
   cleanFilters,
   setAdvertismentPageFilter,
@@ -13,9 +11,12 @@ import {
   setSpaceFilter,
 } from 'data/actions';
 
+import { Range } from 'react-input-range';
+import { createReducer } from '@reduxjs/toolkit';
+
 interface IAdvertismentFilterInitialState {
   propertyType: string;
-  districts: string[];
+  districts: number[];
   rentPayment: Range | number;
   rooms: string[];
   space: Range | number;
@@ -26,7 +27,7 @@ interface IAdvertismentFilterInitialState {
 }
 
 const advertismentFilterInitialState: IAdvertismentFilterInitialState = {
-  propertyType: 'flat-type',
+  propertyType: '1',
   districts: [],
   rentPayment: { min: 5, max: 300 },
   rooms: [],

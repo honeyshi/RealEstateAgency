@@ -9,15 +9,23 @@ interface ILeftMenuItem {
   header: string;
   iconName: string;
   index: number;
+  withDispatch: boolean | undefined;
   setActiveMethod: (value: number) => void;
 }
 
-export const LeftMenuItem: React.FC<ILeftMenuItem> = ({ active, header, iconName, index, setActiveMethod }) => {
+export const LeftMenuItem: React.FC<ILeftMenuItem> = ({
+  active,
+  withDispatch,
+  header,
+  iconName,
+  index,
+  setActiveMethod,
+}) => {
   const dispatch = useDispatch();
   return (
     <li
       className={classNames({ active: active }, { shadow: active }, 'left-menu-item')}
-      onClick={() => dispatch(setActiveMethod(index + 1))}>
+      onClick={() => (withDispatch ? dispatch(setActiveMethod(index + 1)) : setActiveMethod(index + 1))}>
       <Flexbox pl="4">
         <RemixIcon name={iconName} />
         <TextField tag="span" pl="4">

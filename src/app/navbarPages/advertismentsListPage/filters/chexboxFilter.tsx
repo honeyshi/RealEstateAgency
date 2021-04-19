@@ -1,11 +1,12 @@
-import classNames from 'classnames';
+import { Block, Flexbox, RemixIcon, TextField } from 'shared/base';
 import React, { useState } from 'react';
-import { Block, Flexbox, TextField, RemixIcon } from 'shared/base';
 
-export const CheckboxFilter: React.FC<{ filterName: string }> = ({ filterName, children }) => {
+import classNames from 'classnames';
+
+export const CheckboxFilter: React.FC<{ after?: boolean; filterName: string }> = ({ after, filterName, children }) => {
   const [opened, setOpened] = useState(false);
   return (
-    <Block mt="4" mb="4">
+    <Block mb="4" className={classNames({ 'mt-4': !after })}>
       <Flexbox
         alignItems="center"
         justifyContent="between"

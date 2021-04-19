@@ -1,20 +1,30 @@
 @import 'shared/base/utils/styleVariables';
 
-.input-border-bottom {
-  border: 0 !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5) !important;
-}
-
 input:focus {
   outline: none;
 }
 
 .form-control {
+  &.input-border-bottom {
+    border: 0 !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5) !important;
+  }
   &.is-invalid {
     color: $invalid-color;
     border-bottom-color: $invalid-color !important;
   }
   &:focus {
     box-shadow: none !important;
+  }
+  &.input-solid {
+    background-color: $light-color-secondary;
+    border-color: $light-color-secondary;
+    font-size: 1.15rem;
+    border-radius: $solid-form-radius;
+    &:focus {
+      background-color: $light-color-secondary;
+      border-color: $accent-color;
+      outline: 0;
+    }
   }
 }

@@ -1,0 +1,21 @@
+@import 'shared/base/utils/styleVariables';
+
+.cotenant-list-container {
+  th {
+    border-top: none !important;
+  }
+  .cotenant-container {
+    vertical-align: middle;
+    &:hover {
+      box-shadow: $shadow;
+    }
+    .cotenant-image {
+      height: 5rem;
+      width: 5rem;
+    }
+    td {
+      vertical-align: middle !important;
+      border-top: none !important;
+    }
+  }
+}

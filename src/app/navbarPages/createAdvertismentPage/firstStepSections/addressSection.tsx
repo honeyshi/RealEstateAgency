@@ -71,7 +71,7 @@ export const AddressSection: React.FC = () => {
         defaultQuery={houseDetails.address == null ? 'Нижний Новгород' : houseDetails.address.value}
         onChange={(selectedAddress) => {
           dispatch(setCreateAdAddress(selectedAddress));
-          dispatch(setCreateAdStreet(String(selectedAddress?.data.street)));
+          dispatch(setCreateAdStreet(String(selectedAddress?.data.street_with_type)));
           dispatch(setCreateAdHouseNumber(String(selectedAddress?.data.house)));
           dispatch(setCreateAdGeo(`${selectedAddress?.data.geo_lat}, ${selectedAddress?.data.geo_lon}`));
         }}

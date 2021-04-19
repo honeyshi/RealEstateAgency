@@ -1,0 +1,43 @@
+@import 'shared/base/utils/styleVariables';
+
+.advertisment-main-description-container {
+  height: 30rem;
+  box-shadow: $shadow;
+  .information-header {
+    color: $light-color;
+  }
+  .add-favourite {
+    height: fit-content;
+    width: fit-content;
+  }
+}
+
+.advertisment-secondary-description-container {
+  box-shadow: $shadow;
+}
+
+.advertisment-doodle-container {
+  .doodle {
+    position: absolute;
+    width: 20rem;
+    height: 20rem;
+    overflow: hidden;
+    z-index: -100;
+    opacity: 0.5;
+    &.top {
+      top: 2rem;
+    }
+    &.middle {
+      top: 30rem;
+    }
+    &.bottom {
+      top: 60rem;
+    }
+    &.left {
+      left: 0px;
+    }
+    &.right {
+      right: 0px;
+    }
+  }
+}

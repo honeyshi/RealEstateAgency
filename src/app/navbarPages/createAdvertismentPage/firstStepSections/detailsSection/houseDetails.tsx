@@ -1,12 +1,13 @@
 import { DetailsInput, DetailsRow, ErrorMessage } from 'app/navbarPages/createAdvertismentPage/base';
 import React, { useMemo } from 'react';
-import { renovationTypes, roomsAmount } from './data';
 import { setRenovationType, setRoomsAmount, setTotalFloors, setTotalSpace } from 'data/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { CheckboxOption } from 'shared/base';
 import { StoreType } from 'core/store';
 import { checkAdvertismentField } from 'core/checkInvalidNewAdvertismentField';
+import { renovationTypes } from './data';
+import { roomsAmount } from 'data/values';
 
 export const HouseDetails: React.FC = () => {
   const dispatch = useDispatch();

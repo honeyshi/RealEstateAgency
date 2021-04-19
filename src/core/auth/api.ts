@@ -1,8 +1,7 @@
-import axios from 'axios';
-
 import { LoginModel } from './loginModel';
-
 import authConfig from 'core/configFiles/authSettings.json';
+import axios from 'axios';
+import config from 'core/configFiles/appSettings.json';
 
 export const performSigninRequest = async (username: string, password: string) => {
   const loginConfig: LoginModel = {
@@ -14,8 +13,10 @@ export const performSigninRequest = async (username: string, password: string) =
   };
 
   const response = await axios.post(authConfig.apiUrl, loginConfig);
-  localStorage.setItem(
-    'authInfo',
-    JSON.stringify({ isAuth: true, accessToken: Object(response.data)['access_token'] })
-  );
+  localStorage.setItem('authInfo', Object(response.data)['access_token']);
+
+  axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authInfo')}`;
+
+  const getResponse = await axios.get(`${config.apiUrl}/user`);
+  localStorage.setItem('userRole', Object(getResponse.data)['role']);
 };

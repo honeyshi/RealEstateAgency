@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
 import * as yup from 'yup';
 
 import { Button, Flexbox, Input } from 'shared/base';
+import React, { useState } from 'react';
+
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
-import { checkInvalidInput } from 'core/checkInvalidInput';
-import { parseError } from 'core/parseError';
 import { FormPage } from 'shared/layout/formPage';
+import { checkInvalidInput } from 'core/checkInvalidInput';
+import { history } from 'core/history';
 import image from 'icons/forgotpassword.svg';
+import { parseError } from 'core/parseError';
+import { performSendResetPasswordLinkRequest } from 'core/forgotPassword/sendResetPasswordLink';
 
 const schema = yup
   .string()
@@ -21,6 +24,8 @@ export const ForgetPassword: React.FC = () => {
     try {
       setErrorMessage('');
       await schema.validate(email, { abortEarly: false });
+      await performSendResetPasswordLinkRequest(email);
+      history.push('/successful-send-link');
     } catch (error) {
       setErrorMessage(parseError(error));
     }

@@ -1,0 +1,15 @@
+@import 'shared/base/utils/styleVariables';
+
+.advertisment-menu {
+  position: absolute;
+  background-color: white;
+  border-radius: 0.625rem !important;
+  z-index: 999;
+  .delete-button {
+    box-shadow: $shadow;
+    background-color: $invalid-color;
+    &:hover {
+      background-color: $invalid-color-hover !important;
+    }
+  }
+}

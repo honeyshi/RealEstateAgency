@@ -11,7 +11,7 @@ interface INewAdvertismentInitialState {
 
 const newAdvertismentInitialState: INewAdvertismentInitialState = {
   activeStep: 1,
-  propertyType: '0',
+  propertyType: '1',
   wrongSteps: [],
   validated: false,
 };

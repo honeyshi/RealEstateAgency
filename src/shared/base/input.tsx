@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react';
-import classNames from 'classnames';
-import { propsToSpace, SpaceProps } from './utils/spaceUtil';
-
 import './input.scss';
+
+import React, { useCallback } from 'react';
+import { SpaceProps, propsToSpace } from './utils/spaceUtil';
+
+import classNames from 'classnames';
 
 interface InputProps extends SpaceProps {
   borderBottom?: boolean;
@@ -11,6 +12,7 @@ interface InputProps extends SpaceProps {
   id?: string;
   invalid?: boolean;
   placeholder: string;
+  solid?: boolean;
   type?: string;
   value: string;
   onChange: (value: string) => void;
@@ -24,6 +26,7 @@ export const Input: React.FC<InputProps> = ({
   id,
   invalid,
   placeholder,
+  solid,
   type,
   value,
   onChange,
@@ -38,6 +41,7 @@ export const Input: React.FC<InputProps> = ({
     className,
     {
       'form-control font-weight-light input-border-bottom': borderBottom,
+      'form-control font-weight-light input-solid': solid,
       'pl-0 py-2 mb-5': formSpaces,
       'is-invalid': invalid,
     },
