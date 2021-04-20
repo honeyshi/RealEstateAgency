@@ -30,6 +30,7 @@ import {
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { ContactUs } from './infoPages/contactUs';
+import { CotenantDescriptionPage } from './navbarPages/cotenantDescriptionPage/cotenantDescriptionPage';
 import { CotenantsListPage } from './navbarPages/cotenantsListPage';
 import { ErrorPage } from 'shared/layout/errorPage';
 import React from 'react';
@@ -57,6 +58,7 @@ export const App: React.FC = () => {
       <Route exact path="/pricing" component={PricingPage} />
       <Route exact path="/advertisment-description/:id" component={AdvertismentDescriptionPage} />
       <Route exact path="/search-roommates" component={CotenantsListPage} />
+      <Route exact path="/cotenant-description/:id" component={CotenantDescriptionPage} />
 
       {token == null && <Redirect from="/profile*" to="/unauthorized" />}
       <Route exact path="/profile">

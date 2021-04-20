@@ -4,10 +4,9 @@ import React from 'react';
 
 interface InformationRowProps {
   header: string;
-  text: string;
 }
 
-export const AdvertismentDescriptionRow: React.FC<InformationRowProps> = ({ header, text }) => {
+export const InformationRow: React.FC<InformationRowProps> = ({ header, children }) => {
   return (
     <Flexbox>
       <Column size={5}>
@@ -16,7 +15,7 @@ export const AdvertismentDescriptionRow: React.FC<InformationRowProps> = ({ head
         </TextField>
       </Column>
       <Column size={7}>
-        <TextField>{text}</TextField>
+        <TextField>{children}</TextField>
       </Column>
     </Flexbox>
   );

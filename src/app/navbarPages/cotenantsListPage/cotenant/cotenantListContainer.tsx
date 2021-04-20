@@ -32,9 +32,12 @@ export const CotenantListContainer: React.FC = () => {
       return (
         <Cotenant
           id={request.id}
-          image=""
+          image={request.image}
           sex={request.author_sex}
-          district={request.district}
+          desiredMinAge={request.desired_min_age}
+          desiredMaxAge={request.desired_max_age}
+          desiredSex={request.desired_sex}
+          district={request.district.name}
           age={request.author_age}
           key={`cotenant-request-${request.id}`}
         />
@@ -52,8 +55,10 @@ export const CotenantListContainer: React.FC = () => {
               <Tr>
                 <Th>Фотография</Th>
                 <Th>Пол</Th>
-                <Th>Район</Th>
                 <Th>Возраст</Th>
+                <Th>Район</Th>
+                <Th>Пол соарендатора</Th>
+                <Th>Возраст соарендатора</Th>
                 <Th></Th>
               </Tr>
             </THead>

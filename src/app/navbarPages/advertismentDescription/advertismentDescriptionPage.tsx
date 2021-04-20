@@ -14,10 +14,10 @@ import {
 } from 'core/advertismentPropsIdToValues';
 
 import { AdvertismentDescriptionColumn } from './advertismentDescriptionColumn';
-import { AdvertismentDescriptionRow } from './advertismentDescriptionRow';
 import { DefaultPage } from 'shared/layout/defaultPage';
 import { FavouriteButton } from 'pageParts/advertisment';
-import { ImagesCarousel } from 'pageParts/imagesCarousel';
+import { InformationMainContainer } from 'pageParts/infoParts';
+import { InformationRow } from 'pageParts/infoParts/informationRow';
 import { OneAdvertismentModel } from 'core/getAdvertisment/advertismentModel';
 import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
 import doodle1 from 'icons/doodle1.svg';
@@ -29,7 +29,6 @@ import { useParams } from 'react-router-dom';
 
 export const AdvertismentDescriptionPage: React.FC = () => {
   const [currentAdvertisment, setCurrentAdvertisment] = useState<OneAdvertismentModel>();
-  const [showPhone, setShowPhone] = useState(false);
 
   const { id } = useParams<{ id: string }>();
 
@@ -75,80 +74,62 @@ export const AdvertismentDescriptionPage: React.FC = () => {
                 <Image src={doodle2} className="doodle middle right" />
                 <Image src={doodle3} className="doodle bottom left" />
               </Row>
-              <Row alignItems="center">
-                <Flexbox rounded="50" bg="white" className="advertisment-main-description-container" w="100" mb="5">
-                  <Column size={6} className="images-carousel">
-                    <ImagesCarousel imageUrls={currentAdvertisment.images.map((image) => image.url)} />
-                  </Column>
-                  <Column flex vertical justifyContent="center" size={6} p="4" pr="5">
-                    <Flexbox justifyContent="between" alignItems="baseline" mb="3">
-                      <TextField tag="h5" mb="0">
-                        {`${currentAdvertisment.price} ₽/месяц`}
-                      </TextField>
-                      <Flexbox>
-                        <Button danger mr="3">
-                          Пожаловаться
-                        </Button>
-                        <FavouriteButton isFavourite={currentAdvertisment.favorite_apartments.length !== 0} id={id} />
-                      </Flexbox>
-                    </Flexbox>
-                    <TextField tag="span" mb="3">
-                      {`Нижегородская область, Нижний Новгород, р-н ${currentAdvertisment.district}, ${currentAdvertisment.address}`}
-                    </TextField>
-                    {currentAdvertisment.metro !== '' && currentAdvertisment.metro !== 'Не указано' && (
-                      <Flexbox alignItems="center">
-                        <RemixIcon size="xl" name="train" className="text-danger" mr="3" />
-                        <TextField tag="span">{currentAdvertisment.metro}</TextField>
-                      </Flexbox>
-                    )}
-                    <Flexbox justifyContent="between" my="3">
-                      <AdvertismentDescriptionColumn
-                        header="Комнаты"
-                        iconName="hotel-bed"
-                        text={getAdvertismentRooms()}
-                      />
-                      {currentAdvertisment.type === 0 ? (
-                        <AdvertismentDescriptionColumn
-                          header="Этажность"
-                          iconName="building-4"
-                          text={String(currentAdvertisment.house_floors)}
-                        />
-                      ) : (
-                        <AdvertismentDescriptionColumn
-                          header="Этаж"
-                          iconName="building-4"
-                          text={`${currentAdvertisment.apartment_floor}/${currentAdvertisment.house_floors}`}
-                        />
-                      )}
-                      <AdvertismentDescriptionColumn
-                        header="Площадь"
-                        iconName="layout-masonry"
-                        text={`${currentAdvertisment.apartment_area} м²`}
-                      />
-                    </Flexbox>
-                    <TextField tag="span" mb="5">
-                      {buildAdditionalInformationString(
-                        currentAdvertisment.deposit === null ? null : String(currentAdvertisment.deposit),
-                        currentAdvertisment.payment_condition,
-                        currentAdvertisment.with_animals,
-                        currentAdvertisment.with_kids
-                      )}
-                    </TextField>
-                    {showPhone ? (
-                      <Flexbox>
-                        <TextField bold tag="span" mr="5">
-                          {currentAdvertisment.author.name}
-                        </TextField>
-                        <TextField tag="span">{currentAdvertisment.contact_phone}</TextField>
-                      </Flexbox>
-                    ) : (
-                      <Button primary onClick={() => setShowPhone(true)}>
-                        Показать телефон
-                      </Button>
-                    )}
-                  </Column>
+              <InformationMainContainer
+                withAuthor
+                authorName={currentAdvertisment.author.name}
+                phone={currentAdvertisment.contact_phone}
+                imageUrls={currentAdvertisment.images.map((image) => image.url)}
+                className="advertisment-main-description-container">
+                <Flexbox justifyContent="between" alignItems="baseline" mb="3">
+                  <TextField tag="h5" mb="0">
+                    {`${currentAdvertisment.price} ₽/месяц`}
+                  </TextField>
+                  <Flexbox>
+                    <Button danger mr="3">
+                      Пожаловаться
+                    </Button>
+                    <FavouriteButton isFavourite={currentAdvertisment.favorite_apartments.length !== 0} id={id} />
+                  </Flexbox>
                 </Flexbox>
-              </Row>
+                <TextField tag="span" mb="3">
+                  {`Нижегородская область, Нижний Новгород, р-н ${currentAdvertisment.district}, ${currentAdvertisment.address}`}
+                </TextField>
+                {currentAdvertisment.metro !== '' && currentAdvertisment.metro !== 'Не указано' && (
+                  <Flexbox alignItems="center">
+                    <RemixIcon size="xl" name="train" className="text-danger" mr="3" />
+                    <TextField tag="span">{currentAdvertisment.metro}</TextField>
+                  </Flexbox>
+                )}
+                <Flexbox justifyContent="between" my="3">
+                  <AdvertismentDescriptionColumn header="Комнаты" iconName="hotel-bed" text={getAdvertismentRooms()} />
+                  {currentAdvertisment.type === 0 ? (
+                    <AdvertismentDescriptionColumn
+                      header="Этажность"
+                      iconName="building-4"
+                      text={String(currentAdvertisment.house_floors)}
+                    />
+                  ) : (
+                    <AdvertismentDescriptionColumn
+                      header="Этаж"
+                      iconName="building-4"
+                      text={`${currentAdvertisment.apartment_floor}/${currentAdvertisment.house_floors}`}
+                    />
+                  )}
+                  <AdvertismentDescriptionColumn
+                    header="Площадь"
+                    iconName="layout-masonry"
+                    text={`${currentAdvertisment.apartment_area} м²`}
+                  />
+                </Flexbox>
+                <TextField tag="span" mb="5">
+                  {buildAdditionalInformationString(
+                    currentAdvertisment.deposit === null ? null : String(currentAdvertisment.deposit),
+                    currentAdvertisment.payment_condition,
+                    currentAdvertisment.with_animals,
+                    currentAdvertisment.with_kids
+                  )}
+                </TextField>
+              </InformationMainContainer>
 
               <Row alignItems="center">
                 <Flexbox rounded="50" w="100" justifyContent="between" mb="5">
@@ -167,31 +148,25 @@ export const AdvertismentDescriptionPage: React.FC = () => {
                     bg="white"
                     className="advertisment-secondary-description-container"
                     p="5">
-                    <AdvertismentDescriptionRow
-                      header="Тип недвижимости"
-                      text={buildPropertyTypeString(String(currentAdvertisment.type))}
-                    />
-                    <AdvertismentDescriptionRow
-                      header="Условия оплаты"
-                      text={buildPaymentConditionString(currentAdvertisment.payment_condition)}
-                    />
-                    <AdvertismentDescriptionRow
-                      header="Заселение с животными"
-                      text={buildAnimalsString(currentAdvertisment.with_animals)}
-                    />
-                    <AdvertismentDescriptionRow
-                      header="Заселение с детьми"
-                      text={buildKidsString(currentAdvertisment.with_kids)}
-                    />
-                    <AdvertismentDescriptionRow header="Залог" text={buildDepositString(currentAdvertisment.deposit)} />
-                    <AdvertismentDescriptionRow
-                      header="Ремонт"
-                      text={buildRenovationString(currentAdvertisment.renovation)}
-                    />
-                    <AdvertismentDescriptionRow
-                      header="Удобства"
-                      text={buildFurnitureString(currentAdvertisment.furniture)}
-                    />
+                    <InformationRow header="Тип недвижимости">
+                      {buildPropertyTypeString(String(currentAdvertisment.type))}
+                    </InformationRow>
+                    <InformationRow header="Условия оплаты">
+                      {buildPaymentConditionString(currentAdvertisment.payment_condition)}
+                    </InformationRow>
+                    <InformationRow header="Заселение с животными">
+                      {buildAnimalsString(currentAdvertisment.with_animals)}
+                    </InformationRow>
+                    <InformationRow header="Заселение с детьми">
+                      {buildKidsString(currentAdvertisment.with_kids)}
+                    </InformationRow>
+                    <InformationRow header="Залог">{buildDepositString(currentAdvertisment.deposit)}</InformationRow>
+                    <InformationRow header="Ремонт">
+                      {buildRenovationString(currentAdvertisment.renovation)}
+                    </InformationRow>
+                    <InformationRow header="Удобства">
+                      {buildFurnitureString(currentAdvertisment.furniture)}
+                    </InformationRow>
                   </Column>
                 </Flexbox>
               </Row>
