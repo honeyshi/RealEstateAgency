@@ -16,24 +16,26 @@ export const FilesUploader: React.FC<{ fileUrl: string }> = ({ fileUrl }) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: async (acceptedFiles) => {
-      setFile(
-        Object.assign(acceptedFiles[0], {
-          preview: URL.createObjectURL(acceptedFiles[0]),
-        })
-      );
+      acceptedFiles.length &&
+        setFile(
+          Object.assign(acceptedFiles[0], {
+            preview: URL.createObjectURL(acceptedFiles[0]),
+          })
+        );
     },
   });
 
   return (
     <div {...getRootProps({ className: 'dropzone' })}>
       <input {...getInputProps()} />
-      {file !== undefined ? (
+      {file !== undefined && (
         <Flexbox wrap justifyContent="around" mb="4">
           <Block className="avatar-image-container" mx="4">
             <Image src={file.preview} alt={file.preview} className="shadow" />
           </Block>
         </Flexbox>
-      ) : (
+      )}
+      {fileUrl !== '' && file === undefined && (
         <Flexbox wrap justifyContent="around" mb="4">
           <Block className="avatar-image-container" mx="4">
             <Image src={fileUrl} alt={fileUrl} className="shadow" />
@@ -41,7 +43,7 @@ export const FilesUploader: React.FC<{ fileUrl: string }> = ({ fileUrl }) => {
         </Flexbox>
       )}
       <Flexbox vertical alignItems="center">
-        {(file === undefined && fileUrl === '') && (
+        {file === undefined && fileUrl === '' && (
           <RemixIcon className="files-uploader-icon" my="4" name="image" size="2x" />
         )}
         <Button fontLight className="rounded-link" text="accent">
