@@ -7,6 +7,7 @@ import {
   EditAdvertismentPage,
   FavouriteAdvertismentsListPage,
   OwnAdvertismentsListPage,
+  OwnCoRequestPage,
   ProfileInformationPage,
   UserProfilePage,
 } from 'app/userProfile';
@@ -81,6 +82,11 @@ export const App: React.FC = () => {
         render={() => <UserProfilePage activeSubPage={<AdminAdvertismentsListPage />} />}>
         {currentUserRole === '2' && <Redirect to="/profile/info" />}
       </Route>
+      <Route
+        exact
+        path="/profile/my-cotenant-request"
+        render={() => <UserProfilePage activeSubPage={<OwnCoRequestPage />} />}
+      />
       <Route
         exact
         path="/profile/create-cotenant-request"

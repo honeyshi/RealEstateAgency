@@ -1,0 +1,53 @@
+import './filesUploader.scss';
+
+import { Block, Button, Flexbox, Image } from 'shared/base';
+import React, { useState } from 'react';
+
+import { RemixIcon } from 'shared/base/remixIcon';
+import { useDropzone } from 'react-dropzone';
+
+interface FileWithPreview extends File {
+  preview: string;
+}
+
+export const FilesUploader: React.FC<{ fileUrl: string }> = ({ fileUrl }) => {
+  const [file, setFile] = useState<FileWithPreview>();
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: 'image/*',
+    onDrop: async (acceptedFiles) => {
+      setFile(
+        Object.assign(acceptedFiles[0], {
+          preview: URL.createObjectURL(acceptedFiles[0]),
+        })
+      );
+    },
+  });
+
+  return (
+    <div {...getRootProps({ className: 'dropzone' })}>
+      <input {...getInputProps()} />
+      {file !== undefined ? (
+        <Flexbox wrap justifyContent="around" mb="4">
+          <Block className="avatar-image-container" mx="4">
+            <Image src={file.preview} alt={file.preview} className="shadow" />
+          </Block>
+        </Flexbox>
+      ) : (
+        <Flexbox wrap justifyContent="around" mb="4">
+          <Block className="avatar-image-container" mx="4">
+            <Image src={fileUrl} alt={fileUrl} className="shadow" />
+          </Block>
+        </Flexbox>
+      )}
+      <Flexbox vertical alignItems="center">
+        {(file === undefined && fileUrl === '') && (
+          <RemixIcon className="files-uploader-icon" my="4" name="image" size="2x" />
+        )}
+        <Button fontLight className="rounded-link" text="accent">
+          Добавить фото
+        </Button>
+      </Flexbox>
+    </div>
+  );
+};

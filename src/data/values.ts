@@ -63,3 +63,10 @@ export const invalidModalState: ModalProps = {
   show: true,
   text: 'Что-то пошло не так. Повторите попытку позже.',
 };
+
+export enum Sex {
+  initial = -1,
+  unselected = 0,
+  male = 1,
+  female = 2,
+}

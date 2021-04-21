@@ -1,0 +1,23 @@
+@import 'shared/base/utils/styleVariables';
+
+.avatar-image-container {
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  img {
+    border-radius: 50% !important;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.avatar-uploader-container {
+  .dropzone {
+    outline: none;
+    cursor: pointer;
+  }
+  .files-uploader-icon {
+    color: $accent-color;
+    cursor: pointer;
+  }
+}
