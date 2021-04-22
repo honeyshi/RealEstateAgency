@@ -1,0 +1,1 @@
+export { FlatsMapPage } from './flatsMapPage';
