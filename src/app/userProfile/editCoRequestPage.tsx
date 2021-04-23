@@ -1,9 +1,9 @@
 import * as yup from 'yup';
 
-import { Button, CheckBox, Column, Flexbox, Input, Row, Textarea } from 'shared/base';
+import { Button, CheckBox, Column, Flexbox, Input, Modal, Row, Textarea } from 'shared/base';
 import { CotenantEdit, CotenantMy } from 'core/cotenant/cotenantModel';
 import React, { useEffect, useState } from 'react';
-import { Sex, districts } from 'data/values';
+import { Sex, districts, invalidModalState } from 'data/values';
 
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
 import { FilesUploader } from './filesUploader';
@@ -11,6 +11,7 @@ import InputRange from 'react-input-range';
 import { ProfileInfromationRow } from './profileInformationRow';
 import { Select } from 'shared/composite/select';
 import { parseError } from 'core/parseError';
+import { performDeleteCotenantRequest } from 'core/cotenant/deleteCotenant';
 import { performGetOwnCotenantRequest } from 'core/cotenant/getOwnCotenant';
 
 const schema = yup.object().shape({
@@ -25,7 +26,7 @@ const schema = yup.object().shape({
     .string()
     .nullable()
     .required('Вы не заполнили описание заявки')
-    .max(255, 'Описание заявки не должно превышать 255 символов'),
+    .max(3000, 'Описание заявки не должно превышать 3000 символов'),
   cotenantSex: yup.number().notOneOf([-1], 'Вы не указали пол соарендатора'),
   phone: yup
     .string()
@@ -50,6 +51,8 @@ export const EditCoRequestPage: React.FC = () => {
   const [form, setForm] = useState<CotenantEdit>(initialState);
   const [initialForm, setInitialForm] = useState<CotenantEdit>(initialState);
   const [errorMessage, setErrorMessage] = useState<string | string[]>('');
+  const [requestId, setRequestId] = useState('');
+  const [modalProps, setModalProps] = useState({ ...invalidModalState, show: false });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,6 +77,7 @@ export const EditCoRequestPage: React.FC = () => {
         phone: result.phone,
         image: result.image,
       });
+      setRequestId(result.id);
     };
     fetchData();
   }, []);
@@ -86,8 +90,23 @@ export const EditCoRequestPage: React.FC = () => {
       setErrorMessage(parseError(error));
     }
   };
+
+  const handleModalClose = () => {
+    setModalProps({ ...invalidModalState, show: false });
+  };
+
+  const deleteRequest = async () => {
+    try {
+      await performDeleteCotenantRequest(requestId);
+      setModalProps({ show: true, valid: true, text: 'Заявка успешно удалена' });
+    } catch (error) {
+      setModalProps({ ...invalidModalState });
+    }
+  };
+
   return (
     <>
+      <Modal valid={modalProps.valid} text={modalProps.text} show={modalProps.show} handleClose={handleModalClose} />
       <Flexbox>
         <Column size={8} pl="0">
           <ProfileInfromationRow label="Ваш возраст">
@@ -213,7 +232,9 @@ export const EditCoRequestPage: React.FC = () => {
             </Button>
           </Flexbox>
           <Flexbox>
-            <Button danger>Удалить</Button>
+            <Button danger onClick={deleteRequest}>
+              Удалить
+            </Button>
           </Flexbox>
         </Row>
       </ProfileInfromationRow>

@@ -38,6 +38,7 @@ export interface CotenantEdit {
 }
 
 export interface CotenantMy {
+  id: string;
   author_age: string;
   author_sex: string;
   desired_max_age: number;
