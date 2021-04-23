@@ -1,13 +1,15 @@
-import { combineReducers } from 'redux';
 import {
-  propertyDetailsReducer,
-  newAdvertismentReducer,
-  propertyFacilitiesReducer,
-  propertyPhotosReducer,
-  ownerContactsReducer,
   advertismentFilterReducer,
   authorizationReducer,
+  newAdvertismentReducer,
+  ownerContactsReducer,
+  propertyDetailsReducer,
+  propertyFacilitiesReducer,
+  propertyPhotosReducer,
+  userProfileReducer,
 } from './reducers';
+
+import { combineReducers } from 'redux';
 
 export const appReducer = combineReducers({
   advertismentFilter: advertismentFilterReducer,
@@ -17,4 +19,5 @@ export const appReducer = combineReducers({
   propertyPhotos: propertyPhotosReducer,
   ownerContacts: ownerContactsReducer,
   newAdvertisment: newAdvertismentReducer,
+  userProfile: userProfileReducer,
 });

@@ -1,8 +1,8 @@
 import * as yup from 'yup';
 
-import { Button, CheckBox, Column, Flexbox, Input, Row, Textarea } from 'shared/base';
-import React, { useState } from 'react';
-import { Sex, districts } from 'data/values';
+import { Button, CheckBox, Column, Flexbox, Input, Modal, Row, Textarea } from 'shared/base';
+import React, { useEffect, useState } from 'react';
+import { Sex, districts, invalidModalState } from 'data/values';
 
 import { CotenantEdit } from 'core/cotenant/cotenantModel';
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
@@ -10,7 +10,10 @@ import { FilesUploader } from './filesUploader';
 import InputRange from 'react-input-range';
 import { ProfileInfromationRow } from './profileInformationRow';
 import { Select } from 'shared/composite/select';
+import { StoreType } from 'core/store';
 import { parseError } from 'core/parseError';
+import { performCreateCotenantRequest } from 'core/cotenant/createCotenantRequest';
+import { useSelector } from 'react-redux';
 
 const schema = yup.object().shape({
   age: yup
@@ -24,7 +27,7 @@ const schema = yup.object().shape({
     .string()
     .nullable()
     .required('Вы не заполнили описание заявки')
-    .max(255, 'Описание заявки не должно превышать 255 символов'),
+    .max(3000, 'Описание заявки не должно превышать 3000 символов'),
   cotenantSex: yup.number().notOneOf([-1], 'Вы не указали пол соарендатора'),
   phone: yup
     .string()
@@ -49,16 +52,36 @@ const initialState: CotenantEdit = {
 export const CreateCoRequestPage: React.FC = () => {
   const [form, setForm] = useState<CotenantEdit>(initialState);
   const [errorMessage, setErrorMessage] = useState<string | string[]>('');
+  const [modalProps, setModalProps] = useState({ ...invalidModalState, show: false });
+
+  const handleModalClose = () => {
+    setModalProps({ ...invalidModalState, show: false });
+  };
+
+  const createRequestImage = useSelector((state: StoreType) => state.userProfile.createRequestAvatar);
+
+  useEffect(() => {
+    createRequestImage.has('image') && setForm({ ...form, image: 'image' });
+    // eslint-disable-next-line
+  }, [createRequestImage]);
+
   const saveChanges = async () => {
     try {
       setErrorMessage('');
       await schema.validate(form, { abortEarly: false });
+      await performCreateCotenantRequest(form, createRequestImage);
+      setModalProps({ show: true, valid: true, text: 'Заявка успешно создана' });
     } catch (error) {
-      setErrorMessage(parseError(error));
+      if (error instanceof yup.ValidationError) setErrorMessage(parseError(error));
+      else
+        error.message.includes('совместную аренду')
+          ? setModalProps({ ...invalidModalState, text: error.message })
+          : setModalProps({ ...invalidModalState });
     }
   };
   return (
     <>
+      <Modal valid={modalProps.valid} text={modalProps.text} show={modalProps.show} handleClose={handleModalClose} />
       <Flexbox>
         <Column size={8} pl="0">
           <ProfileInfromationRow label="Ваш возраст">
@@ -93,7 +116,7 @@ export const CreateCoRequestPage: React.FC = () => {
           </ProfileInfromationRow>
         </Column>
         <Column rounded="50" size={3} py="3" className="shadow avatar-uploader-container">
-          <FilesUploader fileUrl={form.image} />
+          <FilesUploader fileUrl="" />
         </Column>
       </Flexbox>
       <ProfileInfromationRow label="Район">

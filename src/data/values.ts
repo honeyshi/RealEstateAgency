@@ -75,3 +75,9 @@ export interface Geo {
   lat: number;
   lon: number;
 }
+
+export const sexNameToId = new Map([
+  ['Не указано', Sex.unselected],
+  ['Мужской', Sex.male],
+  ['Женский', Sex.female],
+]);

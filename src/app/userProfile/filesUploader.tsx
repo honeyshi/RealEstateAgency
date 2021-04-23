@@ -4,6 +4,8 @@ import { Block, Button, Flexbox, Image } from 'shared/base';
 import React, { useState } from 'react';
 
 import { RemixIcon } from 'shared/base/remixIcon';
+import { setCreateRequestAvatar } from 'data/actions';
+import { useDispatch } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
 
 interface FileWithPreview extends File {
@@ -11,17 +13,23 @@ interface FileWithPreview extends File {
 }
 
 export const FilesUploader: React.FC<{ fileUrl: string }> = ({ fileUrl }) => {
+  const dispatch = useDispatch();
+
   const [file, setFile] = useState<FileWithPreview>();
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: async (acceptedFiles) => {
-      acceptedFiles.length &&
+      if (acceptedFiles.length) {
         setFile(
           Object.assign(acceptedFiles[0], {
             preview: URL.createObjectURL(acceptedFiles[0]),
           })
         );
+        const formData = new FormData();
+        formData.append('image', acceptedFiles[0]);
+        dispatch(setCreateRequestAvatar(formData));
+      }
     },
   });
 

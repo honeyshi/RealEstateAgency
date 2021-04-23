@@ -41,3 +41,5 @@ export {
   setRentDeposit,
   setTelephoneNumber,
 } from './ownerContactsActions';
+
+export { setCreateRequestAvatar } from './userProfileActions';

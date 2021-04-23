@@ -59,3 +59,7 @@ export enum AdvertismentFilterActionTypes {
   SET_SORTING_FILTER = 'SET_SORTING_FILTER',
   SET_ACTIVE_PAGE_FILTER = 'SET_ACTIVE_PAGE_FILTER',
 }
+
+export enum UserProfileActionTypes {
+  SET_CREATE_REQUEST_AVATAR = 'SET_CREATE_REQUEST_AVATAR',
+}
