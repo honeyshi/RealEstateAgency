@@ -42,7 +42,7 @@ export const PricingItem: React.FC<IPricingItemProps> = ({
           </Block>
           <Flexbox mb="4">
             <TextField tag="h5">{price} ₽ </TextField>
-            <TextField tag="span"> / {validity} дней</TextField>
+            <TextField tag="span"> / {validity}</TextField>
           </Flexbox>
         </Flexbox>
         <ul className="pricing-description-container mt-4 pb-5 mb-5 w-100">

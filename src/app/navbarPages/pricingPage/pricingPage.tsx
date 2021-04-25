@@ -41,8 +41,8 @@ export const PricingPage: React.FC = () => {
               ]}
               iconName="coin"
               link="#"
-              validity="7"
-              price="800"
+              validity="3 дня"
+              price="490"
             />
             <PricingItem
               primary
@@ -54,8 +54,8 @@ export const PricingPage: React.FC = () => {
               ]}
               iconName="wallet"
               link="#"
-              validity="15"
-              price="1200"
+              validity="7 дней"
+              price="990"
               additionalPlan="Базовый"
             />
             <PricingItem
@@ -63,8 +63,8 @@ export const PricingPage: React.FC = () => {
               description={['Личный менеджер']}
               iconName="vip-diamond"
               link="#"
-              validity="30"
-              price="2500"
+              validity="30 дней"
+              price="1490"
               additionalPlan="Продвинутый"
             />
           </Flexbox>
