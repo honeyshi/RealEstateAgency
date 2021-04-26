@@ -1,12 +1,15 @@
+import { setCreateRequestAvatar, setEditRequestAvatar } from 'data/actions';
+
 import { createReducer } from '@reduxjs/toolkit';
-import { setCreateRequestAvatar } from 'data/actions';
 
 export interface IUserProfileInitialState {
   createRequestAvatar: FormData;
+  editRequestAvatar: FormData;
 }
 
 const userProfileInitialState: IUserProfileInitialState = {
   createRequestAvatar: new FormData(),
+  editRequestAvatar: new FormData(),
 };
 
 export const userProfileReducer = createReducer(userProfileInitialState, {
@@ -14,6 +17,12 @@ export const userProfileReducer = createReducer(userProfileInitialState, {
     return {
       ...state,
       createRequestAvatar: action.payload,
+    };
+  },
+  [setEditRequestAvatar.type]: (state, action) => {
+    return {
+      ...state,
+      editRequestAvatar: action.payload,
     };
   },
 });

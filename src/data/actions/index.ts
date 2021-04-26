@@ -42,4 +42,4 @@ export {
   setTelephoneNumber,
 } from './ownerContactsActions';
 
-export { setCreateRequestAvatar } from './userProfileActions';
+export { setCreateRequestAvatar, setEditRequestAvatar } from './userProfileActions';

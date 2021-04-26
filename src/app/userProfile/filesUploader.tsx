@@ -4,7 +4,6 @@ import { Block, Button, Flexbox, Image } from 'shared/base';
 import React, { useState } from 'react';
 
 import { RemixIcon } from 'shared/base/remixIcon';
-import { setCreateRequestAvatar } from 'data/actions';
 import { useDispatch } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
 
@@ -12,7 +11,12 @@ interface FileWithPreview extends File {
   preview: string;
 }
 
-export const FilesUploader: React.FC<{ fileUrl: string }> = ({ fileUrl }) => {
+interface IFilesUploaderProps {
+  fileUrl: string;
+  setImage: (value: FormData) => void;
+}
+
+export const FilesUploader: React.FC<IFilesUploaderProps> = ({ fileUrl, setImage }) => {
   const dispatch = useDispatch();
 
   const [file, setFile] = useState<FileWithPreview>();
@@ -28,7 +32,7 @@ export const FilesUploader: React.FC<{ fileUrl: string }> = ({ fileUrl }) => {
         );
         const formData = new FormData();
         formData.append('image', acceptedFiles[0]);
-        dispatch(setCreateRequestAvatar(formData));
+        dispatch(setImage(formData));
       }
     },
   });

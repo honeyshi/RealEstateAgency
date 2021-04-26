@@ -13,6 +13,7 @@ import { Select } from 'shared/composite/select';
 import { StoreType } from 'core/store';
 import { parseError } from 'core/parseError';
 import { performCreateCotenantRequest } from 'core/cotenant/createCotenantRequest';
+import { setCreateRequestAvatar } from 'data/actions';
 import { useSelector } from 'react-redux';
 
 const schema = yup.object().shape({
@@ -116,7 +117,7 @@ export const CreateCoRequestPage: React.FC = () => {
           </ProfileInfromationRow>
         </Column>
         <Column rounded="50" size={3} py="3" className="shadow avatar-uploader-container">
-          <FilesUploader fileUrl="" />
+          <FilesUploader fileUrl="" setImage={setCreateRequestAvatar} />
         </Column>
       </Flexbox>
       <ProfileInfromationRow label="Район">

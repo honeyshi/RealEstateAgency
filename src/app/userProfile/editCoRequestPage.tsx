@@ -3,16 +3,20 @@ import * as yup from 'yup';
 import { Button, CheckBox, Column, Flexbox, Input, Modal, Row, Textarea } from 'shared/base';
 import { CotenantEdit, CotenantMy } from 'core/cotenant/cotenantModel';
 import React, { useEffect, useState } from 'react';
-import { Sex, districts, invalidModalState } from 'data/values';
+import { Sex, districts, invalidModalState, sexNameToId } from 'data/values';
 
 import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
 import { FilesUploader } from './filesUploader';
 import InputRange from 'react-input-range';
 import { ProfileInfromationRow } from './profileInformationRow';
 import { Select } from 'shared/composite/select';
+import { StoreType } from 'core/store';
 import { parseError } from 'core/parseError';
 import { performDeleteCotenantRequest } from 'core/cotenant/deleteCotenant';
+import { performEditCotenantRequest } from 'core/cotenant/editCotenantRequest';
 import { performGetOwnCotenantRequest } from 'core/cotenant/getOwnCotenant';
+import { setEditRequestAvatar } from 'data/actions';
+import { useSelector } from 'react-redux';
 
 const schema = yup.object().shape({
   age: yup
@@ -54,25 +58,27 @@ export const EditCoRequestPage: React.FC = () => {
   const [requestId, setRequestId] = useState('');
   const [modalProps, setModalProps] = useState({ ...invalidModalState, show: false });
 
+  const editRequestImage = useSelector((state: StoreType) => state.userProfile.editRequestAvatar);
+
   useEffect(() => {
     const fetchData = async () => {
       const result = (await performGetOwnCotenantRequest())[0] as CotenantMy;
       setForm({
         age: result.author_age,
-        ownSex: 1,
+        ownSex: Number(sexNameToId.get(result.author_sex)),
         district: result.district.id,
         description: result.text,
-        cotenantSex: 1,
+        cotenantSex: Number(sexNameToId.get(result.desired_sex)),
         cotenantAge: { min: result.desired_min_age, max: result.desired_max_age },
         phone: result.phone,
         image: result.image,
       });
       setInitialForm({
         age: result.author_age,
-        ownSex: 1,
+        ownSex: Number(sexNameToId.get(result.author_sex)),
         district: result.district.id,
         description: result.text,
-        cotenantSex: 1,
+        cotenantSex: Number(sexNameToId.get(result.desired_sex)),
         cotenantAge: { min: result.desired_min_age, max: result.desired_max_age },
         phone: result.phone,
         image: result.image,
@@ -86,8 +92,11 @@ export const EditCoRequestPage: React.FC = () => {
     try {
       setErrorMessage('');
       await schema.validate(form, { abortEarly: false });
+      await performEditCotenantRequest(form, editRequestImage, requestId);
+      setModalProps({ show: true, valid: true, text: 'Заявка успешно изменена' });
     } catch (error) {
-      setErrorMessage(parseError(error));
+      if (error instanceof yup.ValidationError) setErrorMessage(parseError(error));
+      else setModalProps({ ...invalidModalState });
     }
   };
 
@@ -141,7 +150,7 @@ export const EditCoRequestPage: React.FC = () => {
           </ProfileInfromationRow>
         </Column>
         <Column rounded="50" size={3} py="3" className="shadow avatar-uploader-container">
-          <FilesUploader fileUrl={form.image} />
+          <FilesUploader fileUrl={form.image} setImage={setEditRequestAvatar} />
         </Column>
       </Flexbox>
       <ProfileInfromationRow label="Район">

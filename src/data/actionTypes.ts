@@ -62,4 +62,5 @@ export enum AdvertismentFilterActionTypes {
 
 export enum UserProfileActionTypes {
   SET_CREATE_REQUEST_AVATAR = 'SET_CREATE_REQUEST_AVATAR',
+  SET_EDIT_REQUEST_AVATAR = 'SET_EDIT_REQUEST_AVATAR',
 }
