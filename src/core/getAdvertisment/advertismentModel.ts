@@ -3,6 +3,15 @@ interface ImageUrl {
   id: number;
 }
 
+export interface AdvertismentOnMap {
+  header: string;
+  address: string;
+  price: string;
+  gps_point: string;
+  id: string;
+  images: ImageUrl[];
+}
+
 export interface IAdvertisment {
   header: string;
   address: string;
