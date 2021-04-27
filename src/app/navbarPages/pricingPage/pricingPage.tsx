@@ -1,11 +1,23 @@
 import { Column, Container, Flexbox, Image, Row, Section, TextField } from 'shared/base';
+import React, { useEffect, useState } from 'react';
 
 import { DefaultPage } from 'shared/layout/defaultPage';
 import { PricingItem } from './pricingItem';
-import React from 'react';
+import { PricingModel } from 'core/pricing/pricingModel';
 import image from 'icons/prcing.svg';
+import { performGetPricingLinksRequest } from 'core/pricing/getPricingLinks';
 
 export const PricingPage: React.FC = () => {
+  const [pricings, setPricings] = useState<PricingModel[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await performGetPricingLinksRequest();
+      setPricings(result);
+    };
+    fetchData();
+  }, []);
+
   return (
     <DefaultPage>
       <Section>
@@ -29,45 +41,47 @@ export const PricingPage: React.FC = () => {
       </Section>
       <Section bottom>
         <Container nonFluid>
-          <Flexbox justifyContent="around">
-            <PricingItem
-              type="Базовый"
-              description={[
-                'Доступ к объявлениям за последние 30 дней',
-                'Добавление объявлений в избранное',
-                'Поиск недвижимости на карте',
-                'Удобная фильтрация объявлений',
-                'Поиск людей для совместной аренды',
-              ]}
-              iconName="coin"
-              link="#"
-              validity="3 дня"
-              price="490"
-            />
-            <PricingItem
-              primary
-              type="Продвинутый"
-              description={[
-                'Шаблон правильного договора аренды',
-                'Уведомления о новых квартирах',
-                'Бесплатная консультация наших специалистов',
-              ]}
-              iconName="wallet"
-              link="#"
-              validity="7 дней"
-              price="990"
-              additionalPlan="Базовый"
-            />
-            <PricingItem
-              type="Персональный"
-              description={['Личный менеджер']}
-              iconName="vip-diamond"
-              link="#"
-              validity="30 дней"
-              price="1490"
-              additionalPlan="Продвинутый"
-            />
-          </Flexbox>
+          {pricings.length !== 0 && (
+            <Flexbox justifyContent="around">
+              <PricingItem
+                type={pricings[0].name}
+                description={[
+                  'Доступ к объявлениям за последние 30 дней',
+                  'Добавление объявлений в избранное',
+                  'Поиск недвижимости на карте',
+                  'Удобная фильтрация объявлений',
+                  'Поиск людей для совместной аренды',
+                ]}
+                iconName="coin"
+                link={pricings[0].link}
+                validity={`${pricings[0].days_duration} дня`}
+                price={pricings[0].price}
+              />
+              <PricingItem
+                primary
+                type={pricings[1].name}
+                description={[
+                  'Шаблон правильного договора аренды',
+                  'Уведомления о новых квартирах',
+                  'Бесплатная консультация наших специалистов',
+                ]}
+                iconName="wallet"
+                link={pricings[1].link}
+                validity={`${pricings[1].days_duration} дней`}
+                price={pricings[1].price}
+                additionalPlan="Базовый"
+              />
+              <PricingItem
+                type={pricings[2].name}
+                description={['Личный менеджер']}
+                iconName="vip-diamond"
+                link={pricings[2].link}
+                validity={`${pricings[2].days_duration} дней`}
+                price={pricings[2].price}
+                additionalPlan="Продвинутый"
+              />
+            </Flexbox>
+          )}
         </Container>
       </Section>
     </DefaultPage>
