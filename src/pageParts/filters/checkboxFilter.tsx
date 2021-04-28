@@ -1,3 +1,5 @@
+import './filters.scss';
+
 import { Block, Flexbox, RemixIcon, TextField } from 'shared/base';
 import React, { useState } from 'react';
 

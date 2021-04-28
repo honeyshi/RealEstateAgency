@@ -1,4 +1,3 @@
-import './filters.scss';
 import 'react-input-range/lib/css/index.css';
 
 import { Button, CheckBox, CheckboxOption, Flexbox, RemixIcon, TextField } from 'shared/base';
@@ -17,7 +16,7 @@ import { districts, propertyTypes, roomsAmount } from 'data/values';
 import { facilityOptions, livingRules } from './data';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CheckboxFilter } from './chexboxFilter';
+import { CheckboxFilter } from 'pageParts/filters';
 import InputRange from 'react-input-range';
 import { PropertyType } from 'pageParts/propertyType';
 import { StoreType } from 'core/store';
