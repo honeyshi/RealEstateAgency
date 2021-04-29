@@ -1,7 +1,7 @@
 import './advertisment.scss';
 
 import { Badge, Button, Column, Flexbox, RemixIcon, TextField } from 'shared/base';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { AdvertismentMenu } from './advertismentMenu';
 import { FavouriteButton } from './favouriteButton';
@@ -40,8 +40,29 @@ export const Advertisment: React.FC<IAdvertismentProps> = ({
   favourite,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
+
+  const advertismentMenuRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = useCallback(
+    (e: MouseEvent) => {
+      if (!advertismentMenuRef.current || advertismentMenuRef.current.contains(e.target as Node)) return;
+      console.log('CLIK');
+      setShowMenu(false);
+    },
+    [advertismentMenuRef]
+  );
+
+  useEffect(() => {
+    if (showMenu) document.addEventListener('mousedown', handleClickOutside);
+    else document.removeEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showMenu, handleClickOutside]);
+
   return (
-    <Flexbox rounded="50" className="advertisment-container" mb="5">
+    <div className="d-flex flex-row mb-5 rounded-50 advertisment-container" ref={advertismentMenuRef}>
       <Column size={5} className="images-carousel">
         <ImagesCarousel imageUrls={images} />
       </Column>
@@ -92,6 +113,6 @@ export const Advertisment: React.FC<IAdvertismentProps> = ({
           </Link>
         </Flexbox>
       </Column>
-    </Flexbox>
+    </div>
   );
 };
