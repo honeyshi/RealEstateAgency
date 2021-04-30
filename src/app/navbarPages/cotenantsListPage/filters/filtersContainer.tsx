@@ -118,7 +118,13 @@ export const FiltersContainer: React.FC = () => {
         Сбросить фильтры
         <RemixIcon name="refresh" />
       </Flexbox>
-      <Button primary w="100" onClick={() => dispatch(setApplyCotenantFilter(true))}>
+      <Button
+        primary
+        w="100"
+        onClick={() => {
+          dispatch(setApplyCotenantFilter(true));
+          !cotenantFilter.withFilter && dispatch(setWithCotenantFilter(true));
+        }}>
         Поиск
       </Button>
     </Flexbox>

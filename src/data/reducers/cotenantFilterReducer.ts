@@ -1,3 +1,4 @@
+import { AgeRange, Sex } from 'data/values';
 import {
   cleanCotenantFilters,
   setCotenantAgeFilter,
@@ -9,7 +10,6 @@ import {
 import { setApplyCotenantFilter, setWithCotenantFilter } from 'data/actions/cotenantFilterActions';
 
 import { Range } from 'react-input-range';
-import { Sex } from 'data/values';
 import { createReducer } from '@reduxjs/toolkit';
 
 interface ICotenantFilterInitialState {
@@ -24,9 +24,9 @@ interface ICotenantFilterInitialState {
 
 const cotenantFilterInitialState: ICotenantFilterInitialState = {
   districts: [],
-  cotenantAge: { min: 18, max: 70 },
+  cotenantAge: { min: AgeRange.min, max: AgeRange.max },
   cotenantSex: Sex.initial,
-  ownAge: 18,
+  ownAge: AgeRange.min,
   ownSex: Sex.initial,
   apply: false,
   withFilter: false,

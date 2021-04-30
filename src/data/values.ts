@@ -92,3 +92,8 @@ export const sexNameToId = new Map([
   ['Мужской', Sex.male],
   ['Женский', Sex.female],
 ]);
+
+export enum AgeRange {
+  min = 18,
+  max = 70,
+}

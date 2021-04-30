@@ -1,6 +1,5 @@
 import { Block, THead, Table, Th, Tr } from 'shared/base';
 import React, { useEffect, useMemo, useState } from 'react';
-import { setApplyCotenantFilter, setWithCotenantFilter } from 'data/actions/cotenantFilterActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Cotenant } from './cotenant';
@@ -11,6 +10,7 @@ import { StoreType } from 'core/store';
 import { amountAdvertismentOnPage } from 'data/values';
 import { history } from 'core/history';
 import { performGetCotenantsRequest } from 'core/cotenant/getCotenants';
+import { setApplyCotenantFilter } from 'data/actions/cotenantFilterActions';
 
 export const CotenantListContainer: React.FC = () => {
   const [activePage, setActivePage] = useState(1);
@@ -26,7 +26,14 @@ export const CotenantListContainer: React.FC = () => {
       try {
         let result: any;
         cotenantFilter.withFilter
-          ? console.log('with filter')
+          ? (result = await performGetCotenantsRequest(
+              activePage,
+              cotenantFilter.districts,
+              cotenantFilter.cotenantAge,
+              cotenantFilter.cotenantSex,
+              cotenantFilter.ownAge,
+              cotenantFilter.ownSex
+            ))
           : (result = await performGetCotenantsRequest(activePage));
         setRequests(result.items);
         setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
@@ -35,13 +42,15 @@ export const CotenantListContainer: React.FC = () => {
       }
     };
     fetchData();
-  }, [activePage, cotenantFilter.withFilter]);
+    // eslint-disable-next-line
+  }, [activePage, cotenantFilter.withFilter, cotenantFilter.apply]);
 
   useEffect(() => {
     if (cotenantFilter.apply) {
-      console.log('Apply filter');
-      dispatch(setWithCotenantFilter(true));
-      dispatch(setApplyCotenantFilter(false));
+      setActivePage(1);
+      return () => {
+        dispatch(setApplyCotenantFilter(false));
+      };
     }
   }, [dispatch, cotenantFilter.apply]);
 
