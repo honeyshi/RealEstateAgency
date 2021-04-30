@@ -1,10 +1,13 @@
 import { Block, THead, Table, Th, Tr } from 'shared/base';
 import React, { useEffect, useMemo, useState } from 'react';
+import { setApplyCotenantFilter, setWithCotenantFilter } from 'data/actions/cotenantFilterActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Cotenant } from './cotenant';
 import { CotenantListItem } from 'core/cotenant/cotenantModel';
 import { NoResultsPage } from 'shared/layout/noResultsPage';
 import { NumberPagination } from 'shared/pagination';
+import { StoreType } from 'core/store';
 import { amountAdvertismentOnPage } from 'data/values';
 import { history } from 'core/history';
 import { performGetCotenantsRequest } from 'core/cotenant/getCotenants';
@@ -14,10 +17,17 @@ export const CotenantListContainer: React.FC = () => {
   const [requests, setRequests] = useState<CotenantListItem[]>();
   const [amountPages, setAmountPages] = useState(10);
 
+  const dispatch = useDispatch();
+
+  const cotenantFilter = useSelector((state: StoreType) => state.cotenantFilter);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await performGetCotenantsRequest(activePage);
+        let result: any;
+        cotenantFilter.withFilter
+          ? console.log('with filter')
+          : (result = await performGetCotenantsRequest(activePage));
         setRequests(result.items);
         setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
       } catch (error) {
@@ -25,7 +35,15 @@ export const CotenantListContainer: React.FC = () => {
       }
     };
     fetchData();
-  }, [activePage]);
+  }, [activePage, cotenantFilter.withFilter]);
+
+  useEffect(() => {
+    if (cotenantFilter.apply) {
+      console.log('Apply filter');
+      dispatch(setWithCotenantFilter(true));
+      dispatch(setApplyCotenantFilter(false));
+    }
+  }, [dispatch, cotenantFilter.apply]);
 
   const cotenantItemComponents = useMemo(() => {
     const cotenantItems = requests?.map((request) => {

@@ -1,38 +1,89 @@
 import { Button, CheckBox, Flexbox, RemixIcon, TextField } from 'shared/base';
 import React, { useMemo } from 'react';
+import { Sex, districts, ownSexCheckboxes, sexCheckboxes } from 'data/values';
+import {
+  cleanCotenantFilters,
+  setCotenantAgeFilter,
+  setCotenantDistrictFilter,
+  setCotenantSexFilter,
+  setOwnCotenantAgeFilter,
+  setOwnCotenantSexFilter,
+} from 'data/actions';
+import { setApplyCotenantFilter, setWithCotenantFilter } from 'data/actions/cotenantFilterActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { CheckboxFilter } from 'pageParts/filters';
 import InputRange from 'react-input-range';
-import { districts } from 'data/values';
+import { StoreType } from 'core/store';
 
 export const FiltersContainer: React.FC = () => {
+  const dispatch = useDispatch();
+  const cotenantFilter = useSelector((state: StoreType) => state.cotenantFilter);
+
   const districtItemComponents = useMemo(() => {
     const districtItems = districts.map((district) => {
       return (
-        <CheckBox name={district} value={false} onChange={(value) => void 0} key={district}>
+        <CheckBox
+          name={district}
+          value={cotenantFilter.districts.includes(districts.indexOf(district))}
+          onChange={(value) =>
+            value
+              ? dispatch(setCotenantDistrictFilter(cotenantFilter.districts.concat(districts.indexOf(district))))
+              : dispatch(
+                  setCotenantDistrictFilter(
+                    cotenantFilter.districts.filter((selectedDistrict) => {
+                      return selectedDistrict !== districts.indexOf(district);
+                    })
+                  )
+                )
+          }
+          key={district}>
           {district}
         </CheckBox>
       );
     });
     return districtItems;
-  }, []);
+  }, [dispatch, cotenantFilter.districts]);
+
+  const cotenantSexCheckboxesItemComponents = useMemo(() => {
+    const cotenantSexCheckboxesItems = sexCheckboxes.map((checkbox) => {
+      return (
+        <CheckBox
+          name={checkbox.name}
+          value={cotenantFilter.cotenantSex === checkbox.value}
+          onChange={(value) =>
+            value ? dispatch(setCotenantSexFilter(checkbox.value)) : dispatch(setCotenantSexFilter(Sex.initial))
+          }
+          key={checkbox.name}>
+          {checkbox.text}
+        </CheckBox>
+      );
+    });
+    return cotenantSexCheckboxesItems;
+  }, [dispatch, cotenantFilter.cotenantSex]);
+
+  const cotenantOwnSexCheckboxesItemComponents = useMemo(() => {
+    const cotenantOwnSexCheckboxesItems = ownSexCheckboxes.map((checkbox) => {
+      return (
+        <CheckBox
+          name={checkbox.name}
+          value={cotenantFilter.ownSex === checkbox.value}
+          onChange={(value) =>
+            value ? dispatch(setOwnCotenantSexFilter(checkbox.value)) : dispatch(setOwnCotenantSexFilter(Sex.initial))
+          }
+          key={checkbox.name}>
+          {checkbox.text}
+        </CheckBox>
+      );
+    });
+    return cotenantOwnSexCheckboxesItems;
+  }, [dispatch, cotenantFilter.ownSex]);
+
   return (
     <Flexbox vertical mx="5" mb="5">
       <CheckboxFilter filterName="Район">{districtItemComponents}</CheckboxFilter>
       <CheckboxFilter after filterName="Пол соарендатора">
-        <CheckBox name="cotenant-sex-male" value={false} onChange={(value) => void 0} key="cotenant-sex-male">
-          Мужской
-        </CheckBox>
-        <CheckBox name="cotenant-sex-female" value={false} onChange={(value) => void 0} key="cotenant-sex-female">
-          Женский
-        </CheckBox>
-        <CheckBox
-          name="cotenant-sex-unselected"
-          value={false}
-          onChange={(value) => void 0}
-          key="cotenant-sex-unselected">
-          Не важен
-        </CheckBox>
+        {cotenantSexCheckboxesItemComponents}
       </CheckboxFilter>
       <TextField mb="4">Возраст соарендатора</TextField>
       <Flexbox py="4">
@@ -40,33 +91,34 @@ export const FiltersContainer: React.FC = () => {
           formatLabel={(value) => `${value} лет`}
           maxValue={70}
           minValue={18}
-          value={{ min: 18, max: 70 }}
-          onChange={(value) => void 0}
+          value={cotenantFilter.cotenantAge}
+          onChange={(value) => dispatch(setCotenantAgeFilter(value))}
         />
       </Flexbox>
-      <CheckboxFilter filterName="Ваш пол">
-        <CheckBox name="own-sex-male" value={false} onChange={(value) => void 0} key="own-sex-male">
-          Мужской
-        </CheckBox>
-        <CheckBox name="own-sex-female" value={false} onChange={(value) => void 0} key="own-sex-female">
-          Женский
-        </CheckBox>
-      </CheckboxFilter>
+      <CheckboxFilter filterName="Ваш пол">{cotenantOwnSexCheckboxesItemComponents}</CheckboxFilter>
       <TextField mb="4">Ваш возраст</TextField>
       <Flexbox py="4" mb="4">
         <InputRange
           formatLabel={(value) => `${value} лет`}
           maxValue={70}
           minValue={18}
-          value={18}
-          onChange={(value) => void 0}
+          value={cotenantFilter.ownAge}
+          onChange={(value) => dispatch(setOwnCotenantAgeFilter(value))}
         />
       </Flexbox>
-      <Flexbox justifyContent="between" text="accent" className="cursor-pointer" mb="4" onClick={() => void 0}>
+      <Flexbox
+        justifyContent="between"
+        text="accent"
+        className="cursor-pointer"
+        mb="4"
+        onClick={() => {
+          dispatch(cleanCotenantFilters());
+          dispatch(setWithCotenantFilter(false));
+        }}>
         Сбросить фильтры
-        <RemixIcon name="refresh" />{' '}
+        <RemixIcon name="refresh" />
       </Flexbox>
-      <Button primary w="100">
+      <Button primary w="100" onClick={() => dispatch(setApplyCotenantFilter(true))}>
         Поиск
       </Button>
     </Flexbox>

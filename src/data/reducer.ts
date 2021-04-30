@@ -1,6 +1,7 @@
 import {
   advertismentFilterReducer,
   authorizationReducer,
+  cotenantFilterReducer,
   newAdvertismentReducer,
   ownerContactsReducer,
   propertyDetailsReducer,
@@ -14,6 +15,7 @@ import { combineReducers } from 'redux';
 export const appReducer = combineReducers({
   advertismentFilter: advertismentFilterReducer,
   authorization: authorizationReducer,
+  cotenantFilter: cotenantFilterReducer,
   propertyDetails: propertyDetailsReducer,
   propertyFacilities: propertyFacilitiesReducer,
   propertyPhotos: propertyPhotosReducer,
