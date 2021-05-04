@@ -11,3 +11,5 @@ export const setFacilitiesFilter = createAction<string[]>(AdvertismentFilterActi
 export const setLivingRulesFilter = createAction<string[]>(AdvertismentFilterActionTypes.SET_LIVING_RULES_FILTER);
 export const setSortingFilter = createAction<string>(AdvertismentFilterActionTypes.SET_SORTING_FILTER);
 export const setAdvertismentPageFilter = createAction<number>(AdvertismentFilterActionTypes.SET_ACTIVE_PAGE_FILTER);
+export const setApplyFilter = createAction<boolean>(AdvertismentFilterActionTypes.SET_APPLY_FILTER);
+export const setWithFilter = createAction<boolean>(AdvertismentFilterActionTypes.SET_WITH_FILTER);

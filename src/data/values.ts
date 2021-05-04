@@ -97,3 +97,8 @@ export enum AgeRange {
   min = 18,
   max = 70,
 }
+
+export enum AreaPriceRange {
+  min = 5,
+  max = 300,
+}

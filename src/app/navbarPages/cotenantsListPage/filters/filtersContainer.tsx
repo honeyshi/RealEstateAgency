@@ -1,6 +1,6 @@
+import { AgeRange, Sex, districts, ownSexCheckboxes, sexCheckboxes } from 'data/values';
 import { Button, CheckBox, Flexbox, RemixIcon, TextField } from 'shared/base';
 import React, { useMemo } from 'react';
-import { Sex, districts, ownSexCheckboxes, sexCheckboxes } from 'data/values';
 import {
   cleanCotenantFilters,
   setCotenantAgeFilter,
@@ -89,8 +89,8 @@ export const FiltersContainer: React.FC = () => {
       <Flexbox py="4">
         <InputRange
           formatLabel={(value) => `${value} лет`}
-          maxValue={70}
-          minValue={18}
+          maxValue={AgeRange.max}
+          minValue={AgeRange.min}
           value={cotenantFilter.cotenantAge}
           onChange={(value) => dispatch(setCotenantAgeFilter(value))}
         />
@@ -100,8 +100,8 @@ export const FiltersContainer: React.FC = () => {
       <Flexbox py="4" mb="4">
         <InputRange
           formatLabel={(value) => `${value} лет`}
-          maxValue={70}
-          minValue={18}
+          maxValue={AgeRange.max}
+          minValue={AgeRange.min}
           value={cotenantFilter.ownAge}
           onChange={(value) => dispatch(setOwnCotenantAgeFilter(value))}
         />
