@@ -1,10 +1,12 @@
-import { AreaPriceRange } from 'data/values';
+import { AreaPriceRange, orderNameToQuery } from 'data/values';
+
 import { Range } from 'react-input-range';
 import axios from 'axios';
 import config from 'core/configFiles/appSettings.json';
 
 export const performGetAdvertismentRequest = async (
   page: number,
+  sorting: string,
   propertyType?: string,
   districts?: number[],
   rentPayment?: Range | number,
@@ -14,6 +16,8 @@ export const performGetAdvertismentRequest = async (
   livingRules?: string[]
 ) => {
   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authInfo')}`;
+
+  const sortingQuery = orderNameToQuery.has(sorting) ? `?order_by=${orderNameToQuery.get(sorting)}` : '';
 
   const propertyTypeQuery = propertyType ? `type=${propertyType}` : '';
   const districtQuery = districts && districts?.length !== 0 ? `district=${districts.join(',')}` : '';
@@ -55,7 +59,9 @@ export const performGetAdvertismentRequest = async (
 
   console.log(finalQuery);
 
-  const response = await axios.get(`${config.apiUrl}/apartments?page=${page}${finalQuery && `&${finalQuery}`}`);
+  const response = await axios.get(
+    `${config.apiUrl}/apartments?page=${page}${finalQuery && `&${finalQuery}`}${sortingQuery && sortingQuery}`
+  );
   console.log(response);
   return response.data;
 };

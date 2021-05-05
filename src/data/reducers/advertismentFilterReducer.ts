@@ -1,13 +1,11 @@
 import {
   cleanFilters,
-  setAdvertismentPageFilter,
   setDistrictFilter,
   setFacilitiesFilter,
   setLivingRulesFilter,
   setPropertyTypeFilter,
   setRentPaymentFilter,
   setRoomsFilter,
-  setSortingFilter,
   setSpaceFilter,
 } from 'data/actions';
 import { setApplyFilter, setWithFilter } from 'data/actions/advertismentFilterActions';
@@ -24,8 +22,6 @@ interface IAdvertismentFilterInitialState {
   space: Range | number;
   facilities: string[];
   livingRules: string[];
-  sorting: string;
-  activePage: number;
   apply: boolean;
   withFilter: boolean;
 }
@@ -38,8 +34,6 @@ const advertismentFilterInitialState: IAdvertismentFilterInitialState = {
   space: { min: AreaPriceRange.min, max: AreaPriceRange.max },
   facilities: [],
   livingRules: [],
-  sorting: '',
-  activePage: 1,
   apply: false,
   withFilter: false,
 };
@@ -87,18 +81,6 @@ export const advertismentFilterReducer = createReducer(advertismentFilterInitial
       livingRules: action.payload,
     };
   },
-  [setSortingFilter.type]: (state, action) => {
-    return {
-      ...state,
-      sorting: action.payload,
-    };
-  },
-  [setAdvertismentPageFilter.type]: (state, action) => {
-    return {
-      ...state,
-      activePage: action.payload,
-    };
-  },
   [setApplyFilter.type]: (state, action) => {
     return {
       ...state,
@@ -111,10 +93,9 @@ export const advertismentFilterReducer = createReducer(advertismentFilterInitial
       withFilter: action.payload,
     };
   },
-  [cleanFilters.type]: (state) => {
+  [cleanFilters.type]: () => {
     return {
       ...advertismentFilterInitialState,
-      activePage: state.activePage,
     };
   },
 });

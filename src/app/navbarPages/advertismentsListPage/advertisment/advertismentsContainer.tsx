@@ -11,8 +11,7 @@ import { amountAdvertismentOnPage } from 'data/values';
 import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
 import { history } from 'core/history';
 import { performGetAdvertismentRequest } from 'core/getAdvertisment/getAdvertisment';
-import { setApplyFilter } from 'data/actions/advertismentFilterActions';
-import { setSortingFilter } from 'data/actions';
+import { setApplyFilter } from 'data/actions';
 import { usePrevious } from 'core/usePrevious';
 
 export const AdvertismentsContainer: React.FC = () => {
@@ -22,6 +21,7 @@ export const AdvertismentsContainer: React.FC = () => {
   const [advertisments, setAdvertisments] = useState<IAdvertisment[]>();
   const [amountPages, setAmountPages] = useState(10);
   const [totalAds, setTotalAds] = useState(10);
+  const [sorting, setSorting] = useState('');
 
   const advertismentFilter = useSelector((state: StoreType) => state.advertismentFilter);
 
@@ -35,6 +35,7 @@ export const AdvertismentsContainer: React.FC = () => {
           advertismentFilter.withFilter
             ? (result = await performGetAdvertismentRequest(
                 activePage,
+                sorting,
                 advertismentFilter.propertyType,
                 advertismentFilter.districts,
                 advertismentFilter.rentPayment,
@@ -43,7 +44,7 @@ export const AdvertismentsContainer: React.FC = () => {
                 advertismentFilter.facilities,
                 advertismentFilter.livingRules
               ))
-            : (result = await performGetAdvertismentRequest(activePage));
+            : (result = await performGetAdvertismentRequest(activePage, sorting));
           setAdvertisments(result.apartments);
           setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
           setTotalAds(result.total_count);
@@ -54,7 +55,7 @@ export const AdvertismentsContainer: React.FC = () => {
     };
     fetchData();
     // eslint-disable-next-line
-  }, [activePage, advertismentFilter.withFilter, advertismentFilter.apply]);
+  }, [activePage, sorting, advertismentFilter.withFilter, advertismentFilter.apply]);
 
   useEffect(() => {
     if (advertismentFilter.apply) {
@@ -96,9 +97,10 @@ export const AdvertismentsContainer: React.FC = () => {
           <Flexbox alignItems="baseline" justifyContent="between" mb="4">
             <TextField>Найдено {totalAds} объявлений</TextField>
             <Select
+              absoluteRight
               selectOptions={['Сначала новые', 'По возрастанию цены', 'По убыванию цены']}
               selectText="Сортировка"
-              onSelectValue={(value) => dispatch(setSortingFilter(value))}
+              onSelectValue={(value) => setSorting(value)}
             />
           </Flexbox>
           {advertismentItemComponents}

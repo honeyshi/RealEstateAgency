@@ -93,6 +93,11 @@ export const sexNameToId = new Map([
   ['Женский', Sex.female],
 ]);
 
+export const orderNameToQuery = new Map([
+  ['По убыванию цены', 'max_price'],
+  ['По возрастанию цены', 'min_price'],
+]);
+
 export enum AgeRange {
   min = 18,
   max = 70,

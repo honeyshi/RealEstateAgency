@@ -9,7 +9,5 @@ export const setRoomsFilter = createAction<string[]>(AdvertismentFilterActionTyp
 export const setSpaceFilter = createAction<Range | number>(AdvertismentFilterActionTypes.SET_SPACE_FILTER);
 export const setFacilitiesFilter = createAction<string[]>(AdvertismentFilterActionTypes.SET_FACILITIES_FILTER);
 export const setLivingRulesFilter = createAction<string[]>(AdvertismentFilterActionTypes.SET_LIVING_RULES_FILTER);
-export const setSortingFilter = createAction<string>(AdvertismentFilterActionTypes.SET_SORTING_FILTER);
-export const setAdvertismentPageFilter = createAction<number>(AdvertismentFilterActionTypes.SET_ACTIVE_PAGE_FILTER);
 export const setApplyFilter = createAction<boolean>(AdvertismentFilterActionTypes.SET_APPLY_FILTER);
 export const setWithFilter = createAction<boolean>(AdvertismentFilterActionTypes.SET_WITH_FILTER);

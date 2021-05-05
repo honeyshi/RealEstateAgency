@@ -5,6 +5,7 @@ import { Button, CheckBox, CheckboxOption, Flexbox, RemixIcon, TextField } from 
 import React, { useMemo } from 'react';
 import {
   cleanFilters,
+  setApplyFilter,
   setDistrictFilter,
   setFacilitiesFilter,
   setLivingRulesFilter,
@@ -12,9 +13,9 @@ import {
   setRentPaymentFilter,
   setRoomsFilter,
   setSpaceFilter,
+  setWithFilter,
 } from 'data/actions';
 import { facilityOptions, livingRules } from './data';
-import { setApplyFilter, setWithFilter } from 'data/actions/advertismentFilterActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { CheckboxFilter } from 'pageParts/filters';

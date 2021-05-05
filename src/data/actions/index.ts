@@ -6,8 +6,8 @@ export {
   setSpaceFilter,
   setFacilitiesFilter,
   setLivingRulesFilter,
-  setSortingFilter,
-  setAdvertismentPageFilter,
+  setApplyFilter,
+  setWithFilter,
 } from './advertismentFilterActions';
 
 export { setAuthorizationToken } from './authorizationActions';
