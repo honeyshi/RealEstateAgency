@@ -5,6 +5,7 @@ import config from 'core/configFiles/appSettings.json';
 
 export const performGetAdvertismentRequest = async (
   page: number,
+  propertyType?: string,
   districts?: number[],
   rentPayment?: Range | number,
   rooms?: string[],
@@ -14,6 +15,7 @@ export const performGetAdvertismentRequest = async (
 ) => {
   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authInfo')}`;
 
+  const propertyTypeQuery = propertyType ? `type=${propertyType}` : '';
   const districtQuery = districts && districts?.length !== 0 ? `district=${districts.join(',')}` : '';
   const minRentQuery =
     rentPayment && typeof rentPayment !== 'number' && rentPayment.min !== AreaPriceRange.min
@@ -35,6 +37,7 @@ export const performGetAdvertismentRequest = async (
   const onlyRentQuery = livingRules && livingRules.includes('filter-only-rent') ? 'only_rent=1' : '';
 
   const finalQuery = [
+    propertyTypeQuery,
     districtQuery,
     minRentQuery,
     maxRentQuery,

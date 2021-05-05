@@ -35,6 +35,7 @@ export const AdvertismentsContainer: React.FC = () => {
           advertismentFilter.withFilter
             ? (result = await performGetAdvertismentRequest(
                 activePage,
+                advertismentFilter.propertyType,
                 advertismentFilter.districts,
                 advertismentFilter.rentPayment,
                 advertismentFilter.rooms,
