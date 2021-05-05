@@ -11,6 +11,7 @@ import { amountAdvertismentOnPage } from 'data/values';
 import { history } from 'core/history';
 import { performGetCotenantsRequest } from 'core/cotenant/getCotenants';
 import { setApplyCotenantFilter } from 'data/actions/cotenantFilterActions';
+import { usePrevious } from 'core/usePrevious';
 
 export const CotenantListContainer: React.FC = () => {
   const [activePage, setActivePage] = useState(1);
@@ -21,22 +22,26 @@ export const CotenantListContainer: React.FC = () => {
 
   const cotenantFilter = useSelector((state: StoreType) => state.cotenantFilter);
 
+  const previousApplyFilter = usePrevious(cotenantFilter.apply);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         let result: any;
-        cotenantFilter.withFilter
-          ? (result = await performGetCotenantsRequest(
-              activePage,
-              cotenantFilter.districts,
-              cotenantFilter.cotenantAge,
-              cotenantFilter.cotenantSex,
-              cotenantFilter.ownAge,
-              cotenantFilter.ownSex
-            ))
-          : (result = await performGetCotenantsRequest(activePage));
-        setRequests(result.items);
-        setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
+        if (!previousApplyFilter) {
+          cotenantFilter.withFilter
+            ? (result = await performGetCotenantsRequest(
+                activePage,
+                cotenantFilter.districts,
+                cotenantFilter.cotenantAge,
+                cotenantFilter.cotenantSex,
+                cotenantFilter.ownAge,
+                cotenantFilter.ownSex
+              ))
+            : (result = await performGetCotenantsRequest(activePage));
+          setRequests(result.items);
+          setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
+        }
       } catch (error) {
         history.push('/error');
       }
@@ -48,9 +53,7 @@ export const CotenantListContainer: React.FC = () => {
   useEffect(() => {
     if (cotenantFilter.apply) {
       setActivePage(1);
-      return () => {
-        dispatch(setApplyCotenantFilter(false));
-      };
+      dispatch(setApplyCotenantFilter(false));
     }
   }, [dispatch, cotenantFilter.apply]);
 
