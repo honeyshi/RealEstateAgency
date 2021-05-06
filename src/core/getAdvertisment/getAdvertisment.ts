@@ -17,7 +17,7 @@ export const performGetAdvertismentRequest = async (
 ) => {
   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authInfo')}`;
 
-  const sortingQuery = orderNameToQuery.has(sorting) ? `?order_by=${orderNameToQuery.get(sorting)}` : '';
+  const sortingQuery = orderNameToQuery.has(sorting) ? `&order_by=${orderNameToQuery.get(sorting)}` : '';
 
   const propertyTypeQuery = propertyType ? `type=${propertyType}` : '';
   const districtQuery = districts && districts?.length !== 0 ? `district=${districts.join(',')}` : '';

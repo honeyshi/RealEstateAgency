@@ -68,5 +68,6 @@
     "jsdom": "^16.5.3",
     "node-sass": "^4.14.1",
     "webpack-cli": "^4.3.1"
-  }
+  },
+  "homepage": "https://dwelly-rent.netlify.app/"
 }
