@@ -1,15 +1,18 @@
 import { Block, Flexbox, TextField } from 'shared/base';
 import React, { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Advertisment } from 'pageParts/advertisment';
 import { IAdvertisment } from 'core/getAdvertisment/advertismentModel';
 import { NumberPagination } from 'shared/pagination';
 import { Select } from 'shared/composite/select';
+import { StoreType } from 'core/store';
 import { amountAdvertismentOnPage } from 'data/values';
 import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
+import { history } from 'core/history';
 import { performGetAdvertismentRequest } from 'core/getAdvertisment/getAdvertisment';
-import { setSortingFilter } from 'data/actions';
-import { useDispatch } from 'react-redux';
+import { setApplyFilter } from 'data/actions';
+import { usePrevious } from 'core/usePrevious';
 
 export const AdvertismentsContainer: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,18 +21,48 @@ export const AdvertismentsContainer: React.FC = () => {
   const [advertisments, setAdvertisments] = useState<IAdvertisment[]>();
   const [amountPages, setAmountPages] = useState(10);
   const [totalAds, setTotalAds] = useState(10);
+  const [sorting, setSorting] = useState('');
+
+  const advertismentFilter = useSelector((state: StoreType) => state.advertismentFilter);
+
+  const previousApplyFilter = usePrevious(advertismentFilter.apply);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await performGetAdvertismentRequest(activePage);
-      setAdvertisments(result.apartments);
-      setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
-      setTotalAds(result.total_count);
-      console.log(advertisments);
+      try {
+        let result: any;
+        if (!previousApplyFilter) {
+          advertismentFilter.withFilter
+            ? (result = await performGetAdvertismentRequest(
+                activePage,
+                sorting,
+                advertismentFilter.propertyType,
+                advertismentFilter.districts,
+                advertismentFilter.rentPayment,
+                advertismentFilter.rooms,
+                advertismentFilter.space,
+                advertismentFilter.facilities,
+                advertismentFilter.livingRules
+              ))
+            : (result = await performGetAdvertismentRequest(activePage, sorting));
+          setAdvertisments(result.apartments);
+          setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
+          setTotalAds(result.total_count);
+        }
+      } catch {
+        history.push('/error');
+      }
     };
     fetchData();
     // eslint-disable-next-line
-  }, [activePage]);
+  }, [activePage, sorting, advertismentFilter.withFilter, advertismentFilter.apply]);
+
+  useEffect(() => {
+    if (advertismentFilter.apply) {
+      setActivePage(1);
+      dispatch(setApplyFilter(false));
+    }
+  }, [dispatch, advertismentFilter.apply]);
 
   const advertismentItemComponents = useMemo(() => {
     const advertismentItems = advertisments?.map((advertisment) => {
@@ -64,9 +97,10 @@ export const AdvertismentsContainer: React.FC = () => {
           <Flexbox alignItems="baseline" justifyContent="between" mb="4">
             <TextField>Найдено {totalAds} объявлений</TextField>
             <Select
+              absoluteRight
               selectOptions={['Сначала новые', 'По возрастанию цены', 'По убыванию цены']}
               selectText="Сортировка"
-              onSelectValue={(value) => dispatch(setSortingFilter(value))}
+              onSelectValue={(value) => setSorting(value)}
             />
           </Flexbox>
           {advertismentItemComponents}

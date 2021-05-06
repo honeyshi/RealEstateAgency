@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import classNames from 'classnames';
 
 interface ISelectProps {
+  absoluteRight?: boolean;
   solid?: boolean;
   selectOptions: string[];
   selectText: string;
@@ -13,7 +14,14 @@ interface ISelectProps {
   onSelectValue: (value: string) => void;
 }
 
-export const Select: React.FC<ISelectProps> = ({ solid, selectOptions, selectText, className, onSelectValue }) => {
+export const Select: React.FC<ISelectProps> = ({
+  absoluteRight,
+  solid,
+  selectOptions,
+  selectText,
+  className,
+  onSelectValue,
+}) => {
   const selectRef = useRef<HTMLDivElement>(null);
 
   const [opened, setOpened] = useState(false);
@@ -57,7 +65,9 @@ export const Select: React.FC<ISelectProps> = ({ solid, selectOptions, selectTex
   }, [selectOptions, onselectvalue, text]);
 
   return (
-    <div className={classNames('select p-2', { solid: solid }, className)} ref={selectRef}>
+    <div
+      className={classNames('select p-2', { solid: solid }, { 'absolute-right': absoluteRight }, className)}
+      ref={selectRef}>
       <Flexbox
         alignItems="center"
         justifyContent="between"

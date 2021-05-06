@@ -1,16 +1,16 @@
 import {
   cleanFilters,
-  setAdvertismentPageFilter,
   setDistrictFilter,
   setFacilitiesFilter,
   setLivingRulesFilter,
   setPropertyTypeFilter,
   setRentPaymentFilter,
   setRoomsFilter,
-  setSortingFilter,
   setSpaceFilter,
 } from 'data/actions';
+import { setApplyFilter, setWithFilter } from 'data/actions/advertismentFilterActions';
 
+import { AreaPriceRange } from 'data/values';
 import { Range } from 'react-input-range';
 import { createReducer } from '@reduxjs/toolkit';
 
@@ -22,20 +22,20 @@ interface IAdvertismentFilterInitialState {
   space: Range | number;
   facilities: string[];
   livingRules: string[];
-  sorting: string;
-  activePage: number;
+  apply: boolean;
+  withFilter: boolean;
 }
 
 const advertismentFilterInitialState: IAdvertismentFilterInitialState = {
   propertyType: '1',
   districts: [],
-  rentPayment: { min: 5, max: 300 },
+  rentPayment: { min: AreaPriceRange.min, max: AreaPriceRange.max },
   rooms: [],
-  space: { min: 5, max: 300 },
+  space: { min: AreaPriceRange.min, max: AreaPriceRange.max },
   facilities: [],
   livingRules: [],
-  sorting: '',
-  activePage: 1,
+  apply: false,
+  withFilter: false,
 };
 
 export const advertismentFilterReducer = createReducer(advertismentFilterInitialState, {
@@ -81,22 +81,21 @@ export const advertismentFilterReducer = createReducer(advertismentFilterInitial
       livingRules: action.payload,
     };
   },
-  [setSortingFilter.type]: (state, action) => {
+  [setApplyFilter.type]: (state, action) => {
     return {
       ...state,
-      sorting: action.payload,
+      apply: action.payload,
     };
   },
-  [setAdvertismentPageFilter.type]: (state, action) => {
+  [setWithFilter.type]: (state, action) => {
     return {
       ...state,
-      activePage: action.payload,
+      withFilter: action.payload,
     };
   },
-  [cleanFilters.type]: (state) => {
+  [cleanFilters.type]: () => {
     return {
       ...advertismentFilterInitialState,
-      activePage: state.activePage,
     };
   },
 });

@@ -1,9 +1,11 @@
 import 'react-input-range/lib/css/index.css';
 
+import { AreaPriceRange, districts, propertyTypes, roomsAmount } from 'data/values';
 import { Button, CheckBox, CheckboxOption, Flexbox, RemixIcon, TextField } from 'shared/base';
 import React, { useMemo } from 'react';
 import {
   cleanFilters,
+  setApplyFilter,
   setDistrictFilter,
   setFacilitiesFilter,
   setLivingRulesFilter,
@@ -11,8 +13,8 @@ import {
   setRentPaymentFilter,
   setRoomsFilter,
   setSpaceFilter,
+  setWithFilter,
 } from 'data/actions';
-import { districts, propertyTypes, roomsAmount } from 'data/values';
 import { facilityOptions, livingRules } from './data';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -154,8 +156,8 @@ export const FiltersContainer: React.FC = () => {
         <Flexbox py="4">
           <InputRange
             formatLabel={(value) => `${value} тыс. руб.`}
-            maxValue={300}
-            minValue={5}
+            maxValue={AreaPriceRange.max}
+            minValue={AreaPriceRange.min}
             value={advertismentFilter.rentPayment}
             step={5}
             onChange={(value) => dispatch(setRentPaymentFilter(value))}
@@ -173,8 +175,8 @@ export const FiltersContainer: React.FC = () => {
         <Flexbox py="4">
           <InputRange
             formatLabel={(value) => `${value} м²`}
-            maxValue={300}
-            minValue={5}
+            maxValue={AreaPriceRange.max}
+            minValue={AreaPriceRange.min}
             value={advertismentFilter.space}
             step={5}
             onChange={(value) => dispatch(setSpaceFilter(value))}
@@ -189,11 +191,20 @@ export const FiltersContainer: React.FC = () => {
           text="accent"
           className="cursor-pointer"
           mb="4"
-          onClick={() => dispatch(cleanFilters())}>
+          onClick={() => {
+            dispatch(cleanFilters());
+            dispatch(setWithFilter(false));
+          }}>
           Сбросить фильтры
-          <RemixIcon name="refresh" />{' '}
+          <RemixIcon name="refresh" />
         </Flexbox>
-        <Button primary w="100">
+        <Button
+          primary
+          w="100"
+          onClick={() => {
+            dispatch(setApplyFilter(true));
+            !advertismentFilter.withFilter && dispatch(setWithFilter(true));
+          }}>
           Поиск
         </Button>
       </Flexbox>

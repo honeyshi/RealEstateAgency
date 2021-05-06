@@ -6,13 +6,21 @@ export {
   setSpaceFilter,
   setFacilitiesFilter,
   setLivingRulesFilter,
-  setSortingFilter,
-  setAdvertismentPageFilter,
+  setApplyFilter,
+  setWithFilter,
 } from './advertismentFilterActions';
 
 export { setAuthorizationToken } from './authorizationActions';
 
-export { cleanPropertyDetails, cleanNewAdvertisment, cleanFilters } from './cleanActions';
+export { cleanPropertyDetails, cleanNewAdvertisment, cleanFilters, cleanCotenantFilters } from './cleanActions';
+
+export {
+  setCotenantAgeFilter,
+  setCotenantDistrictFilter,
+  setCotenantSexFilter,
+  setOwnCotenantAgeFilter,
+  setOwnCotenantSexFilter,
+} from './cotenantFilterActions';
 
 export { setActiveStep, setPropertyType, setWrongSteps, setValidatedForm } from './newAdvertismentActions';
 

@@ -17,4 +17,10 @@
       padding: 0.375rem 0.75rem !important;
     }
   }
+  &.absolute-right {
+    position: absolute;
+    z-index: 1000;
+    background: white;
+    right: 5%;
+  }
 }

@@ -71,6 +71,17 @@ export enum Sex {
   female = 2,
 }
 
+export const sexCheckboxes = [
+  { name: 'cotenant-sex-male', text: 'Мужской', value: Sex.male },
+  { name: 'cotenant-sex-female', text: 'Женский', value: Sex.female },
+  { name: 'cotenant-sex-unselected', text: 'Не важен', value: Sex.unselected },
+];
+
+export const ownSexCheckboxes = [
+  { name: 'own-sex-male', text: 'Мужской', value: Sex.male },
+  { name: 'own-sex-female', text: 'Женский', value: Sex.female },
+];
+
 export interface Geo {
   lat: number;
   lon: number;
@@ -81,3 +92,18 @@ export const sexNameToId = new Map([
   ['Мужской', Sex.male],
   ['Женский', Sex.female],
 ]);
+
+export const orderNameToQuery = new Map([
+  ['По убыванию цены', 'max_price'],
+  ['По возрастанию цены', 'min_price'],
+]);
+
+export enum AgeRange {
+  min = 18,
+  max = 70,
+}
+
+export enum AreaPriceRange {
+  min = 5,
+  max = 300,
+}

@@ -1,31 +1,61 @@
 import { Block, THead, Table, Th, Tr } from 'shared/base';
 import React, { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Cotenant } from './cotenant';
 import { CotenantListItem } from 'core/cotenant/cotenantModel';
 import { NoResultsPage } from 'shared/layout/noResultsPage';
 import { NumberPagination } from 'shared/pagination';
+import { StoreType } from 'core/store';
 import { amountAdvertismentOnPage } from 'data/values';
 import { history } from 'core/history';
 import { performGetCotenantsRequest } from 'core/cotenant/getCotenants';
+import { setApplyCotenantFilter } from 'data/actions/cotenantFilterActions';
+import { usePrevious } from 'core/usePrevious';
 
 export const CotenantListContainer: React.FC = () => {
   const [activePage, setActivePage] = useState(1);
   const [requests, setRequests] = useState<CotenantListItem[]>();
   const [amountPages, setAmountPages] = useState(10);
 
+  const dispatch = useDispatch();
+
+  const cotenantFilter = useSelector((state: StoreType) => state.cotenantFilter);
+
+  const previousApplyFilter = usePrevious(cotenantFilter.apply);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await performGetCotenantsRequest(activePage);
-        setRequests(result.items);
-        setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
+        let result: any;
+        if (!previousApplyFilter) {
+          cotenantFilter.withFilter
+            ? (result = await performGetCotenantsRequest(
+                activePage,
+                cotenantFilter.districts,
+                cotenantFilter.cotenantAge,
+                cotenantFilter.cotenantSex,
+                cotenantFilter.ownAge,
+                cotenantFilter.ownSex
+              ))
+            : (result = await performGetCotenantsRequest(activePage));
+          setRequests(result.items);
+          setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
+        }
       } catch (error) {
         history.push('/error');
       }
     };
     fetchData();
-  }, [activePage]);
+    // eslint-disable-next-line
+  }, [activePage, cotenantFilter.withFilter, cotenantFilter.apply]);
+
+  useEffect(() => {
+    if (cotenantFilter.apply) {
+      setActivePage(1);
+      dispatch(setApplyCotenantFilter(false));
+    }
+  }, [dispatch, cotenantFilter.apply]);
 
   const cotenantItemComponents = useMemo(() => {
     const cotenantItems = requests?.map((request) => {
