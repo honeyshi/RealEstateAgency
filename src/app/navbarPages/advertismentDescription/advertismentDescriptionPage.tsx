@@ -18,6 +18,7 @@ import { DefaultPage } from 'shared/layout/defaultPage';
 import { FavouriteButton } from 'pageParts/advertisment';
 import { InformationMainContainer } from 'pageParts/infoParts';
 import { InformationRow } from 'pageParts/infoParts/informationRow';
+import { ModalInput } from './modalInput';
 import { OneAdvertismentModel } from 'core/getAdvertisment/advertismentModel';
 import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
 import doodle1 from 'icons/doodle1.svg';
@@ -31,6 +32,12 @@ export const AdvertismentDescriptionPage: React.FC = () => {
   const [currentAdvertisment, setCurrentAdvertisment] = useState<OneAdvertismentModel>();
 
   const { id } = useParams<{ id: string }>();
+
+  const [showInputModal, setShowInputModal] = useState(false);
+
+  const handleInputModalClose = () => {
+    setShowInputModal(false);
+  };
 
   const getAdvertismentRooms = () => {
     // type flat and no rooms
@@ -69,6 +76,7 @@ export const AdvertismentDescriptionPage: React.FC = () => {
         <Container nonFluid>
           {currentAdvertisment !== undefined && (
             <>
+              <ModalInput advertismentId={id} show={showInputModal} handleClose={handleInputModalClose} />
               <Row className="advertisment-doodle-container">
                 <Image src={doodle1} className="doodle top left" />
                 <Image src={doodle2} className="doodle middle right" />
@@ -85,7 +93,7 @@ export const AdvertismentDescriptionPage: React.FC = () => {
                     {`${currentAdvertisment.price} ₽/месяц`}
                   </TextField>
                   <Flexbox>
-                    <Button danger mr="3">
+                    <Button danger mr="3" onClick={() => setShowInputModal(true)}>
                       Пожаловаться
                     </Button>
                     <FavouriteButton isFavourite={currentAdvertisment.favorite_apartments.length !== 0} id={id} />
