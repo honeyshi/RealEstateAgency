@@ -61,7 +61,7 @@ export const Footer: React.FC = () => {
               Мы на связи
             </TextField>
             <TextField mb="0">+7 (831) 212-34-56</TextField>
-            <TextField mb="0">example@email.com</TextField>
+            <TextField mb="0">support@dwelly.com</TextField>
             <Link to="/contact" className="footer-link">
               Напишите нам
             </Link>
