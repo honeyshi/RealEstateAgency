@@ -1,23 +1,24 @@
-import React, { useMemo } from 'react';
 import { Container, Flexbox, Row, Section, TextField } from 'shared/base';
-import { Suggestion } from 'pageParts/advertisment';
+import React, { useEffect, useState } from 'react';
+
+import { IAdvertisment } from 'core/getAdvertisment/advertismentModel';
 import { Link } from 'react-router-dom';
+import { Suggestion } from 'pageParts/advertisment';
+import { performGetAdvertismentRequest } from 'core/getAdvertisment/getAdvertisment';
 
 export const SuggestionsSection: React.FC = () => {
-  const suggestionItemComponents = useMemo(() => {
-    const suggestionItems = [];
-    for (var i = 0; i < 3; i++)
-      suggestionItems.push(
-        <Suggestion
-          header="3-комнатная квартира 88 м²"
-          address="ул. Большая Покровская д.8 эт. 4/7"
-          price="15 000 Р/месяц"
-          link="/suggestion"
-          key={`suggestion-${i}`}
-        />
-      );
-    return suggestionItems;
+  const [advertisments, setAdvertisments] = useState<IAdvertisment[]>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await performGetAdvertismentRequest(1, '');
+        setAdvertisments(result.apartments);
+      } catch (error) {}
+    };
+    fetchData();
   }, []);
+
   return (
     <Section>
       <Container nonFluid>
@@ -25,10 +26,36 @@ export const SuggestionsSection: React.FC = () => {
           Последние предложения
         </TextField>
         <TextField center>Мы предлагаем обширный выбор недвижимости от собственников.</TextField>
-        <Row>{suggestionItemComponents}</Row>
-        <Row>{suggestionItemComponents}</Row>
+        <Row>
+          {advertisments?.slice(0, 3).map((advertisment) => {
+            return (
+              <Suggestion
+                header={advertisment.header}
+                image={advertisment.images[0].url}
+                address={`Нижний Новгород, р-н ${advertisment.district}, ${advertisment.address}`}
+                price={`${advertisment.price} ₽/месяц`}
+                link={`/advertisment-description/${advertisment.id}`}
+                key={`suggestion-${advertisment.id}`}
+              />
+            );
+          })}
+        </Row>
+        <Row>
+          {advertisments?.slice(3, 6).map((advertisment) => {
+            return (
+              <Suggestion
+                header={advertisment.header}
+                image={advertisment.images[0].url}
+                address={`Нижний Новгород, р-н ${advertisment.district}, ${advertisment.address}`}
+                price={`${advertisment.price} ₽/месяц`}
+                link={`/advertisment-description/${advertisment.id}`}
+                key={`suggestion-${advertisment.id}`}
+              />
+            );
+          })}
+        </Row>
         <Flexbox justifyContent="center" pb="5" pt="0" breakpoint="md" space="pt" className="pt-5">
-          <Link to="advert" className="rounded-link text-body">
+          <Link to="/flats" className="rounded-link text-body">
             Показать ещё
           </Link>
         </Flexbox>

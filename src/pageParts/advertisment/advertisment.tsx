@@ -46,7 +46,6 @@ export const Advertisment: React.FC<IAdvertismentProps> = ({
   const handleClickOutside = useCallback(
     (e: MouseEvent) => {
       if (!advertismentMenuRef.current || advertismentMenuRef.current.contains(e.target as Node)) return;
-      console.log('CLIK');
       setShowMenu(false);
     },
     [advertismentMenuRef]
