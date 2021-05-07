@@ -1,6 +1,3 @@
-import './pagesStyle.scss';
-import './tooltip.scss';
-
 import {
   AdminAdvertismentsListPage,
   CreateCoRequestPage,
@@ -30,7 +27,7 @@ import {
 } from 'app/formPages';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import { ContactUs } from './infoPages/contactUs';
+import { ContactUs } from './formPages/contactUs';
 import { CotenantDescriptionPage } from './navbarPages/cotenantDescriptionPage/cotenantDescriptionPage';
 import { CotenantsListPage } from './navbarPages/cotenantsListPage';
 import { ErrorPage } from 'shared/layout/errorPage';
