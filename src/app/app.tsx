@@ -1,5 +1,6 @@
 import {
   AdminAdvertismentsListPage,
+  AdminClaimListPage,
   CreateCoRequestPage,
   CreateSubscriptionPage,
   EditAdvertismentPage,
@@ -85,6 +86,12 @@ export const App: React.FC = () => {
         exact
         path="/profile/admin/advertisments"
         render={() => <UserProfilePage activeSubPage={<AdminAdvertismentsListPage />} />}>
+        {currentUserRole === '2' && <Redirect to="/profile/info" />}
+      </Route>
+      <Route
+        exact
+        path="/profile/admin/claims"
+        render={() => <UserProfilePage activeSubPage={<AdminClaimListPage />} />}>
         {currentUserRole === '2' && <Redirect to="/profile/info" />}
       </Route>
       <Route

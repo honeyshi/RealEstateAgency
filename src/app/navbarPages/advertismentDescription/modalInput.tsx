@@ -7,7 +7,7 @@ import { ErrorMessagesView } from 'shared/composite/errorMessagesView';
 import classNames from 'classnames';
 import { invalidModalState } from 'data/values';
 import { parseError } from 'core/parseError';
-import { performPublishClaimRequest } from 'core/createAdvertisment/publishClaim';
+import { performPublishClaimRequest } from 'core/claim/publishClaim';
 
 const schema = yup.object().shape({
   claim: yup

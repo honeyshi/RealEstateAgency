@@ -13,6 +13,7 @@ enum PagesLink {
   CreateSubscription = '/profile/create-subscription',
   OwnCoRequest = '/profile/my-cotenant-request',
   AdminAdvertisments = '/profile/admin/advertisments',
+  AdminClaims = '/profile/admin/claims',
   CreateCoRequest = '/profile/create-cotenant-request',
 }
 
@@ -61,7 +62,7 @@ export const UserProfilePage: React.FC<{ activeSubPage: JSX.Element }> = ({ acti
                 activeLink={activeMenu}
                 leftMenuItems={[
                   { iconName: 'file-list', header: 'Объявления', link: PagesLink.AdminAdvertisments },
-                  { iconName: 'emotion-unhappy', header: 'Активные жалобы', link: 'PagesLink.AdminAdvertisments' },
+                  { iconName: 'emotion-unhappy', header: 'Активные жалобы', link: PagesLink.AdminClaims },
                   { iconName: 'contacts', header: 'Список пользователей', link: 'PagesLink.AdminAdvertisments' },
                 ]}
               />

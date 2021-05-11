@@ -1,0 +1,11 @@
+@import 'shared/base/utils/styleVariables';
+
+.claim-container {
+  box-shadow: $shadow;
+  border-radius: $border-radius-50;
+  .menu {
+    z-index: 900;
+    height: fit-content;
+    width: fit-content;
+  }
+}

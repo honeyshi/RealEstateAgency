@@ -1,4 +1,5 @@
 export { AdminAdvertismentsListPage } from './adminAdvertismentsListPage';
+export { AdminClaimListPage } from './claims/adminClaimsListPage';
 export { CreateCoRequestPage } from './createCoRequestPage';
 export { CreateSubscriptionPage } from './createSubscriptionPage';
 export { EditAdvertismentPage } from './editAdvertismentPage';

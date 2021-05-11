@@ -1,9 +1,10 @@
 import './advertismentMenu.scss';
 
-import { Button, Flexbox, Modal, RemixIcon, TextField } from 'shared/base';
 import { ModalProps, Statuses, invalidModalState } from 'data/values';
 import React, { useState } from 'react';
 
+import { DefaultButton } from 'pageParts/menuButton';
+import { Modal } from 'shared/base';
 import classNames from 'classnames';
 import { history } from 'core/history';
 import { performChangeAdvertismentStatusRequest } from 'core/profile/changeAdvertismentStatus';
@@ -15,22 +16,6 @@ interface IAdvertismentMenuProps {
   show: boolean;
   id: string;
 }
-
-const DefaultButton: React.FC<{ iconName: string; className?: string; onClick?: (e: React.MouseEvent) => void }> = ({
-  iconName,
-  className,
-  onClick,
-  children,
-}) => {
-  return (
-    <Button primary className={classNames(className)} mb="2" onClick={onClick}>
-      <Flexbox>
-        <RemixIcon name={iconName} mr="2" />
-        <TextField tag="span">{children}</TextField>
-      </Flexbox>
-    </Button>
-  );
-};
 
 const DeclineButton: React.FC<{ onClick: (e: React.MouseEvent) => void }> = ({ onClick }) => {
   return (
