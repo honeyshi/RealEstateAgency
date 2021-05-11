@@ -1,5 +1,6 @@
 export { AdminAdvertismentsListPage } from './adminAdvertismentsListPage';
 export { CreateCoRequestPage } from './createCoRequestPage';
+export { CreateSubscriptionPage } from './createSubscriptionPage';
 export { EditAdvertismentPage } from './editAdvertismentPage';
 export { FavouriteAdvertismentsListPage } from './favouriteAdvertismentListPage';
 export { OwnAdvertismentsListPage } from './ownAdvertismentsListPage';

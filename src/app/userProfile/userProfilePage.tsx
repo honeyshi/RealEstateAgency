@@ -10,6 +10,7 @@ enum PagesLink {
   Information = '/profile/info',
   OwnAdvertisments = '/profile/my-advertisments',
   FavouriteAdvertisments = '/profile/favourite-advertisments',
+  CreateSubscription = '/profile/create-subscription',
   OwnCoRequest = '/profile/my-cotenant-request',
   AdminAdvertisments = '/profile/admin/advertisments',
   CreateCoRequest = '/profile/create-cotenant-request',
@@ -73,7 +74,7 @@ export const UserProfilePage: React.FC<{ activeSubPage: JSX.Element }> = ({ acti
                 { iconName: 'heart-3', header: 'Избранное', link: PagesLink.FavouriteAdvertisments },
                 { iconName: 'file-edit', header: 'Мои объявления', link: PagesLink.OwnAdvertisments },
                 { iconName: 'coins', header: 'Тарифный план', link: 'PagesLink.Information' },
-                { iconName: 'mail-send', header: 'Подписки', link: 'PagesLink.Information ' },
+                { iconName: 'mail-send', header: 'Подписки', link: PagesLink.CreateSubscription },
                 { iconName: 'group', header: 'Поиск соарендатора', link: PagesLink.OwnCoRequest },
               ]}
             />
