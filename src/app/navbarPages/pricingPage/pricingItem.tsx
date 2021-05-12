@@ -1,9 +1,10 @@
 import './pricingItemStyle.scss';
 
-import { Badge, Block, Column, ExternalLink, Flexbox, RemixIcon, TextField } from 'shared/base';
+import { Badge, Block, Button, Column, ExternalLink, Flexbox, RemixIcon, TextField } from 'shared/base';
 
 import React from 'react';
 import classNames from 'classnames';
+import { history } from 'core/history';
 
 interface IPricingItemProps {
   type: string;
@@ -63,14 +64,25 @@ export const PricingItem: React.FC<IPricingItemProps> = ({
             </li>
           )}
         </ul>
-        <ExternalLink
-          to={link}
-          py="2"
-          px="5"
-          mb="4"
-          className={classNames({ primary: primary }, 'pricing-choose-button')}>
-          Выбрать
-        </ExternalLink>
+        {link === 'link for register page' ? (
+          <Button
+            py="2"
+            px="5"
+            mb="4"
+            className={classNames({ primary: primary }, 'pricing-choose-button')}
+            onClick={() => history.push(`/unauthorized`)}>
+            Выбрать
+          </Button>
+        ) : (
+          <ExternalLink
+            to={link}
+            py="2"
+            px="5"
+            mb="4"
+            className={classNames({ primary: primary }, 'pricing-choose-button')}>
+            Выбрать
+          </ExternalLink>
+        )}
       </Flexbox>
     </Column>
   );
