@@ -34,6 +34,7 @@ import { CotenantDescriptionPage } from './navbarPages/cotenantDescriptionPage/c
 import { CotenantsListPage } from './navbarPages/cotenantsListPage';
 import { ErrorPage } from 'shared/layout/errorPage';
 import { FlatsMapPage } from './navbarPages/flatsMapPage';
+import { MyPricingPage } from './userProfile/pricing/myPrcingPage';
 import React from 'react';
 import { UnauthorizedErrorPage } from 'shared/layout/unauthorizedErrorPage';
 
@@ -77,6 +78,7 @@ export const App: React.FC = () => {
         path="/profile/favourite-advertisments"
         render={() => <UserProfilePage activeSubPage={<FavouriteAdvertismentsListPage />} />}
       />
+      <Route exact path="/profile/my-pricing" render={() => <UserProfilePage activeSubPage={<MyPricingPage />} />} />
       <Route
         exact
         path="/profile/create-subscription"
