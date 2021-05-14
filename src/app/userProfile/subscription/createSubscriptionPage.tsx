@@ -1,20 +1,20 @@
-import { AreaPriceRange, districts, facilityOptions, livingRules, propertyTypes, roomsAmount } from 'data/values';
-import { Button, CheckBox, CheckboxOption, Flexbox, RemixIcon, Row } from 'shared/base';
-import InputRange, { Range } from 'react-input-range';
+import {
+  AreaPriceRange,
+  districts,
+  facilityOptions,
+  invalidModalState,
+  livingRules,
+  propertyTypes,
+  roomsAmount,
+} from 'data/values';
+import { Button, CheckBox, CheckboxOption, Flexbox, Modal, RemixIcon, Row } from 'shared/base';
 import React, { useMemo, useState } from 'react';
 
-import { ProfileInfromationRow } from './profileInformationRow';
+import InputRange from 'react-input-range';
+import { ProfileInfromationRow } from '../profileInformationRow';
 import { PropertyType } from 'pageParts/propertyType';
-
-interface Subscription {
-  propertyType: string;
-  districts: number[];
-  rentPayment: Range | number;
-  rooms: string[];
-  space: Range | number;
-  facilities: string[];
-  livingRules: string[];
-}
+import { Subscription } from 'core/subscription/subscription';
+import { performCreateSubscriptionRequest } from 'core/subscription/createSubscription';
 
 const initialState: Subscription = {
   propertyType: '1',
@@ -28,6 +28,20 @@ const initialState: Subscription = {
 
 export const CreateSubscriptionPage: React.FC = () => {
   const [form, setForm] = useState<Subscription>(initialState);
+  const [modalProps, setModalProps] = useState({ ...invalidModalState, show: false });
+
+  const handleModalClose = () => {
+    setModalProps({ ...invalidModalState, show: false });
+  };
+
+  const createSubscription = async () => {
+    try {
+      await performCreateSubscriptionRequest(form);
+      setModalProps({ show: true, valid: true, text: 'Подписка успешно создана' });
+    } catch (error) {
+      setModalProps({ ...invalidModalState });
+    }
+  };
 
   const propertyTypeItemComponents = useMemo(() => {
     const propertyTypeItems = propertyTypes.map((propertyType) => {
@@ -147,6 +161,7 @@ export const CreateSubscriptionPage: React.FC = () => {
 
   return (
     <>
+      <Modal valid={modalProps.valid} text={modalProps.text} show={modalProps.show} handleClose={handleModalClose} />
       <Row justifyContent="center" mt="5" mb="4" w="100">
         <Flexbox justifyContent="between" w="50">
           {propertyTypeItemComponents}
@@ -184,7 +199,9 @@ export const CreateSubscriptionPage: React.FC = () => {
       <ProfileInfromationRow label="Условия проживания">{livingRulesItemComponents}</ProfileInfromationRow>
       <ProfileInfromationRow label="">
         <Row alignItems="center">
-          <Button primary>Сохранить</Button>
+          <Button primary onClick={() => createSubscription()}>
+            Сохранить
+          </Button>
           <Button secondary ml="5" onClick={() => setForm(initialState)}>
             Отменить
           </Button>
