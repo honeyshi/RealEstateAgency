@@ -10,8 +10,11 @@ enum PagesLink {
   Information = '/profile/info',
   OwnAdvertisments = '/profile/my-advertisments',
   FavouriteAdvertisments = '/profile/favourite-advertisments',
+  CreateSubscription = '/profile/create-subscription',
+  MyPricing = '/profile/my-pricing',
   OwnCoRequest = '/profile/my-cotenant-request',
   AdminAdvertisments = '/profile/admin/advertisments',
+  AdminClaims = '/profile/admin/claims',
   CreateCoRequest = '/profile/create-cotenant-request',
 }
 
@@ -60,7 +63,7 @@ export const UserProfilePage: React.FC<{ activeSubPage: JSX.Element }> = ({ acti
                 activeLink={activeMenu}
                 leftMenuItems={[
                   { iconName: 'file-list', header: 'Объявления', link: PagesLink.AdminAdvertisments },
-                  { iconName: 'emotion-unhappy', header: 'Активные жалобы', link: 'PagesLink.AdminAdvertisments' },
+                  { iconName: 'emotion-unhappy', header: 'Активные жалобы', link: PagesLink.AdminClaims },
                   { iconName: 'contacts', header: 'Список пользователей', link: 'PagesLink.AdminAdvertisments' },
                 ]}
               />
@@ -72,8 +75,8 @@ export const UserProfilePage: React.FC<{ activeSubPage: JSX.Element }> = ({ acti
                 { iconName: 'account-box', header: 'Мои данные', link: PagesLink.Information },
                 { iconName: 'heart-3', header: 'Избранное', link: PagesLink.FavouriteAdvertisments },
                 { iconName: 'file-edit', header: 'Мои объявления', link: PagesLink.OwnAdvertisments },
-                { iconName: 'coins', header: 'Тарифный план', link: 'PagesLink.Information' },
-                { iconName: 'mail-send', header: 'Подписки', link: 'PagesLink.Information ' },
+                { iconName: 'coins', header: 'Тарифный план', link: PagesLink.MyPricing },
+                { iconName: 'mail-send', header: 'Подписки', link: PagesLink.CreateSubscription },
                 { iconName: 'group', header: 'Поиск соарендатора', link: PagesLink.OwnCoRequest },
               ]}
             />

@@ -1,6 +1,6 @@
 import 'react-input-range/lib/css/index.css';
 
-import { AreaPriceRange, districts, propertyTypes, roomsAmount } from 'data/values';
+import { AreaPriceRange, districts, facilityOptions, livingRules, propertyTypes, roomsAmount } from 'data/values';
 import { Button, CheckBox, CheckboxOption, Flexbox, RemixIcon, TextField } from 'shared/base';
 import React, { useMemo } from 'react';
 import {
@@ -15,7 +15,6 @@ import {
   setSpaceFilter,
   setWithFilter,
 } from 'data/actions';
-import { facilityOptions, livingRules } from './data';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { CheckboxFilter } from 'pageParts/filters';

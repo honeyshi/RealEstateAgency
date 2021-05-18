@@ -18,5 +18,5 @@ export const performSigninRequest = async (username: string, password: string) =
   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authInfo')}`;
 
   const getResponse = await axios.get(`${config.apiUrl}/user`);
-  localStorage.setItem('userRole', Object(getResponse.data)['role']);
+  localStorage.setItem('userRole', Object(getResponse.data[0])['role']);
 };

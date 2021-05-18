@@ -1,9 +1,10 @@
+import { SizeProps, propsToSize } from './utils/sizeUtil';
+import { SpaceProps, propsToSpace } from './utils/spaceUtil';
+
 import React from 'react';
 import classNames from 'classnames';
 
-import { SpaceProps, propsToSpace } from './utils/spaceUtil';
-
-interface Props extends SpaceProps {
+interface Props extends SpaceProps, SizeProps {
   tag?: React.ElementType;
   className?: string;
   justifyContent?: 'start' | 'end' | 'center' | 'between' | 'around';
@@ -25,6 +26,7 @@ export const Row: React.FC<Props> = ({
       [`align-items-md-${alignItems}`]: alignItems != null,
     },
     propsToSpace(other),
+    propsToSize(other),
     className
   );
   return (
