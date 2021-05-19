@@ -14,7 +14,6 @@ export const MyPricingPage: React.FC = () => {
     let mounted = false;
     const fetchData = async () => {
       const result = await performGetMyPricingRequest();
-      console.log(result);
       if (!mounted) setPricing(result);
     };
     fetchData();

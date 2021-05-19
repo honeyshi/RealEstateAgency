@@ -7,4 +7,5 @@ export { FavouriteAdvertismentsListPage } from './favouriteAdvertismentListPage'
 export { OwnAdvertismentsListPage } from './ownAdvertismentsListPage';
 export { OwnCoRequestPage } from './ownCoRequestPage';
 export { ProfileInformationPage } from './profielInformationPage';
+export { SubscriptionListPage } from './subscription/subscriptionListPage';
 export { UserProfilePage } from './userProfilePage';
