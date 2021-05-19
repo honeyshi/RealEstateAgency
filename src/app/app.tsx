@@ -92,6 +92,11 @@ export const App: React.FC = () => {
       />
       <Route
         exact
+        path="/profile/edit-subscription/:id"
+        render={() => <UserProfilePage activeSubPage={<CreateSubscriptionPage />} />}
+      />
+      <Route
+        exact
         path="/profile/admin/advertisments"
         render={() => <UserProfilePage activeSubPage={<AdminAdvertismentsListPage />} />}>
         {currentUserRole === '2' && <Redirect to="/profile/info" />}

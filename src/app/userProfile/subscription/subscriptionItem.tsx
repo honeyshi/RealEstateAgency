@@ -79,7 +79,11 @@ export const SubscriptionItem: React.FC<{ props: SubsciptionGetModel }> = ({ pro
       </Label>
       <Label label="Цена">{`от ${props.min_price} до ${props.max_price} ₽/месяц`}</Label>
       <Label label="Площадь">{`от ${props.min_area} до ${props.max_area} м²`}</Label>
-      <Label label="Количество комнат">{roomsArray.length !== 0 ? roomsArray.join(', ') : 'Не указано'}</Label>
+      <Label label="Количество комнат">
+        {roomsArray.length !== 0
+          ? roomsArray.map((room) => (room === '0' ? 'Студия' : room === '4' ? '4+' : room)).join(', ')
+          : 'Не указано'}
+      </Label>
       <Label label="Только оплата аренды">{props.only_rent === 1 ? 'Да' : 'Нет'}</Label>
       <Label label="Заселение с животными">{props.with_animals === 1 ? 'Да' : 'Нет'}</Label>
       <Label label="Заселение с детьми">{props.with_kids === 1 ? 'Да' : 'Нет'}</Label>

@@ -8,15 +8,18 @@ import {
   roomsAmount,
 } from 'data/values';
 import { Button, CheckBox, CheckboxOption, Flexbox, Modal, RemixIcon, Row } from 'shared/base';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { SubsciptionGetModel, Subscription } from 'core/subscription/subscription';
 
 import InputRange from 'react-input-range';
 import { ProfileInfromationRow } from '../profileInformationRow';
 import { PropertyType } from 'pageParts/propertyType';
-import { Subscription } from 'core/subscription/subscription';
 import { performCreateSubscriptionRequest } from 'core/subscription/createSubscription';
+import { performEditSubscriptionRequest } from 'core/subscription/updateSubscription';
+import { performGetOneSubscriptionRequest } from 'core/subscription/getOneSubscription';
+import { useParams } from 'react-router-dom';
 
-const initialState: Subscription = {
+const initialStateForm: Subscription = {
   propertyType: '1',
   districts: [],
   rentPayment: { min: AreaPriceRange.min, max: AreaPriceRange.max },
@@ -27,8 +30,11 @@ const initialState: Subscription = {
 };
 
 export const CreateSubscriptionPage: React.FC = () => {
-  const [form, setForm] = useState<Subscription>(initialState);
+  const [form, setForm] = useState<Subscription>(initialStateForm);
+  const [initialState, setInitialState] = useState<Subscription>(initialStateForm);
   const [modalProps, setModalProps] = useState({ ...invalidModalState, show: false });
+
+  const { id } = useParams<{ id: string }>();
 
   const handleModalClose = () => {
     setModalProps({ ...invalidModalState, show: false });
@@ -42,6 +48,52 @@ export const CreateSubscriptionPage: React.FC = () => {
       setModalProps({ ...invalidModalState });
     }
   };
+
+  const updateSubscription = async () => {
+    try {
+      await performEditSubscriptionRequest(form, id);
+      setModalProps({ show: true, valid: true, text: 'Подписка успешно обновлена' });
+    } catch (error) {
+      setModalProps({ ...invalidModalState });
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      let mounted = false;
+      const fetchData = async () => {
+        const subscription = (await performGetOneSubscriptionRequest(id)) as SubsciptionGetModel;
+        if (!mounted && subscription) {
+          const subscriptionData = {
+            propertyType: String(subscription.type),
+            districts: JSON.parse(subscription.district) as Array<number>,
+            rentPayment: {
+              min: Number(String(subscription.min_price).substring(0, String(subscription.min_price).length - 3)),
+              max: Number(String(subscription.max_price).substring(0, String(subscription.max_price).length - 3)),
+            },
+            rooms: JSON.parse(subscription.rooms) as Array<string>,
+            space: {
+              min: Number(subscription.min_area),
+              max: Number(subscription.max_area),
+            },
+            facilities: JSON.parse(subscription.furniture) as Array<string>,
+            livingRules: [
+              subscription.only_rent === 1 ? 'filter-only-rent' : '',
+              subscription.with_animals === 1 ? 'filter-with-animals' : '',
+              subscription.with_kids === 1 ? 'filter-with-kids' : '',
+              subscription.without_deposit === 1 ? 'filter-without-deposit' : '',
+            ],
+          };
+          setForm(subscriptionData);
+          setInitialState(subscriptionData);
+        }
+      };
+      fetchData();
+      return () => {
+        mounted = true;
+      };
+    }
+  }, [id]);
 
   const propertyTypeItemComponents = useMemo(() => {
     const propertyTypeItems = propertyTypes.map((propertyType) => {
@@ -199,7 +251,11 @@ export const CreateSubscriptionPage: React.FC = () => {
       <ProfileInfromationRow label="Условия проживания">{livingRulesItemComponents}</ProfileInfromationRow>
       <ProfileInfromationRow label="">
         <Row alignItems="center">
-          <Button primary onClick={() => createSubscription()}>
+          <Button
+            primary
+            onClick={() => {
+              id ? updateSubscription() : createSubscription();
+            }}>
             Сохранить
           </Button>
           <Button secondary ml="5" onClick={() => setForm(initialState)}>
