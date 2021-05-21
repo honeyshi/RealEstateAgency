@@ -1,21 +1,23 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-import { Block } from 'shared/base';
 import { Claim } from './claim';
 import { ClaimModel } from 'core/claim/claimModel';
+import { DefaultListBlock } from 'shared/layout/defaultListBlock';
+import { Loading } from 'shared/base';
 import { NoResultsPage } from 'shared/layout/noResultsPage';
 import { performGetClaimRequest } from 'core/claim/getClaims';
 
 export const AdminClaimListPage: React.FC = () => {
   const [claims, setClaims] = useState<ClaimModel[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = false;
     const fetchData = async () => {
+      setLoading(true);
       const result = await performGetClaimRequest();
-      if (!mounted) {
-        setClaims(result);
-      }
+      if (!mounted) setClaims(result);
+      setLoading(false);
     };
     fetchData();
     return () => {
@@ -39,12 +41,18 @@ export const AdminClaimListPage: React.FC = () => {
   }, [claims]);
 
   return (
-    <Block mr="5" mt="3" mb="5">
-      {claimItemComponents.length !== 0 ? (
-        <>{claimItemComponents}</>
+    <DefaultListBlock>
+      {loading ? (
+        <Loading loading />
       ) : (
-        <NoResultsPage>В настоящее время нет активных жалоб.</NoResultsPage>
+        <>
+          {claimItemComponents.length !== 0 ? (
+            <>{claimItemComponents}</>
+          ) : (
+            <NoResultsPage>В настоящее время нет активных жалоб.</NoResultsPage>
+          )}
+        </>
       )}
-    </Block>
+    </DefaultListBlock>
   );
 };
