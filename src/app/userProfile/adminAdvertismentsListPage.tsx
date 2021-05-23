@@ -1,8 +1,9 @@
-import { Block, CheckBox, Flexbox, TextField } from 'shared/base';
+import { CheckBox, Flexbox, Loading, TextField } from 'shared/base';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Statuses, amountAdvertismentOnPage } from 'data/values';
 
 import { Advertisment } from 'pageParts/advertisment';
+import { DefaultListBlock } from 'shared/layout/defaultListBlock';
 import { IAdvertisment } from 'core/getAdvertisment/advertismentModel';
 import { NumberPagination } from 'shared/pagination';
 import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
@@ -21,16 +22,18 @@ export const AdminAdvertismentsListPage: React.FC = () => {
   const [activePage, setActivePage] = useState(1);
   const [advertisments, setAdvertisments] = useState<IAdvertisment[]>();
   const [amountPages, setAmountPages] = useState(10);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = false;
     const fetchData = async () => {
+      setLoading(true);
       const result = await performGetAdvertismentByStatusRequest(activeStatus, activePage);
       if (!mounted) {
         setAdvertisments(result.apartments);
         setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
-        console.log(advertisments);
       }
+      setLoading(false);
     };
     fetchData();
     return () => {
@@ -84,18 +87,24 @@ export const AdminAdvertismentsListPage: React.FC = () => {
           </CheckBox>
         ))}
       </Flexbox>
-      <Block mr="5" mt="3" mb="5">
-        {advertismentItemComponents?.length !== 0 ? (
+      <DefaultListBlock>
+        {loading ? (
+          <Loading loading />
+        ) : (
           <>
-            {advertismentItemComponents}
-            {amountPages !== 1 && (
-              <NumberPagination amountPages={amountPages} activePage={activePage} setActivePage={setActivePage} />
+            {advertismentItemComponents?.length !== 0 ? (
+              <>
+                {advertismentItemComponents}
+                {amountPages !== 1 && (
+                  <NumberPagination amountPages={amountPages} activePage={activePage} setActivePage={setActivePage} />
+                )}
+              </>
+            ) : (
+              <TextField classes="lead">По вашему запросу не было найдено ни одного объявления.</TextField>
             )}
           </>
-        ) : (
-          <TextField classes="lead">По вашему запросу не было найдено ни одного объявления.</TextField>
         )}
-      </Block>
+      </DefaultListBlock>
     </>
   );
 };

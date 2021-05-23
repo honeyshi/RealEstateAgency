@@ -8,6 +8,7 @@ import {
   OwnAdvertismentsListPage,
   OwnCoRequestPage,
   ProfileInformationPage,
+  SubscriptionListPage,
   UserProfilePage,
 } from 'app/userProfile';
 import {
@@ -81,7 +82,17 @@ export const App: React.FC = () => {
       <Route exact path="/profile/my-pricing" render={() => <UserProfilePage activeSubPage={<MyPricingPage />} />} />
       <Route
         exact
+        path="/profile/subscription"
+        render={() => <UserProfilePage activeSubPage={<SubscriptionListPage />} />}
+      />
+      <Route
+        exact
         path="/profile/create-subscription"
+        render={() => <UserProfilePage activeSubPage={<CreateSubscriptionPage />} />}
+      />
+      <Route
+        exact
+        path="/profile/edit-subscription/:id"
         render={() => <UserProfilePage activeSubPage={<CreateSubscriptionPage />} />}
       />
       <Route

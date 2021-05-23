@@ -1,0 +1,12 @@
+@import 'shared/base/utils/styleVariables';
+
+.subscription-container {
+  box-shadow: $shadow;
+  border-radius: $border-radius-50;
+  width: 45%;
+  .menu {
+    z-index: 900;
+    height: fit-content;
+    width: fit-content;
+  }
+}

@@ -1,20 +1,24 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { Advertisment } from 'pageParts/advertisment';
-import { Block } from 'shared/base';
+import { DefaultListBlock } from 'shared/layout/defaultListBlock';
 import { IAdvertisment } from 'core/getAdvertisment/advertismentModel';
+import { Loading } from 'shared/base';
 import { NoResultsPage } from 'shared/layout/noResultsPage';
 import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
 import { performGetFavouriteAdvertismentsRequest } from 'core/getAdvertisment/getFavouriteAdvertisments';
 
 export const FavouriteAdvertismentsListPage: React.FC = () => {
   const [advertisments, setAdvertisments] = useState<IAdvertisment[]>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = false;
     const fetchData = async () => {
+      setLoading(true);
       const result = await performGetFavouriteAdvertismentsRequest();
       if (!mounted) setAdvertisments(result);
+      setLoading(false);
     };
     fetchData();
     return () => {
@@ -51,14 +55,18 @@ export const FavouriteAdvertismentsListPage: React.FC = () => {
   }, [advertisments]);
 
   return (
-    <>
-      <Block mr="5" mt="3" mb="5">
-        {advertismentItemComponents?.length !== 0 ? (
-          <>{advertismentItemComponents}</>
-        ) : (
-          <NoResultsPage>Вы еще не добавили объявления в избранное.</NoResultsPage>
-        )}
-      </Block>
-    </>
+    <DefaultListBlock>
+      {loading ? (
+        <Loading loading />
+      ) : (
+        <>
+          {advertismentItemComponents?.length !== 0 ? (
+            <>{advertismentItemComponents}</>
+          ) : (
+            <NoResultsPage>Вы еще не добавили объявления в избранное.</NoResultsPage>
+          )}
+        </>
+      )}
+    </DefaultListBlock>
   );
 };

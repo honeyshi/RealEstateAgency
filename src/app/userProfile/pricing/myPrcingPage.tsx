@@ -1,6 +1,7 @@
-import { Block, Button, Flexbox } from 'shared/base';
+import { Button, Flexbox, Loading } from 'shared/base';
 import React, { useEffect, useMemo, useState } from 'react';
 
+import { DefaultListBlock } from 'shared/layout/defaultListBlock';
 import { MyPricingModel } from 'core/pricing/pricingModel';
 import { NoResultsPage } from 'shared/layout/noResultsPage';
 import { PricingItem } from './pricingItem';
@@ -9,13 +10,15 @@ import { performGetMyPricingRequest } from 'core/pricing/getMyPricing';
 
 export const MyPricingPage: React.FC = () => {
   const [pricing, setPricing] = useState<MyPricingModel[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = false;
     const fetchData = async () => {
+      setLoading(true);
       const result = await performGetMyPricingRequest();
-      console.log(result);
       if (!mounted) setPricing(result);
+      setLoading(false);
     };
     fetchData();
     return () => {
@@ -52,19 +55,25 @@ export const MyPricingPage: React.FC = () => {
   }, [pricing]);
 
   return (
-    <Block mr="5" mt="3" mb="5">
-      {pricingItemComponents.length !== 0 ? (
-        <>{pricingItemComponents}</>
+    <DefaultListBlock>
+      {loading ? (
+        <Loading loading />
       ) : (
         <>
-          <NoResultsPage>Вы еще не приобрели ни одного тарифа.</NoResultsPage>
-          <Flexbox justifyContent="center" mt="3">
-            <Button primary onClick={() => history.push('/pricing')}>
-              Выбрать тариф
-            </Button>
-          </Flexbox>
+          {pricingItemComponents.length !== 0 ? (
+            <>{pricingItemComponents}</>
+          ) : (
+            <>
+              <NoResultsPage>Вы еще не приобрели ни одного тарифа.</NoResultsPage>
+              <Flexbox justifyContent="center" mt="3">
+                <Button primary onClick={() => history.push('/pricing')}>
+                  Выбрать тариф
+                </Button>
+              </Flexbox>
+            </>
+          )}
         </>
       )}
-    </Block>
+    </DefaultListBlock>
   );
 };

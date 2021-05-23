@@ -125,3 +125,5 @@ export enum AreaPriceRange {
   min = 5,
   max = 300,
 }
+
+export const MainColor = '#765bbb';

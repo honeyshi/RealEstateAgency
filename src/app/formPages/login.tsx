@@ -39,6 +39,7 @@ export const Login: React.FC = () => {
       await schema.validate(form, { abortEarly: false });
       await performSigninRequest(form.email, form.password);
       history.push('/');
+      window.location.reload();
     } catch (error) {
       setErrorMessage(parseError(error, true));
     }

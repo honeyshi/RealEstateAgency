@@ -1,9 +1,10 @@
-import { Block, THead, Table, Th, Tr } from 'shared/base';
+import { Loading, THead, Table, Th, Tr } from 'shared/base';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Cotenant } from './cotenant';
 import { CotenantListItem } from 'core/cotenant/cotenantModel';
+import { DefaultListBlock } from 'shared/layout/defaultListBlock';
 import { NoResultsPage } from 'shared/layout/noResultsPage';
 import { NumberPagination } from 'shared/pagination';
 import { StoreType } from 'core/store';
@@ -17,6 +18,7 @@ export const CotenantListContainer: React.FC = () => {
   const [activePage, setActivePage] = useState(1);
   const [requests, setRequests] = useState<CotenantListItem[]>();
   const [amountPages, setAmountPages] = useState(10);
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -29,6 +31,7 @@ export const CotenantListContainer: React.FC = () => {
       try {
         let result: any;
         if (!previousApplyFilter) {
+          setLoading(true);
           cotenantFilter.withFilter
             ? (result = await performGetCotenantsRequest(
                 activePage,
@@ -42,6 +45,7 @@ export const CotenantListContainer: React.FC = () => {
           setRequests(result.items);
           setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
         }
+        setLoading(false);
       } catch (error) {
         history.push('/error');
       }
@@ -78,28 +82,36 @@ export const CotenantListContainer: React.FC = () => {
 
   return (
     <>
-      {cotenantItemComponents?.length !== 0 ? (
-        <Block mr="5" mt="3" mb="5">
-          <Table className=" cotenant-list-container">
-            <THead>
-              <Tr>
-                <Th>Фотография</Th>
-                <Th>Пол</Th>
-                <Th>Возраст</Th>
-                <Th>Район</Th>
-                <Th>Пол соарендатора</Th>
-                <Th>Возраст соарендатора</Th>
-                <Th></Th>
-              </Tr>
-            </THead>
-            <tbody>{cotenantItemComponents}</tbody>
-          </Table>
-          {amountPages !== 1 && (
-            <NumberPagination amountPages={amountPages} activePage={activePage} setActivePage={setActivePage} />
-          )}
-        </Block>
+      {loading ? (
+        <DefaultListBlock>
+          <Loading loading />
+        </DefaultListBlock>
       ) : (
-        <NoResultsPage>По вашему запросу не было найдено заявок на совместную аренду</NoResultsPage>
+        <>
+          {cotenantItemComponents?.length !== 0 ? (
+            <DefaultListBlock>
+              <Table className=" cotenant-list-container">
+                <THead>
+                  <Tr>
+                    <Th>Фотография</Th>
+                    <Th>Пол</Th>
+                    <Th>Возраст</Th>
+                    <Th>Район</Th>
+                    <Th>Пол соарендатора</Th>
+                    <Th>Возраст соарендатора</Th>
+                    <Th></Th>
+                  </Tr>
+                </THead>
+                <tbody>{cotenantItemComponents}</tbody>
+              </Table>
+              {amountPages !== 1 && (
+                <NumberPagination amountPages={amountPages} activePage={activePage} setActivePage={setActivePage} />
+              )}
+            </DefaultListBlock>
+          ) : (
+            <NoResultsPage>По вашему запросу не было найдено заявок на совместную аренду</NoResultsPage>
+          )}
+        </>
       )}
     </>
   );

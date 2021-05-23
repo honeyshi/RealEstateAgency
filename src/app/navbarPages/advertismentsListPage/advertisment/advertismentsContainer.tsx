@@ -1,8 +1,9 @@
-import { Block, Flexbox, TextField } from 'shared/base';
+import { Flexbox, Loading, TextField } from 'shared/base';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Advertisment } from 'pageParts/advertisment';
+import { DefaultListBlock } from 'shared/layout/defaultListBlock';
 import { IAdvertisment } from 'core/getAdvertisment/advertismentModel';
 import { NumberPagination } from 'shared/pagination';
 import { Select } from 'shared/composite/select';
@@ -22,6 +23,7 @@ export const AdvertismentsContainer: React.FC = () => {
   const [amountPages, setAmountPages] = useState(10);
   const [totalAds, setTotalAds] = useState(10);
   const [sorting, setSorting] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const advertismentFilter = useSelector((state: StoreType) => state.advertismentFilter);
 
@@ -32,6 +34,7 @@ export const AdvertismentsContainer: React.FC = () => {
       try {
         let result: any;
         if (!previousApplyFilter) {
+          setLoading(true);
           advertismentFilter.withFilter
             ? (result = await performGetAdvertismentRequest(
                 activePage,
@@ -48,6 +51,7 @@ export const AdvertismentsContainer: React.FC = () => {
           setAdvertisments(result.apartments);
           setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
           setTotalAds(result.total_count);
+          setLoading(false);
         }
       } catch {
         history.push('/error');
@@ -90,29 +94,34 @@ export const AdvertismentsContainer: React.FC = () => {
     });
     return advertismentItems;
   }, [advertisments]);
-  return (
-    <Block mr="5" mt="3" mb="5">
-      {advertismentItemComponents?.length !== 0 ? (
-        <>
-          <Flexbox alignItems="baseline" justifyContent="between" mb="4">
-            <TextField>Найдено {totalAds} объявлений</TextField>
-            <Select
-              absoluteRight
-              selectOptions={['Сначала новые', 'По возрастанию цены', 'По убыванию цены']}
-              selectText="Сортировка"
-              onSelectValue={(value) => setSorting(value)}
-            />
-          </Flexbox>
-          {advertismentItemComponents}
-          {amountPages !== 1 && (
-            <NumberPagination amountPages={amountPages} activePage={activePage} setActivePage={setActivePage} />
-          )}
-        </>
-      ) : (
-        <TextField classes="lead">
-          По вашему запросу не было найдено ни одного объявления. Попробуйте смягчить критерии поиска.
-        </TextField>
-      )}
-    </Block>
-  );
+
+  const renderAdvertisments = () => {
+    return (
+      <>
+        {advertismentItemComponents?.length !== 0 ? (
+          <>
+            <Flexbox alignItems="baseline" justifyContent="between" mb="4">
+              <TextField>Найдено {totalAds} объявлений</TextField>
+              <Select
+                absoluteRight
+                selectOptions={['Сначала новые', 'По возрастанию цены', 'По убыванию цены']}
+                selectText="Сортировка"
+                onSelectValue={(value) => setSorting(value)}
+              />
+            </Flexbox>
+            {advertismentItemComponents}
+            {amountPages !== 1 && (
+              <NumberPagination amountPages={amountPages} activePage={activePage} setActivePage={setActivePage} />
+            )}
+          </>
+        ) : (
+          <TextField classes="lead">
+            По вашему запросу не было найдено ни одного объявления. Попробуйте смягчить критерии поиска.
+          </TextField>
+        )}
+      </>
+    );
+  };
+
+  return <DefaultListBlock>{loading ? <Loading loading /> : renderAdvertisments()}</DefaultListBlock>;
 };
