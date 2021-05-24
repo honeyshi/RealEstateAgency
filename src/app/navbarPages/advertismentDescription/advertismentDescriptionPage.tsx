@@ -14,6 +14,7 @@ import {
 } from 'core/advertismentPropsIdToValues';
 
 import { AdvertismentDescriptionColumn } from './advertismentDescriptionColumn';
+import { DateTime } from 'luxon';
 import { DefaultPage } from 'shared/layout/defaultPage';
 import { FavouriteButton } from 'pageParts/advertisment';
 import { InformationMainContainer } from 'pageParts/infoParts';
@@ -160,6 +161,14 @@ export const AdvertismentDescriptionPage: React.FC = () => {
                         p="5">
                         <TextField bold>Описание объявления</TextField>
                         <TextField tag="span">{currentAdvertisment.description}</TextField>
+                        <TextField bold mt="3">
+                          Дата размещения
+                        </TextField>
+                        <TextField>
+                          {DateTime.fromSQL(currentAdvertisment.created_at)
+                            .setLocale('ru')
+                            .toLocaleString(DateTime.DATE_FULL)}
+                        </TextField>
                       </Column>
                       <Column
                         size={5}

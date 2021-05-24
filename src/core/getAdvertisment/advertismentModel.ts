@@ -54,4 +54,5 @@ export interface OneAdvertismentModel {
   rooms: number;
   renovation: number;
   favorite_apartments: Array<Object>;
+  created_at: string;
 }
