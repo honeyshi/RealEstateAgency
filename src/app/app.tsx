@@ -9,6 +9,7 @@ import {
   OwnCoRequestPage,
   ProfileInformationPage,
   SubscriptionListPage,
+  UserListPage,
   UserProfilePage,
 } from 'app/userProfile';
 import {
@@ -105,6 +106,9 @@ export const App: React.FC = () => {
         exact
         path="/profile/admin/claims"
         render={() => <UserProfilePage activeSubPage={<AdminClaimListPage />} />}>
+        {currentUserRole === '2' && <Redirect to="/profile/info" />}
+      </Route>
+      <Route exact path="/profile/admin/users" render={() => <UserProfilePage activeSubPage={<UserListPage />} />}>
         {currentUserRole === '2' && <Redirect to="/profile/info" />}
       </Route>
       <Route

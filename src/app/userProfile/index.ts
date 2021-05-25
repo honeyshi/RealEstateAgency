@@ -8,4 +8,5 @@ export { OwnAdvertismentsListPage } from './ownAdvertismentsListPage';
 export { OwnCoRequestPage } from './ownCoRequestPage';
 export { ProfileInformationPage } from './profielInformationPage';
 export { SubscriptionListPage } from './subscription/subscriptionListPage';
+export { UserListPage } from './users/usersListPage';
 export { UserProfilePage } from './userProfilePage';

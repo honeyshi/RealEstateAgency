@@ -1,0 +1,24 @@
+@import 'shared/base/utils/styleVariables';
+
+.users-list-container {
+  th {
+    border-top: none !important;
+  }
+  .user-container {
+    vertical-align: middle;
+    &:hover {
+      box-shadow: $shadow;
+    }
+    td {
+      vertical-align: middle !important;
+      border-top: none !important;
+    }
+    .badge-container {
+      align-items: unset !important;
+      .badge {
+        position: relative;
+        top: 0;
+      }
+    }
+  }
+}
