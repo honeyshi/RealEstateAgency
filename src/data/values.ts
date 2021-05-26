@@ -127,3 +127,9 @@ export enum AreaPriceRange {
 }
 
 export const MainColor = '#765bbb';
+
+export enum UserRoles {
+  Admin = '0',
+  Manager = '1',
+  User = '2',
+}

@@ -7,19 +7,30 @@ import { DefaultListBlock } from 'shared/layout/defaultListBlock';
 import { NoResultsPage } from 'shared/layout/noResultsPage';
 import { User } from './user';
 import { UserModel } from 'core/users/user';
+import { history } from 'core/history';
+import { performGetUserInfoRequest } from 'core/profile/getUserInformation';
 import { performGetUsersRequest } from 'core/users/getUsers';
 
 export const UserListPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<UserModel[]>([]);
+  const [userInfo, setUserInfo] = useState({ id: '', role: '2' });
 
   useEffect(() => {
     let mounted = false;
     const fetchData = async () => {
-      setLoading(true);
-      const result = await performGetUsersRequest();
-      if (!mounted) setUsers(result);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const result = await performGetUsersRequest();
+        const userData = await performGetUserInfoRequest();
+        if (!mounted) {
+          setUsers(result);
+          setUserInfo({ id: userData.id, role: userData.role });
+        }
+        setLoading(false);
+      } catch (error) {
+        history.push('/error');
+      }
     };
     fetchData();
     return () => {
@@ -30,10 +41,19 @@ export const UserListPage: React.FC = () => {
   const userItemComponents = useMemo(() => {
     return users.map((user) => {
       return (
-        <User id={user.id} name={user.name} email={user.email} registrationDate={user.created_at} role={user.role} />
+        <User
+          id={user.id}
+          ownId={userInfo.id}
+          name={user.name}
+          email={user.email}
+          registrationDate={user.created_at}
+          role={user.role}
+          ownRole={userInfo.role}
+          key={`user-${user.id}`}
+        />
       );
     });
-  }, [users]);
+  }, [users, userInfo]);
   return (
     <DefaultListBlock>
       {loading ? (

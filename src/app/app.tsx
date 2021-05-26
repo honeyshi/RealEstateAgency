@@ -39,6 +39,7 @@ import { FlatsMapPage } from './navbarPages/flatsMapPage';
 import { MyPricingPage } from './userProfile/pricing/myPrcingPage';
 import React from 'react';
 import { UnauthorizedErrorPage } from 'shared/layout/unauthorizedErrorPage';
+import { UserRoles } from 'data/values';
 
 export const App: React.FC = () => {
   const currentUserRole = localStorage.getItem('userRole');
@@ -100,16 +101,16 @@ export const App: React.FC = () => {
         exact
         path="/profile/admin/advertisments"
         render={() => <UserProfilePage activeSubPage={<AdminAdvertismentsListPage />} />}>
-        {currentUserRole === '2' && <Redirect to="/profile/info" />}
+        {currentUserRole === UserRoles.User && <Redirect to="/profile/info" />}
       </Route>
       <Route
         exact
         path="/profile/admin/claims"
         render={() => <UserProfilePage activeSubPage={<AdminClaimListPage />} />}>
-        {currentUserRole === '2' && <Redirect to="/profile/info" />}
+        {currentUserRole === UserRoles.User && <Redirect to="/profile/info" />}
       </Route>
       <Route exact path="/profile/admin/users" render={() => <UserProfilePage activeSubPage={<UserListPage />} />}>
-        {currentUserRole === '2' && <Redirect to="/profile/info" />}
+        {currentUserRole === UserRoles.User && <Redirect to="/profile/info" />}
       </Route>
       <Route
         exact

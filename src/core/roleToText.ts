@@ -1,10 +1,12 @@
+import { UserRoles } from 'data/values';
+
 export const mapRoleToText = (role: string) => {
   switch (role) {
-    case '0':
-      return 'Админ';
-    case '1':
+    case UserRoles.Admin:
+      return 'Администратор';
+    case UserRoles.Manager:
       return 'Менеджер';
-    case '2':
+    case UserRoles.User:
       return 'Пользователь';
     default:
       return '';

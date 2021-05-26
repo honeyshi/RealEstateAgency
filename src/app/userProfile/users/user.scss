@@ -12,6 +12,9 @@
     td {
       vertical-align: middle !important;
       border-top: none !important;
+      &.menu-button-container {
+        text-align: center;
+      }
     }
     .badge-container {
       align-items: unset !important;
