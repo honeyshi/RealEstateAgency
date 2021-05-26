@@ -1,6 +1,10 @@
+export { AboutUs } from './aboutUs';
+export { ContactUs } from './contactUs';
+export { Feedback } from './feedback';
 export { ForgetPassword } from './forgetPassword';
 export { Login } from './login';
 export { NotFoundPage } from './notFoundPage';
+export { Questions } from './questions';
 export { ResetPassword } from './resetPassword';
 export { Signup } from './signup';
 export { SuccessfulSendLink } from './successfulSendLink';

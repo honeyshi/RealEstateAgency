@@ -4,6 +4,7 @@ export { CreateCoRequestPage } from './createCoRequestPage';
 export { CreateSubscriptionPage } from './subscription/createSubscriptionPage';
 export { EditAdvertismentPage } from './editAdvertismentPage';
 export { FavouriteAdvertismentsListPage } from './favouriteAdvertismentListPage';
+export { MyPricingPage } from './pricing/myPrcingPage';
 export { OwnAdvertismentsListPage } from './ownAdvertismentsListPage';
 export { OwnCoRequestPage } from './ownCoRequestPage';
 export { ProfileInformationPage } from './profielInformationPage';
