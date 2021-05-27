@@ -57,11 +57,8 @@ export const performGetAdvertismentRequest = async (
     .filter(Boolean)
     .join('&');
 
-  console.log(finalQuery);
-
   const response = await axios.get(
-    `${config.apiUrl}/apartments?page=${page}${finalQuery && `&${finalQuery}`}${sortingQuery && sortingQuery}`
+    `${config.apiUrl}/apartments/${page}${finalQuery && `?${finalQuery}`}${sortingQuery && sortingQuery}`
   );
-  console.log(response);
   return response.data;
 };

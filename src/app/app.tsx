@@ -1,43 +1,48 @@
 import {
+  AboutUs,
+  ContactUs,
+  Feedback,
+  ForgetPassword,
+  Login,
+  NotFoundPage,
+  Questions,
+  ResetPassword,
+  Signup,
+  SuccessfulSendLink,
+  SuccessfulSignup,
+} from 'app/formPages';
+import {
   AdminAdvertismentsListPage,
   AdminClaimListPage,
   CreateCoRequestPage,
   CreateSubscriptionPage,
   EditAdvertismentPage,
   FavouriteAdvertismentsListPage,
+  MyPricingPage,
   OwnAdvertismentsListPage,
   OwnCoRequestPage,
   ProfileInformationPage,
   SubscriptionListPage,
+  UserListPage,
   UserProfilePage,
 } from 'app/userProfile';
 import {
   AdvertismentDescriptionPage,
   AdvertismentListPage,
+  CotenantDescriptionPage,
+  CotenantsListPage,
   CreateAdvertismentPage,
+  FlatsMapPage,
   PricingPage,
   StartPage,
   SuccessfulCreationPage,
 } from 'app/navbarPages';
-import {
-  ForgetPassword,
-  Login,
-  NotFoundPage,
-  ResetPassword,
-  Signup,
-  SuccessfulSendLink,
-  SuccessfulSignup,
-} from 'app/formPages';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import { ContactUs } from './formPages/contactUs';
-import { CotenantDescriptionPage } from './navbarPages/cotenantDescriptionPage/cotenantDescriptionPage';
-import { CotenantsListPage } from './navbarPages/cotenantsListPage';
 import { ErrorPage } from 'shared/layout/errorPage';
-import { FlatsMapPage } from './navbarPages/flatsMapPage';
-import { MyPricingPage } from './userProfile/pricing/myPrcingPage';
 import React from 'react';
 import { UnauthorizedErrorPage } from 'shared/layout/unauthorizedErrorPage';
+import { UserRoles } from 'data/values';
 
 export const App: React.FC = () => {
   const currentUserRole = localStorage.getItem('userRole');
@@ -54,6 +59,10 @@ export const App: React.FC = () => {
       <Route exact path="/unauthorized" component={UnauthorizedErrorPage} />
 
       <Route exact path="/contact" component={ContactUs} />
+      <Route exact path="/about" component={AboutUs} />
+      <Route exact path="/faq" component={Questions} />
+      <Route exact path="/feedback" component={Feedback} />
+
       {token == null && <Redirect from="/new-advertisment" to="/unauthorized" />}
       <Route exact path="/new-advertisment" component={CreateAdvertismentPage} />
       <Route exact path="/flats" component={AdvertismentListPage} />
@@ -99,13 +108,16 @@ export const App: React.FC = () => {
         exact
         path="/profile/admin/advertisments"
         render={() => <UserProfilePage activeSubPage={<AdminAdvertismentsListPage />} />}>
-        {currentUserRole === '2' && <Redirect to="/profile/info" />}
+        {currentUserRole === UserRoles.User && <Redirect to="/profile/info" />}
       </Route>
       <Route
         exact
         path="/profile/admin/claims"
         render={() => <UserProfilePage activeSubPage={<AdminClaimListPage />} />}>
-        {currentUserRole === '2' && <Redirect to="/profile/info" />}
+        {currentUserRole === UserRoles.User && <Redirect to="/profile/info" />}
+      </Route>
+      <Route exact path="/profile/admin/users" render={() => <UserProfilePage activeSubPage={<UserListPage />} />}>
+        {currentUserRole === UserRoles.User && <Redirect to="/profile/info" />}
       </Route>
       <Route
         exact

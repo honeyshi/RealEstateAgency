@@ -46,6 +46,5 @@ export const performEditAdvertismentRequest = async (
   };
   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authInfo')}`;
   const response = await axios.put(`${config.apiUrl}/apartment/${id}`, advertismentConfig);
-  console.log(response);
   return response.data;
 };

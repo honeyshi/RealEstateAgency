@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { LeftMenuLinks } from 'shared/leftMenu';
 import { RightContainerPage } from 'shared/layout/rightContainerPage';
+import { UserRoles } from 'data/values';
 import { history } from 'core/history';
 import { useLocation } from 'react-router-dom';
 
@@ -16,10 +17,9 @@ enum PagesLink {
   OwnCoRequest = '/profile/my-cotenant-request',
   AdminAdvertisments = '/profile/admin/advertisments',
   AdminClaims = '/profile/admin/claims',
+  AdminUsers = '/profile/admin/users',
   CreateCoRequest = '/profile/create-cotenant-request',
 }
-
-const userRole = '2';
 
 export const UserProfilePage: React.FC<{ activeSubPage: JSX.Element }> = ({ activeSubPage }) => {
   const [activeMenu, setActiveMenu] = useState('/profile/info');
@@ -43,7 +43,7 @@ export const UserProfilePage: React.FC<{ activeSubPage: JSX.Element }> = ({ acti
       header="Профиль"
       leftMenu={
         <>
-          {currentUserRole !== userRole && (
+          {currentUserRole !== UserRoles.User && (
             <Flexbox justifyContent="between" mb="5" mx="5">
               <TextField tag="span">Режим администратора</TextField>
               <CheckBox
@@ -65,7 +65,7 @@ export const UserProfilePage: React.FC<{ activeSubPage: JSX.Element }> = ({ acti
                 leftMenuItems={[
                   { iconName: 'file-list', header: 'Объявления', link: PagesLink.AdminAdvertisments },
                   { iconName: 'emotion-unhappy', header: 'Активные жалобы', link: PagesLink.AdminClaims },
-                  { iconName: 'contacts', header: 'Список пользователей', link: 'PagesLink.AdminAdvertisments' },
+                  { iconName: 'contacts', header: 'Список пользователей', link: PagesLink.AdminUsers },
                 ]}
               />
             </>

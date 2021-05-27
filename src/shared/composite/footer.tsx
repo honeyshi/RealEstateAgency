@@ -35,7 +35,7 @@ export const Footer: React.FC = () => {
             <Link to="/about" className="footer-link">
               О компании
             </Link>
-            <Link to="/reviews" className="footer-link">
+            <Link to="/feedback" className="footer-link">
               Отзывы
             </Link>
             <Link to="/faq" className="footer-link">
