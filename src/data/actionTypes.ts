@@ -32,6 +32,8 @@ export enum PropertyFacilitiesActionTypes {
 export enum PropertyPhotosActionTypes {
   SET_PHOTOS = 'SET_PHOTOS',
   SET_PRIMARY_IMAGE = 'SET_PRIMARY_IMAGE',
+  SET_UPLOADED_FILES = 'SET_UPLOADED_FILES',
+  SET_PRIMARY_IMAGE_NAME = 'SET_PRIMARY_IMAGE_NAME',
 }
 
 export enum OwnerContactsActionTypes {

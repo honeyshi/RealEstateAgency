@@ -40,7 +40,12 @@ export {
 
 export { setFacilities, setLivingRules, setDescription } from './propertyFacilitiesActions';
 
-export { setPropertyPhotos, setPropertyPrimaryImage } from './propertyPhotosActions';
+export {
+  setPropertyPhotos,
+  setPropertyPrimaryImage,
+  setUploadedFiles,
+  setPrimaryImageName,
+} from './propertyPhotosActions';
 
 export {
   setRentPayment,
