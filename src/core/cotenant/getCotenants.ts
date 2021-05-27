@@ -38,9 +38,6 @@ export const performGetCotenantsRequest = async (
     .filter(Boolean)
     .join('&');
 
-  console.log(finalQuery);
-
   const response = await axios.get(`${config.apiUrl}/tenant?page=${page}${finalQuery && `&${finalQuery}`}`);
-  console.log(response);
   return response.data;
 };

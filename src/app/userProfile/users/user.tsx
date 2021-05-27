@@ -37,8 +37,6 @@ export const User: React.FC<IUserProps> = ({ id, ownId, name, email, registratio
     };
   }, [showMenu, handleClickOutside]);
 
-  console.log(!(ownRole === UserRoles.Manager && role === UserRoles.Admin));
-
   return (
     <tr className="user-container" ref={userMenuRef}>
       <Td>{name}</Td>
@@ -48,7 +46,7 @@ export const User: React.FC<IUserProps> = ({ id, ownId, name, email, registratio
         <Badge>{mapRoleToText(role)}</Badge>
       </Td>
       <Td className="menu-button-container">
-        {(id !== ownId && !(ownRole === UserRoles.Manager && role === UserRoles.Admin)) && (
+        {id !== ownId && !(ownRole === UserRoles.Manager && role === UserRoles.Admin) && (
           <>
             <Button className="shadow menu" px="2" pt="2" pb="0" onClick={() => setShowMenu(!showMenu)}>
               <RemixIcon name="menu" size="sm" />
