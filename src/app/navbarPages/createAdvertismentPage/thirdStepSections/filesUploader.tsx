@@ -2,7 +2,7 @@ import './filesUploader.scss';
 
 import { Block, Button, Flexbox, Image, TextField } from 'shared/base';
 import React, { useState } from 'react';
-import { setPropertyPhotos, setPropertyPrimaryImage } from 'data/actions';
+import { setPrimaryImageName, setPropertyPhotos, setPropertyPrimaryImage, setUploadedFiles } from 'data/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ErrorMessage } from '../base';
@@ -22,26 +22,28 @@ export const FilesUploader: React.FC = () => {
   const propertyPhotosState = useSelector((state: StoreType) => state.propertyPhotos);
   const validated = useSelector((state: StoreType) => state.newAdvertisment.validated);
 
-  const [files, setFiles] = useState<any[]>([]);
-  const [primaryImage, setPrimaryImage] = useState('');
   const [errorMessage, setErrorMessage] = useState<string | string[]>('');
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     maxFiles: maxFiles,
     onDrop: async (acceptedFiles) => {
-      setFiles([
-        ...files,
-        ...acceptedFiles.slice(0, maxFiles - files.length).map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        ),
-      ]);
+      dispatch(
+        setUploadedFiles([
+          ...propertyPhotosState.previews,
+          ...acceptedFiles.slice(0, maxFiles - propertyPhotosState.previews.length).map((file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            })
+          ),
+        ])
+      );
       try {
         setErrorMessage('');
         const uploadedFilesId = await Promise.all(
-          acceptedFiles.slice(0, maxFiles - files.length).map((file) => performUploadImageRequest(file))
+          acceptedFiles
+            .slice(0, maxFiles - propertyPhotosState.previews.length)
+            .map((file) => performUploadImageRequest(file))
         );
         dispatch(setPropertyPhotos(propertyPhotosState.photos.concat(uploadedFilesId)));
       } catch (error) {
@@ -50,14 +52,14 @@ export const FilesUploader: React.FC = () => {
     },
   });
 
-  const filePreviews = files.map((file, index) => (
+  const filePreviews = propertyPhotosState.previews.map((file, index) => (
     <Block className="property-image-container" key={file.name} mx="4" mb="4">
       <Button
         fontLight
-        className={classNames('primary-image', { selected: primaryImage === file.name })}
+        className={classNames('primary-image', { selected: propertyPhotosState.primaryImageName === file.name })}
         onClick={(event) => {
           event.stopPropagation();
-          setPrimaryImage(file.name);
+          dispatch(setPrimaryImageName(file.name));
           dispatch(setPropertyPrimaryImage(propertyPhotosState.photos[index]));
         }}>
         <Flexbox>
@@ -73,9 +75,13 @@ export const FilesUploader: React.FC = () => {
           dispatch(
             setPropertyPhotos(propertyPhotosState.photos.filter((id) => id !== propertyPhotosState.photos[index]))
           );
-          setFiles(files.filter((selectedFile) => selectedFile.name !== file.name));
-          primaryImage === file.name && setPrimaryImage('');
-          dispatch(setPropertyPrimaryImage(-1));
+          dispatch(
+            setUploadedFiles(propertyPhotosState.previews.filter((selectedFile) => selectedFile.name !== file.name))
+          );
+          if (propertyPhotosState.primaryImageName === file.name) {
+            dispatch(setPrimaryImageName(''));
+            dispatch(setPropertyPrimaryImage(-1));
+          }
         }}>
         <Flexbox>
           <RemixIcon name="close" className="delete-image-icon" />
@@ -93,8 +99,10 @@ export const FilesUploader: React.FC = () => {
           {filePreviews}
         </Flexbox>
         <Flexbox vertical alignItems="center" mb="4">
-          {files.length === 0 && <RemixIcon className="files-uploader-icon" my="4" name="image" size="3x" />}
-          {files.length < maxFiles ? (
+          {propertyPhotosState.previews.length === 0 && (
+            <RemixIcon className="files-uploader-icon" my="4" name="image" size="3x" />
+          )}
+          {propertyPhotosState.previews.length < maxFiles ? (
             <Button fontLight className="rounded-link" text="accent" mb="4">
               Добавить фото и планировку
             </Button>
