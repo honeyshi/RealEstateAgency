@@ -53,6 +53,7 @@ export const Signup: React.FC = () => {
       await schema.validate(form, { abortEarly: false });
       await performSignupRequest(form.name, form.email, form.password);
       history.push('/successful-signup');
+      window.location.reload();
     } catch (error) {
       setErrorMessage(parseError(error));
     }
