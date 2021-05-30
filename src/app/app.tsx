@@ -1,6 +1,7 @@
 import {
   AboutUs,
   ContactUs,
+  EmailConfirm,
   Feedback,
   ForgetPassword,
   Login,
@@ -57,6 +58,7 @@ export const App: React.FC = () => {
       <Route exact path="/successful-send-link" component={SuccessfulSendLink} />
       <Route exact path="/error" component={ErrorPage} />
       <Route exact path="/unauthorized" component={UnauthorizedErrorPage} />
+      <Route exact path="/email-confirm" component={EmailConfirm} />
 
       <Route exact path="/contact" component={ContactUs} />
       <Route exact path="/about" component={AboutUs} />

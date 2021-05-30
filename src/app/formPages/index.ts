@@ -1,5 +1,6 @@
 export { AboutUs } from './aboutUs';
 export { ContactUs } from './contactUs';
+export { EmailConfirm } from './emailConfirm';
 export { Feedback } from './feedback';
 export { ForgetPassword } from './forgetPassword';
 export { Login } from './login';
