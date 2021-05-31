@@ -66,6 +66,9 @@ export const AdvertismentDescriptionPage: React.FC = () => {
           case 401:
             history.push('/unauthorized');
             break;
+          case 403:
+            history.push('/access-denied');
+            break;
           default:
             history.push('/error');
         }

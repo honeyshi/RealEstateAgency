@@ -26,9 +26,16 @@ export const FavouriteButton: React.FC<IFavouriteButtonProps> = ({ isFavourite, 
       favourite ? await performDeleteFromFavouriteRequest(id) : await performAddToFavouriteRequest(id);
       setFavourite(!favourite);
     } catch (error) {
-      error.response.status === 401
-        ? history.push('/unauthorized')
-        : setModalProps({ ...invalidModalState, show: true });
+      switch (error.response.status) {
+        case 401:
+          history.push('/unauthorized');
+          break;
+        case 403:
+          history.push('/access-denied');
+          break;
+        default:
+          setModalProps({ ...invalidModalState, show: true });
+      }
     }
   };
 

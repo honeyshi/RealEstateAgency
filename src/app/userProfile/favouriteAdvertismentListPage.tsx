@@ -7,6 +7,7 @@ import { Loading } from 'shared/base';
 import { NoResultsPage } from 'shared/layout/noResultsPage';
 import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
 import { performGetFavouriteAdvertismentsRequest } from 'core/getAdvertisment/getFavouriteAdvertisments';
+import { switchError } from 'core/switchError';
 
 export const FavouriteAdvertismentsListPage: React.FC = () => {
   const [advertisments, setAdvertisments] = useState<IAdvertisment[]>();
@@ -15,10 +16,14 @@ export const FavouriteAdvertismentsListPage: React.FC = () => {
   useEffect(() => {
     let mounted = false;
     const fetchData = async () => {
-      setLoading(true);
-      const result = await performGetFavouriteAdvertismentsRequest();
-      if (!mounted) setAdvertisments(result);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const result = await performGetFavouriteAdvertismentsRequest();
+        if (!mounted) setAdvertisments(result);
+        setLoading(false);
+      } catch (error) {
+        switchError(error.response.status);
+      }
     };
     fetchData();
     return () => {

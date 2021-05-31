@@ -1,5 +1,6 @@
 import {
   AboutUs,
+  AccessDeniedPage,
   ContactUs,
   EmailConfirm,
   Feedback,
@@ -59,6 +60,7 @@ export const App: React.FC = () => {
       <Route exact path="/error" component={ErrorPage} />
       <Route exact path="/unauthorized" component={UnauthorizedErrorPage} />
       <Route exact path="/email-confirm" component={EmailConfirm} />
+      <Route exact path="/access-denied" component={AccessDeniedPage} />
 
       <Route exact path="/contact" component={ContactUs} />
       <Route exact path="/about" component={AboutUs} />

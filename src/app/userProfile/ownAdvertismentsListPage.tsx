@@ -9,6 +9,7 @@ import { NumberPagination } from 'shared/pagination';
 import { amountAdvertismentOnPage } from 'data/values';
 import { buildAdditionalInformationString } from 'core/buildAdditionalInformationString';
 import { performGetOwnAdvertismentsRequest } from 'core/getAdvertisment/getOwnAdvertisments';
+import { switchError } from 'core/switchError';
 
 export const OwnAdvertismentsListPage: React.FC = () => {
   const [activePage, setActivePage] = useState(1);
@@ -19,13 +20,17 @@ export const OwnAdvertismentsListPage: React.FC = () => {
   useEffect(() => {
     let mounted = false;
     const fetchData = async () => {
-      setLoading(true);
-      const result = await performGetOwnAdvertismentsRequest(activePage);
-      if (!mounted) {
-        setAdvertisments(result.apartments);
-        setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
+      try {
+        setLoading(true);
+        const result = await performGetOwnAdvertismentsRequest(activePage);
+        if (!mounted) {
+          setAdvertisments(result.apartments);
+          setAmountPages(Math.ceil(result.total_count / amountAdvertismentOnPage));
+        }
+        setLoading(false);
+      } catch (error) {
+        switchError(error.response.status);
       }
-      setLoading(false);
     };
     fetchData();
     return () => {

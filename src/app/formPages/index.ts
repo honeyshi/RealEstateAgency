@@ -1,4 +1,5 @@
 export { AboutUs } from './aboutUs';
+export { AccessDeniedPage } from './accessDeniedPage';
 export { ContactUs } from './contactUs';
 export { EmailConfirm } from './emailConfirm';
 export { Feedback } from './feedback';
