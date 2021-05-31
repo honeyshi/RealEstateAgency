@@ -1,9 +1,9 @@
-import React from 'react';
+import { Button, Flexbox, RemixIcon, TextField } from 'shared/base';
+import { setActiveStep, setWrongSteps } from 'data/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
+import React from 'react';
 import { StoreType } from 'core/store';
-import { setActiveStep, setWrongSteps } from 'data/actions';
-import { Button, Icon } from 'shared/base';
 
 export const PreviousStep: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,12 @@ export const PreviousStep: React.FC = () => {
           setWrongSteps(newAdvertismentProps.wrongSteps.filter((step) => step < newAdvertismentProps.activeStep - 1))
         );
       }}>
-      <Icon name="arrow-left" mr="3" /> Предыдущий шаг
+      <Flexbox>
+        <RemixIcon name="arrow-left" />
+        <TextField tag="span" ml="3">
+          Предыдущий шаг
+        </TextField>
+      </Flexbox>
     </Button>
   );
 };
