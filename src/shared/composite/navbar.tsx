@@ -1,6 +1,6 @@
 import './navbar.scss';
 
-import { Button, Container, Flexbox, Icon, RemixIcon, TextField } from 'shared/base';
+import { Button, Container, Flexbox, RemixIcon, TextField } from 'shared/base';
 import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
@@ -30,7 +30,7 @@ export const Navbar: React.FC = () => {
           <NavbarRight />
         </div>
         <Button className={buttonClasses} ml="auto" onClick={() => setShow(!show)}>
-          {show ? <Icon name="times" /> : <Icon name="bars" />}
+          {show ? <RemixIcon name="close" /> : <RemixIcon name="menu" />}
         </Button>
       </Container>
       <Container nonFluid className={smallNavbarClasses}>

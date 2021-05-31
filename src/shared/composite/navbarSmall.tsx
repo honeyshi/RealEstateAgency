@@ -1,11 +1,11 @@
-import { Block, Icon, NavbarContainer, NavbarItem } from 'shared/base';
+import { Block, NavbarContainer, NavbarItem, RemixIcon } from 'shared/base';
 import React, { useMemo } from 'react';
 
 const navbarItems = [
-  { text: 'Объявления', to: '/advert', key: 'navbar-advert' },
+  { text: 'Объявления', to: '/flats', key: 'navbar-advert' },
   { text: 'Квартиры на карте', to: '/flats-map', key: 'navbar-flats-map' },
   { text: 'Тарифы', to: '/pricing', key: 'navbar-pricing' },
-  { text: 'Поиск сожителей', to: '/search-roommates', key: 'navbar-search-roommates' },
+  { text: 'Поиск соарендаторов', to: '/search-roommates', key: 'navbar-search-roommates' },
 ];
 
 export const NavbarSmall: React.FC = () => {
@@ -16,14 +16,17 @@ export const NavbarSmall: React.FC = () => {
     return innerNavbar;
   }, []);
 
+  const authInfo = localStorage.getItem('authInfo');
+  const isAuth = authInfo != null;
+
   return (
     <NavbarContainer>
       <NavbarItem text="Нижний Новгород" to="#" mr="2" linkClass="d-flex">
         <Block px="2">
-          <Icon name="location-arrow" />
+          <RemixIcon name="map-pin-5" />
         </Block>
       </NavbarItem>
-      <NavbarItem text="Войти" to="/login" mt="1" />
+      {isAuth ? <NavbarItem text="Профиль" to="/profile" mt="1" /> : <NavbarItem text="Войти" to="/login" mt="1" />}
       <NavbarItem text="Подать объявление" to="/new-advertisment" mt="1" />
       {navbarItemComponents}
     </NavbarContainer>
