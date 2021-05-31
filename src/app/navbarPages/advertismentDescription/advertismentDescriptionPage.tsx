@@ -183,7 +183,7 @@ export const AdvertismentDescriptionPage: React.FC = () => {
                           {buildPropertyTypeString(String(currentAdvertisment.type))}
                         </InformationRow>
                         <InformationRow header="Условия оплаты">
-                          {buildPaymentConditionString(currentAdvertisment.payment_condition)}
+                          {buildPaymentConditionString(String(currentAdvertisment.payment_condition))}
                         </InformationRow>
                         <InformationRow header="Заселение с животными">
                           {buildAnimalsString(currentAdvertisment.with_animals)}
