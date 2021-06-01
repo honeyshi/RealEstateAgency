@@ -17,7 +17,7 @@ export const performGetAdvertismentRequest = async (
 ) => {
   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authInfo')}`;
 
-  const sortingQuery = orderNameToQuery.has(sorting) ? `&order_by=${orderNameToQuery.get(sorting)}` : '';
+  let sortingQuery = orderNameToQuery.has(sorting) ? `order_by=${orderNameToQuery.get(sorting)}` : '';
 
   const propertyTypeQuery = propertyType ? `type=${propertyType}` : '';
   const districtQuery = districts && districts?.length !== 0 ? `district=${districts.join(',')}` : '';
@@ -56,6 +56,8 @@ export const performGetAdvertismentRequest = async (
   ]
     .filter(Boolean)
     .join('&');
+
+  if (sortingQuery) finalQuery ? (sortingQuery = '&' + sortingQuery) : (sortingQuery = '?' + sortingQuery);
 
   const response = await axios.get(
     `${config.apiUrl}/apartments/${page}${finalQuery && `?${finalQuery}`}${sortingQuery && sortingQuery}`
