@@ -64,13 +64,13 @@ export const PricingItem: React.FC<IPricingItemProps> = ({
             </li>
           )}
         </ul>
-        {link === 'link for register page' ? (
+        {link === 'link for register page' || link === 'email not verified' ? (
           <Button
             py="2"
             px="5"
             mb="4"
             className={classNames({ primary: primary }, 'pricing-choose-button')}
-            onClick={() => history.push(`/unauthorized`)}>
+            onClick={() => history.push(link === 'link for register page' ? `/unauthorized` : '/access-denied')}>
             Выбрать
           </Button>
         ) : (

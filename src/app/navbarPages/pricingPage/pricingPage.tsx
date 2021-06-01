@@ -6,6 +6,7 @@ import { PricingItem } from './pricingItem';
 import { PricingModel } from 'core/pricing/pricingModel';
 import image from 'icons/prcing.svg';
 import { performGetPricingLinksRequest } from 'core/pricing/getPricingLinks';
+import { switchError } from 'core/switchError';
 
 export const PricingPage: React.FC = () => {
   const [pricings, setPricings] = useState<PricingModel[]>([]);
@@ -13,10 +14,14 @@ export const PricingPage: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
-      const result = await performGetPricingLinksRequest();
-      setPricings(result);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const result = await performGetPricingLinksRequest();
+        setPricings(result);
+        setLoading(false);
+      } catch (error) {
+        switchError(error.response.status);
+      }
     };
     fetchData();
   }, []);

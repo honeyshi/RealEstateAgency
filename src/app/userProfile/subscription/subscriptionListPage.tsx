@@ -7,6 +7,7 @@ import { SubsciptionGetModel } from 'core/subscription/subscription';
 import { SubscriptionItem } from './subscriptionItem';
 import { history } from 'core/history';
 import { performGetSubscriptionRequest } from 'core/subscription/getSubscription';
+import { switchError } from 'core/switchError';
 
 export const SubscriptionListPage: React.FC = () => {
   const [subscriptions, setSubscriptions] = useState<SubsciptionGetModel[]>([]);
@@ -15,10 +16,14 @@ export const SubscriptionListPage: React.FC = () => {
   useEffect(() => {
     let mounted = false;
     const fetchData = async () => {
-      setLoading(true);
-      const result = await performGetSubscriptionRequest();
-      if (!mounted) setSubscriptions(result);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const result = await performGetSubscriptionRequest();
+        if (!mounted) setSubscriptions(result);
+        setLoading(false);
+      } catch (error) {
+        switchError(error.response.status);
+      }
     };
     fetchData();
     return () => {

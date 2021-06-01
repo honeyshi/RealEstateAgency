@@ -7,6 +7,7 @@ import { NoResultsPage } from 'shared/layout/noResultsPage';
 import { PricingItem } from './pricingItem';
 import { history } from 'core/history';
 import { performGetMyPricingRequest } from 'core/pricing/getMyPricing';
+import { switchError } from 'core/switchError';
 
 export const MyPricingPage: React.FC = () => {
   const [pricing, setPricing] = useState<MyPricingModel[]>([]);
@@ -15,10 +16,14 @@ export const MyPricingPage: React.FC = () => {
   useEffect(() => {
     let mounted = false;
     const fetchData = async () => {
-      setLoading(true);
-      const result = await performGetMyPricingRequest();
-      if (!mounted) setPricing(result);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const result = await performGetMyPricingRequest();
+        if (!mounted) setPricing(result);
+        setLoading(false);
+      } catch (error) {
+        switchError(error.response.status);
+      }
     };
     fetchData();
     return () => {
